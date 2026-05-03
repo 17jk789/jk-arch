@@ -245,8 +245,26 @@ sudo systemctl enable --now cups.service
 sudo systemctl enable --now avahi-daemon.service
 
 fisher install jorgebucaran/autopair.fish
-fish_vi_key_bindings
-# fish_default_key_bindings
+
+set -l config_block '
+set -g fish_key_bindings fish_vi_key_bindings
+
+function fish_user_key_bindings
+    fish_vi_key_bindings
+    
+    if functions -q _autopair_install
+        _autopair_install
+    end
+end'
+
+if not grep -q "fish_user_key_bindings" ~/.config/fish/config.fish
+    echo $config_block >> ~/.config/fish/config.fish
+    echo "Die Vi-Autopair-Konfiguration wurde am Ende der config.fish hinzugefügt!"
+else
+    echo "Konfiguration bereits vorhanden oder manuell angepasst."
+end
+
+source ~/.config/fish/config.fish
 
 # für yazi
 sudo pacman -S xdg-utils
