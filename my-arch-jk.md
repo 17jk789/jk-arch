@@ -264,6 +264,8 @@ else
     echo "Konfiguration bereits vorhanden oder manuell angepasst."
 end
 
+echo "thefuck --alias | source" >> ~/.config/fish/config.fish; and source ~/.config/fish/config.fish
+
 source ~/.config/fish/config.fish
 
 # für yazi
