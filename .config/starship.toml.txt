@@ -1,3 +1,4 @@
+
 # Don't print a new line at the start of the prompt
 add_newline = false
 # Pipes ╰─ ╭─
@@ -10,7 +11,7 @@ add_newline = false
 # $directory $fill $git_branch $cmd_duration
 #  $character"""
 format = """
-$os$cmd_duration $directory$git_branch$git_status$python$rust$nodejs$golang$lua$java$c$bash
+$os$cmd_duration$directory$git_branch$git_status$python$rust$nodejs$golang$lua$java$c$bash
 $character"""
 
 [os]
@@ -92,7 +93,7 @@ read_only = "  "
 style = "bg:255 fg:240"
 truncation_length = 5
 # truncation_symbol = ".../"
-format = '[](bold fg:255)[󰉋 → $path]($style)[](bold fg:255)'
+format = ' [](bold fg:255)[󰉋 → $path]($style)[](bold fg:255)'
 
 [directory.substitutions]
 "Desktop" = "  "
