@@ -391,3 +391,14 @@ os:
 ```vim
 :lua vim.lsp.buf.format()
 ```
+
+# BlackArch
+
+```bash
+curl -O https://blackarch.org/strap.sh
+chmod +x strap.sh
+sudo ./strap.sh
+# alles 2800 tools oder so
+sudo pacman -S blackarch
+sudo pacman -Syyu
+```
