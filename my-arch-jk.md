@@ -269,6 +269,9 @@ function fish_user_key_bindings
 
     bind -M default \eh prevd-or-backward-word
     bind -M default \el nextd-or-forward-word
+
+    bind -M insert \cs "commandline -r 'ls -laa'; commandline -f execute"
+    bind -M default \cs "commandline -r 'ls -laa'; commandline -f execute"
 end'
 
 if not grep -q "fish_user_key_bindings" ~/.config/fish/config.fish
