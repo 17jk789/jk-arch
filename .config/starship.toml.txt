@@ -154,7 +154,7 @@ detect_files = ["pom.xml", "build.gradle", "gradlew"]
 symbol = " "
 style = "bg:248 fg:235"
 format = " [](bold fg:248)[$symbol $version]($style)[](bold fg:248)"
-detect_extensions = ["c", "h", cpp", "hpp", "cc"]
+detect_extensions = ["c", "h", "cpp", "hpp", "cc"]
 detect_files = ["CMakeLists.txt", "Makefile"]
 
 # unötig -> immer C!!!
