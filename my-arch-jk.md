@@ -309,6 +309,9 @@ echo "bind -M default \cf 'yazi; commandline -f repaint'" >> ~/.config/fish/conf
 
 echo "bind -M insert \cn 'nvim (pwd); commandline -f repaint'" >> ~/.config/fish/config.fish
 echo "bind -M default \cn 'nvim (pwd); commandline -f repaint'" >> ~/.config/fish/config.fish
+
+echo "bind -M insert \cg 'lazygit; commandline -f repaint'" >> ~/.config/fish/config.fish
+echo "bind -M default \cg 'lazygit; commandline -f repaint'" >> ~/.config/fish/config.fish
 sudo pacman -S just
 
 # npm install -g @mermaid-js/mermaid-cli
