@@ -250,6 +250,8 @@ sudo systemctl enable --now avahi-daemon.service
 
 fisher install jorgebucaran/autopair.fish
 
+sudo pacman -S eza
+
 set -l config_block '
 function fish_user_key_bindings
     fish_vi_key_bindings
