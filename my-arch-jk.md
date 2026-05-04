@@ -304,8 +304,11 @@ mkdir -p ~/.config/fish/conf.d
 
 # Aktiviert die fzf Tastenkombinationen für fish
 echo 'fzf_key_bindings' >> ~/.config/fish/config.fish
-echo "bind \cf 'yazi; commandline -f repaint'" >> ~/.config/fish/config.fish
-echo "bind \cn 'nvim (pwd); commandline -f repaint'" >> ~/.config/fish/config.fish
+echo "bind -M insert \cf 'yazi; commandline -f repaint'" >> ~/.config/fish/config.fish
+echo "bind -M default \cf 'yazi; commandline -f repaint'" >> ~/.config/fish/config.fish
+
+echo "bind -M insert \cn 'nvim (pwd); commandline -f repaint'" >> ~/.config/fish/config.fish
+echo "bind -M default \cn 'nvim (pwd); commandline -f repaint'" >> ~/.config/fish/config.fish
 sudo pacman -S just
 
 # npm install -g @mermaid-js/mermaid-cli
