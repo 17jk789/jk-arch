@@ -137,7 +137,8 @@ return {
               colorArg = "always",
               -- 'syntax-theme="none"' sorgt dafür, dass Grün/Rot deinem Theme entsprechen
               -- pager = [[delta --paging=never --line-numbers --hunk-header-decoration-style="blue box" --hunk-header-style="file line-number syntax" --syntax-theme="none"]],
-              pager = "delta --dark --paging=never --line-numbers",
+              -- pager = "delta --dark --paging=never --line-numbers",
+              pager = "delta --dark --paging=never --line-numbers --true-color=always --syntax-theme='Catppuccin-mocha'",
             },
           },
 
