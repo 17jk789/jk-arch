@@ -36,7 +36,8 @@ style = "bg: 252"
 symbol = "󰘬"
 truncation_length = 12
 truncation_symbol = ""
-format = " 󰜥 [](bold fg:252)[$symbol $branch(:$remote_branch)](fg:235 bg:252)[ ](bold fg:252)"
+# format = " 󰜥 [](bold fg:252)[$symbol $branch(:$remote_branch)](fg:235 bg:252)[ ](bold fg:252)"
+format = " [](bold fg:252)[$symbol $branch(:$remote_branch)](fg:235 bg:252)[ ](bold fg:252)"
 
 [git_commit]
 commit_hash_length = 4
@@ -92,7 +93,6 @@ style = "bg:255 fg:240"
 truncation_length = 5
 # truncation_symbol = ".../"
 format = '[](bold fg:255)[󰉋 → $path]($style)[](bold fg:255)'
-
 
 [directory.substitutions]
 "Desktop" = "  "
