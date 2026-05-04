@@ -2,6 +2,8 @@ Bitte installieren Sie eine Arch-basierte Distribution – vorzugsweise [Arch Li
 
 Fish und nicht bash oder zsh!!!
 
+Bitte führen sie alle Commands aus und fügen sie .config in ihr Systhem ein.
+
 ```bash
 sudo pacman -Syu
 git clone https://github.com/end-4/dots-hyprland.git
