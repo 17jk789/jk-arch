@@ -243,6 +243,7 @@ sudo pacman -S ttf-liberation
 sudo pacman -S firejail
 sudo pacman -S cups cups-filters ghostscript gutenprint avahi nss-mdns system-config-printer
 sudo pacman -S hplip
+sudo pacman -S pandoc tectonic
 sudo systemctl enable --now cups.service
 sudo systemctl enable --now avahi-daemon.service
 
