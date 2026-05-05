@@ -16,7 +16,7 @@ $character"""
 [os]
 disabled = false
 style = "bg:252 fg:235"
-format = " [](bold fg:252)[  jk-arch]($style)[](bold fg:252)"
+format = "[](bold fg:252)[  jk-arch]($style)[](bold fg:252)"
 
 [fill]
 symbol = '-'
