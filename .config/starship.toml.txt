@@ -16,7 +16,7 @@ $character"""
 [os]
 disabled = false
 style = "bg:252 fg:235"
-format = "[](bold fg:252)[  jk-arch]($style)[](bold fg:252) "
+format = " [](bold fg:252)[  jk-arch]($style)[](bold fg:252)"
 
 [fill]
 symbol = '-'
@@ -32,23 +32,26 @@ error_symbol = "[ ](bold fg:244)"
 disabled = true
 
 [git_branch]
-style = "bg: 252"
+# style = "bg: 252"
+style = "bg:252 fg:235"
 symbol = "󰘬"
 truncation_length = 12
 truncation_symbol = ""
-# format = " 󰜥 [](bold fg:252)[$symbol $branch(:$remote_branch)](fg:235 bg:252)[ ](bold fg:252)"
-format = " [](bold fg:252)[$symbol $branch(:$remote_branch)](fg:235 bg:252)[](bold fg:252)"
+# format = " 󰜥 [](bold fg:252)[$symbol $branch(:$remote_branch)]($style)[ ](bold fg:252)"
+format = " [](bold fg:252)[$symbol $branch(:$remote_branch)]($style)[](bold fg:252)"
 
 [git_commit]
 commit_hash_length = 4
 tag_symbol = " "
 
 [git_state]
-format = '[\($state( $progress_current of $progress_total)\)]($style) '
+style = "bg:252 fg:235"
+format = ' [\($state( $progress_current of $progress_total)\)]($style)'
 cherry_pick = "[🍒 PICKING](bold red)"
 
 [git_status]
-format = " [](bold fg:252)[$conflicted$untracked$modified$deleted$renamed$staged$ahead_behind](fg:235 bg:252)[](bold fg:252)"
+style = "bg:252 fg:235"
+format = " [](bold fg:252)[$conflicted$untracked$modified$deleted$renamed$staged$ahead_behind]($style)[](bold fg:252)"
 conflicted = "🏳 "
 untracked = "🤷 "
 modified = "📝 "
@@ -62,7 +65,8 @@ diverged = "😵 "
 
 [hostname]
 ssh_only = false
-format =  "[•$hostname](bg:252 bold fg:235)[](bold fg:252)"
+style = "bg:252 fg:235"
+format =  " [•$hostname]($style)[](bold fg:252)"
 trim_at = ".companyname.com"
 disabled = false
 
@@ -77,13 +81,14 @@ style = "bold dimmed green"
 
 [time]
 disabled = true
-format = '🕙[\[ $time \]]($style) '
+style = "bg:252 fg:235"
+format = ' 🕙[\[ $time \]]($style)'
 time_format = "%T"
 
 [username]
-style_user = "bold bg:252 fg:235"
+style = "bold bg:252 fg:235"
 style_root = "red bold"
-format = "[](bold fg:252)[$user]($style)"
+format = " [](bold fg:252)[$user]($style)"
 disabled = false
 show_always = true
 
@@ -93,7 +98,7 @@ read_only = "  "
 style = "bg:255 fg:240"
 truncation_length = 5
 # truncation_symbol = ".../"
-format = ' [](bold fg:255)[󰉋 → $path]($style)[](bold fg:255)'
+format = " [](bold fg:255)[󰉋 → $path]($style)[](bold fg:255)"
 
 [directory.substitutions]
 "Desktop" = "  "
@@ -106,7 +111,8 @@ format = ' [](bold fg:255)[󰉋 → $path]($style)[](bold fg:255)'
 
 [cmd_duration]
 min_time = 0
-format = '[](bold fg:252)[󰪢 $duration](bold bg:252 fg:235)[](bold fg:252)'
+style = "bold bg:252 fg:235"
+format = " [](bold fg:252)[󰪢 $duration]($style)[](bold fg:252)"
 
 [python]
 symbol = ""
