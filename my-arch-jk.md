@@ -432,3 +432,10 @@ nameserver 8.8.8.8
 options single-request
 options edns0 trust-ad
 ```
+
+librewulf google securtiy:
+
+```bash
+# Erstellt den Ordner und schreibt die Zeilen in die Datei
+mkdir -p ~/.librewolf && printf 'defaultPref("browser.safebrowsing.malware.enabled", true);\ndefaultPref("browser.safebrowsing.phishing.enabled", true);\ndefaultPref("browser.safebrowsing.blockedURIs.enabled", true);\n' >> ~/.librewolf/librewolf.overrides.cfg
+```
