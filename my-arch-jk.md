@@ -263,6 +263,13 @@ sudo pacman -S kimageformats
 sudo pacman -S --needed networkmanager python-dbus ca-certificates
 yay -S geteduroam-gui
 
+# Uni: vpn
+# yay -S globalprotect-bin
+sudo pacman -S globalprotect-openconnect
+# run: gpclient launch-gui
+# yay -S wireguird
+# yay -S wireguard-gui-bin
+
 fisher install jorgebucaran/autopair.fish
 
 sudo pacman -S eza
