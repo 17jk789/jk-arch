@@ -5,7 +5,14 @@ Fish und nicht bash oder zsh!!!
 Bitte führen sie alle Commands aus und fügen sie .config in ihr Systhem ein.
 
 ```bash
+cd ~
+# sudo cachyos-rate-mirrors
+
+# DNS temporär auf Cloudflare (1.1.1.1) setzen
+# echo "nameserver 1.1.1.1" | sudo tee /etc/resolv.conf
+
 sudo pacman -Syu
+pacman -Qk
 git clone https://github.com/end-4/dots-hyprland.git
 cd dots-hyprland
 ./setup install
@@ -250,6 +257,10 @@ sudo systemctl enable --now avahi-daemon.service
 sudo pacman -S sudo-rs
 sudo pacman -S libheif
 sudo pacman -S kimageformats
+
+# Uni: eduroam
+sudo pacman -S --needed networkmanager python-dbus ca-certificates
+yay -S geteduroam-gui
 
 fisher install jorgebucaran/autopair.fish
 
