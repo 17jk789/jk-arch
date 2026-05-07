@@ -452,4 +452,5 @@ mkdir -p ~/.librewolf && printf 'defaultPref("browser.safebrowsing.malware.enabl
 
 ```bash
 sudo pacman -S $(pacman -Qq | grep '^haskell-') shellcheck pandoc
+sudo systemctl restart NetworkManager
 ```
