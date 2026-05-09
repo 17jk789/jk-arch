@@ -441,6 +441,30 @@ options single-request
 options edns0 trust-ad
 ```
 
+### Langsames Internet
+
+```bash
+sudo nvim /etc/modprobe.d/8821ce.conf
+```
+
+and 
+
+```text
+options 8821ce rtw_power_mgnt=0 rtw_enusbss=0 rtw_ips_mode=0
+```
+
+and
+
+```bash
+iw dev wlan0 get power_save
+```
+
+wen an
+
+```bash
+sudo iw dev wlan0 set power_save off
+```
+
 ### librewulf google securtiy:
 
 ```bash
