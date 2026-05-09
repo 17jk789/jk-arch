@@ -18,18 +18,30 @@ if status is-interactive
     end
 
     # Aliases
-    # kitty doesn't clear properly so we need to do this weird printing
     alias clear "printf '\033[2J\033[3J\033[1;1H'"
     alias celar "printf '\033[2J\033[3J\033[1;1H'"
     alias claer "printf '\033[2J\033[3J\033[1;1H'"
     alias pamcan pacman
     alias q 'qs -c ii'
+    # alias sudo="sudo-rs"
+
     if test "$TERM" != linux
-        alias ls 'eza --icons'
+        if type -q eza
+            alias ls='eza --icons --group-directories-first'
+            alias ll='eza -l --icons --group-directories-first'
+            alias la='eza -a --icons --group-directories-first'
+        else
+            alias ls 'ls --color=auto'
+        end
     end
+
     if test "$TERM" = xterm-kitty
         alias ssh 'kitten ssh'
     end
+
+    # Initialisierungen
+    zoxide init fish | source
+    thefuck --alias | source
 end
 
 # Setze Neovim als Standard-Editor
@@ -38,57 +50,49 @@ set -gx VISUAL nvim
 
 # Yazi Wrapper-Funktion (ändert das Verzeichnis beim Beenden)
 function y
-	set tmp (mktemp -t "yazi-cwd.XXXXXX")
-	yazi $argv --cwd-file="$tmp"
-	if set cwd (command cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
-		builtin cd -- "$cwd"
-	end
-	rm -f -- "$tmp"
+    set tmp (mktemp -t "yazi-cwd.XXXXXX")
+    yazi $argv --cwd-file="$tmp"
+    if set cwd (command cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+        builtin cd -- "$cwd"
+    end
+    rm -f -- "$tmp"
 end
 
-if type -q eza
-    alias ls='eza --icons --group-directories-first'
-    alias ll='eza -l --icons --group-directories-first'
-    alias la='eza -a --icons --group-directories-first'
-end
-
-zoxide init fish | source
-fzf_key_bindings
-zoxide init fish | source
-fzf_key_bindings
-bind \cf 'yazi; commandline -f repaint'
-bind \cn 'nvim (pwd); commandline -f repaint'
-
+# Keybindings
 function fish_user_key_bindings
+    # Vi Mode aktivieren
     fish_vi_key_bindings
 
+    # Autopair Plugin falls vorhanden
     if functions -q _autopair_install
         _autopair_install
     end
 
-    # 1. Bestehende Bindings für Alt+L löschen (wichtig!)
+    # Standard fzf Bindings laden
+    fzf_key_bindings
+
+    # 1. Bestehende Bindings für Alt+L löschen
     bind -e \el
     bind -M insert -e \el
     bind -M default -e \el
 
-    # 2. Deine eigenen Bindings neu setzen
+    # 2. Wort-Navigation (Alt+H, Alt+L)
     bind -M insert \eh prevd-or-backward-word
     bind -M insert \el nextd-or-forward-word
-
     bind -M default \eh prevd-or-backward-word
     bind -M default \el nextd-or-forward-word
 
+    # 3. Schnelle Befehle (Strg+S für ls)
     bind -M insert \cs "commandline -r 'ls -laa'; commandline -f execute"
     bind -M default \cs "commandline -r 'ls -laa'; commandline -f execute"
-end
 
-thefuck --alias | source
-zoxide init fish | source
-fzf_key_bindings
-bind -M insert \cf 'yazi; commandline -f repaint'
-bind -M default \cf 'yazi; commandline -f repaint'
-bind -M insert \cn 'nvim (pwd); commandline -f repaint'
-bind -M default \cn 'nvim (pwd); commandline -f repaint'
-bind -M insert \cg 'lazygit; commandline -f repaint'
-bind -M default \cg 'lazygit; commandline -f repaint'
-alias sudo="sudo-rs"
+    # 4. App-Shortcuts (Strg+F, Strg+N, Strg+G)
+    bind -M insert \cf 'yazi; commandline -f repaint'
+    bind -M default \cf 'yazi; commandline -f repaint'
+    
+    bind -M insert \cn 'nvim (pwd); commandline -f repaint'
+    bind -M default \cn 'nvim (pwd); commandline -f repaint'
+
+    bind -M insert \cg 'lazygit; commandline -f repaint'
+    bind -M default \cg 'lazygit; commandline -f repaint'
+end
