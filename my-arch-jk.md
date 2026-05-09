@@ -514,3 +514,25 @@ sudo pacman -S $(pacman -Qq | grep '^haskell-') shellcheck pandoc
 sudo systemctl restart NetworkManager
 sudo cachyos-rate-mirrors
 ```
+
+# WARP Cloudflair "1.1.1.1"
+
+```bash
+yay -S cloudflare-warp-bin
+```
+
+Alternatively, for a version without the GUI taskbar (useful for servers), use cloudflare-warp-nox-bin.
+
+```bash
+sudo systemctl enable --now warp-svc
+```
+
+```bash
+bashwarp-cli register
+```
+
+Connect:
+
+```bash
+bashwarp-cli connect
+```
