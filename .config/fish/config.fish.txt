@@ -39,20 +39,30 @@ set -gx VISUAL nvim
 # Yazi Wrapper-Funktion (ändert das Verzeichnis beim Beenden)
 function y
     set tmp (mktemp -t "yazi-cwd.XXXXXX")
-    yazi $argv --cwd-file="$tmp"
-    if set cwd (command cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+    yazi "$argv" --cwd-file="$tmp"
+
+    if set cwd (command cat -- "$tmp")
+        and test -n "$cwd"
+        and test "$cwd" != "$PWD"
         builtin cd -- "$cwd"
     end
+
     rm -f -- "$tmp"
 end
 
 set -g fish_key_bindings fish_vi_key_bindings
 
-thefuck --alias | source
+function fuck
+    # lädt thefuck nur beim ersten Aufruf
+    functions -q __thefuck_loaded; or begin
+        thefuck --alias | source
+        functions -c __thefuck_loaded __thefuck_loaded
+    end
+    __thefuck_loaded
+end
+
 zoxide init fish | source
-fzf_key_bindings
-bind \cf 'yazi; commandline -f repaint'
-bind \cn 'nvim (pwd); commandline -f repaint'
+# fzf_key_bindings
 
 function fish_user_key_bindings
     fish_vi_key_bindings
@@ -83,24 +93,29 @@ if type -q eza
     alias la='eza -a --icons --group-directories-first'
 end
 
-bind \cf 'yazi; commandline -f repaint'
-bind \cn 'nvim (pwd); commandline -f repaint'
 bind -M insert \cf 'yazi; commandline -f repaint'
 bind -M default \cf 'yazi; commandline -f repaint'
 bind -M insert \cn 'nvim (pwd); commandline -f repaint'
 bind -M default \cn 'nvim (pwd); commandline -f repaint'
 bind -M insert \cg 'lazygit; commandline -f repaint'
 bind -M default \cg 'lazygit; commandline -f repaint'
+bind -M insert \cc 'lazy_navi; commandline -f repaint'
+bind -M default \cc 'lazy_navi; commandline -f repaint'
 # alias sudo="sudo-rs"
-
-function y
-    set tmp (mktemp)
-    yazi --cwd-file=$tmp
-    cd (cat $tmp)
-end
 
 # Öffnet Dateien oder Verzeichnisse mit der Standard-App (xdg-open)
 function open
     xdg-open $argv >/dev/null 2>&1 &
     disown
+end
+
+function lazy_navi
+    # Prüfen, ob wir schon geladen haben
+    if not functions -q __navi_loaded
+        # optional: Repo sicherstellen
+        navi repo add denisidoro/cheats 2>/dev/null
+        # Dummy-Funktion als Marker
+        function __navi_loaded; end
+    end
+    command navi $argv
 end
