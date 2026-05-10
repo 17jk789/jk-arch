@@ -1,6 +1,6 @@
 # Matlab on arch with Wayland (no X11)
 
-Meine histroy (bitte lesen sie von unten -> fish):
+Meine history (bitte lesen sie von unten -> fish):
 
 ```bash
 /opt/matlab/bin/matlab -nodesktop -nosplash -nojvm -batch "run('file.m')"
