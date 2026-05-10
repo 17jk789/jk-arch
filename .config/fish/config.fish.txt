@@ -98,3 +98,9 @@ function y
     yazi --cwd-file=$tmp
     cd (cat $tmp)
 end
+
+# Öffnet Dateien oder Verzeichnisse mit der Standard-App (xdg-open)
+function open
+    xdg-open $argv >/dev/null 2>&1 &
+    disown
+end
