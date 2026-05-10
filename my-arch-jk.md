@@ -31,8 +31,6 @@ git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
 
-sudo pacman -S --needed base-devel git
-
 sudo pacman -S curl wget unzip cmark fzf luarocks gcc git-delta shellcheck lib32-gcc-libs
 sudo pacman -S llvm clang lldb gdb strace ltrace radare2
 sudo pacman -S gtk4 libadwaita network-manager-applet polkit-gnome librsvg adwaita-icon-theme
@@ -458,7 +456,9 @@ options 8821ce rtw_power_mgnt=0 rtw_enusbss=0 rtw_ips_mode=0
 ```
 
 ```bash
-sudo update-initramfs -u
+# sudo update-initramfs -u
+# sudo mkinitcpio -P # normalem Arch + GRUB
+sudo limine-mkinitcpio # Arch + Limine
 reboot
 ```
 
