@@ -433,7 +433,19 @@ os:
 :lua vim.lsp.buf.format()
 ```
 
-# BlackArch
+### emfehlungen:
+
+```bash
+nvim ~/.config/quickshell/ii/modules/common/Config.qml
+```
+
+zeile 476
+```qml
+# property list<string> excludedSites: ["quora.com", "facebook.com"]
+property list<string> excludedSites: []
+```
+
+### BlackArch
 
 ```bash
 curl -O https://blackarch.org/strap.sh
