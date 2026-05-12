@@ -263,6 +263,17 @@ sudo pacman -S 7zip
 sudo pacman -S qemu-full virt-manager libvirt virt-viewer dnsmasq
 sudo systemctl enable --now libvirtd
 sudo usermod -aG libvirt,kvm $(whoami)
+# Bsp.:
+# qemu-system-x86_64 \
+#       -enable-kvm \
+#       -m 6144 \
+#       -cpu host \
+#       -smp 6 \
+#       -netdev user,id=n1 \
+#       -device virtio-net-pci,netdev=n1 \
+#       -vga virtio \
+#       -display gtk,gl=on \
+#       -drive file=kali-linux-2026.1-qemu-amd64.qcow2,format=qcow2
 
 # Uni: eduroam
 sudo pacman -S --needed networkmanager python-dbus ca-certificates
