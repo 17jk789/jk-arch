@@ -258,6 +258,7 @@ sudo pacman -S libheif
 sudo pacman -S kimageformats
 sudo pacman -S bandwhich
 sudo pacman -S wireshark-qt
+sudo pacman -S krusader
 sudo pacman -S 7zip
 sudo pacman -S qemu-full virt-manager libvirt virt-viewer dnsmasq
 sudo systemctl enable --now libvirtd
