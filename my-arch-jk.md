@@ -132,9 +132,9 @@ sudo pacman -S texlive-meta latexmk zathura zathura-pdf-poppler
 sudo pacman -S hunspell hunspell-de hunspell-en_us
 sudo pacman -S ghostty  # besser für Lazyvim als gnome-terminal oder konsole (KDE)
 sudo pacman -S foot
-sudo pacman -S alacritty
-sudo pacman -S kitty
-sudo pacman -S wezterm
+# sudo pacman -S alacritty # sollte schon installirt sein auf cachy os
+# sudo pacman -S kitty # sollte schon installirt sein auf cachy os
+# sudo pacman -S wezterm
 # sudo pacman -S jre-openjdk
 # sudo pacman -S languagetool
 # sudo pacman -S vim
