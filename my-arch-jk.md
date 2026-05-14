@@ -571,3 +571,26 @@ Connect:
 # bashwarp-cli connect
 warp-cli connect
 ```
+
+Bei Problemen:
+
+```bash
+warp-cli registration new
+warp-cli connect
+warp-cli status
+```
+
+Wen es immer noch nicht leuft, warte kurtz: WARP baut Zeit um den Tunnel aufzubauen.
+
+```bash
+warp-cli status
+```
+
+Weitere Commands:
+
+```bash
+warp-cli disconnect     # disable WARP
+warp-cli connect        # enable WARP
+warp-cli status         # check status
+warp-cli settings       # view settings
+```
