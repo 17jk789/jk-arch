@@ -615,3 +615,10 @@ Dann von Gerät A:
 ```bash
 ping 100.x.x.x
 ```
+
+Bei Problemen:
+
+```bash
+sudo ufw allow in on tailscale0
+sudo ufw allow out on tailscale0
+```
