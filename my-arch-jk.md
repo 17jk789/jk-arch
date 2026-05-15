@@ -263,6 +263,8 @@ sudo pacman -S krusader
 sudo pacman -S 7zip
 sudo pacman -S qemu-full virt-manager libvirt virt-viewer dnsmasq
 sudo systemctl enable --now libvirtd
+sudo pacman -S pwvucontrol
+sudo pacman -S qpwgraph
 sudo usermod -aG libvirt,kvm $(whoami)
 # Bsp.:
 # qemu-system-x86_64 \
