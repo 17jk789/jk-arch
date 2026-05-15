@@ -265,6 +265,7 @@ sudo pacman -S qemu-full virt-manager libvirt virt-viewer dnsmasq
 sudo systemctl enable --now libvirtd
 sudo pacman -S pwvucontrol
 sudo pacman -S qpwgraph
+sudo pacman -S ollama
 sudo usermod -aG libvirt,kvm $(whoami)
 # Bsp.:
 # qemu-system-x86_64 \
