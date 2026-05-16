@@ -607,6 +607,8 @@ warp-cli settings       # view settings
 sudo pacman -S tailscale
 sudo systemctl enable --now tailscaled
 sudo tailscale up
+warp-cli dns families malware
+warp-cli settings
 ```
 
 Prüfen:
