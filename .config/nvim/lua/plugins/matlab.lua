@@ -8,7 +8,7 @@ return {
 --         matlab_ls = {
 --           settings = {
 --             MATLAB = {
---               installPath = "/usr/local/MATLAB/R2025b",
+--               installPath = "/opt/matlab",
 --               indexWorkspace = true,
 --               telemetry = false,
 --               matlabConnectionTiming = "onStart", -- WICHTIG: Startet Engine nur wenn nötig
