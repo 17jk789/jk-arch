@@ -642,3 +642,43 @@ tailscale ip
 ```bash
 tailscale up --authkey [key]
 ```
+
+# Swap erhöhen:
+
+```bash
+sudo nvim /etc/systemd/zram-generator.conf
+```
+
+```txt
+[zram0]
+zram-size = 16384
+```
+
+Nie über 1,5:1 gehen!!! Bei 16Gb RAM die über 24576 ZRAM, gehe, auch 1,5:1 ist die Schmerzgrenze.
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl restart systemd-zram-setup@zram0.service
+reboot
+```
+
+```bash
+swapon --show
+```
+
+# cachy os optimirung
+
+Prüfen, ob aktiv: Geben Sie im Terminal ein:
+
+```bash
+bashsystemctl status uksmd
+```
+
+Aktivieren (falls aus): Sollte er nicht laufen, starten Sie ihn mit:
+
+```bash
+sudo pacman -S cachyos-ksm-settings
+bashsudo systemctl enable --now uksmd
+# sudo systemctl disable --now uksmd
+# sudo pacman -R cachyos-ksm-settings
+```
