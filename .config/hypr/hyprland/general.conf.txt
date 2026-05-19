@@ -1,6 +1,6 @@
 cursor {
     no_hardware_cursors = true
-    inactive_timeout = 0
+    inactive_timeout = 1
     zoom_factor = 1
     zoom_rigid = false
     zoom_disable_aa = true
