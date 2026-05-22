@@ -776,6 +776,19 @@ sleep 2
 systemctl --user start sunshine
 ```
 
+Tip: Es kann bei Sunshine mit Kurserausblenden zu Probelem führen, diebezüglich würde ich volgende einstellungen für end-4 Hyperland bervorzugen:
+
+```text
+cursor {
+    no_hardware_cursors = true
+    inactive_timeout = 0
+    zoom_factor = 1
+    zoom_rigid = false
+    zoom_disable_aa = true
+    hotspot_padding = 1
+}
+```
+
 # Windows
 
 ## Moonlight installieren
