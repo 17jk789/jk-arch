@@ -403,6 +403,9 @@ sudo pacman -S gst-plugins-good
 # yay -S plymouth-theme-arch-logo
 # sudo plymouth-set-default-theme -R arch-logo
 # plymouth-set-default-theme
+# yay -Rns plymouth-theme-arch-logo
+# sudo plymouth-set-default-theme -R bgrt
+# sudo mkinitcpio -P
 # /home/jk/.config/quickshell/ii/assets/icons/
 # arch-logo
 ```
