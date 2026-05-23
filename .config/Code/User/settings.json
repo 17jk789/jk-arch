@@ -154,5 +154,12 @@
         "RA_LRU_CAP": "100000"
     },
     "material-code.primaryColor": "#9FD2E0",
-    "git.autofetch": true
+    "git.autofetch": true,
+
+    // Terminal-Optimierung für das Fish-Shell-Design
+    "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font', 'JetBrains Mono', monospace",
+    "terminal.integrated.gpuAcceleration": "on",
+    "terminal.integrated.fontWeight": "normal",
+    "terminal.integrated.letterSpacing": 0,
+    "terminal.integrated.lineHeight": 1.2
 }
