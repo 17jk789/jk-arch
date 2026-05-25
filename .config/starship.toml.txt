@@ -16,7 +16,7 @@ $character"""
 [os]
 disabled = false
 style = "bg:252 fg:235"
-format = "[](bold fg:252)[  jk-arch]($style)[](bold fg:252)"
+format = " [](bold fg:252)[  jk-arch]($style)[](bold fg:252)"
 
 [fill]
 symbol = '-'
@@ -24,8 +24,8 @@ style = 'fg:245'
 
 # Replace the "❯" symbol in the prompt with "➜"
 [character]                            # The name of the module we are configuring is "character"
-success_symbol = "[ ](bold fg:243)"
-error_symbol = "[ ](bold fg:244)"
+success_symbol = " [ ](bold fg:243)"
+error_symbol = " [ ](bold fg:244)"
 
 # Disable the package module, hiding it from the prompt completely
 [package]
