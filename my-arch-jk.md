@@ -269,6 +269,7 @@ sudo pacman -S qpwgraph
 sudo pacman -S ollama
 sudo pacman -S smartmontools
 sudo pacman -S krdc
+sudo pacman -S aria2
 # sudo smartctl --scan
 sudo usermod -aG libvirt,kvm $(whoami)
 # Bsp.:
