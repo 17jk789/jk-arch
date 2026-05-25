@@ -2,4 +2,5 @@
 # For all available variables, see ~/.config/hypr/hyprland/variables.conf
 
 $browser = firefox
-$terminal = ghostty
+# $terminal = ghostty
+$terminal = kitty
