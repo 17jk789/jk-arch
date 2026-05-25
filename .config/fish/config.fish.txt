@@ -65,8 +65,8 @@ if status is-interactive
         alias ssh 'kitten ssh'
     end
 
-    bind -M insert \cf 'yazi; commandline -f repaint'
-    bind -M default \cf 'yazi; commandline -f repaint'
+    bind -M insert \cy 'yazi; commandline -f repaint'
+    bind -M default \cy 'yazi; commandline -f repaint'
     bind -M insert \cn 'nvim (pwd); commandline -f repaint'
     bind -M default \cn 'nvim (pwd); commandline -f repaint'
     bind -M insert \cg 'lazygit; commandline -f repaint'
