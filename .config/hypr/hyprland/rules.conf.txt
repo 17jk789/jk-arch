@@ -3,5 +3,5 @@
 # Disable blur for every window
 # windowrule = match:class .*, no_blur on
 
-windowrule = no_blur off, match:class com.mitchellh.ghostty
-windowrule = opacity 0.93 0.95, match:class com.mitchellh.ghostty
+# windowrule = no_blur off, match:class com.mitchellh.ghostty
+# windowrule = opacity 0.93 0.95, match:class com.mitchellh.ghostty
