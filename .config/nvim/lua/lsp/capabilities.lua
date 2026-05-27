@@ -5,6 +5,7 @@ M.get = function()
   capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
   capabilities.general = capabilities.general or {}
   capabilities.general.positionEncodings = { "utf-8" }
+  capabilities.offsetEncoding = { "utf-8" }
   return capabilities
 end
 
