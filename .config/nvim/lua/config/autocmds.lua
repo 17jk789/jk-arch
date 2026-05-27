@@ -1448,63 +1448,64 @@ vim.api.nvim_create_autocmd("FileType", {
 --   end,
 -- })
 
-vim.api.nvim_create_autocmd("FileType", {
-  group = vim.api.nvim_create_augroup("MatlabConfig", { clear = true }),
-  pattern = { "matlab" },
+-- besser:
+-- vim.api.nvim_create_autocmd("FileType", {
+--   group = vim.api.nvim_create_augroup("MatlabConfig", { clear = true }),
+--   pattern = { "matlab" },
 
-  callback = function()
-    local opts = { noremap = true, silent = true, buffer = true }
+--   callback = function()
+--     local opts = { noremap = true, silent = true, buffer = true }
 
-    -- MAX SPEED MATLAB
-    local matlab_fast = "/opt/matlab/bin/matlab -nojvm -nodisplay -nosplash -nodesktop"
+--     -- MAX SPEED MATLAB
+--     local matlab_fast = "/opt/matlab/bin/matlab -nojvm -nodisplay -nosplash -nodesktop"
 
-    local matlab_batch = "/opt/matlab/bin/matlab -batch"
+--     local matlab_batch = "/opt/matlab/bin/matlab -batch"
 
-    -- SPLIT TERMINAL (horizontal)
-    local function run_cmd(cmd)
-      vim.cmd("split")
+--     -- SPLIT TERMINAL (horizontal)
+--     local function run_cmd(cmd)
+--       vim.cmd("split")
 
-      -- vim.cmd("resize 15")
+--       -- vim.cmd("resize 15")
 
-      vim.cmd("terminal " .. cmd)
+--       vim.cmd("terminal " .. cmd)
 
-      vim.cmd("startinsert")
-    end
+--       vim.cmd("startinsert")
+--     end
 
-    -- <leader>rra = FAST RUN
-    vim.keymap.set("n", "<leader>rra", function()
-      local file = vim.fn.expand("%:p")
+--     -- <leader>rra = FAST RUN
+--     vim.keymap.set("n", "<leader>rra", function()
+--       local file = vim.fn.expand("%:p")
 
-      run_cmd(matlab_fast .. " -r \"try; run('" .. file .. "'); catch ME; disp(getReport(ME)); end; exit\"")
-    end, {
-      desc = "Run MATLAB FAST",
-      silent = true,
-      buffer = true,
-    })
+--       run_cmd(matlab_fast .. " -r \"try; run('" .. file .. "'); catch ME; disp(getReport(ME)); end; exit\"")
+--     end, {
+--       desc = "Run MATLAB FAST",
+--       silent = true,
+--       buffer = true,
+--     })
 
-    -- <leader>rrr = Interactive Console
-    vim.keymap.set("n", "<leader>rrr", function()
-      run_cmd(matlab_fast)
-    end, {
-      desc = "Open MATLAB Console",
-      silent = true,
-      buffer = true,
-    })
+--     -- <leader>rrr = Interactive Console
+--     vim.keymap.set("n", "<leader>rrr", function()
+--       run_cmd(matlab_fast)
+--     end, {
+--       desc = "Open MATLAB Console",
+--       silent = true,
+--       buffer = true,
+--     })
 
-    -- F5 = TURBO RUN
-    vim.keymap.set("n", "<F5>", function()
-      local file = vim.fn.expand("%:p")
+--     -- F5 = TURBO RUN
+--     vim.keymap.set("n", "<F5>", function()
+--       local file = vim.fn.expand("%:p")
 
-      run_cmd(matlab_batch .. " \"run('" .. file .. "')\"")
-    end, opts)
+--       run_cmd(matlab_batch .. " \"run('" .. file .. "')\"")
+--     end, opts)
 
-    -- <leader>rrk = Kill Terminal
-    vim.keymap.set("n", "<leader>rrk", function()
-      vim.cmd("bd!")
-    end, {
-      desc = "Close MATLAB Terminal",
-      silent = true,
-      buffer = true,
-    })
-  end,
-})
+--     -- <leader>rrk = Kill Terminal
+--     vim.keymap.set("n", "<leader>rrk", function()
+--       vim.cmd("bd!")
+--     end, {
+--       desc = "Close MATLAB Terminal",
+--       silent = true,
+--       buffer = true,
+--     })
+--   end,
+-- })
