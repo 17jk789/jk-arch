@@ -10,7 +10,13 @@ M.setup = function(capabilities)
     lspconfig.yamlls.setup({
         capabilities = capabilities,
 
-        filetypes = { "yaml", "yml" },
+        filetypes = {
+            "yaml",
+            "yml",
+            "yaml.docker-compose",
+            "yaml.gitlab",
+            "yaml.helm-values",
+        },
 
         settings = {
             yaml = {
