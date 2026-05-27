@@ -21,8 +21,5 @@ return {
     display = {
       theme = 'atom', -- Aktiviert das Atom Material Design
     },
-    timer = {
-      reset_on_change = false, -- Timer läuft beim Dateiwechsel einfach weiter
-    },
   },
 }
