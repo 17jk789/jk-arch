@@ -68,7 +68,7 @@ local M = {}
 M.setup = function(capabilities)
   local lspconfig = require("lspconfig")
 
-  capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+  capabilities = require("lsp.capabilities").get()
 
   lspconfig.lua_ls.setup({
     capabilities = capabilities,
