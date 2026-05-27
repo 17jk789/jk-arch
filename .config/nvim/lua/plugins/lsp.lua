@@ -69,7 +69,6 @@ return {
       "mason-org/mason.nvim",
       "mason-org/mason-lspconfig.nvim",
     },
-    capabilities = require("lsp.capabilities").get(),
     opts = {
       servers = {
         clangd = {
