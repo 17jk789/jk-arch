@@ -2,6 +2,7 @@
 
 return {
   "nvim-lualine/lualine.nvim",
+  event = "VeryLazy",
   opts = function(_, opts)
     -- local function battery()
     --   local handle = io.popen("acpi -b 2>/dev/null | grep -o '[0-9]\\+%' | head -n1 | tr -d '%'")
