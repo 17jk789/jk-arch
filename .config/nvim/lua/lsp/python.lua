@@ -236,7 +236,7 @@ M.setup = function(capabilities)
   local lspconfig = require("lspconfig")
   -- local null_ls = require("none-ls")
 
-  capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+  capabilities = require("lsp.capabilities").get()
 
   -- PYRIGHT
   lspconfig.pyright.setup({
