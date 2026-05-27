@@ -1034,7 +1034,7 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.keymap.set("n", "<leader>rtd", ":lua require('neogen').generate()<CR>", { desc = "Generate Docstring (Neogen)", silent = true, buffer = true })
     vim.keymap.set("n", "<leader>rtf", ":TodoTelescope<CR>", { desc = "Find TODOs", silent = true, buffer = true })
     vim.keymap.set("n", "<leader>te", "<cmd>TroubleToggle lsp_workspace_diagnostics<CR>", { desc = "Show All Python Errors" })
-    vim.keymap.set("n", "<leader>rrbd", "<cmd>!bandit -r %<CR>", { desc = "Run Bandit Security Scan" })   
+    vim.keymap.set("n", "<leader>rrbd", "<cmd>!bandit %<CR>", { desc = "Run Bandit Security Scan" })   
   end,
 })
 
