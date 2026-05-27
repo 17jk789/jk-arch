@@ -11,7 +11,7 @@ return {
       python = { "mypy", "bandit" },
     }
 
-    vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter" }, {
+    vim.api.nvim_create_autocmd("BufWritePost", {
       callback = function()
         lint.try_lint()
       end,
