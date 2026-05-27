@@ -1011,7 +1011,7 @@ vim.api.nvim_create_autocmd("FileType", {
     
     -- Linting & Formatting
     vim.keymap.set("n", "<leader>rlf", ":!black %<CR>", { desc = "Format with Black", silent = true, buffer = true })
-    vim.keymap.set("n", "<leader>rll", ":!flake8 %<CR>", { desc = "Lint with Flake8", silent = true, buffer = true })
+    vim.keymap.set("n", "<leader>rll", ":!ruff check %<CR>", { desc = "Lint with Ruff", silent = true, buffer = true })
 
     -- Tests
     vim.keymap.set("n", "<leader>rrrT", ":split | terminal pytest %<CR>", { desc = "Run current file tests", silent = true, buffer = true })
