@@ -306,7 +306,6 @@ return {
   {
     "benlubas/molten-nvim",
     ft = { "markdown", "python" },
-    lazy = false,
     version = "^1.0.0",
     build = ":UpdateRemotePlugins",
     init = function()
@@ -417,8 +416,7 @@ return {
 
   {
     "GCBallesteros/jupytext.nvim",
-    lazy = false,
-    -- ft = { "python", "jupyter" },
+    ft = { "python", "markdown" },
     opts = {
       -- Hier erzwingen wir das Markdown-Verhalten für Python-Notebooks
       custom_language_formatting = {
