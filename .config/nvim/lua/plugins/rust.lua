@@ -729,6 +729,7 @@ return {
 
 {
     "nvim-neotest/neotest",
+  ft = { "rust" },
     dependencies = {
       "nvim-neotest/nvim-nio",
       "rouge8/neotest-rust",
