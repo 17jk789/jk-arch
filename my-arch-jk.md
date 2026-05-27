@@ -107,7 +107,7 @@ cd jetbrains-toolbox-[VERSION]/bin
 
 ```bash
 # Ich würde noch Docker installieren
-sudo pacman -S docker docker-compose
+sudo pacman -S docker docker-compose docker-buildx
 sudo systemctl enable --now docker
 docker --version
 ```
