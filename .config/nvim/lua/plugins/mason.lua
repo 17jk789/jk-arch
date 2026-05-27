@@ -66,6 +66,9 @@ return {
         -- Zig:
         -- "zls",
 
+        -- Go:
+        "gopls",
+
         -- C#
         -- "omnisharp",
 
