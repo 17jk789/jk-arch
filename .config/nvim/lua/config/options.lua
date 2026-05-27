@@ -146,13 +146,11 @@ vim.opt.winbar = "%!v:lua.winbar()"
 -- })
 
 -- Mason-Binaries zum System-Pfad hinzufügen (behebt "CLI not found")
-vim.env.PATH = vim.fn.expand("$HOME/.local/share/nvim/mason/bin:") .. vim.env.PATH
-
--- In lua/config/options.lua ganz unten:
-vim.opt.rtp:prepend("/home/jk/.local/share/nvim/site")
-
--- In lua/config/options.lua (ganz oben)
-vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH
+local mason_bin = vim.fn.stdpath("data") .. "/mason/bin"
+if vim.fn.isdirectory(mason_bin) == 1 then
+  local path_sep = package.config:sub(1, 1) == "\\" and ";" or ":"
+  vim.env.PATH = mason_bin .. path_sep .. vim.env.PATH
+end
 
 -- Beruhigt den Snacks-Healthcheck
 vim.api.nvim_set_hl(0, "SnacksNormal", { fg = "#cba6f7", bg = "NONE" })
