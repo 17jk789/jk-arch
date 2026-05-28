@@ -476,18 +476,22 @@ return {
         },
       },
 
+      -- sources = {
+      --   default = { "lsp", "path", "buffer" },
+
+      --   providers = {
+      --     lsp = { score_offset = 1000 },
+      --     path = { score_offset = 750 },
+
+      --     buffer = {
+      --       score_offset = 500,
+      --       min_keyword_length = 4, -- weniger spam = mehr performance
+      --     },
+      --   },
+      -- },
+
       sources = {
-        default = { "lsp", "path", "buffer" },
-
-        providers = {
-          lsp = { score_offset = 1000 },
-          path = { score_offset = 750 },
-
-          buffer = {
-            score_offset = 500,
-            min_keyword_length = 4, -- weniger spam = mehr performance
-          },
-        },
+        default = { "lsp", "path", "buffer", "snippets" },
       },
 
       signature = {
