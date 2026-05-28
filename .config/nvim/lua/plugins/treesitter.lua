@@ -26,9 +26,41 @@ return {
         -- Web
         "html", "css", "scss", "graphql", "http",
       },
+
       highlight = { enable = true },
-      --  indent = { enable = true },
+
+      -- indent = { enable = true },
+
       -- auto_install = true,
+
+      -- indent = {
+      --   enable = true,
+      --   disable = { "cpp" },
+      -- },
+
+      textobjects = {
+        select = {
+          enable = true,
+          lookahead = true,
+          keymaps = {
+            ["af"] = "@function.outer",
+            ["if"] = "@function.inner",
+            ["ac"] = "@class.outer",
+            ["ic"] = "@class.inner",
+          },
+        },
+
+        move = {
+          enable = true,
+          set_jumps = true,
+          goto_next_start = {
+            ["]m"] = "@function.outer",
+          },
+          goto_previous_start = {
+            ["[m"] = "@function.outer",
+          },
+        },
+      },
     },
   },
 }
