@@ -96,14 +96,14 @@ end
 
 set -g fish_key_bindings fish_vi_key_bindings
 
-function fuck
-    # lädt thefuck nur beim ersten Aufruf
-    functions -q __thefuck_loaded; or begin
-        thefuck --alias | source
-        functions -c __thefuck_loaded __thefuck_loaded
-    end
-    __thefuck_loaded
-end
+# function fuck
+#     # lädt thefuck nur beim ersten Aufruf
+#     functions -q __thefuck_loaded; or begin
+#         thefuck --alias | source
+#         functions -c __thefuck_loaded __thefuck_loaded
+#     end
+#     __thefuck_loaded
+# end
 
 # Öffnet Dateien oder Verzeichnisse mit der Standard-App (xdg-open)
 function open
