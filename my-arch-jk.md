@@ -224,6 +224,7 @@ yay -S brave-bin
 # yay -S mullvad-browser-bin
 # yay -S google-chrome
 yay -S librewolf-bin
+sudo pacman -S firefox-developer-edition
 sudo pacman -S ark
 sudo pacman -S kate
 sudo pacman -S gwenview
