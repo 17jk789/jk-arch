@@ -283,18 +283,18 @@ return {
 			-- vim.api.nvim_set_hl(0, "CursorLine", { bg = colors.surface0})
 
 			-- Terminal Background beim Start ändern
-			vim.api.nvim_create_autocmd("VimEnter", {
-				callback = function()
-					io.write("\27]11;#1E1E2E\7")
-				end,
-			})
+			-- vim.api.nvim_create_autocmd("VimEnter", {
+			-- 	callback = function()
+			-- 		io.write("\27]11;#1E1E2E\7")
+			-- 	end,
+			-- })
 
 			-- Beim Beenden zurück zu schwarz
-			vim.api.nvim_create_autocmd("VimLeavePre", {
-				callback = function()
-					io.write("\27]11;#1a1b1b\7")
-				end,
-			})
+			-- vim.api.nvim_create_autocmd("VimLeavePre", {
+			-- 	callback = function()
+			-- 		io.write("\27]11;#1a1b1b\7")
+			-- 	end,
+			-- })
 		end,
 	},
 }

@@ -166,10 +166,10 @@ if vim.fn.isdirectory(mason_bin) == 1 then
 	vim.env.PATH = mason_bin .. path_sep .. vim.env.PATH
 end
 
-vim.g.loaded_ruby_provider = 0
-vim.g.loaded_perl_provider = 0
-vim.g.loaded_node_provider = 0
-vim.g.loaded_python3_provider = 0
+-- vim.g.loaded_ruby_provider = 0
+-- vim.g.loaded_perl_provider = 0
+-- vim.g.loaded_node_provider = 0
+-- vim.g.loaded_python3_provider = 0
 
 -- Beruhigt den Snacks-Healthcheck
 vim.api.nvim_set_hl(0, "SnacksNormal", { fg = "#cba6f7", bg = "NONE" })
