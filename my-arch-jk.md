@@ -50,6 +50,7 @@ rustup component add rustfmt
 cargo install --locked cargo-bloat
 cargo install --locked cargo-binutils
 cargo install --locked cargo-show-asm
+cargo install --locked bacon
 
 # Plugin für Decompilation in radare2 (Terminal)
 r2pm -U
