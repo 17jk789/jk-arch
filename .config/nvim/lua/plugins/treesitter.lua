@@ -76,6 +76,7 @@ return {
 				"scss",
 				"graphql",
 				"http",
+				"gotmpl",
 			},
 
 			highlight = { enable = true },
