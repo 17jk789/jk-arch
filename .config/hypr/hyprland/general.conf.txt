@@ -27,7 +27,7 @@ input {
 decoration {
     # 2 = circle, higher = squircle, 4 = very obvious squircle
     # Clear squircles look really off; we use only extra .4 here to make the rounding feel more continuous
-    rounding_power = 4
+    rounding_power = 3
     rounding = 18
 
     blur {
