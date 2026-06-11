@@ -193,8 +193,6 @@ return {
                 "--navigate",
                 "--hyperlinks",
                 '--hyperlinks-file-link-format="lazygit-edit://{path}:{line}"',
-                "--plus-style=syntax",
-                "--minus-style=syntax",
                 "--file-decoration-style=none",
                 "--hunk-header-style=file",
                 "--commit-style=bold",
