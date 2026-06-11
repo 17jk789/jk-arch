@@ -129,6 +129,7 @@ sudo npm install -g typescript
 # sudo pacman -S texlive-most zathura zathura-pdf-poppler
 # sudo pacman -S texlive-basic texlive-latex texlive-latexrecommended texlive-fontsrecommended latexmk zathura zathura-pdf-poppler
 sudo pacman -S texlive-meta latexmk zathura zathura-pdf-poppler
+sudo pacman -S texlive-latexextra texlive-pictures, texlive-langgerman texlive-langenglish biber
 # sudo pacman -S texlive-latexextra texlive-pictures texlive-fontsextra
 sudo pacman -S hunspell hunspell-de hunspell-en_us
 sudo pacman -S ghostty  # besser für Lazyvim als gnome-terminal oder konsole (KDE)
@@ -462,12 +463,12 @@ git checkout -- app/yarn.lock
 mkdir -p ~/.config/lazygit/
 
 # Die Konfiguration direkt mit printf schreiben (sicherer in fish)
-printf "git:
-  paging:
-    colorArg: always
-    pager: delta --dark --paging=never --line-numbers
-os:
-  editCommand: 'nvim'" > ~/.config/lazygit/config.yml
+# printf "git:
+#   paging:
+#     colorArg: always
+#     pager: delta --dark --paging=never --line-numbers
+# os:
+#   editCommand: 'nvim'" > ~/.config/lazygit/config.yml
 
 ```
 
