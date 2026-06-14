@@ -110,29 +110,29 @@ return {
 			return " " .. icon .. " "
 		end
 
-		local function latex_compile_status()
-			if vim.bo.filetype ~= "tex" and vim.bo.filetype ~= "plaintex" and vim.bo.filetype ~= "latex" then
-				return ""
-			end
+		-- local function latex_compile_status()
+		-- 	if vim.bo.filetype ~= "tex" and vim.bo.filetype ~= "plaintex" and vim.bo.filetype ~= "latex" then
+		-- 		return ""
+		-- 	end
 
-			local state = vim.b.vimtex_compile_state
-			if state == "compiling" then
-				return " 󰔟 TeX compiling"
-			elseif state == "success" then
-				return " 󰄴 TeX ready"
-			elseif state == "failed" then
-				return " 󰅙 TeX failed"
-			elseif state == "stopped" then
-				return " 󰓛 TeX stopped"
-			end
+		-- 	local state = vim.b.vimtex_compile_state
+		-- 	if state == "compiling" then
+		-- 		return " 󰔟 TeX compiling"
+		-- 	elseif state == "success" then
+		-- 		return " 󰄴 TeX ready"
+		-- 	elseif state == "failed" then
+		-- 		return " 󰅙 TeX failed"
+		-- 	elseif state == "stopped" then
+		-- 		return " 󰓛 TeX stopped"
+		-- 	end
 
-			local compiler = vim.b.vimtex and vim.b.vimtex.compiler
-			if compiler and compiler.status == 1 then
-				return " 󰔟 TeX compiling"
-			end
+		-- 	local compiler = vim.b.vimtex and vim.b.vimtex.compiler
+		-- 	if compiler and compiler.status == 1 then
+		-- 		return " 󰔟 TeX compiling"
+		-- 	end
 
-			return " 󰈙 TeX idle"
-		end
+		-- 	return " 󰈙 TeX idle"
+		-- end
 
 		-- Füge Komponenten mit Trennern hinzu
 		-- local x = opts.sections.lualine_x
@@ -180,9 +180,9 @@ return {
 			separator = { left = "", right = "" },
 		})
 
-		table.insert(opts.sections.lualine_x, 1, {
-			latex_compile_status,
-			separator = { left = "", right = "" },
-		})
+		-- table.insert(opts.sections.lualine_x, 1, {
+		-- 	latex_compile_status,
+		-- 	separator = { left = "", right = "" },
+		-- })
 	end,
 }
