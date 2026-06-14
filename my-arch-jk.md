@@ -130,6 +130,7 @@ sudo npm install -g typescript
 # sudo pacman -S texlive-basic texlive-latex texlive-latexrecommended texlive-fontsrecommended latexmk zathura zathura-pdf-poppler
 sudo pacman -S texlive-meta latexmk zathura zathura-pdf-poppler
 sudo pacman -S texlive-latexextra texlive-pictures, texlive-langgerman texlive-langenglish biber
+sudo pacman -S texlab
 # sudo pacman -S texlive-latexextra texlive-pictures texlive-fontsextra
 sudo pacman -S hunspell hunspell-de hunspell-en_us
 sudo pacman -S ghostty  # besser für Lazyvim als gnome-terminal oder konsole (KDE)
