@@ -316,7 +316,7 @@ end)
 map_if_free("n", "<leader>gca", "<cmd>Git commit --amend<cr>", { desc = "Git Commit Amend", silent = true })
 map_if_free("n", "<leader>gss", "<cmd>Git stash<cr>", { desc = "Git Stash", silent = true })
 map_if_free("n", "<leader>gsp", "<cmd>Git stash pop<cr>", { desc = "Git Stash Pop", silent = true })
-map_if_free("n", "<leader>gf", "<cmd>Git fetch<cr>", { desc = "Git Fetch", silent = true })
+map_if_free("n", "<leader>gF", "<cmd>Git fetch<cr>", { desc = "Git Fetch", silent = true })
 map_if_free("n", "<leader>gr", "<cmd>Git remote -v<cr>", { desc = "Git Remote -v", silent = true })
 -- map_if_free("n", "<leader>glo", "<cmd>Git log --oneline --graph<cr>")
 map_if_free(
