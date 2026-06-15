@@ -34,7 +34,7 @@
 --               type = "postgres",
 --               url = "postgres://postgres:postgres@localhost:5432/test_db?sslmode=disable",
 --             },
-            
+
 --             {
 --               name = "MariaDB Local",
 --               type = "mysql", -- MariaDB nutzt den mysql Treiber
@@ -62,8 +62,8 @@
 -- return {
 --   {
 --     "kndndrj/nvim-dbee",
---     dependencies = { 
---       "MunifTanjim/nui.nvim" 
+--     dependencies = {
+--       "MunifTanjim/nui.nvim"
 --     },
 --     cmd = { "Dbee", "DbeeToggle", "DbeeOpen" },
 
@@ -73,7 +73,7 @@
 --     --   end)
 --     -- end,
 
---     build = "make install", 
+--     build = "make install",
 
 --     -- opts = {
 --     --   sources = {
@@ -94,30 +94,30 @@
 -- }
 
 return {
---   {
---     "kndndrj/nvim-dbee",
---     dependencies = { "MunifTanjim/nui.nvim" },
---     cmd = { "Dbee", "DbeeToggle", "DbeeOpen" },
---     build = function()
---       -- Nutzt die interne Installationsroutine des Plugins
---       require("dbee").install()
---     end,
---     config = function()
---       local dbee = require("dbee")
---       local sources = require("dbee.sources")
+	--   {
+	--     "kndndrj/nvim-dbee",
+	--     dependencies = { "MunifTanjim/nui.nvim" },
+	--     cmd = { "Dbee", "DbeeToggle", "DbeeOpen" },
+	--     build = function()
+	--       -- Nutzt die interne Installationsroutine des Plugins
+	--       require("dbee").install()
+	--     end,
+	--     config = function()
+	--       local dbee = require("dbee")
+	--       local sources = require("dbee.sources")
 
---       dbee.setup({
---         sources = {
---           -- Sicher: Secrets kommen aus der Umgebungsvariable
---           sources.EnvSource:new("DBEE_CONNECTIONS"),
---           -- Praktisch für temporäre Verbindungen im UI
---           sources.MemorySource:new(),
---         },
---       })
---     end,
---     keys = {
---       -- Lazy-loading: Plugin lädt erst beim Drücken des Hotkeys
---       { "<leader>Dt", function() require("dbee").toggle() end, desc = "DBee: Toggle UI" },
---     },
---   },
+	--       dbee.setup({
+	--         sources = {
+	--           -- Sicher: Secrets kommen aus der Umgebungsvariable
+	--           sources.EnvSource:new("DBEE_CONNECTIONS"),
+	--           -- Praktisch für temporäre Verbindungen im UI
+	--           sources.MemorySource:new(),
+	--         },
+	--       })
+	--     end,
+	--     keys = {
+	--       -- Lazy-loading: Plugin lädt erst beim Drücken des Hotkeys
+	--       { "<leader>Dt", function() require("dbee").toggle() end, desc = "DBee: Toggle UI" },
+	--     },
+	--   },
 }

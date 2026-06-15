@@ -31,33 +31,52 @@ vim.api.nvim_create_user_command("AutoFormatOn", function()
   print("Autoformat: ON")
 end, {})
 
-vim.keymap.set("n", "<C-p>", ":Telescope find_files<cr>", { desc = "Find Files (Telescope)", silent = true, noremap = true })
-vim.keymap.set("n", "<C-f>", ":Telescope live_grep<cr>", { desc = "Telescope Live Grep", silent = true, buffer = true })
-vim.keymap.set("n", "<C-o>", ":Telescope lsp_document_symbols<cr>", { desc = "Telescope LSP Document Symbols", silent = true, buffer = true })
+vim.keymap.set(
+  "n",
+  "<C-p>",
+  ":Telescope find_files<cr>",
+  { desc = "Find Files (Telescope)", silent = true, noremap = true }
+)
+vim.keymap.set("n", "<C-f>", ":Telescope live_grep<cr>", { desc = "Telescope Live Grep", silent = true })
+vim.keymap.set(
+  "n",
+  "<C-o>",
+  ":Telescope lsp_document_symbols<cr>",
+  { desc = "Telescope LSP Document Symbols", silent = true }
+)
+
+vim.api.nvim_create_user_command("LspRestart", function()
+  for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+    vim.lsp.stop_client(client.id)
+  end
+
+  vim.cmd("edit")
+end, { desc = "Restart LSP" })
+
 -- vim.keymap.set("n", "<C-m>", ":TroubleToggle<cr>", { desc = "Trouble Toggle", silent = true, buffer = true })
-vim.keymap.set("n", "<leader>xx", ":TroubleToggle<cr>", { desc = "Trouble Toggle", silent = true, buffer = true })
-vim.keymap.set("n", "<C-b>", ":NvimTreeToggle<cr>", { desc = "NvimTree Toggle", silent = true, buffer = true })
+vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Trouble Toggle", silent = true })
+vim.keymap.set("n", "<C-b>", ":NvimTreeToggle<cr>", { desc = "NvimTree Toggle", silent = true })
 
 vim.keymap.set("n", "<leader>f<space>", "<cmd>FzfLua files<cr>", { desc = "Fzf Find Files", silent = true })
 
 -- vim.keymap.set("n", "<C-_>", "gcc", { desc = "Toggle Comment", silent = true, buffer = true })
-vim.keymap.set("n", "<leader>/", "gcc", { desc = "Toggle Comment", silent = true, buffer = true })
+vim.keymap.set("n", "<leader>/", "gcc", { desc = "Toggle Comment", silent = true })
 -- vim.keymap.set("v", "<C-_>", "gc", { desc = "Toggle Comment (Visual)", silent = true, buffer = true })
-vim.keymap.set("v", "<leader>/", "gc", { desc = "Toggle Comment", silent = true, buffer = true })
+vim.keymap.set("v", "<leader>/", "gc", { desc = "Toggle Comment", silent = true })
 
-vim.keymap.set("n", "<C-S-p>", ":Telescope commands<cr>", { desc = "Telescope Commands", silent = true, buffer = true })
+vim.keymap.set("n", "<C-S-p>", ":Telescope commands<cr>", { desc = "Telescope Commands", silent = true })
 
 -- vim.keymap.set("n", "<C-Tab>", ":bnext<cr>", { desc = "Switch to Next Buffer", silent = true, buffer = true })
-vim.keymap.set("n", "<leader>bn", ":bnext<cr>", { desc = "Next Buffer", silent = true, buffer = true })
+vim.keymap.set("n", "<leader>bn", ":bnext<cr>", { desc = "Next Buffer", silent = true })
 -- vim.keymap.set("n", "<C-S-Tab>", ":bprevious<cr>", { desc = "Switch to Previous Buffer", silent = true, buffer = true })
-vim.keymap.set("n", "<leader>bp", ":bprevious<cr>", { desc = "Previous Buffer", silent = true, buffer = true })
+vim.keymap.set("n", "<leader>bp", ":bprevious<cr>", { desc = "Previous Buffer", silent = true })
 
-vim.keymap.set("n", "<C-s>", ":w<cr>", { desc = "Save File", silent = true, buffer = true })
-vim.keymap.set("i", "<C-s>", "<Esc>:w<cr>a", { desc = "Save File and Continue Editing", silent = true, buffer = true })
+vim.keymap.set("n", "<C-s>", ":w<cr>", { desc = "Save File", silent = true })
+vim.keymap.set("i", "<C-s>", "<Esc>:w<cr>a", { desc = "Save File and Continue Editing", silent = true })
 
-vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", { desc = "Go to Definition", silent = true, buffer = true })
-vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", { desc = "Show References", silent = true, buffer = true })
-vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", { desc = "Show Hover Info", silent = true, buffer = true })
+vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", { desc = "Go to Definition", silent = true })
+vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", { desc = "Show References", silent = true })
+vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", { desc = "Show Hover Info", silent = true })
 
 vim.keymap.set("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
 
@@ -75,8 +94,8 @@ vim.keymap.set("n", "L", ":BufferLineCycleNext<CR>", { silent = true })
 vim.keymap.set("n", "H", ":BufferLineCyclePrev<CR>", { silent = true })
 
 -- vim.keymap.set("n", "<C-d>", "<cmd>lua require('dapui').toggle()<cr>", { desc = "Toggle DAP UI", silent = true, buffer = true })
-vim.keymap.set("n", "<leader>du", "<cmd>lua require('dapui').toggle()<cr>", { desc = "DAP UI Toggle", silent = true, buffer = true })
-vim.keymap.set("n", "<leader>dr", "<cmd>lua require'dap'.repl.open()<cr>", { desc = "DAP Open REPL", silent = true, buffer = true })
+vim.keymap.set("n", "<leader>du", "<cmd>lua require('dapui').toggle()<cr>", { desc = "DAP UI Toggle", silent = true })
+vim.keymap.set("n", "<leader>dr", "<cmd>lua require'dap'.repl.open()<cr>", { desc = "DAP Open REPL", silent = true })
 
 vim.keymap.set("n", "<leader>cf", ":ConformInfo<CR>", { desc = "Conform: Formatter Info" })
 
@@ -234,7 +253,7 @@ map_if_free("n", "]h", "<cmd>Gitsigns next_hunk<cr>", { desc = "Next Hunk" })
 map_if_free("n", "[h", "<cmd>Gitsigns prev_hunk<cr>", { desc = "Prev Hunk" })
 
 -- Git Basics
-map_if_free("n", "<leader>gb", "<cmd>G blame<cr>", { desc = "Git Blame", silent = true})
+map_if_free("n", "<leader>gb", "<cmd>G blame<cr>", { desc = "Git Blame", silent = true })
 map_if_free("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "Diffview Open", silent = true })
 map_if_free("n", "<leader>gh", "<cmd>DiffviewFileHistory %<cr>", { desc = "Diffview File History", silent = true })
 map_if_free("n", "<leader>gc", "<cmd>Git commit<cr>", { desc = "Git Commit", silent = true })
@@ -243,7 +262,7 @@ map_if_free("n", "<leader>gl", "<cmd>Git pull<cr>", { desc = "Git Pull", silent 
 
 -- Git Status öffnen
 -- map_if_free("n", "<leader>g", Snacks.picker.git_status, { desc = "Git Status Picker" })
-vim.keymap.set("n", "<leader>g", function() Snacks.picker.git_status() end, { desc = "Git Status" })
+vim.keymap.set("n", "<leader>gG", "<cmd>Git<cr>", { desc = "Git Status" })
 
 -- Hunks
 -- map_if_free("n", "]h", "<cmd>Gitsigns next_hunk<cr>", { desc = "Go to Next Git Hunk" })
@@ -257,14 +276,32 @@ map_if_free("n", "<leader>hR", "<cmd>Gitsigns reset_buffer<cr>", { desc = "Gitsi
 map_if_free("n", "<leader>hd", "<cmd>Gitsigns diffthis<cr>", { desc = "Gitsigns Diff This", silent = true })
 map_if_free("n", "<leader>hD", "<cmd>Gitsigns diffthis ~<cr>", { desc = "Gitsigns Diff This ~", silent = true })
 
-
 -- Toggle Git UI
-map_if_free("n", "<leader>tb", "<cmd>Gitsigns toggle_current_line_blame<cr>", { desc = "Gitsigns Toggle Current Line Blame", silent = true })
+map_if_free(
+  "n",
+  "<leader>tb",
+  "<cmd>Gitsigns toggle_current_line_blame<cr>",
+  { desc = "Gitsigns Toggle Current Line Blame", silent = true }
+)
 map_if_free("n", "<leader>ts", "<cmd>Gitsigns toggle_signs<cr>", { desc = "Gitsigns Toggle Signs", silent = true })
-map_if_free("n", "<leader>tn", "<cmd>Gitsigns toggle_numhl<cr>", { desc = "Gitsigns Toggle Number Highlight", silent = true })
-map_if_free("n", "<leader>tl", "<cmd>Gitsigns toggle_linehl<cr>", { desc = "Gitsigns Toggle Line Highlight", silent = true })
-map_if_free("n", "<leader>tw", "<cmd>Gitsigns toggle_word_diff<cr>", { desc = "Gitsigns Toggle Word Diff", silent = true })
-
+map_if_free(
+  "n",
+  "<leader>tn",
+  "<cmd>Gitsigns toggle_numhl<cr>",
+  { desc = "Gitsigns Toggle Number Highlight", silent = true }
+)
+map_if_free(
+  "n",
+  "<leader>tl",
+  "<cmd>Gitsigns toggle_linehl<cr>",
+  { desc = "Gitsigns Toggle Line Highlight", silent = true }
+)
+map_if_free(
+  "n",
+  "<leader>tw",
+  "<cmd>Gitsigns toggle_word_diff<cr>",
+  { desc = "Gitsigns Toggle Word Diff", silent = true }
+)
 
 -- Extra Git Commands (nicht typisch in LazyVim)
 map_if_free("n", "<leader>gco", "<cmd>Git checkout<cr>", { desc = "Git Checkout", silent = true })
@@ -282,7 +319,12 @@ map_if_free("n", "<leader>gsp", "<cmd>Git stash pop<cr>", { desc = "Git Stash Po
 map_if_free("n", "<leader>gF", "<cmd>Git fetch<cr>", { desc = "Git Fetch", silent = true })
 map_if_free("n", "<leader>gr", "<cmd>Git remote -v<cr>", { desc = "Git Remote -v", silent = true })
 -- map_if_free("n", "<leader>glo", "<cmd>Git log --oneline --graph<cr>")
-map_if_free("n", "<leader>glo", "<cmd>Git log --oneline --graph --decorate --all<cr>", { desc = "Git Log Oneline Graph", silent = true })
+map_if_free(
+  "n",
+  "<leader>glo",
+  "<cmd>Git log --oneline --graph --decorate --all<cr>",
+  { desc = "Git Log Oneline Graph", silent = true }
+)
 map_if_free("n", "<leader>gdc", "<cmd>DiffviewClose<cr>", { desc = "Diffview Close", silent = true })
 
 -- Schneller Wechsel zwischen geändert Dateien in Diffview
@@ -396,7 +438,6 @@ end, {})
 vim.api.nvim_create_user_command("LspClient", function()
   vim.cmd("checkhealth lsp")
 end, {})
-
 
 vim.api.nvim_create_user_command("LspClient", function()
   vim.cmd("checkhealth lsp")

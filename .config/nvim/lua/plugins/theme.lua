@@ -210,94 +210,93 @@
 -- Catppuccin
 
 return {
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require("catppuccin").setup({
-        flavour = "mocha", -- latte / frappe / macchiato / mocha
-        transparent_background = true,
-        term_colors = true,
-        -- integrations = {
-        --   snacks = true,
-        --   lsp_trouble = true,
-        --   mason = true,
-        --   which_key = true,
-        --   -- weitere Plugins bei Bedarf hier auf true setzen
-        -- },
-      })
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			require("catppuccin").setup({
+				flavour = "mocha", -- latte / frappe / macchiato / mocha
+				transparent_background = true,
+				term_colors = true,
+				-- integrations = {
+				--   snacks = true,
+				--   lsp_trouble = true,
+				--   mason = true,
+				--   which_key = true,
+				--   -- weitere Plugins bei Bedarf hier auf true setzen
+				-- },
+			})
 
-      vim.cmd("colorscheme catppuccin")
+			vim.cmd("colorscheme catppuccin")
 
-      -- local colors = require("catppuccin.palettes").get_palette("mocha")
+			-- local colors = require("catppuccin.palettes").get_palette("mocha")
 
-      -- local groups = {
-      --   "Normal",
-      --   "NormalNC",
-      --   "NormalFloat",
-      --   "FloatBorder",
-      --   "SignColumn",
-      --   "EndOfBuffer",
-      --   "LineNr",
-      --   "CursorLineNr",
-      --   "VertSplit",
-      --   "WinSeparator",
-      -- }
+			-- local groups = {
+			--   "Normal",
+			--   "NormalNC",
+			--   "NormalFloat",
+			--   "FloatBorder",
+			--   "SignColumn",
+			--   "EndOfBuffer",
+			--   "LineNr",
+			--   "CursorLineNr",
+			--   "VertSplit",
+			--   "WinSeparator",
+			-- }
 
-      local groups = {
-        "Normal",
-        "NormalNC",
-        "NormalFloat",
-        "FloatBorder",
-        "SignColumn",
-        "EndOfBuffer",
-        "LineNr",
-        "CursorLineNr",
-        "VertSplit",
-        "WinSeparator",
-        "TabLine",
-        "TabLineSel",
-        "TabLineFill",
-        "StatusLine",
-        "StatusLineNC",
-        "WinBar",
-        "WinBarNC",
-      }
+			local groups = {
+				"Normal",
+				"NormalNC",
+				"NormalFloat",
+				"FloatBorder",
+				"SignColumn",
+				"EndOfBuffer",
+				"LineNr",
+				"CursorLineNr",
+				"VertSplit",
+				"WinSeparator",
+				"TabLine",
+				"TabLineSel",
+				"TabLineFill",
+				"StatusLine",
+				"StatusLineNC",
+				"WinBar",
+				"WinBarNC",
+			}
 
-      -- for _, group in ipairs(groups) do
-      --   vim.api.nvim_set_hl(0, group, { bg = "none" })
-      -- end
+			-- for _, group in ipairs(groups) do
+			--   vim.api.nvim_set_hl(0, group, { bg = "none" })
+			-- end
 
-      for _, group in ipairs(groups) do
-        -- Der Trick: Wir holen das existierende Highlight (mit Farbe!)
-        local old_hl = vim.api.nvim_get_hl(0, { name = group })
-        -- Wir ändern NUR den Hintergrund, behalten aber das FG (Vordergrund)
-        vim.api.nvim_set_hl(0, group, vim.tbl_extend("force", old_hl, { bg = "none" }))
-      end
+			for _, group in ipairs(groups) do
+				-- Der Trick: Wir holen das existierende Highlight (mit Farbe!)
+				local old_hl = vim.api.nvim_get_hl(0, { name = group })
+				-- Wir ändern NUR den Hintergrund, behalten aber das FG (Vordergrund)
+				vim.api.nvim_set_hl(0, group, vim.tbl_extend("force", old_hl, { bg = "none" }))
+			end
 
-      vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#fab387", bold = true, bg = "none" })
-      -- vim.api.nvim_set_hl(0, "CursorLineNr", { fg = colors.mauve, bold = true, bg = "none" })
-      -- vim.api.nvim_set_hl(0, "LineNr", { fg = colors.surface0, bg = "none" })
-      -- vim.api.nvim_set_hl(0, "CursorLine", { bg = colors.surface0}) 
+			vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#fab387", bold = true, bg = "none" })
+			-- vim.api.nvim_set_hl(0, "CursorLineNr", { fg = colors.mauve, bold = true, bg = "none" })
+			-- vim.api.nvim_set_hl(0, "LineNr", { fg = colors.surface0, bg = "none" })
+			-- vim.api.nvim_set_hl(0, "CursorLine", { bg = colors.surface0})
 
-      -- Terminal Background beim Start ändern
-      vim.api.nvim_create_autocmd("VimEnter", {
-        callback = function()
-          io.write("\27]11;#1E1E2E\7")
-        end,
-      })
+			-- Terminal Background beim Start ändern
+			-- vim.api.nvim_create_autocmd("VimEnter", {
+			-- 	callback = function()
+			-- 		io.write("\27]11;#1E1E2E\7")
+			-- 	end,
+			-- })
 
-      -- Beim Beenden zurück zu schwarz
-      vim.api.nvim_create_autocmd("VimLeavePre", {
-        callback = function()
-          io.write("\27]11;#1a1b1b\7")
-        end,
-      })
-
-    end,
-  },
+			-- Beim Beenden zurück zu schwarz
+			-- vim.api.nvim_create_autocmd("VimLeavePre", {
+			-- 	callback = function()
+			-- 		io.write("\27]11;#1a1b1b\7")
+			-- 	end,
+			-- })
+		end,
+	},
 }
 
 -- Kanagawa
@@ -373,7 +372,7 @@ return {
 --     priority = 1000,
 --     config = function()
 --       vim.g.gruvbox_material_background = "soft" -- soft / medium / hard
---       vim.g.gruvbox_material_foreground = "material" 
+--       vim.g.gruvbox_material_foreground = "material"
 --       vim.g.gruvbox_material_enable_italic = 1
 --       vim.g.gruvbox_material_transparent_background = 1 -- transparent background
 --       vim.g.gruvbox_material_enable_bold = 1

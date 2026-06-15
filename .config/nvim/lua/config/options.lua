@@ -87,53 +87,56 @@ vim.opt.mouse = "a"
 -- end
 
 local function get_ls_style()
-  -- Das Fenster, das gerade gerendert wird
-  local winid = vim.g.statusline_winid or vim.api.nvim_get_current_win()
-  local bufnr = vim.api.nvim_win_get_buf(winid)
-  
-  -- 1. Hardcore Filter: Buffer-Typen und Filetypes
-  local ft = vim.bo[bufnr].filetype
-  local bt = vim.bo[bufnr].buftype
+	-- Das Fenster, das gerade gerendert wird
+	local winid = vim.g.statusline_winid or vim.api.nvim_get_current_win()
+	local bufnr = vim.api.nvim_win_get_buf(winid)
 
-  -- Erweitere die Liste, falls Snacks Explorer einen anderen Namen nutzt
-  if bt ~= "" 
-     or ft == "snacks_explorer" 
-     or ft == "snacks_layout" 
-     or ft == "snacks_picker_list" 
-     or ft:find("snacks") 
-  then
-    return ""
-  end
+	-- 1. Hardcore Filter: Buffer-Typen und Filetypes
+	local ft = vim.bo[bufnr].filetype
+	local bt = vim.bo[bufnr].buftype
 
-  -- 2. Pfad-Check: Verhindert Anzeige in leeren Buffern
-  local path = vim.api.nvim_buf_get_name(bufnr)
-  if path == "" or path:find("snacks_explorer") then
-    return ""
-  end
+	-- Erweitere die Liste, falls Snacks Explorer einen anderen Namen nutzt
+	if
+		bt ~= ""
+		or ft == "snacks_explorer"
+		or ft == "snacks_layout"
+		or ft == "snacks_picker_list"
+		or ft:find("snacks")
+	then
+		return ""
+	end
 
-  -- 3. Daten sammeln
-  local home = vim.fn.expand("$HOME")
-  local rel_path = path:gsub("^" .. vim.pesc(home), "~")
-  local stat = vim.uv.fs_stat(path)
-  
-  local info = rel_path
-  if stat then
-    local perms = vim.fn.getfperm(path)
-    local size = math.floor(stat.size / 1024) .. "KB"
-    local mtime = os.date("%b %d %H:%M", stat.mtime.sec)
-    info = string.format("%s › %s › %s › %s", rel_path, perms, size, mtime)
-  end
+	-- 2. Pfad-Check: Verhindert Anzeige in leeren Buffern
+	local path = vim.api.nvim_buf_get_name(bufnr)
+	if path == "" or path:find("snacks_explorer") then
+		return ""
+	end
 
-  -- 4. Platz-Check
-  local winwidth = vim.api.nvim_win_get_width(winid)
-  if winwidth < 50 then return "" end -- Zu schmal (z.B. Explorer-Leiste)
+	-- 3. Daten sammeln
+	local home = vim.fn.expand("$HOME")
+	local rel_path = path:gsub("^" .. vim.pesc(home), "~")
+	local stat = vim.uv.fs_stat(path)
 
-  local maxlen = math.floor(winwidth * 0.8)
-  if #info > maxlen then
-    info = "…" .. info:sub(-(maxlen - 1))
-  end
+	local info = rel_path
+	if stat then
+		local perms = vim.fn.getfperm(path)
+		local size = math.floor(stat.size / 1024) .. "KB"
+		local mtime = os.date("%b %d %H:%M", stat.mtime.sec)
+		info = string.format("%s › %s › %s › %s", rel_path, perms, size, mtime)
+	end
 
-  return "%=%m " .. info
+	-- 4. Platz-Check
+	local winwidth = vim.api.nvim_win_get_width(winid)
+	if winwidth < 50 then
+		return ""
+	end -- Zu schmal (z.B. Explorer-Leiste)
+
+	local maxlen = math.floor(winwidth * 0.8)
+	if #info > maxlen then
+		info = "…" .. info:sub(-(maxlen - 1))
+	end
+
+	return "%=%m " .. info
 end
 
 _G.winbar = get_ls_style
@@ -145,29 +148,78 @@ vim.opt.winbar = "%!v:lua.winbar()"
 --   },
 -- })
 
+vim.filetype.add({
+	pattern = {
+		[".*docker%-compose.*yaml"] = "yaml",
+		[".*docker%-compose.*yml"] = "yaml",
+		[".*%.gitlab%-ci%.yaml"] = "yaml",
+		[".*%.gitlab%-ci%.yml"] = "yaml",
+		[".*helm%-values.*%.yaml"] = "yaml",
+		[".*helm%-values.*%.yml"] = "yaml",
+	},
+})
+
 -- Mason-Binaries zum System-Pfad hinzufügen (behebt "CLI not found")
-vim.env.PATH = vim.fn.expand("$HOME/.local/share/nvim/mason/bin:") .. vim.env.PATH
+local mason_bin = vim.fn.stdpath("data") .. "/mason/bin"
+if vim.fn.isdirectory(mason_bin) == 1 then
+	local path_sep = package.config:sub(1, 1) == "\\" and ";" or ":"
+	vim.env.PATH = mason_bin .. path_sep .. vim.env.PATH
+end
 
--- In lua/config/options.lua ganz unten:
-vim.opt.rtp:prepend("/home/jk/.local/share/nvim/site")
-
--- In lua/config/options.lua (ganz oben)
-vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH
+-- vim.g.loaded_ruby_provider = 0
+-- vim.g.loaded_perl_provider = 0
+-- vim.g.loaded_node_provider = 0
+-- vim.g.loaded_python3_provider = 0
 
 -- Beruhigt den Snacks-Healthcheck
 vim.api.nvim_set_hl(0, "SnacksNormal", { fg = "#cba6f7", bg = "NONE" })
 vim.api.nvim_set_hl(0, "SnacksIndent", { fg = "#585b70", bg = "NONE" })
 
 vim.diagnostic.config({
-  virtual_text = {
-    prefix = "●",
-    spacing = 2,
-    source = "if_many",
-  },
-  float = {
-    border = "rounded",
-  },
-  severity_sort = true,
+	virtual_text = {
+		prefix = "●",
+		spacing = 2,
+		source = "if_many",
+	},
+	float = {
+		border = "rounded",
+	},
+	severity_sort = true,
 })
 
 -- vim.opt.guicursor = "n-v-c:block,i:block-blinkwait500-blinkon500-blinkoff500"
+
+local function is_binary(path)
+	local fd = vim.loop.fs_open(path, "r", 438)
+	if not fd then
+		return false
+	end
+
+	local data = vim.loop.fs_read(fd, 1024, 0)
+	vim.loop.fs_close(fd)
+
+	return data and data:find("\0", 1, true) ~= nil
+end
+
+vim.api.nvim_create_autocmd("BufReadPost", {
+	callback = function(args)
+		local buf = args.buf
+		local file = args.file
+
+		if file == "" or vim.fn.filereadable(file) == 0 then
+			return
+		end
+
+		if not is_binary(file) then
+			return
+		end
+
+		vim.bo[buf].modifiable = true
+		vim.cmd("%!hexdump -C")
+
+		vim.bo[buf].filetype = "hexdump"
+		vim.bo[buf].readonly = true
+		vim.bo[buf].modifiable = false
+		vim.bo[buf].modified = false
+	end,
+})

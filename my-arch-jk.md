@@ -50,6 +50,7 @@ rustup component add rustfmt
 cargo install --locked cargo-bloat
 cargo install --locked cargo-binutils
 cargo install --locked cargo-show-asm
+cargo install --locked bacon
 
 # Plugin für Decompilation in radare2 (Terminal)
 r2pm -U
@@ -128,6 +129,8 @@ sudo npm install -g typescript
 # sudo pacman -S texlive-most zathura zathura-pdf-poppler
 # sudo pacman -S texlive-basic texlive-latex texlive-latexrecommended texlive-fontsrecommended latexmk zathura zathura-pdf-poppler
 sudo pacman -S texlive-meta latexmk zathura zathura-pdf-poppler
+sudo pacman -S texlive-latexextra texlive-pictures, texlive-langgerman texlive-langenglish biber
+sudo pacman -S texlab
 # sudo pacman -S texlive-latexextra texlive-pictures texlive-fontsextra
 sudo pacman -S hunspell hunspell-de hunspell-en_us
 sudo pacman -S ghostty  # besser für Lazyvim als gnome-terminal oder konsole (KDE)
@@ -224,6 +227,7 @@ yay -S brave-bin
 # yay -S mullvad-browser-bin
 # yay -S google-chrome
 yay -S librewolf-bin
+sudo pacman -S firefox-developer-edition
 sudo pacman -S ark
 sudo pacman -S kate
 sudo pacman -S gwenview
@@ -270,6 +274,8 @@ sudo pacman -S ollama
 sudo pacman -S smartmontools
 sudo pacman -S krdc
 sudo pacman -S aria2
+sudo pacman -S difftastic
+sudo pacman -S github-cli
 yay -S ghidra
 # sudo smartctl --scan
 sudo usermod -aG libvirt,kvm $(whoami)
@@ -458,12 +464,12 @@ git checkout -- app/yarn.lock
 mkdir -p ~/.config/lazygit/
 
 # Die Konfiguration direkt mit printf schreiben (sicherer in fish)
-printf "git:
-  paging:
-    colorArg: always
-    pager: delta --dark --paging=never --line-numbers
-os:
-  editCommand: 'nvim'" > ~/.config/lazygit/config.yml
+# printf "git:
+#   paging:
+#     colorArg: always
+#     pager: delta --dark --paging=never --line-numbers
+# os:
+#   editCommand: 'nvim'" > ~/.config/lazygit/config.yml
 
 ```
 

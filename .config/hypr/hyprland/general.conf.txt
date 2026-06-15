@@ -23,3 +23,43 @@ input {
         scroll_factor = 0.7
     }
 }
+
+decoration {
+    # 2 = circle, higher = squircle, 4 = very obvious squircle
+    # Clear squircles look really off; we use only extra .4 here to make the rounding feel more continuous
+    rounding_power = 3
+    rounding = 18
+
+    blur {
+        enabled = true
+        xray = true
+        special = false
+        new_optimizations = true
+        size = 10
+        passes = 3
+        brightness = 1.1
+        noise = 0.03
+        contrast = 0.95
+        vibrancy = 0.5
+        vibrancy_darkness = 0.55
+        popups = false
+        popups_ignorealpha = 0.6
+        input_methods = true
+        input_methods_ignorealpha = 0.8
+    }
+
+    shadow {
+        enabled = true
+        # ignore_window = true
+        range = 28
+        offset = 0 4
+        render_power = 10
+        color = rgba(00000025)
+    }
+
+    # Dim
+    dim_inactive = true
+    dim_strength = 0.05
+    dim_special = 0.2
+}
+

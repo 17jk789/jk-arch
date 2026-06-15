@@ -28,7 +28,9 @@ function create-python-jup-pro --argument-names action name
         nbformat nbconvert notebook \
         bandit black mypy pytest
 
-    python -m ipykernel install --user --name=pneovim --display-name "Python (P-NeoVim)"
+    python -m ipykernel install --user \
+        --name=$PROJECT_NAME \
+        --display-name="Python ($PROJECT_NAME)"
 
     sudo chown -R $USER:$USER "$HOME/.local/share/jupyter"
     mkdir -p "$HOME/.local/share/jupyter/runtime"

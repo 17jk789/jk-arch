@@ -66,53 +66,53 @@
 local M = {}
 
 M.setup = function(capabilities)
-  local lspconfig = require("lspconfig")
+	local lspconfig = require("lspconfig")
 
-  capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+	capabilities = require("lsp.capabilities").get()
 
-  lspconfig.lua_ls.setup({
-    capabilities = capabilities,
+	lspconfig.lua_ls.setup({
+		capabilities = capabilities,
 
-    settings = {
-      Lua = {
-        runtime = {
-          version = "LuaJIT",
-        },
+		settings = {
+			Lua = {
+				runtime = {
+					version = "LuaJIT",
+				},
 
-        diagnostics = {
-          globals = { "vim" },
-        },
+				diagnostics = {
+					globals = { "vim" },
+				},
 
-        workspace = {
-          library = vim.api.nvim_get_runtime_file("", true),
-          checkThirdParty = false,
-        },
+				workspace = {
+					library = vim.api.nvim_get_runtime_file("", true),
+					checkThirdParty = false,
+				},
 
-        telemetry = {
-          enable = false,
-        },
+				telemetry = {
+					enable = false,
+				},
 
-        completion = {
-          callSnippet = "Replace",
-        },
-      },
-    },
+				completion = {
+					callSnippet = "Replace",
+				},
+			},
+		},
 
-    on_attach = function(client, bufnr)
-      -- safer than hard disabling capabilities
-      client.server_capabilities.semanticTokensProvider = nil
+		on_attach = function(client, bufnr)
+			-- safer than hard disabling capabilities
+			client.server_capabilities.semanticTokensProvider = nil
 
-      local map = function(mode, lhs, rhs)
-        vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, silent = true })
-      end
+			local map = function(mode, lhs, rhs)
+				vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, silent = true })
+			end
 
-      map("n", "K", vim.lsp.buf.hover)
-      map("n", "<leader>rn", vim.lsp.buf.rename)
-      map("n", "<leader>f", function()
-        vim.lsp.buf.format({ async = true })
-      end)
-    end,
-  })
+			map("n", "K", vim.lsp.buf.hover)
+			map("n", "<leader>rn", vim.lsp.buf.rename)
+			map("n", "<leader>f", function()
+				vim.lsp.buf.format({ async = true })
+			end)
+		end,
+	})
 end
 
 return M

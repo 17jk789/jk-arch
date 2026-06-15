@@ -1,0 +1,48 @@
+[user]
+	name = ...
+	email = ...
+
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    side-by-side = true
+    line-numbers = true
+    hyperlinks = true
+    hyperlinks-file-link-format = "lazygit-edit://{path}:{line}"
+
+    syntax-theme = Catppuccin Mocha
+
+    ; file-style = bold yellow
+    ; file-decoration-style = yellow ul
+
+    hunk-header-style = file line-number syntax
+
+    commit-style = bold magenta
+    commit-decoration-style = magenta
+
+    plus-style = "syntax #364144"
+    minus-style = "syntax #443245"
+
+    blame-format = "{author:<18} │ {commit:<8} │ {timestamp}"
+
+[merge]
+    conflictstyle = zdiff3
+
+[diff]
+    colorMoved = zebra
+
+[pull]
+    rebase = true
+    autoStash = true
+
+[fetch]
+    prune = true
+
+[rebase]
+    autosquash = true
+    

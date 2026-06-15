@@ -233,78 +233,78 @@
 local M = {}
 
 M.setup = function(capabilities)
-  local lspconfig = require("lspconfig")
-  -- local null_ls = require("none-ls")
+	local lspconfig = require("lspconfig")
+	-- local null_ls = require("none-ls")
 
-  capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+	capabilities = require("lsp.capabilities").get()
 
-  -- PYRIGHT
-  lspconfig.pyright.setup({
-    capabilities = capabilities,
+	-- PYRIGHT
+	lspconfig.pyright.setup({
+		capabilities = capabilities,
 
-    settings = {
-      python = {
-        analysis = {
-          typeCheckingMode = "strict",
-          diagnosticMode = "workspace",
-          autoSearchPaths = true,
-          useLibraryCodeForTypes = true,
-          autoImportCompletions = true,
+		settings = {
+			python = {
+				analysis = {
+					typeCheckingMode = "strict",
+					diagnosticMode = "workspace",
+					autoSearchPaths = true,
+					useLibraryCodeForTypes = true,
+					autoImportCompletions = true,
 
-          reportMissingImports = true,
-          reportUnusedVariable = true,
-          reportUnusedImport = true,
-          reportOptionalMemberAccess = true,
-          reportOptionalSubscript = true,
-          reportGeneralTypeIssues = true,
-          reportUnboundVariable = true,
-        },
-      },
-    },
+					reportMissingImports = true,
+					reportUnusedVariable = true,
+					reportUnusedImport = true,
+					reportOptionalMemberAccess = true,
+					reportOptionalSubscript = true,
+					reportGeneralTypeIssues = true,
+					reportUnboundVariable = true,
+				},
+			},
+		},
 
-    on_attach = function(client, bufnr)
-      client.server_capabilities.documentFormattingProvider = false
+		on_attach = function(client, bufnr)
+			client.server_capabilities.documentFormattingProvider = false
 
-      local map = function(mode, lhs, rhs)
-        vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, silent = true })
-      end
+			local map = function(mode, lhs, rhs)
+				vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, silent = true })
+			end
 
-      map("n", "K", vim.lsp.buf.hover)
-      map("n", "gd", vim.lsp.buf.definition)
-      map("n", "gr", vim.lsp.buf.references)
-      map("n", "<leader>rn", vim.lsp.buf.rename)
-      map("n", "<leader>ca", vim.lsp.buf.code_action)
-      map("n", "[d", vim.diagnostic.goto_prev)
-      map("n", "]d", vim.diagnostic.goto_next)
-    end,
-  })
+			map("n", "K", vim.lsp.buf.hover)
+			map("n", "gd", vim.lsp.buf.definition)
+			map("n", "gr", vim.lsp.buf.references)
+			map("n", "<leader>rn", vim.lsp.buf.rename)
+			map("n", "<leader>ca", vim.lsp.buf.code_action)
+			map("n", "[d", vim.diagnostic.goto_prev)
+			map("n", "]d", vim.diagnostic.goto_next)
+		end,
+	})
 
-  -- NONE-LS (MUSS IM FUNKTIONSTEIL SEIN!)
---   null_ls.setup({
---     sources = {
---       null_ls.builtins.diagnostics.ruff,
---       null_ls.builtins.formatting.black.with({
---         extra_args = { "--fast" },
---       }),
---       null_ls.builtins.diagnostics.bandit,
---       null_ls.builtins.diagnostics.mypy.with({
---         extra_args = { "--strict" },
---       }),
---     },
---   })
+	-- NONE-LS (MUSS IM FUNKTIONSTEIL SEIN!)
+	--   null_ls.setup({
+	--     sources = {
+	--       null_ls.builtins.diagnostics.ruff,
+	--       null_ls.builtins.formatting.black.with({
+	--         extra_args = { "--fast" },
+	--       }),
+	--       null_ls.builtins.diagnostics.bandit,
+	--       null_ls.builtins.diagnostics.mypy.with({
+	--         extra_args = { "--strict" },
+	--       }),
+	--     },
+	--   })
 
-  -- DIAGNOSTICS UI (Clean & Modern)
-  vim.diagnostic.config({
-    virtual_text = false,
-    signs = true,
-    underline = true,
-    update_in_insert = false,
-    severity_sort = true,
-    float = {
-      border = "rounded",
-      source = "if_many",
-    },
-  })
+	-- DIAGNOSTICS UI (Clean & Modern)
+	vim.diagnostic.config({
+		virtual_text = false,
+		signs = true,
+		underline = true,
+		update_in_insert = false,
+		severity_sort = true,
+		float = {
+			border = "rounded",
+			source = "if_many",
+		},
+	})
 end
 
 -- NULL-LS (LINT + FORMAT + SECURITY)

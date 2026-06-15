@@ -1,5 +1,3 @@
--- plugins/mason.lua
-
 return {
   {
     "mason-org/mason.nvim",
@@ -12,7 +10,7 @@ return {
         "rust-analyzer",
         -- "rustfmt",
 
-        -- C++: 
+        -- C++:
         "clangd",
         "codelldb",
 
@@ -31,7 +29,7 @@ return {
         -- "checkstyle",
 
         -- Python:
-        "pyright", 
+        "pyright",
         -- "python-lsp-server", -- früber "pylsp",
         -- "pylsp-mypy" -- optional, für Typ-Prüfung
         -- "python-lsp-black",
@@ -66,11 +64,14 @@ return {
         -- Zig:
         -- "zls",
 
+        -- Go:
+        "gopls",
+
         -- C#
         -- "omnisharp",
 
         -- Bash
-				"bash-language-server",
+        "bash-language-server",
         "shellcheck",
         "shfmt",
 
@@ -95,6 +96,9 @@ return {
         -- Docker & YAML
         "dockerfile-language-server",
         "yaml-language-server",
+
+        -- Latex
+        "texlab",
       },
     },
   },

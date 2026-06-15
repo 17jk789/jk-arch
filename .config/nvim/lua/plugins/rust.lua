@@ -56,7 +56,7 @@
 
 -- return {
 --   {
---     "simrat39/rust-tools.nvim", -- This repository was archived by the owner on Jan 3, 2024. It is now read-only. 
+--     "simrat39/rust-tools.nvim", -- This repository was archived by the owner on Jan 3, 2024. It is now read-only.
 --     ft = { "rust" },
 --     dependencies = {
 --       "neovim/nvim-lspconfig",
@@ -119,7 +119,7 @@
 
 -- return {
 --   {
---     "simrat39/rust-tools.nvim", -- This repository was archived by the owner on Jan 3, 2024. It is now read-only. 
+--     "simrat39/rust-tools.nvim", -- This repository was archived by the owner on Jan 3, 2024. It is now read-only.
 --     ft = { "rust" },
 --     dependencies = {
 --       "neovim/nvim-lspconfig",
@@ -303,7 +303,7 @@
 --   --   "nvim-neotest/neotest",
 --   --   dependencies = {
 --   --     "nvim-neotest/nvim-nio",
---   --     "rouge8/neotest-rust", -- Dieser Adapter ist LSP-unabhängig - aber This repository was archived by the owner on Aug 19, 2025. It is now read-only. 
+--   --     "rouge8/neotest-rust", -- Dieser Adapter ist LSP-unabhängig - aber This repository was archived by the owner on Aug 19, 2025. It is now read-only.
 --   --   },
 --   --   config = function()
 --   --     require("neotest").setup({
@@ -341,7 +341,7 @@
 return {
   {
     "mrcjkb/rustaceanvim",
-    version = "^8",
+    -- version = "^8",
     ft = { "rust" },
 
     config = function()
@@ -373,7 +373,6 @@ return {
         server = {
 
           on_attach = function(_, bufnr)
-
             -- local map = function(keys, func, desc)
             --   vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
             -- end
@@ -438,18 +437,24 @@ return {
               -- Clippy on Save
               -------------------------
 
-              checkOnSave = {
-                command = "clippy",
+              -- checkOnSave = {
+              -- command = "clippy",
 
-                -- This enables full Clippy analysis on every save.
-                -- It is very accurate but also a CPU-heavy operation ("CPU killer"),
-                -- especially in large projects or WSL environments.
-                -- extraArgs = {
-                --   "--all",
-                --   "--all-features",
-                --   "--",
-                --   "-Dwarnings",
-                -- },
+              -- This enables full Clippy analysis on every save.
+              -- It is very accurate but also a CPU-heavy operation ("CPU killer"),
+              -- especially in large projects or WSL environments.
+              -- extraArgs = {
+              --   "--all",
+              --   "--all-features",
+              --   "--",
+              --   "-Dwarnings",
+              -- },
+              -- },
+
+              checkOnSave = true,
+
+              check = {
+                command = "clippy",
               },
 
               -------------------------
@@ -526,9 +531,9 @@ return {
                   enable = true,
                 },
 
-                limit = {
-                  maxItems = 200,
-                },
+                -- limit = {
+                --   maxItems = 200,
+                -- },
 
                 hideDeprecated = true,
               },
@@ -727,8 +732,9 @@ return {
   --   end,
   -- },
 
-{
+  {
     "nvim-neotest/neotest",
+    ft = { "rust" },
     dependencies = {
       "nvim-neotest/nvim-nio",
       "rouge8/neotest-rust",

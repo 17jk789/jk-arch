@@ -1,4 +1,4 @@
-function activate-sunshine
+function run-sunshine
     systemctl --user enable --now sunshine.service
     and systemctl --user stop sunshine
     and sleep 2

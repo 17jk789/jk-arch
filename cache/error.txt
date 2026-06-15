@@ -1,0 +1,185 @@
+LspInfo
+
+- ⚠️ WARNING Unknown filetype 'yaml.docker-compose' (Hint: filename extension != filetype).
+- ⚠️ WARNING Unknown filetype 'yaml.gitlab' (Hint: filename extension != filetype).
+- ⚠️ WARNING Unknown filetype 'yaml.helm-values' (Hint: filename extension != filetype).
+- yamlls:
+  - capabilities: {
+      textDocument = {
+        completion = {
+          completionItem = {
+            commitCharactersSupport = false,
+            deprecatedSupport = true,
+            documentationFormat = { "markdown", "plaintext" },
+            insertReplaceSupport = true,
+            insertTextModeSupport = {
+              valueSet = { 1 }
+            },
+            labelDetailsSupport = true,
+            preselectSupport = false,
+            resolveSupport = {
+              properties = { "documentation", "detail", "additionalTextEdits", "command", "data" }
+            },
+            snippetSupport = true,
+            tagSupport = {
+              valueSet = { 1 }
+            }
+          },
+          completionList = {
+            itemDefaults = { "commitCharacters", "editRange", "insertTextFormat", "insertTextMode", "data" }
+          },
+          contextSupport = true,
+          insertTextMode = 1
+        }
+      },
+      workspace = {
+        fileOperations = {
+          didRename = true,
+          willRename = true
+        }
+      }
+    }
+
+
+- ⚠️ WARNING Found buffers attached to multiple clients with different position encodings.
+  - Buffer 7: UTF-16 (client id(s): 1, 3), UTF-8 (client id(s): 2)
+  - ADVICE:
+    - Use the positionEncodings client capability to ensure all clients use the same position encoding
+
+Health
+
+==============================================================================
+cord:                                                                     2 ⚠️
+
+- ⚠️ WARNING Unknown configuration entry: `timer`
+- ⚠️ WARNING Unknown configuration entry: `timer.reset_on_change`
+
+==============================================================================
+fzf_lua:                                                                  3 ⚠️
+
+fzf-lua [optional:media] ~
+- ⚠️ WARNING 'viu' not found
+- ⚠️ WARNING 'chafa' not found
+- ⚠️ WARNING 'ueberzugpp' not found
+
+==============================================================================
+snacks:                                                                   4 ⚠️
+
+Snacks.image ~
+- ⚠️ WARNING setup {disabled}
+- ⚠️ WARNING Missing Treesitter languages:
+    `norg`, `svelte`, `typst`, `vue`
+- ⚠️ WARNING Image rendering in docs with missing treesitter parsers won't work
+
+Snacks.statuscolumn ~
+- ⚠️ WARNING setup {disabled}
+
+==============================================================================
+vim.provider:                                                             6 ⚠️
+
+Node.js provider (optional) ~
+- ⚠️ WARNING Missing "neovim" npm (or yarn, pnpm) package.
+  - ADVICE:
+    - Run in shell: npm install -g neovim
+    - Run in shell (if you use yarn): yarn global add neovim
+    - Run in shell (if you use pnpm): pnpm install -g neovim
+    - You may disable this provider (and warning) by adding `let g:loaded_node_provider = 0` to your init.vim
+
+Perl provider (optional) ~
+- ⚠️ WARNING "Neovim::Ext" cpan module is not installed
+  - ADVICE:
+    - See :help |provider-perl| for more information.
+    - You can disable this provider (and warning) by adding `let g:loaded_perl_provider = 0` to your init.vim
+- ⚠️ WARNING No usable perl executable found
+
+Python 3 provider (optional) ~
+- ⚠️ WARNING No Python executable found that can `import neovim`. Using the first available executable for diagnostics.
+- ⚠️ WARNING Could not load Python :
+  /usr/bin/python3 does not have the "neovim" module.
+  /usr/bin/python3.14 does not have the "neovim" module.
+  python3.13 not found in search path or not executable.
+  /usr/bin/python3.12 does not have the "neovim" module.
+  python3.11 not found in search path or not executable.
+  python3.10 not found in search path or not executable.
+  python3.9 not found in search path or not executable.
+  /usr/bin/python does not have the "neovim" module.
+  - ADVICE:
+    - See :help |provider-python| for more information.
+    - You can disable this provider (and warning) by adding `let g:loaded_python3_provider = 0` to your init.vim
+- Executable: Not found
+
+Ruby provider (optional) ~
+- ⚠️ WARNING `ruby` and `gem` must be in $PATH.
+  - ADVICE:
+    - Install Ruby and verify that `ruby` and `gem` commands work.
+
+==============================================================================
+which-key:                                                               10 ⚠️
+
+checking for overlapping keymaps ~
+- ⚠️ WARNING In mode `n`, <y> overlaps with <yy>:
+  - <y>: Yank
+- ⚠️ WARNING In mode `n`, <d> overlaps with <dd>:
+  - <d>: Delete
+- ⚠️ WARNING In mode `n`, <<Space>g> overlaps with <<Space>gf>, <<Space>gP>, <<Space>gI>, <<Space>gY>, <<Space>gi>, <<Space>gp>, <<Space>gs>, <<Space>gg>, <<Space>gh>, <<Space>gB>, <<Space>gS>, <<Space>gd>, <<Space>gD>, <<Space>gG>, <<Space>gc>, <<Space>gb>, <<Space>gL>, <<Space>gl>:
+  - <<Space>g>: git
+  - <<Space>gf>: Git Current File History
+  - <<Space>gP>: GitHub Pull Requests (all)
+  - <<Space>gI>: GitHub Issues (all)
+  - <<Space>gY>: Git Browse (copy)
+  - <<Space>gi>: GitHub Issues (open)
+  - <<Space>gp>: GitHub Pull Requests (open)
+  - <<Space>gs>: Git Status
+  - <<Space>gg>: LazyGit
+  - <<Space>gh>: hunks
+  - <<Space>gB>: Git Browse (open)
+  - <<Space>gS>: Git Stash
+  - <<Space>gd>: Git Diff (hunks)
+  - <<Space>gD>: Git Diff (origin)
+  - <<Space>gG>: Lazygit (cwd)
+  - <<Space>gc>: Git Commit
+  - <<Space>gb>: Git Blame Line
+  - <<Space>gL>: Git Log (cwd)
+  - <<Space>gl>: Git Log
+- ⚠️ WARNING In mode `n`, <gc> overlaps with <gcO>, <gcc>, <gco>:
+  - <gc>: Toggle comment
+  - <gcO>: Add Comment Above
+  - <gco>: Add Comment Below
+- ⚠️ WARNING In mode `x`, <a> overlaps with <a%>, <al>, <ai>, <an>:
+  - <a>: around
+  - <al>: last
+  - <ai>: indent
+  - <an>: next
+- ⚠️ WARNING In mode `x`, <i> overlaps with <ii>, <in>, <il>:
+  - <i>: inside
+  - <ii>: indent
+  - <in>: next
+  - <il>: last
+- ⚠️ WARNING In mode `o`, <a> overlaps with <ai>, <an>, <al>:
+  - <a>: around
+  - <ai>: indent
+  - <an>: next
+  - <al>: last
+- ⚠️ WARNING In mode `o`, <i> overlaps with <ii>, <in>, <il>:
+  - <i>: inside
+  - <ii>: indent
+  - <in>: next
+  - <il>: last
+- ⚠️ WARNING In mode `o`, <y> overlaps with <yy>:
+
+- ⚠️ WARNING In mode `n`, <g> overlaps with <grr>, <gra>, <grt>, <gri>, <grn>, <grx>, <gO>, <g%>, <gx>, <g]>, <gc>, <gcO>, <gcc>, <gco>, <g[>:
+  - <g>: goto
+  - <grr>: vim.lsp.buf.references()
+  - <gra>: vim.lsp.buf.code_action()
+  - <grt>: vim.lsp.buf.type_definition()
+  - <gri>: vim.lsp.buf.implementation()
+  - <grn>: vim.lsp.buf.rename()
+  - <grx>: vim.lsp.codelens.run()
+  - <gO>: vim.lsp.buf.document_symbol()
+  - <g%>: Cycle backwards through results
+  - <gx>: Open with system app
+  - <g]>: Move to right "around"
+  - <gc>: Toggle comment
+  - <gcO>: Add Comment Above
+  - <gco>: Add Comment Below
+  - <g[>: Move to left "around"

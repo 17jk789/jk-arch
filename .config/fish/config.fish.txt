@@ -15,9 +15,9 @@ if status is-interactive
     zoxide init fish | source
 
     # Colors
-    if test -f ~/.local/state/quickshell/user/generated/terminal/sequences.txt
-        cat ~/.local/state/quickshell/user/generated/terminal/sequences.txt
-    end
+    # if test -f ~/.local/state/quickshell/user/generated/terminal/sequences.txt
+    #     cat ~/.local/state/quickshell/user/generated/terminal/sequences.txt
+    # end
 
     # Aliases
     # kitty doesn't clear properly so we need to do this weird printing
@@ -47,11 +47,11 @@ if status is-interactive
         bind -M default -e \el
 
         # 2. Deine eigenen Bindings neu setzen
-        bind -M insert \eh prevd-or-backward-word
-        bind -M insert \el nextd-or-forward-word
+        bind -M insert \ch prevd-or-backward-word
+        bind -M insert \cl nextd-or-forward-word
 
-        bind -M default \eh prevd-or-backward-word
-        bind -M default \el nextd-or-forward-word
+        bind -M default \ch prevd-or-backward-word
+        bind -M default \cl nextd-or-forward-word
 
         bind -M insert \cs "commandline -r 'ls -laa'; commandline -f execute"
         bind -M default \cs "commandline -r 'ls -laa'; commandline -f execute"
@@ -94,16 +94,16 @@ function y
     rm -f -- "$tmp"
 end
 
-set -g fish_key_bindings fish_vi_key_bindings
+# set -g fish_key_bindings fish_vi_key_bindings
 
-function fuck
-    # lädt thefuck nur beim ersten Aufruf
-    functions -q __thefuck_loaded; or begin
-        thefuck --alias | source
-        functions -c __thefuck_loaded __thefuck_loaded
-    end
-    __thefuck_loaded
-end
+# function fuck
+#     # lädt thefuck nur beim ersten Aufruf
+#     functions -q __thefuck_loaded; or begin
+#         thefuck --alias | source
+#         functions -c __thefuck_loaded __thefuck_loaded
+#     end
+#     __thefuck_loaded
+# end
 
 # Öffnet Dateien oder Verzeichnisse mit der Standard-App (xdg-open)
 function open
@@ -117,7 +117,8 @@ function lazy_navi
         # optional: Repo sicherstellen
         navi repo add denisidoro/cheats 2>/dev/null
         # Dummy-Funktion als Marker
-        function __navi_loaded; end
+        function __navi_loaded
+        end
     end
     command navi $argv
 end

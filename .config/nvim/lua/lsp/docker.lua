@@ -3,20 +3,22 @@
 local M = {}
 
 M.setup = function(capabilities)
-    local lspconfig = require("lspconfig")
+	local lspconfig = require("lspconfig")
 
-    lspconfig.dockerls.setup({
-        capabilities = capabilities,
-        filetypes = { "dockerfile" },
+	capabilities = require("lsp.capabilities").get()
 
-        on_attach = function(client, bufnr)
-            local buf_map = function(mode, lhs, rhs, opts)
-                opts = opts or {}
-                opts.buffer = bufnr
-                vim.keymap.set(mode, lhs, rhs, opts)
-            end
-        end,
-    })
+	lspconfig.dockerls.setup({
+		capabilities = capabilities,
+		filetypes = { "dockerfile" },
+
+		on_attach = function(client, bufnr)
+			local buf_map = function(mode, lhs, rhs, opts)
+				opts = opts or {}
+				opts.buffer = bufnr
+				vim.keymap.set(mode, lhs, rhs, opts)
+			end
+		end,
+	})
 end
 
 return M

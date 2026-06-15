@@ -1,0 +1,49 @@
+gui:
+  nerdFontsVersion: "3"
+  showFileIcons: true
+  showBranchCommitHash: true
+  showDivergenceFromBaseBranch: arrowAndNumber
+  showBottomLine: true
+  showPanelJumps: true
+  showRandomTip: true
+  splitDiff: auto
+  border: rounded
+  expandedSidePanel: files
+  showFileTree: true
+  sidePanelWidth: 0.15
+  showCommandLog: true
+  theme:
+    activeBorderColor:
+      - "#89b4fa"
+      - bold
+    inactiveBorderColor:
+      - "#6c7086"
+    searchingActiveBorderColor:
+      - "#f9e2af"
+      - bold
+    optionsTextColor:
+      - "#89dceb"
+    selectedLineBgColor:
+      - "#313244"
+    defaultFgColor:
+      - "#cdd6f4"
+git:
+  pagers:
+    - colorArg: always
+      pager: delta --paging=never --navigate --line-numbers --side-by-side --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+os:
+  editCommand: nvim
+  editCommandTemplate: "{{editor}} +{{line}} {{filename}}"
+customCommands:
+  - key: "B"
+    context: "files"
+    command: "git blame -w {{.SelectedFile.Name}}"
+    output: terminal
+  - key: "G"
+    context: "localBranches"
+    command: "git log --graph --decorate --all --oneline --date-order"
+    output: terminal
+  - key: "F"
+    context: "files"
+    command: "git log --follow -- {{.SelectedFile.Name}}"
+    output: terminal

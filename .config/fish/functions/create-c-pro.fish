@@ -33,7 +33,8 @@ target_include_directories(app PUBLIC include)' "$name" > CMakeLists.txt
 
     ln -s build/compile_commands.json .
 
-    printf "---\nLanguage: Cpp\nBasedOnStyle: Google\nIndentWidth: 4\nTabWidth: 4\nUseTab: Never\n..." > .clang-format
+    # printf "---\nLanguage: Cpp\nBasedOnStyle: Google\nIndentWidth: 4\nTabWidth: 4\nUseTab: Never\n..." > .clang-format
+    printf "Language: Cpp\nBasedOnStyle: Google\nIndentWidth: 4\nTabWidth: 4\nUseTab: Never\n" > .clang-format
 
     echo ""
     echo “✅ C project '$name' ready!”

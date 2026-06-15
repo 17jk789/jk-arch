@@ -1,11 +1,11 @@
 {
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
   "logo": {
-    "type": "builtin",
-    "source": "arch",
+    "type": "auto",
+    "source": "~/.config/fastfetch/arch.txt",
     "color": {
-      "1": "blue",
-      "2": "cyan"
+      "1": "#91ddd0",
+      "2": "white"
     }
   },
 
@@ -15,7 +15,7 @@
 
     {
       "type": "os",
-      "format": "Arch Linux"
+      "format": "Arch Linux x86_64"
     },
 
     "host",
@@ -38,16 +38,17 @@
     "cursor",
     "terminal",
     "terminalfont",
-    "cpu",
-    "gpu",
+    // "cpu",
+    // "gpu",
     "memory",
-    "swap",
+    // "swap",
     "disk",
     "localip",
     "battery",
     "poweradapter",
     "locale",
     "break",
-    "colors"
+    "colors",
+    "break",
   ]
 }

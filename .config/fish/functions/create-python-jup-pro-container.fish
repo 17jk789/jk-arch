@@ -121,9 +121,9 @@ function create-python-jup-pro-container --argument-names action name
             pytest;
 
         python -m ipykernel install \
-            --user \
-            --name=pneovim \
-            --display-name='Python (P-NeoVim)';
+            --sys-prefix \
+            --name=$PROJECT_NAME \
+            --display-name="Python ($PROJECT_NAME)"
     "
 
     echo ""
