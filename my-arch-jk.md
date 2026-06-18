@@ -681,7 +681,7 @@ sudo pacman -S plasma-systemmonitor
 ### Den Taskmanager Mission Center über yay installieren
 
 ```bash
-yay -S mission-center
+# yay -S mission-center
 ```
 
 ### Das digitale Mal- und Zeichenprogramm Krita installieren
@@ -963,7 +963,7 @@ sudo pacman -S difftastic
 ### Das Software-Reverse-Engineering-Framework Ghidra über yay installieren
 
 ```bash
-yay -S ghidra
+# yay -S ghidra
 ```
 
 ### Das universitäre WLAN (eduroam) fehlerfrei einrichten
