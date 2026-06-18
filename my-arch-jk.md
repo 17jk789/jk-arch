@@ -575,73 +575,109 @@ sudo pacman -S obs-studio
 sudo pacman -S discover flatpak
 ```
 
+### Die Desktop-Uhr KClock installieren
+
 ```bash
 sudo pacman -S kclock
 ```
 
+### Den Morgen Calendar über yay installieren
+
 ```bash
-yay -S morgen-bin
+# yay -S morgen-bin
 ```
+
+### Das Smartphone-Integrationswerkzeug KDE Connect installieren
 
 ```bash
 sudo pacman -S kdeconnect
 ```
 
+### Eine ältere Python-Version (3.12) über yay installieren
+
 ```bash
-yay -S python312
+# yay -S python312
 ```
+
+### Die Office-Suite LibreOffice installieren
 
 ```bash
 sudo pacman -S libreoffice-fresh libreoffice-fresh-de
 ```
 
+### Die Microsoft-kompatiblen Liberation-Schriftarten installieren
+
 ```bash
 sudo pacman -S ttf-liberation
 ```
+
+### Das Sandbox-Sicherheitswerkzeug Firejail installieren
 
 ```bash
 sudo pacman -S firejail
 ```
 
+### Das vollständige Linux-Drucksystem (CUPS) einrichten
+
 ```bash
 sudo pacman -S cups cups-filters ghostscript gutenprint avahi nss-mdns system-config-printer
 ```
+
+### Die offiziellen HP-Druckertreiber (HPLIP) installieren
 
 ```bash
 sudo pacman -S hplip
 ```
 
+### Die moderne LaTeX-Alternative Tectonic und den Dokumenten-Konverter Pandoc einrichten
+
 ```bash
 # sudo pacman -S pandoc tectonic
 ```
+
+### Text-zu-PostScript-Konverter und PDF-Interpreter installieren
 
 ```bash
 sudo pacman -S enscript ghostscript
 ```
 
+### Den Drucker-Hintergrunddienst aktivieren
+
 ```bash
 sudo systemctl enable --now cups.service
 ```
+
+### Den Netzwerk-Erkennungsdienst Avahi aktivieren
 
 ```bash
 sudo systemctl enable --now avahi-daemon.service
 ```
 
+### Die Rust-Alternative für den sudo-Befehl installieren
+
 ```bash
 # sudo pacman -S sudo-rs
 ```
+
+### Die HEIF- und AVIF-Bildbibliothek libheif installieren
 
 ```bash
 sudo pacman -S libheif
 ```
 
+### Die erweiterten Bildformat-Plugins für KDE installieren
+
 ```bash
 sudo pacman -S kimageformats
 ```
 
+### Den Netzwerk-Bandbreiten-Monitor bandwhich installieren
+
 ```bash
 sudo pacman -S bandwhich
 ```
+
+### Den Netzwerk-Protokollanalysator Wireshark installieren
 
 ```bash
 sudo pacman -S wireshark-qt
