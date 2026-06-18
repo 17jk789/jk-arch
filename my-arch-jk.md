@@ -755,99 +755,114 @@ qemu-system-x86_64 \
 sudo pacman -S pwvucontrol
 ```
 
+### Den grafischen Audio-Verkabelungs-Manager qpwgraph installieren
+
 ```bash
-sudo pacman -S qpwgraph
+# sudo pacman -S qpwgraph
 ```
+
+### Die lokale KI-Laufzeitumgebung Ollama installieren
 
 ```bash
 sudo pacman -S ollama
 ```
 
+### Die S.M.A.R.T.-Festplattenüberwachung installieren
+
 ```bash
 sudo pacman -S smartmontools
 ```
+
+### Den Remote-Desktop-Client KRDC installieren
 
 ```bash
 sudo pacman -S krdc
 ```
 
+### Den ultraschnellen Download-Manager aria2 installieren
+
 ```bash
 sudo pacman -S aria2
 ```
+
+### Das strukturelle Diff-Werkzeug Difftastic installieren
 
 ```bash
 sudo pacman -S difftastic
 ```
 
+### Das offizielle GitHub-Kommandozeilenwerkzeug (GitHub CLI) installieren
+
 ```bash
-sudo pacman -S github-cli
+# sudo pacman -S github-cli
 ```
+
+### Das Software-Reverse-Engineering-Framework Ghidra über yay installieren
 
 ```bash
 yay -S ghidra
 ```
 
+### Das universitäre WLAN (eduroam) fehlerfrei einrichten
+
 ```bash
+# sudo pacman -S --needed networkmanager python-dbus ca-certificates
+# yay -S geteduroam-gui
+```
 
-# Uni: eduroam
-sudo pacman -S --needed networkmanager python-dbus ca-certificates
-yay -S geteduroam-gui
+### Die offizielle Open-Source-Alternative für Universitäts-VPNs installieren
 
-# Uni: vpn
+```bash
 # yay -S globalprotect-bin
 sudo pacman -S globalprotect-openconnect
 # run: gpclient launch-gui
 # yay -S wireguird
 # yay -S wireguard-gui-bin
+```
 
+### Nützliche Fish plugins
+
+```bash
 fisher install jorgebucaran/autopair.fish nickeb96/fish-vim edc/bass PatrickF1/fzf.fish
+```
 
+### Modernes Datei-Listing und ein interaktiver Terminal-Spickzettel
+
+```bash
 sudo pacman -S eza navi
+```
+
+### Die offizielle Spickzettel-Datenbank für navi hinzufügen
+
+```bash
 navi repo add denisidoro/cheats
+```
+
+### Die CachyOS-spezifischen Spickzettel für navi hinzufügen (Optional)
+
+```bash
 # navi repo add cachyos/cheats
+```
 
-# set -l config_block '
-# function fish_user_key_bindings
-#     fish_vi_key_bindings
+### Für yazi: Die Desktop-Integrationswerkzeuge xdg-utils installieren
 
-#     if functions -q _autopair_install
-#         _autopair_install
-#     end
-
-#     # 1. Bestehende Bindings für Alt+L löschen (wichtig!)
-#     bind -e \el
-#     bind -M insert -e \el
-#     bind -M default -e \el
-
-#     # 2. Deine eigenen Bindings neu setzen
-#     bind -M insert \eh prevd-or-backward-word
-#     bind -M insert \el nextd-or-forward-word
-
-#     bind -M default \eh prevd-or-backward-word
-#     bind -M default \el nextd-or-forward-word
-
-#     bind -M insert \cs "commandline -r 'ls -laa'; commandline -f execute"
-#     bind -M default \cs "commandline -r 'ls -laa'; commandline -f execute"
-# end'
-
-# if not grep -q "fish_user_key_bindings" ~/.config/fish/config.fish
-#     # echo $config_block >> ~/.config/fish/config.fish
-#     echo "$config_block" >> ~/.config/fish/config.fish
-#     echo "Die Vi-Autopair-Konfiguration wurde am Ende der config.fish hinzugefügt!"
-# else
-#     echo "Konfiguration bereits vorhanden oder manuell angepasst."
-# end
-
-# echo "thefuck --alias | source" >> ~/.config/fish/config.fish; and source ~/.config/fish/config.fish
-
-# source ~/.config/fish/config.fish
-
-# für yazi
+```bash
 sudo pacman -S xdg-utils
+```
+
+### Für yazi: Die MIME-Typ-Erkennung perl-file-mimeinfo installieren
+
+```bash
 sudo pacman -S perl-file-mimeinfo
+```
 
+### Mauszeiger-Animationen (Cursor Shaders) für Ghostty einrichten
+
+```bash
 git clone https://github.com/sahaj-b/ghostty-cursor-shaders ~/.config/ghostty/shaders
+```
 
+```bash
 # echo 'eval "$(zoxide init bash)"' >> ~/.bashrc
 # echo 'zoxide init fish | source' >> ~/.config/fish/config.fish
 # sudo pacman -S just
