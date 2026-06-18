@@ -756,7 +756,7 @@ return {
 							desc = "17jk789/my-vs-code-setting",
 							action = function()
 								local url =
-									"https://github.com/17jk789/my-vs-code-setting/blob/main/README-neovim-config-Ubuntu.md"
+									"https://github.com/17jk789/my-vs-code-setting"
 								local cmd
 
 								if vim.fn.has("mac") == 1 then
