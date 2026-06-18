@@ -203,52 +203,56 @@ sudo pacman -S zoxide
 sudo pacman -S nodejs npm
 ```
 
+### Das Standard-Kompressionswerkzeug installieren
+
+```bash
 sudo pacman -S gzip
+```
+
+### TypeScript installieren
+
+```bash
 # sudo npm install -g typescript
-# sudo pacman -S texlive-most zathura zathura-pdf-poppler
-# sudo pacman -S texlive-basic texlive-latex texlive-latexrecommended texlive-fontsrecommended latexmk zathura zathura-pdf-poppler
+```
+
+### Die ultimative LaTeX-Umgebung installieren
+
+```bash
 sudo pacman -S texlive-meta latexmk zathura zathura-pdf-poppler
 sudo pacman -S texlive-latexextra texlive-pictures, texlive-langgerman texlive-langenglish biber
 sudo pacman -S texlab
-# sudo pacman -S texlive-latexextra texlive-pictures texlive-fontsextra
+```
+
+### Die Rechtschreibprüfung für Deutsch und Englisch installieren
+
+```bash
 sudo pacman -S hunspell hunspell-de hunspell-en_us
+```
+
+### Moderne Terminal-Emulatoren installieren
+
+```bash
 sudo pacman -S ghostty  # besser für Lazyvim als gnome-terminal oder konsole (KDE)
 sudo pacman -S foot
-# sudo pacman -S alacritty # sollte schon installirt sein auf cachy os
-# sudo pacman -S kitty # sollte schon installirt sein auf cachy os
+sudo pacman -S alacritty # sollte schon installirt sein auf cachy os
+sudo pacman -S kitty # sollte schon installirt sein auf cachy os
 # sudo pacman -S wezterm
 # sudo pacman -S jre-openjdk
 # sudo pacman -S languagetool
 # sudo pacman -S vim
+```
+
+### Akku- und Hardware-Informationen auslesen
+
+```bash
 sudo pacman -S acpi
 ```
 
+### LazyVim und JetBrains Mono Nerd Font installieren
+
 ```bash
-# mkdir -p ~/.local/share/nvim/spell
-# cd ~/.local/share/nvim/spell
-# cp /usr/share/vim/vim*/spell/en.utf-8.spl ~/.local/share/nvim/spell/en_us.utf-8.spl
-# cp /usr/share/vim/vim*/spell/de.utf-8.spl ~/.local/share/nvim/spell/de_de.utf-8.spl
-# cd ~/Downloads
-# wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
-# tar -xzf nvim-linux-x86_64.tar.gz
-# sudo mv nvim-linux-x86_64 /opt/nvim
-# echo 'export PATH="$PATH:/opt/nvim/bin"' >> ~/.bashrc
-# source ~/.bashrc
 sudo pacman -S neovim
-# required
-# mv ~/.config/nvim{,.bak}
-# optional but recommended
-# mv ~/.local/share/nvim{,.bak}
-# mv ~/.local/state/nvim{,.bak}
-# mv ~/.cache/nvim{,.bak}
-# git clone https://github.com/LazyVim/starter ~/.config/nvim
-# # Das Entfernen von .git ist Absicht, sonst hängt man am Starter-Repo.
-# rm -rf ~/.config/nvim/.git 
-# mkdir -p ~/.local/share/fonts
-# cd ~/.local/share/fonts
-# wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip
-# unzip JetBrainsMono.zip -d JetBrainsMono
-# fc-cache -fv
+
 # LazyVim Starter klonen
 git clone https://github.com/LazyVim/starter ~/.config/nvim
 
@@ -266,96 +270,338 @@ unzip JetBrainsMono.zip -d JetBrainsMono
 # Font-Cache aktualisieren
 fc-cache -fv
 
-# git clone --depth=1 https://github.com/github/copilot.vim.git \
-# ~/.config/nvim/pack/github/start/copilot.vim
 nvim
 ```
 
 ```bash
-# Könnte nützlich sein
-
 sudo pacman -S fastfetch
+```
+
+```bash
 sudo pacman -S htop
+```
+
+```bash
 sudo pacman -S btop # nvim ~/.config/btop/btop.conf
+```
+
+```bash
 sudo pacman -S nvtop
+```
+
+```bash
 sudo pacman -S ranger w3m ranger-devicons
+```
+
+```bash
 sudo pacman -S time
+```
+
+```bash
 sudo pacman -S hyperfine
+```
+
+```bash
 sudo pacman -S tmux
+```
+
+```bash
 sudo pacman -S wofi
+```
+
+```bash
 sudo pacman -S zoxide
+```
+
+```bash
 sudo pacman -S ghex
+```
+
+```bash
 sudo pacman -S bat
+```
+
+```bash
 sudo pacman -S yazi
+```
+
+```bash
 sudo pacman -S lazygit
+```
+
+```bash
 sudo pacman -S tree
+```
+
+```bash
 sudo pacman -S ripgrep
+```
+
+```bash
 sudo pacman -S fd
+```
+
+```bash
 sudo pacman -S eza
+```
+
+```bash
 sudo pacman -S tldr
+```
+
+```bash
 sudo pacman -S jq
+```
+
+```bash
 sudo pacman -S nwg-displays
+```
+
+```bash
 sudo pacman -S imagemagick
+```
+
+```bash
 sudo pacman -S thefuck
+```
+
+```bash
 sudo pacman -S --needed lua51
+```
+
+```bash
 # sudo pacman -S code
+```
+
+```bash
 yay -S visual-studio-code-bin
+```
+
+```bash
 yay -S discord
+```
+
+```bash
 yay -S signal-desktop
+```
+
+```bash
 yay -S brave-bin
+```
+
+```bash
 # yay -S mullvad-browser-bin
+```
+
+```bash
 # yay -S google-chrome
+```
+
+```bash
 yay -S librewolf-bin
+```
+
+```bash
 sudo pacman -S firefox-developer-edition
+```
+
+```bash
 sudo pacman -S ark
+```
+
+```bash
 sudo pacman -S kate
+```
+
+```bash
 sudo pacman -S gwenview
+```
+
+```bash
 sudo pacman -S okular
+```
+
+```bash
 sudo pacman -S vlc
+```
+
+```bash
 sudo pacman -S konsole
+```
+
+```bash
 sudo pacman -S obsidian
+```
+
+```bash
 sudo pacman -S plasma-systemmonitor
+```
+
+```bash
 yay -S mission-center
+```
+
+```bash
 sudo pacman -S krita
+```
+
+```bash
 sudo pacman -S gimp
+```
+
+```bash
 sudo pacman -S kdenlive
+```
+
+```bash
 # sudo pacman -S shotcut
+```
+
+```bash
 sudo pacman -S blender
+```
+
+```bash
 sudo pacman -S thunderbird
+```
+
+```bash
 sudo pacman -S qalculate-gtk
+```
+
+```bash
 sudo pacman -S obs-studio
+```
+
+```bash
 sudo pacman -S discover flatpak
+```
+
+```bash
 sudo pacman -S kclock
+```
+
+```bash
 yay -S morgen-bin
+```
+
+```bash
 sudo pacman -S kdeconnect
+```
+
+```bash
 yay -S python312
+```
+
+```bash
 sudo pacman -S libreoffice-fresh libreoffice-fresh-de
+```
+
+```bash
 sudo pacman -S ttf-liberation
+```
+
+```bash
 sudo pacman -S firejail
+```
+
+```bash
 sudo pacman -S cups cups-filters ghostscript gutenprint avahi nss-mdns system-config-printer
+```
+
+```bash
 sudo pacman -S hplip
+```
+
+```bash
 # sudo pacman -S pandoc tectonic
+```
+
+```bash
 sudo pacman -S enscript ghostscript
+```
+
+```bash
 sudo systemctl enable --now cups.service
+```
+
+```bash
 sudo systemctl enable --now avahi-daemon.service
-sudo pacman -S sudo-rs
+```
+
+```bash
+# sudo pacman -S sudo-rs
+```
+
+```bash
 sudo pacman -S libheif
+```
+
+```bash
 sudo pacman -S kimageformats
+```
+
+```bash
 sudo pacman -S bandwhich
+```
+
+```bash
 sudo pacman -S wireshark-qt
+```
+
+```bash
 sudo pacman -S krusader
+```
+
+```bash
 sudo pacman -S 7zip
+```
+
+```bash
 sudo pacman -S qemu-full virt-manager libvirt virt-viewer dnsmasq
+```
+
+```bash
 sudo systemctl enable --now libvirtd
+```
+
+```bash
 sudo pacman -S pwvucontrol
+```
+
+```bash
 sudo pacman -S qpwgraph
+```
+
+```bash
 sudo pacman -S ollama
+```
+
+```bash
 sudo pacman -S smartmontools
+```
+
+```bash
 sudo pacman -S krdc
+```
+
+```bash
 sudo pacman -S aria2
+```
+
+```bash
 sudo pacman -S difftastic
+```
+
+```bash
 sudo pacman -S github-cli
+```
+
+```bash
 yay -S ghidra
+```
+
+```bash
 # sudo smartctl --scan
 sudo usermod -aG libvirt,kvm $(whoami)
 # Bsp.:
