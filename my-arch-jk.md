@@ -130,6 +130,13 @@ Bitte führen sie alle Commands aus und fügen sie .config in ihr Systhem ein.
     - [Für yazi: Die Desktop-Integrationswerkzeuge xdg-utils installieren](#für-yazi-die-desktop-integrationswerkzeuge-xdg-utils-installieren)
     - [Für yazi: Die MIME-Typ-Erkennung perl-file-mimeinfo installieren](#für-yazi-die-mime-typ-erkennung-perl-file-mimeinfo-installieren)
     - [Mauszeiger-Animationen (Cursor Shaders) für Ghostty einrichten](#mauszeiger-animationen-cursor-shaders-für-ghostty-einrichten)
+    - [Einen modularen Fish-Konfigurationsordner erstellen](#einen-modularen-fish-konfigurationsordner-erstellen)
+    - [Den praktischen Befehls-Ausführer just installieren](#den-praktischen-befehls-ausführer-just-installieren)
+    - [Überprüfung der AUR-Paketquellen auf Schadcode (Malware-Hunting)](#überprüfung-der-aur-paketquellen-auf-schadcode-malware-hunting)
+    - [Suche nach der spezifischen Malware-Signatur (atomic-lockfile)](#suche-nach-der-spezifischen-malware-signatur-atomic-lockfile)
+    - [Kontrolle installierter Fremdpakete \& Paketmanager-Historie](#kontrolle-installierter-fremdpakete--paketmanager-historie)
+    - [Virenscan mit ClamAV (Deep Scan sensibler Entwickler-Ordner)](#virenscan-mit-clamav-deep-scan-sensibler-entwickler-ordner)
+    - [Rootkit-Erkennung mit Rootkit Hunter (rkhunter)](#rootkit-erkennung-mit-rootkit-hunter-rkhunter)
     - [Den SSH-Server sofort ausschalten und dauerhaft deaktivieren](#den-ssh-server-sofort-ausschalten-und-dauerhaft-deaktivieren)
     - [Das Begrüßungsprogramm von CachyOS entfernen](#das-begrüßungsprogramm-von-cachyos-entfernen)
     - [Instalation von En Croissant, eine moderne grafische Benutzeroberfläche (GUI) für Schachdatenbanken und Partienanalysen.](#instalation-von-en-croissant-eine-moderne-grafische-benutzeroberfläche-gui-für-schachdatenbanken-und-partienanalysen)
@@ -1018,48 +1025,60 @@ sudo pacman -S perl-file-mimeinfo
 git clone https://github.com/sahaj-b/ghostty-cursor-shaders ~/.config/ghostty/shaders
 ```
 
+### Einen modularen Fish-Konfigurationsordner erstellen
+
 ```bash
-# echo 'eval "$(zoxide init bash)"' >> ~/.bashrc
-# echo 'zoxide init fish | source' >> ~/.config/fish/config.fish
-# sudo pacman -S just
-# source /usr/share/doc/fzf/examples/key-bindings.bash # für fzf im Terminal -> Strg + R
-# echo 'source /usr/share/fzf/key-bindings.bash' >> ~/.bashrc
-# Erstellt das Verzeichnis, falls nicht vorhanden
 mkdir -p ~/.config/fish/conf.d
+```
 
-# Aktiviert die fzf Tastenkombinationen für fish
-# echo 'fzf_key_bindings' >> ~/.config/fish/config.fish
-# echo "bind -M insert \cf 'yazi; commandline -f repaint'" >> ~/.config/fish/config.fish
-# echo "bind -M default \cf 'yazi; commandline -f repaint'" >> ~/.config/fish/config.fish
-
-# echo "bind -M insert \cn 'nvim (pwd); commandline -f repaint'" >> ~/.config/fish/config.fish
-# echo "bind -M default \cn 'nvim (pwd); commandline -f repaint'" >> ~/.config/fish/config.fish
-
-# echo "bind -M insert \cg 'lazygit; commandline -f repaint'" >> ~/.config/fish/config.fish
-# echo "bind -M default \cg 'lazygit; commandline -f repaint'" >> ~/.config/fish/config.fish
-# echo 'alias sudo="sudo-rs"' >> ~/.config/fish/config.fish
+### Den praktischen Befehls-Ausführer just installieren
+```bash
 sudo pacman -S just
+```
 
+### Überprüfung der AUR-Paketquellen auf Schadcode (Malware-Hunting)
+
+```bash
 # npm install -g @mermaid-js/mermaid-cli
 grep -RinE \
 'npm|node|curl.*\||wget.*\||bash -c|sh -c|eval|base64|openssl|nc |socat|python -c' \
 ~/.cache/yay/*/PKGBUILD
-yay -Qm
-ls ~/.cache/yay
-grep "2026-06" /var/log/pacman.log | tail -100
-grep -E "installed|upgraded" /var/log/pacman.log | tail -200
 grep -R "atomic-lockfile" /tmp 2>/dev/null
 grep -R "npm install" ~/.cache/yay 2>/dev/null
 pacman -Qm
+```
+
+### Suche nach der spezifischen Malware-Signatur (atomic-lockfile)
+
+```bash
 find ~ -iname "*atomic-lockfile*" 2>/dev/null
 npm list -g 2>/dev/null | grep atomic-lockfile
 grep -R "atomic-lockfile" /var/cache 2>/dev/null
 grep -R "atomic-lockfile" ~/.cache/yay 2>/dev/null
+```
+
+### Kontrolle installierter Fremdpakete & Paketmanager-Historie
+
+```bash
+yay -Qm
+ls ~/.cache/yay
+grep "2026-06" /var/log/pacman.log | tail -100
+grep -E "installed|upgraded" /var/log/pacman.log | tail -200
+```
+
+### Virenscan mit ClamAV (Deep Scan sensibler Entwickler-Ordner)
+
+```bash
 sudo pacman -S clamav
 sudo freshclam
 clamscan -r -i ~/.config/nvim ~/.local/share/nvim ~/.local/state/nvim ~/.cache/nvim
 clamscan -r -i ~/.cargo ~/.sdkman ~/.npm ~/.local/lib/python3*/site-packages ~/Downloads
 clamscan -r -i ~/.cache/yay
+```
+
+### Rootkit-Erkennung mit Rootkit Hunter (rkhunter)
+
+```bash
 sudo pacman -S rkhunter
 sudo rkhunter --update
 sudo rkhunter --propupd
