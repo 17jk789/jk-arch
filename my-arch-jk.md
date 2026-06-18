@@ -413,113 +413,163 @@ sudo pacman -S imagemagick
 # sudo pacman -S thefuck
 ```
 
+### Die Programmiersprache Lua in der Version 5.1 installieren
+
 ```bash
 sudo pacman -S --needed lua51
 ```
 
+### Microsoft Visual Studio Code (VS Code) über yay installieren
 ```bash
 # sudo pacman -S code
-```
-
-```bash
 yay -S visual-studio-code-bin
 ```
+
+### Den Discord-Client über den Paketmanager installieren
 
 ```bash
 yay -S discord
 ```
 
+### Den Signal Messenger installieren
+
 ```bash
 yay -S signal-desktop
 ```
+
+### Den Brave Browser über yay installieren
 
 ```bash
 yay -S brave-bin
 ```
 
+### Den datenschutzfokussierten Mullvad Browser installieren
+
 ```bash
 # yay -S mullvad-browser-bin
 ```
+
+### Google Chrome über den AUR-Helfer installieren
 
 ```bash
 # yay -S google-chrome
 ```
 
+### Den datenschutzfokussierten LibreWolf Browser installieren
+
 ```bash
-yay -S librewolf-bin
+# yay -S librewolf-bin
 ```
+
+### Die Firefox Developer Edition installieren
 
 ```bash
 sudo pacman -S firefox-developer-edition
 ```
 
+### Das grafische Archivierungsprogramm Ark installieren
+
 ```bash
 sudo pacman -S ark
 ```
 
+### sudo pacman -S kate
+
 ```bash
 sudo pacman -S kate
 ```
+ 
+### Der grafische Bildbetrachter Gwenview installieren
 
 ```bash
 sudo pacman -S gwenview
 ```
 
+### Der universelle Dokumentenbetrachter Okular installieren
+
 ```bash
 sudo pacman -S okular
 ```
+
+### Den universellen Medienplayer VLC installieren
 
 ```bash
 sudo pacman -S vlc
 ```
 
+### Den funktionsreichen Terminal-Emulator Konsole installieren
+
 ```bash
 sudo pacman -S konsole
 ```
+
+### Die Wissensdatenbank Obsidian installieren
 
 ```bash
 sudo pacman -S obsidian
 ```
 
+### Den grafischen Plasma-Systemmonitor installieren
+
 ```bash
 sudo pacman -S plasma-systemmonitor
 ```
+
+### Den Taskmanager Mission Center über yay installieren
 
 ```bash
 yay -S mission-center
 ```
 
+### Das digitale Mal- und Zeichenprogramm Krita installieren
+
 ```bash
 sudo pacman -S krita
 ```
+
+### Das Bildbearbeitungsprogramm GIMP installieren
 
 ```bash
 sudo pacman -S gimp
 ```
 
+### Das professionelle Videoschnittprogramm Kdenlive installieren
+
 ```bash
 sudo pacman -S kdenlive
 ```
+
+### Das plattformübergreifende Videoschnittprogramm Shotcut installieren
 
 ```bash
 # sudo pacman -S shotcut
 ```
 
+### Die 3D-Grafik- und Animations-Suite Blender installieren
+
 ```bash
 sudo pacman -S blender
 ```
 
+### Den E-Mail- und Kalender-Client Thunderbird installieren
+
 ```bash
-sudo pacman -S thunderbird
+# sudo pacman -S thunderbird
 ```
+
+### Den wissenschaftlichen Taschenrechner Qalculate! installieren
 
 ```bash
 sudo pacman -S qalculate-gtk
 ```
 
+### Die Streaming- und Aufnahme-Software OBS Studio installieren
+
 ```bash
 sudo pacman -S obs-studio
 ```
+
+### Das Software-Zentrum Discover und das Flatpak-System installieren
 
 ```bash
 sudo pacman -S discover flatpak
