@@ -4,19 +4,47 @@ Fish und nicht bash oder zsh!!!
 
 Bitte führen sie alle Commands aus und fügen sie .config in ihr Systhem ein.
 
+### Zum Startpunkt wechseln
+
 ```bash
 cd ~
+```
+
+```bash
 # sudo cachyos-rate-mirrors
 
 # DNS temporär auf Cloudflare (1.1.1.1) setzen
 # echo "nameserver 1.1.1.1" | sudo tee /etc/resolv.conf
+```
 
+### Das System aktualisieren
+
+```bash
 sudo pacman -Syu
+```
+### Paketdatenbank prüfen
+
+```bash
 pacman -Qk
+```
+
+### Die Werkzeuge für den Bau von Software installieren
+
+```bash
+sudo pacman -S --needed git base-devel
+```
+
+### Die end-4 Hyperland Konfiguration herunterladen und die Installation starten
+
+```bash
 git clone https://github.com/end-4/dots-hyprland.git
 cd dots-hyprland
 ./setup install
+```
 
+### Die Firewall sofort einschalten und dauerhaft aktivieren
+
+```bash
 # sudo pacman -S ufw
 sudo systemctl enable --now ufw # Wichtig -> Firewall aktivieren!!!
 
@@ -24,94 +52,129 @@ sudo systemctl enable --now ufw # Wichtig -> Firewall aktivieren!!!
 # sudo systemctl stop ufw          # UFW stoppen
 # sudo systemctl disable ufw       # UFW Autostart aus
 # sudo systemctl enable --now firewalld  # firewalld starten
+```
 
-sudo pacman -S --needed git base-devel
+### Den Quellcode von yay herunterladen und das Programm bauen und installieren
+
+```bash
 cd /tmp
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
+```
 
-sudo pacman -S curl wget unzip cmark fzf luarocks gcc git-delta shellcheck lib32-gcc-libs
-sudo pacman -S llvm clang lldb gdb strace ltrace radare2
-sudo pacman -S gtk4 libadwaita network-manager-applet polkit-gnome librsvg adwaita-icon-theme
+### Kern-Werkzeuge und Entwickler-Tools installieren
+
+```bash
+sudo pacman -S curl wget unzip cmark fzf luarocks gcc git-delta shellcheck lib32-gcc-libs llvm clang lldb gdb strace ltrace radare2 gtk4 libadwaita network-manager-applet polkit-gnome librsvg adwaita-icon-theme
+```
+
+### Das Multilib-Repository in den Systemquellen aktivieren
+
+```bash
 sudo bash -c 'grep -q "^\[multilib\]" /etc/pacman.conf || printf "\n[multilib]\nInclude = /etc/pacman.d/mirrorlist\n" >> /etc/pacman.conf'
+```
+
+```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-# cargo install --locked cargo-nextest cargo-benchcmp cargo-audit cargo-edit
-# cargo install --locked critcmp
 cargo install --locked cargo-nextest 
-cargo install --locked cargo-audit 
-cargo install --locked cargo-auditable 
-cargo install --locked cargo-deny 
+# cargo install --locked cargo-audit 
+# cargo install --locked probe-rs # or probe-rs-tools
+# rustup component add rustfmt
+cargo install --locked bacon
 cargo install --locked flamegraph 
 cargo install --locked samply
-cargo install --locked cargo-watch
 cargo install --locked cargo-expand
-rustup component add rustfmt
-cargo install --locked cargo-bloat
-cargo install --locked cargo-binutils
 cargo install --locked cargo-show-asm
-cargo install --locked bacon
+cargo install --locked cargo-deny 
+# cargo install --locked cargo-auditable 
+# cargo install --locked cargo-watch
+# rustup component add rustfmt
+# cargo install --locked cargo-bloat
+# cargo install --locked cargo-binutils
+```
 
-# Plugin für Decompilation in radare2 (Terminal)
+### Plugin für Decompilation in radare2 (Terminal)
+
+```bash
 r2pm -U
 r2pm -init
 r2pm -i r2ghidra
+```
 
-# Zusätzliche Analyse-Tools für Rust
-cargo install --locked panopticon cargo-show-asm
+### Go und Make über den Paketmanager installieren
 
-# cargo install --locked cargo-watch cargo-expand 
+```bash
 sudo pacman -S make go
-
-# Für C/C++ (keines extra)
-# sudo pacman -S checksec # or binutils
-yay -S checksec
-
-# rustup component add rustfmt
-sudo pacman -S clang cmake ninja gdb lldb rr
-cargo install --locked probe-rs # or probe-rs-tools
-sudo pacman -S jdk21-openjdk jdk-openjdk maven
-sudo pacman -S nasm binutils
-sudo pacman -S python-pwntools
-sudo pacman -S jdk25-openjdk
-
-# archlinux-java status
-# sudo archlinux-java set java-21-openjdk
-
-# Für Go
-# sudo pacman -S go
 # go install golang.org/x/tools/gopls@latest
 # go install golang.org/x/tools/cmd/goimports@latest
 # Optional, empfohlen:
 # curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.59.2
 # go install github.com/go-delve/delve/cmd/dlv@latest
+```
 
-# Für Zig
-# sudo pacman -S zig
+### Für C/C++ (keines extra)
+```bash
+# yay -S checksec
+```
 
+### C/C++ Compiler, Build-Systeme und Advanced Debugging installieren
+
+```bash
+sudo pacman -S clang cmake ninja gdb lldb rr
+```
+
+### Mehrere Java-Versionen und die Build-Tool Gradle und Maven installieren
+
+```bash
+sudo pacman -S jdk21-openjdk jdk25-openjdk jdk-openjdk maven
+# archlinux-java status
 # sudo archlinux-java set java-21-openjdk
-# yay -S gradle
-
 sudo pacman -S gradle
+# yay -S gradle
 # sdk install gradle 8.6
 ```
 
+### Den x86-Assembler und grundlegende Binär-Werkzeuge installieren
+
 ```bash
-# Ich würde noch Intellij installieren (java) -> https://www.jetbrains.com/toolbox-app/
-# Für Java-Devs: Nutzt NeoVim mit jdtls für das tägliche Coding. Wenn es kompliziert wird, öffnet das Projekt einfach parallel in IntelliJ IDEA – die beiden ergänzen sich perfekt.
-# In Rust ist NeoVim dank rust-analyzer fast unschlagbar. In C++ lohnt es sich aber oft, CLion (via Toolbox) als Backup für komplexes Debugging und CMake-Management zu haben.
+sudo pacman -S nasm binutils
+```
+
+### Das Exploit-Entwicklungs-Framework Pwntools installieren
+
+```bash
+sudo pacman -S python-pwntools
+```
+
+### Die Programmiersprache und Compiler-Toolchain Zig installieren
+
+```bash
+# sudo pacman -S zig
+```
+
+### Die JetBrains Toolbox installieren und starten
+
+> Ich würde noch Intellij installieren (java) -> https://www.jetbrains.com/toolbox-app/
+> Für Java-Devs: Nutzt NeoVim mit jdtls für das tägliche Coding. Wenn es kompliziert wird, öffnet das Projekt einfach parallel in IntelliJ IDEA – die beiden ergänzen sich perfekt.
+> In Rust ist NeoVim dank rust-analyzer fast unschlagbar. In C++ lohnt es sich aber oft, CLion (via Toolbox) als Backup für komplexes Debugging und CMake-Management zu haben.
+
+```bash
 cd Downloads/
 tar -xzf jetbrains-toolbox-[VERSION].tar.gz # Ändere [VERSION] durch die ToolBox Version
 cd jetbrains-toolbox-[VERSION]/bin
 ./jetbrains-toolbox
 ```
 
+### Docker und Erweiterungen installieren
+
 ```bash
-# Ich würde noch Docker installieren
 sudo pacman -S docker docker-compose docker-buildx
 sudo systemctl enable --now docker
 docker --version
 ```
+
+### Nützliche Systemwerkzeuge und Python einrichten
 
 ```bash
 # sudo pacman -S wl-clipboard fd python python-virtualenv python-pip
@@ -120,12 +183,28 @@ sudo pacman -S wl-clipboard fd python python-pip
 # pipx ensurepath
 # pipx install black
 # pipx install ruff
+```
 
+### Ultraschnelle Textsuche installieren
+
+```bash
 sudo pacman -S ripgrep
+```
+
+### Die intelligente Ordner-Navigation einrichten
+
+```bash
 sudo pacman -S zoxide
+```
+
+### JavaScript-Laufzeitumgebung und Paketmanager installieren
+
+```bash
 sudo pacman -S nodejs npm
+```
+
 sudo pacman -S gzip
-sudo npm install -g typescript
+# sudo npm install -g typescript
 # sudo pacman -S texlive-most zathura zathura-pdf-poppler
 # sudo pacman -S texlive-basic texlive-latex texlive-latexrecommended texlive-fontsrecommended latexmk zathura zathura-pdf-poppler
 sudo pacman -S texlive-meta latexmk zathura zathura-pdf-poppler
