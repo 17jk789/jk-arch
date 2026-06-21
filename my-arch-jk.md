@@ -1271,6 +1271,13 @@ und evt. bei Problemen:
 yay -S rtw88-dkms-git
 ```
 
+### Firefox ist langsam
+
+Firefox nutzt unter Linux nicht immer automatisch deine Grafikkarte. So schaltest du sie manuell ein:
+- Gib `about:config` in die Adresszeile ein und bestätige die Warnung.
+- Suche nach der Einstellung: `layers.acceleration.force-enabled`
+- Klicke doppelt darauf, um den Wert auf true zu setzen.
+
 ### librewulf google securtiy:
 
 ```bash
