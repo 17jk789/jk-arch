@@ -39,10 +39,8 @@ if status is-interactive
             echo "$remote_total $behind"
         end
 
-
         set user_name $USER
         set local_repo_path "$HOME/p-terminal"
-
 
         set info (get_commit_info $local_repo_path)
 
@@ -57,9 +55,14 @@ if status is-interactive
             set behind 0
         end
 
+        set remote_total (string trim $remote_total)
+        set remote_total (string split " " $remote_total)[1] 2>/dev/null
+
+        if test -z "$remote_total"
+            set remote_total 0
+        end
 
         set total (math 500 + 971 + $remote_total)
-
 
         if test $behind -ne 0
             echo -e "[(timestamp)] [INFO] The local repository is $main_color$behind$reset commits behind the remote repository."
@@ -69,38 +72,55 @@ if status is-interactive
         end
 
         echo -e "
-$main_color██████╗ ██████╗$reset$white    ████████╗███████╗██████╗ ███╗   ███╗██╗███╗   ██╗ █████╗ ██╗     $reset
-$main_color██╔══██╗██╔══██╗$reset$white   ╚══██╔══╝██╔════╝██╔══██╗████╗ ████║██║████╗  ██║██╔══██╗██║     $reset
-$main_color██████╔╝██████╔╝$reset$white█████╗██║   █████╗  ██████╔╝██╔████╔██║██║██╔██╗ ██║███████║██║     $reset
-$main_color██╔═══╝ ██╔═══╝ $reset$white╚════╝██║   ██╔══╝  ██╔══██╗██║╚██╔╝██║██║██║╚██╗██║██╔══██║██║     $reset
-$main_color██║     ██║     $reset$white      ██║   ███████╗██║  ██║██║ ╚═╝ ██║██║██║ ╚████║██║  ██║███████╗$reset
-$main_color╚═╝     ╚═╝     $reset$white      ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝     ╚══════╝$reset
+$main_color ██████╗ ██████╗$reset$white    ████████╗███████╗██████╗ ███╗   ███╗██╗███╗   ██╗ █████╗ ██╗     $reset
+$main_color ██╔══██╗██╔══██╗$reset$white   ╚══██╔══╝██╔════╝██╔══██╗████╗ ████║██║████╗  ██║██╔══██╗██║     $reset
+$main_color ██████╔╝██████╔╝$reset$white█████╗██║   █████╗  ██████╔╝██╔████╔██║██║██╔██╗ ██║███████║██║     $reset
+$main_color ██╔═══╝ ██╔═══╝ $reset$white╚════╝██║   ██╔══╝  ██╔══██╗██║╚██╔╝██║██║██║╚██╗██║██╔══██║██║     $reset
+$main_color ██║     ██║     $reset$white      ██║   ███████╗██║  ██║██║ ╚═╝ ██║██║██║ ╚████║██║  ██║███████╗$reset
+$main_color ╚═╝     ╚═╝     $reset$white      ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝     ╚══════╝$reset
 "
 
-
-        echo -e "A warm welcome, $main_color$user_name$reset, to Peharge Python Terminal!
-Developed by Peharge and JK (Peharge Projects 2025)
-Thank you so much for using PP-Terminal ❤️
-
-[GitHub Repository] https://github.com/Peharge/p-terminal
-[Project Website] file://$HOME/peharge-web/p-term.html
-[Learn PP-Term] file://$HOME/peharge-web/pp-term-hole.html"
+        echo -e " A warm welcome, $main_color$user_name$reset, to Peharge Python Terminal!
+ Developed by Peharge and JK (Peharge Projects 2025)
+ Thank you so much for using PP-Terminal ❤️"
 
         echo
-        echo -e "$main_color PP-Terminal Version 8.3.9 $reset"
+        printf "%b%s%b\n" \
+            " \033]8;;https://github.com/Peharge/p-terminal\033\\" \
+            "[GitHub Repository]" \
+            "\033]8;;\033\\"
+        printf "%b%s%b\n" \
+            " \033]8;;file://$HOME/peharge-web/p-term.html\033\\" \
+            "[Project Website]" \
+            "\033]8;;\033\\"
+        printf "%b%s%b\n" \
+            " \033]8;;file://$HOME/peharge-web/pp-term-hole.html\033\\" \
+            "[Learn PP-Term]" \
+            "\033]8;;\033\\"
         echo
+        echo -e "$main_color PP-Terminal Version:$reset 8.3.9.26980"
+        echo -e "$main_color PP-Term Launcher Version:$reset 8.3.3.6589"
+        echo -e "$main_color Peharge Kernel Version:$reset 8.0.3.6984"
+        echo -e "$main_color Peharge Compiler Version:$reset 8.0.3.898"
+        echo -e "$main_color IQ Kernel Version:$reset 4.0.1.956"
+        echo
+
+        printf " "
 
         for i in (seq 0 7)
-            echo -ne "\033[48;5;{$i}m  \033[0m"
+            printf "\033[48;5;%sm  \033[0m" $i
         end
 
         echo ""
+
+        printf " "
 
         for i in (seq 8 15)
-            echo -ne "\033[48;5;{$i}m  \033[0m"
+            printf "\033[48;5;%sm  \033[0m" $i
         end
 
         echo ""
+        echo
     end
 
     # Banner starten
@@ -226,3 +246,4 @@ function lazy_navi
     end
     command navi $argv
 end
+
