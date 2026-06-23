@@ -27,7 +27,12 @@
 
     "uptime",
     "packages",
-    "shell",
+
+    {
+      "type": "shell",
+      "format": "PP-Term 8.3.9.26980"
+    },
+
     "display",
     "de",
     "wm",
@@ -36,7 +41,12 @@
     "icons",
     "font",
     "cursor",
-    "terminal",
+
+    {
+      "type": "terminal",
+      "format": "Peharge Kernel 8.0.3.6984"
+    },
+
     "terminalfont",
     // "cpu",
     // "gpu",
