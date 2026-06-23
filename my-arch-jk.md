@@ -146,6 +146,7 @@ Bitte führen sie alle Commands aus und fügen sie .config in ihr Systhem ein.
     - [emfehlungen:](#emfehlungen)
     - [ufw ist langsam:](#ufw-ist-langsam)
     - [Langsames Internet](#langsames-internet)
+    - [Firefox ist langsam](#firefox-ist-langsam)
     - [librewulf google securtiy:](#librewulf-google-securtiy)
     - [repairen von haskel](#repairen-von-haskel)
 - [WARP Cloudflair "1.1.1.1"](#warp-cloudflair-1111)
@@ -1096,7 +1097,8 @@ sudo systemctl disable --now sshd # Falls du SSH nicht brauchst
 ### Das Begrüßungsprogramm von CachyOS entfernen 
 
 ```bash
-# sudo pacman -Rns cachyos-hello
+sudo pacman -R cachyos-hell
+rm ~/.config/autostart/cachyos-hello.desktop
 ```
 
 ### Instalation von En Croissant, eine moderne grafische Benutzeroberfläche (GUI) für Schachdatenbanken und Partienanalysen.
@@ -1273,16 +1275,18 @@ yay -S rtw88-dkms-git
 
 ### Firefox ist langsam
 
+> Ist nicht notwenig bei modernen Linux OS.
 Firefox nutzt unter Linux nicht immer automatisch deine Grafikkarte. So schaltest du sie manuell ein:
 - Gib `about:config` in die Adresszeile ein und bestätige die Warnung.
 - Suche nach der Einstellung: `layers.acceleration.force-enabled`
-- Klicke doppelt darauf, um den Wert auf true zu setzen.
+- Klicke doppelt darauf, um den Wert auf `true` zu setzen.
 
+> Diese Einstellung sorgt dafür, dass Firefox die SSD nicht mehr beansprucht und stattdessen alle temporären Daten direkt im blitzschnellen Arbeitsspeicher (RAM) ablegt.
 Nur RAM-Cache nutzen (Einfachste Methode):
 Dies kann durch das Ändern der internen Einstellungen im Firefox erfolgen.
-- Öffne about:config.
-- Suche nach der Einstellung browser.cache.disk.enable.
-- Klicke doppelt darauf, um den Wert auf false zu setzen.
+- Öffne `about:config`.
+- Suche nach der Einstellung `browser.cache.disk.enable`.
+- Klicke doppelt darauf, um den Wert auf `false` zu setzen.
 
 ### librewulf google securtiy:
 
