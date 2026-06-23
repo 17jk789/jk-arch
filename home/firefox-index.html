@@ -283,45 +283,80 @@ python3 -m http.server 8000
     update(); setInterval(update,1000);
 
     // Wallpaper: load/save via localStorage as data URL — funktioniert unter file://
-    (function(){
-      const key = 'customWallpaperDataURL';
+    (function() {
+      const KEY = 'customWallpaperDataURL';
+      const DEFAULT_IMAGE = '/home/jk/Pictures/image.jpg';
+
       const wallpaperEl = document.getElementById('wallpaper');
       const input = document.getElementById('wall-input');
       const preview = document.getElementById('wall-preview');
       const saveBtn = document.getElementById('wall-save');
       const resetBtn = document.getElementById('wall-reset');
 
-      function applyDataURL(durl){
-        if(!durl){ wallpaperEl.style.backgroundImage=''; preview.style.display='none'; return }
-        wallpaperEl.style.backgroundImage = `url(${durl})`;
-        // preview
+      let lastDataURL = null;
+
+      function applyWallpaper(url) {
+        const targetUrl = url || DEFAULT_IMAGE;
+        
+        // Hintergrund setzen
+        wallpaperEl.style.backgroundImage = `url('${targetUrl}')`;
+        
+        // Vorschau aktualisieren
         preview.innerHTML = '';
-        const img = new Image(); img.src = durl; img.style.width='100%'; img.style.display='block';
-        preview.appendChild(img); preview.style.display = 'block';
+        const img = new Image();
+        img.src = targetUrl;
+        img.style.width = '100%';
+        img.style.display = 'block';
+        preview.appendChild(img);
+        preview.style.display = 'block';
       }
 
-      // initial load
-      try{
-        const stored = localStorage.getItem(key);
-        if(stored) applyDataURL(stored);
-      }catch(e){console.warn('localStorage unavailable',e)}
+      // Initialer Ladeprozess
+      try {
+        lastDataURL = localStorage.getItem(KEY);
+        applyWallpaper(lastDataURL);
+      } catch (e) {
+        console.warn('localStorage nicht verfügbar:', e);
+        applyWallpaper(null);
+      }
 
-      let lastDataURL = null;
-      input.addEventListener('change', (ev)=>{
-        const f = ev.target.files && ev.target.files[0];
-        if(!f) return;
+      // Event-Listener: Bildauswahl
+      input.addEventListener('change', (ev) => {
+        const file = ev.target.files?.[0];
+        if (!file) return;
+
         const reader = new FileReader();
-        reader.onload = ()=>{ lastDataURL = reader.result; applyDataURL(lastDataURL); };
-        reader.readAsDataURL(f);
+        reader.onload = () => {
+          lastDataURL = reader.result;
+          applyWallpaper(lastDataURL);
+        };
+        reader.readAsDataURL(file);
       });
 
-      saveBtn.addEventListener('click', ()=>{
-        if(!lastDataURL){ alert('Bitte zuerst ein Bild wählen.'); return }
-        try{ localStorage.setItem(key, lastDataURL); alert('Wallpaper gespeichert.'); }catch(e){ alert('Speichern fehlgeschlagen: ' + e); }
+      // Event-Listener: Speichern
+      saveBtn.addEventListener('click', () => {
+        if (!lastDataURL) {
+          alert('Bitte zuerst ein Bild auswählen.');
+          return;
+        }
+        try {
+          localStorage.setItem(KEY, lastDataURL);
+          alert('Wallpaper erfolgreich gespeichert.');
+        } catch (e) {
+          alert('Speichern fehlgeschlagen (evtl. Datei zu groß): ' + e);
+        }
       });
 
-      resetBtn.addEventListener('click', ()=>{
-        try{ localStorage.removeItem(key); lastDataURL = null; applyDataURL(null); alert('Wallpaper zurückgesetzt.'); }catch(e){ alert('Fehler: ' + e); }
+      // Event-Listener: Zurücksetzen
+      resetBtn.addEventListener('click', () => {
+        try {
+          localStorage.removeItem(KEY);
+          lastDataURL = null;
+          applyWallpaper(null);
+          alert('Wallpaper auf Standard zurückgesetzt.');
+        } catch (e) {
+          alert('Fehler beim Zurücksetzen: ' + e);
+        }
       });
     })();
 
