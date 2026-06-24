@@ -86,25 +86,31 @@ $main_color ╚═╝     ╚═╝     $reset$white      ╚═╝   ╚══�
  Thank you so much for using PP-Terminal ❤️"
 
         echo
-        printf "%b%s%b\n" \
-            " \033]8;;https://github.com/Peharge/p-terminal\033\\" \
-            "[GitHub Repository]" \
-            "\033]8;;\033\\"
-        printf "%b%s%b\n" \
-            " \033]8;;file://$HOME/peharge-web/p-term.html\033\\" \
-            "[Project Website]" \
-            "\033]8;;\033\\"
-        printf "%b%s%b\n" \
-            " \033]8;;file://$HOME/peharge-web/pp-term-hole.html\033\\" \
-            "[Learn PP-Term]" \
-            "\033]8;;\033\\"
+        printf "%b%b [%bGitHub Repository%b]%b\n" \
+            "\e]8;;https://github.com/peharge/p-terminal\e\\" \
+            "$white" \
+            "$main_color" \
+            "$reset" \
+            "\e]8;;\e\\"
+        printf "%b%b [%bProject Website%b]%b\n" \
+            "\e]8;;file://$HOME/peharge-web/p-term.html\e\\" \
+            "$white" \
+            "$main_color" \
+            "$reset" \
+            "\e]8;;\e\\"
+        printf "%b%b [%bLearn PP-Term%b]%b\n" \
+            "\e]8;;file://$HOME/peharge-web/pp-term-hole.html\e\\" \
+            "$white" \
+            "$main_color" \
+            "$reset" \
+            "\e]8;;\e\\"
         echo
         echo -e "$main_color PP-Terminal Version:$reset 8.3.9.26980"
         echo -e "$main_color PP-Term Launcher Version:$reset 8.3.3.6589"
         echo -e "$main_color Peharge Kernel Version:$reset 8.0.3.6984"
         echo -e "$main_color Peharge Compiler Version:$reset 8.0.3.898"
         echo -e "$main_color IQ Kernel Version:$reset 4.0.1.956"
-        echo -e "$main_color The Script Version:$reset 1.0.1.95698 EAP$red Not Activated$reset"
+        echo -e "$main_color The Script Version:$reset 1.0.1.95698 EAP ($red""Not Activated""$reset)"
         echo -e "$main_color JKNV Version:$reset 3.6.9"
         echo
 
