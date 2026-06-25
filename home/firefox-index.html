@@ -1353,9 +1353,17 @@ nmcli dev wifi connect "SSID_NAME" password "DEIN_PASSWORT"</pre
             <ul class="muted" style="margin-top: 8px">
               <li>
                 <strong>Status aller PipeWire-Audio-Dienste prüfen:</strong>
-                <pre class="cmd">
+
+                <div class="terminal-cmd">
+                  <div class="terminal-header">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                  <pre class="cmd">
 systemctl --user status pipewire pipewire-pulse wireplumber</pre
-                >
+                  >
+                </div>
               </li>
               <li>
                 <strong>Audio-Server neu starten bei Sound-Problemen:</strong>
