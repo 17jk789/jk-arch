@@ -792,7 +792,10 @@
 
       .toggle,
       .reset,
-      .delete {
+      .delete,
+      .pin-btn,
+      .edit-btn,
+      .delete-btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -823,7 +826,10 @@
 
       .toggle:hover,
       .reset:hover,
-      .delete:hover {
+      .delete:hover,
+      .pin-btn:hover,
+      .edit-btn:hover,
+      .delete-btn:hover {
         border-color: rgba(125, 211, 252, 0.4);
         color: var(--accent);
 
@@ -836,13 +842,19 @@
 
       .toggle:active,
       .reset:active,
-      .delete:active {
+      .delete:active,
+      .pin-btn:active,
+      .edit-btn:active,
+      .delete-btn:active {
         transform: translateY(0) scale(0.98);
       }
 
       .toggle:focus-visible,
       .reset:focus-visible,
-      .delete:focus-visible {
+      .delete:focus-visible,
+      .pin-btn:focus-visible,
+      .edit-btn:focus-visible,
+      .delete-btn:focus-visible {
         outline: none;
         border-color: var(--accent);
         box-shadow:
@@ -852,7 +864,10 @@
 
       .toggle:disabled,
       .reset:disabled,
-      .delete:disabled {
+      .delete:disabled,
+      .pin-btn:disabled,
+      .edit-btn:disabled,
+      .delete-btn:disabled {
         opacity: 0.5;
         cursor: not-allowed;
         transform: none;
@@ -949,6 +964,9 @@
               <a class="btn" href="https://wiki.archlinux.org" target="_blank"
                 >Arch Wiki</a
               >
+              <a class="btn" href="https://stackoverflow.com" target="_blank"
+                >Arch Manpages</a
+              >
               <a class="btn" href="https://aur.archlinux.org" target="_blank"
                 >AUR</a
               >
@@ -978,6 +996,37 @@
               >
               <a class="btn" href="https://www.youtube.com/" target="_blank"
                 >YouTube</a
+              >
+              <a class="btn" href="https://gitlab.com" target="_blank"
+                >GitHub</a
+              >
+              <a class="btn" href="https://www.youtube.com/" target="_blank"
+                >GitLab</a
+              >
+              <a class="btn" href="https://ipinfo.io" target="_blank"
+                >IP Info</a
+              >
+              <a class="btn" href="https://speedtest.net" target="_blank"
+                >Speedtest</a
+              >
+              <a class="btn" href="https://dnsleaktest.com" target="_blank"
+                >DNS Leak Test</a
+              >
+              <a class="btn" href="https://haveibeenpwned.com" target="_blank"
+                >Have I Been Pwned</a
+              >
+              <a class="btn" href="https://deepl.com" target="_blank">DeepL</a>
+              <a class="btn" href="https://reddit.com/r/linux" target="_blank"
+                >r/linux</a
+              >
+              <a
+                class="btn"
+                href="https://reddit.com/r/archlinux"
+                target="_blank"
+                >r/archlinux</a
+              >
+              <a class="btn" href="https://www.virustotal.com" target="_blank"
+                >VirusTotal</a
               >
             </div>
 
