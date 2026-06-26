@@ -135,23 +135,115 @@
 
       .search {
         display: flex;
-        gap: 8px;
+        align-items: stretch;
+        gap: 12px;
+
+        padding: 8px;
+
+        background: rgba(0, 0, 0, 0.18);
+
+        border: 1px solid rgba(125, 211, 252, 0.15);
+        border-radius: 16px;
+
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+
+        box-shadow:
+          0 4px 20px rgba(0, 0, 0, 0.3),
+          inset 0 0 20px rgba(125, 211, 252, 0.05);
       }
+
       .search input {
         flex: 1;
-        padding: 12px;
-        border-radius: 10px;
-        border: 1px solid rgba(255, 255, 255, 0.04);
+
         background: transparent;
-        color: inherit;
+        border: none;
+        outline: none;
+
+        color: #e8f2fb;
+        font-size: 16px;
+        padding: 12px 8px;
       }
+
+      .search input::placeholder {
+        color: rgba(232, 242, 251, 0.45);
+      }
+
       .search button {
-        padding: 12px 14px;
-        border-radius: 10px;
-        border: 0;
-        background: var(--accent);
-        color: #022;
+        flex: 0 0 18%; /* ca. 18 % der Formularbreite */
+        min-width: 110px; /* Mindestbreite */
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 0 18px;
+
+        border: none;
+        border-radius: 12px;
+
+        background: linear-gradient(135deg, var(--accent), #38bdf8);
+
+        color: #02131e;
+        font-size: 15px;
         font-weight: 700;
+
+        cursor: pointer;
+        transition: all 0.25s ease;
+      }
+
+      .search button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 20px rgba(125, 211, 252, 0.45);
+      }
+
+      .search button:active {
+        transform: scale(0.96);
+      }
+
+      .search:focus-within {
+        border-color: rgba(125, 211, 252, 0.45);
+        box-shadow:
+          0 0 0 1px rgba(125, 211, 252, 0.25),
+          0 0 30px rgba(125, 211, 252, 0.18);
+      }
+
+      .glass-input {
+        flex: 1;
+
+        width: 100%;
+        padding: 10px 12px;
+
+        background: rgba(0, 0, 0, 0.18);
+
+        border: 1px solid rgba(125, 211, 252, 0.15);
+        border-radius: 12px;
+
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+
+        color: #e8f2fb;
+        font-size: 15px;
+
+        outline: none;
+
+        box-shadow:
+          0 4px 20px rgba(0, 0, 0, 0.25),
+          inset 0 0 15px rgba(125, 211, 252, 0.04);
+
+        transition: all 0.25s ease;
+      }
+
+      .glass-input::placeholder {
+        color: rgba(232, 242, 251, 0.45);
+      }
+
+      .glass-input:focus {
+        border-color: rgba(125, 211, 252, 0.45);
+        box-shadow:
+          0 0 0 1px rgba(125, 211, 252, 0.2),
+          0 0 20px rgba(125, 211, 252, 0.15),
+          inset 0 0 15px rgba(125, 211, 252, 0.05);
       }
 
       .links {
@@ -639,6 +731,132 @@
           transform: translateX(-50%) rotate(465.5deg);
         }
       }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 8px 16px;
+        min-height: 36px;
+
+        border: 1px solid rgba(125, 211, 252, 0.15);
+        border-radius: 10px;
+
+        background: transparent;
+
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+
+        color: #e8f2fb;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.05),
+          0 4px 12px rgba(0, 0, 0, 0.25);
+      }
+
+      .btn:hover {
+        border-color: rgba(125, 211, 252, 0.4);
+        color: var(--accent);
+
+        transform: translateY(-1px);
+
+        box-shadow:
+          0 0 15px rgba(125, 211, 252, 0.18),
+          0 6px 18px rgba(0, 0, 0, 0.3);
+      }
+
+      .btn:active {
+        transform: translateY(0) scale(0.98);
+      }
+
+      .btn:focus-visible {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow:
+          0 0 0 3px rgba(125, 211, 252, 0.2),
+          0 0 20px rgba(125, 211, 252, 0.25);
+      }
+
+      .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .toggle,
+      .reset,
+      .delete {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 8px 16px;
+        min-height: 36px;
+
+        border: 1px solid rgba(125, 211, 252, 0.15);
+        border-radius: 10px;
+
+        background: transparent;
+
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+
+        color: #e8f2fb;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.05),
+          0 4px 12px rgba(0, 0, 0, 0.25);
+      }
+
+      .toggle:hover,
+      .reset:hover,
+      .delete:hover {
+        border-color: rgba(125, 211, 252, 0.4);
+        color: var(--accent);
+
+        transform: translateY(-1px);
+
+        box-shadow:
+          0 0 15px rgba(125, 211, 252, 0.18),
+          0 6px 18px rgba(0, 0, 0, 0.3);
+      }
+
+      .toggle:active,
+      .reset:active,
+      .delete:active {
+        transform: translateY(0) scale(0.98);
+      }
+
+      .toggle:focus-visible,
+      .reset:focus-visible,
+      .delete:focus-visible {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow:
+          0 0 0 3px rgba(125, 211, 252, 0.2),
+          0 0 20px rgba(125, 211, 252, 0.25);
+      }
+
+      .toggle:disabled,
+      .reset:disabled,
+      .delete:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+      }
     </style>
   </head>
   <body>
@@ -701,7 +919,6 @@
               <div style="font-weight: 700">Schnellzugriff</div>
               <div style="display: flex; gap: 8px">
                 <button
-                  class="collapse-btn"
                   data-target="card-main"
                   title="Ein-/ausklappen"
                   style="
@@ -729,40 +946,37 @@
             </form>
 
             <div class="links" role="navigation" aria-label="Schnellzugriffe">
-              <a class="link" href="https://wiki.archlinux.org" target="_blank"
+              <a class="btn" href="https://wiki.archlinux.org" target="_blank"
                 >Arch Wiki</a
               >
-              <a class="link" href="https://aur.archlinux.org" target="_blank"
+              <a class="btn" href="https://aur.archlinux.org" target="_blank"
                 >AUR</a
               >
               <a
-                class="link"
+                class="btn"
                 href="https://github.com/17jk789/my-vs-code-setting"
                 target="_blank"
                 >17jk789</a
               >
-              <a class="link" href="https://www.google.com/" target="_blank"
+              <a class="btn" href="https://www.google.com/" target="_blank"
                 >Google</a
               >
-              <a class="link" href="https://search.brave.com" target="_blank"
+              <a class="btn" href="https://search.brave.com" target="_blank"
                 >Brave Search</a
               >
               <a
-                class="link"
+                class="btn"
                 href="https://www.gmx.net/consent-management/"
                 target="_blank"
                 >GMX</a
               >
-              <a
-                class="link"
-                href="https://news.ycombinator.com"
-                target="_blank"
+              <a class="btn" href="https://news.ycombinator.com" target="_blank"
                 >Hacker News</a
               >
-              <a class="link" href="https://matrix.to/#/" target="_blank"
+              <a class="btn" href="https://matrix.to/#/" target="_blank"
                 >Matrix</a
               >
-              <a class="link" href="https://www.youtube.com/" target="_blank"
+              <a class="btn" href="https://www.youtube.com/" target="_blank"
                 >YouTube</a
               >
             </div>
@@ -1459,32 +1673,26 @@ systemctl --user restart pipewire pipewire-pulse wireplumber</pre
               (localStorage) und nutzt es immer.
             </div>
             <div style="margin-top: 8px">
-              <input id="wall-input" type="file" accept="image/*" />
-              <div style="margin-top: 8px; display: flex; gap: 8px">
-                <button
-                  id="wall-save"
-                  style="
-                    padding: 8px;
-                    border-radius: 8px;
-                    background: var(--accent);
-                    border: 0;
-                  "
-                >
-                  Speichern
-                </button>
-                <button
-                  id="wall-reset"
-                  style="
-                    padding: 8px;
-                    border-radius: 8px;
-                    background: transparent;
-                    border: 1px solid rgba(255, 255, 255, 0.06);
-                    color: var(--muted);
-                  "
-                >
-                  Zurücksetzen
-                </button>
-              </div>
+              <form id="wallpaper-form">
+                <input
+                  id="wall-input"
+                  name="wallpaper"
+                  type="file"
+                  accept="image/*"
+                />
+
+                <div style="margin-top: 10px"></div>
+
+                <div class="wall-actions">
+                  <button id="wall-save" class="btn" type="submit">
+                    Speichern
+                  </button>
+
+                  <button id="wall-reset" class="btn" type="button">
+                    Zurücksetzen
+                  </button>
+                </div>
+              </form>
               <div
                 id="wall-preview"
                 style="
@@ -1532,56 +1740,26 @@ systemctl --user restart pipewire pipewire-pulse wireplumber</pre
                 <input
                   id="note-title"
                   placeholder="Titel..."
-                  style="
-                    flex: 1;
-                    padding: 8px;
-                    border-radius: 6px;
-                    border: 1px solid rgba(255, 255, 255, 0.08);
-                    background: transparent;
-                    color: inherit;
-                  "
+                  class="glass-input"
                 />
 
-                <button
-                  id="note-add"
-                  style="
-                    padding: 8px 12px;
-                    border-radius: 6px;
-                    border: 0;
-                    background: var(--accent);
-                    font-weight: 700;
-                  "
-                >
-                  +
-                </button>
+                <button id="note-add" class="btn">+</button>
               </div>
+
+              <div style="margin-top: 10px"></div>
 
               <textarea
                 id="note-text"
                 placeholder="Notiz eingeben..."
-                style="
-                  width: 100%;
-                  min-height: 90px;
-                  padding: 10px;
-                  border-radius: 6px;
-                  border: 1px solid rgba(255, 255, 255, 0.08);
-                  background: transparent;
-                  color: inherit;
-                "
+                class="glass-input"
               ></textarea>
+
+              <div style="margin-top: 10px"></div>
 
               <input
                 id="note-search"
-                placeholder="🔍 Notizen durchsuchen..."
-                style="
-                  width: 100%;
-                  margin-top: 10px;
-                  padding: 8px;
-                  border-radius: 6px;
-                  border: 1px solid rgba(255, 255, 255, 0.08);
-                  background: transparent;
-                  color: inherit;
-                "
+                placeholder="Notizen durchsuchen..."
+                class="glass-input"
               />
 
               <div
@@ -1718,14 +1896,7 @@ systemctl --user restart pipewire pipewire-pulse wireplumber</pre
                 <input
                   id="timer-label"
                   placeholder="Label"
-                  style="
-                    flex: 1;
-                    padding: 8px;
-                    border-radius: 6px;
-                    border: 1px solid rgba(255, 255, 255, 0.04);
-                    background: transparent;
-                    color: inherit;
-                  "
+                  class="glass-input"
                 />
               </div>
               <div
@@ -1745,9 +1916,12 @@ systemctl --user restart pipewire pipewire-pulse wireplumber</pre
                     width: 68px;
                     padding: 8px;
                     border-radius: 6px;
-                    border: 1px solid rgba(255, 255, 255, 0.04);
+                    border: 1px solid rgba(125, 211, 252, 0.15);
                     background: transparent;
                     color: inherit;
+                    box-shadow:
+                      inset 0 1px 0 rgba(255, 255, 255, 0.05),
+                      0 4px 12px rgba(0, 0, 0, 0.25);
                   "
                 />
                 <label class="muted">min</label>
@@ -1761,24 +1935,16 @@ systemctl --user restart pipewire pipewire-pulse wireplumber</pre
                     width: 68px;
                     padding: 8px;
                     border-radius: 6px;
-                    border: 1px solid rgba(255, 255, 255, 0.04);
+                    border: 1px solid rgba(125, 211, 252, 0.15);
                     background: transparent;
                     color: inherit;
+                    box-shadow:
+                      inset 0 1px 0 rgba(255, 255, 255, 0.05),
+                      0 4px 12px rgba(0, 0, 0, 0.25);
                   "
                 />
                 <label class="muted">sec</label>
-                <button
-                  id="timer-add"
-                  style="
-                    padding: 8px;
-                    border-radius: 6px;
-                    background: var(--accent);
-                    border: 0;
-                    color: #022;
-                  "
-                >
-                  Erstellen
-                </button>
+                <button id="timer-add" class="btn">Erstellen</button>
               </div>
               <div
                 id="timers-list"
