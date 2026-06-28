@@ -2065,6 +2065,51 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+	group = augroup,
+	pattern = { "cs" },
+	callback = function()
+		local ok, dotnet = pcall(require, "easy-dotnet")
+		if not ok then
+			return
+		end
+
+		-- Standard: Ausführen (Entspricht dotnet run)
+		vim.keymap.set("n", "<leader>rar", function()
+			dotnet.run()
+		end, { desc = ".NET Run Project", silent = true, buffer = true })
+
+		-- Für dich zum Ausführen
+		vim.keymap.set("n", "<leader>rra", function()
+			dotnet.run()
+		end, { desc = ".NET Run Project", silent = true, buffer = true })
+
+		-- Build: Projekt kompilieren
+		vim.keymap.set("n", "<leader>rad", function()
+			dotnet.build()
+		end, { desc = ".NET Build Project", silent = true, buffer = true })
+
+		-- Restore: Abhängigkeiten wiederherstellen
+		vim.keymap.set("n", "<leader>rac", function()
+			dotnet.restore()
+		end, { desc = ".NET Restore Packages", silent = true, buffer = true })
+
+		-- Cleanup: Projekt aufräumen (Löscht bin/obj Ordner)
+		vim.keymap.set("n", "<leader>rax", function()
+			dotnet.clean()
+		end, { desc = ".NET Clean Project", silent = true, buffer = true })
+
+		-- Zusätzliche nützliche C# Extras
+		vim.keymap.set("n", "<leader>rat", function()
+			dotnet.test()
+		end, { desc = ".NET Run Tests", silent = true, buffer = true })
+
+		vim.keymap.set("n", "<leader>rap", function()
+			dotnet.publish()
+		end, { desc = ".NET Publish Project", silent = true, buffer = true })
+	end,
+})
+
 -- Langsam aber stabil
 -- vim.api.nvim_create_autocmd("FileType", {
 --   group = vim.api.nvim_create_augroup("MatlabConfig", { clear = true }),
