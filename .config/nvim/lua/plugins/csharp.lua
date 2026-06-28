@@ -90,16 +90,7 @@ return {
     config = function()
       local dotnet = require("easy-dotnet")
 
-      -- HIER GEÄNDERT: Fenster schließt sich nicht mehr automatisch
-      dotnet.setup({
-        terminal_output = {
-          type = "float",
-          opts = {
-            auto_close_on_success = false,
-            auto_close_on_fail = false,
-          },
-        },
-      })
+      dotnet.setup()
 
       local opts = {
         noremap = true,
