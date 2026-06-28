@@ -29,6 +29,7 @@ Bitte führen sie alle Commands aus und fügen sie .config in ihr Systhem ein.
     - [Ultraschnelle Textsuche installieren](#ultraschnelle-textsuche-installieren)
     - [Die intelligente Ordner-Navigation einrichten](#die-intelligente-ordner-navigation-einrichten)
     - [JavaScript-Laufzeitumgebung und Paketmanager installieren](#javascript-laufzeitumgebung-und-paketmanager-installieren)
+    - [.NET SDK](#net-sdk)
     - [Das Standard-Kompressionswerkzeug installieren](#das-standard-kompressionswerkzeug-installieren)
     - [TypeScript installieren](#typescript-installieren)
     - [Die ultimative LaTeX-Umgebung installieren](#die-ultimative-latex-umgebung-installieren)
@@ -366,6 +367,13 @@ sudo pacman -S zoxide
 
 ```bash
 sudo pacman -S nodejs npm
+```
+
+### .NET SDK
+
+```bash
+sudo pacman -S dotnet-sdk
+sudo pacman -S dotnet-runtime aspnet-runtime
 ```
 
 ### Das Standard-Kompressionswerkzeug installieren
