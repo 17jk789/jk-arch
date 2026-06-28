@@ -103,15 +103,22 @@ return {
         }))
       end
 
-      map("<leader>.r", dotnet.run, ".NET Run")
-      map("<leader>.b", dotnet.build, ".NET Build")
-      map("<leader>.s", dotnet.build_solution, ".NET Build Solution")
-      map("<leader>.t", dotnet.test, ".NET Test")
-      map("<leader>.n", dotnet.nuget, "NuGet")
+    --   map("<leader>.r", dotnet.run, ".NET Run")
+    --   map("<leader>.b", dotnet.build, ".NET Build")
+    --   map("<leader>.s", dotnet.build_solution, ".NET Build Solution")
+    --   map("<leader>.t", dotnet.test, ".NET Test")
+    --   map("<leader>.n", dotnet.nuget, "NuGet")
 
-      map("<leader>.R", dotnet.restore, ".NET Restore")
-      map("<leader>.c", dotnet.clean, ".NET Clean")
-      map("<leader>.p", dotnet.publish, ".NET Publish")
+    --   map("<leader>.R", dotnet.restore, ".NET Restore")
+    --   map("<leader>.c", dotnet.clean, ".NET Clean")
+    --   map("<leader>.p", dotnet.publish, ".NET Publish")
+    map("<leader>db", dotnet.build, ".NET Build")
+    map("<leader>dt", dotnet.test, ".NET Test")
+    map("<leader>dR", dotnet.restore, ".NET Restore")
+    map("<leader>dc", dotnet.clean, ".NET Clean")
+    map("<leader>di", dotnet.nuget, "NuGet")
+    map("<leader>do", dotnet.publish, ".NET Publish")
+    map("<leader>dx", dotnet.run, ".NET Run")
     end,
   },
 }
