@@ -223,3 +223,15 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 		vim.bo[buf].modified = false
 	end,
 })
+
+vim.lsp.config("roslyn_ls", {
+  cmd = { "true" }, -- harmless no-op
+  filetypes = {},
+  root_dir = function()
+    return nil
+  end,
+  single_file_support = false,
+  handlers = {
+    ["textDocument/publishDiagnostics"] = function() end,
+  },
+})
