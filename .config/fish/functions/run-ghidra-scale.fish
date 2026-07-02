@@ -14,12 +14,16 @@ function run-ghidra-scale --description "Launch Ghidra (installed via yay) optim
     #                    -Dswing.aatext=true" \
     #     ghidra >/dev/null 2>&1 &
 
+    # env \
+    #     GDK_DPI_SCALE=1 \
+    #     _JAVA_OPTIONS="-Dsun.java2d.uiScale=2 \
+    #                    -Dawt.useSystemAAFontSettings=lcd \
+    #                    -Dswing.aatext=true \
+    #                    -Dsun.java2d.renderer=sun.java2d.marlin.MarlinRenderingEngine" \
+
     env \
         GDK_DPI_SCALE=1 \
-        _JAVA_OPTIONS="-Dsun.java2d.uiScale=2 \
-                       -Dawt.useSystemAAFontSettings=on \
-                       -Dswing.aatext=true \
-                       -Dsun.java2d.renderer=sun.java2d.marlin.MarlinRenderingEngine" \
+        _JAVA_OPTIONS="-Dsun.java2d.uiScale=2 -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dsun.java2d.renderer=sun.java2d.marlin.MarlinRenderingEngine" \
         ghidra >/dev/null 2>&1 &
 
     disown
