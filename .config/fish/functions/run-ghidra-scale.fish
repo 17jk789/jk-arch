@@ -21,6 +21,8 @@ function run-ghidra-scale --description "Launch Ghidra (installed via yay) optim
     #                    -Dswing.aatext=true \
     #                    -Dsun.java2d.renderer=sun.java2d.marlin.MarlinRenderingEngine" \
 
+    set -gx XCURSOR_SIZE 24
+
     env \
         GDK_DPI_SCALE=1 \
         _JAVA_OPTIONS="-Dsun.java2d.uiScale=2 -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dsun.java2d.renderer=sun.java2d.marlin.MarlinRenderingEngine" \
