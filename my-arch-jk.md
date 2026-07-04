@@ -745,6 +745,8 @@ sudo pacman -S kdenlive
 ```bash
 sudo pacman -S davinci-resolve
 
+# Bei CachyOS reicht die Installation von davinci-resolve meistens aus.
+# Bei anderen Arch-basierten Distributionen müssen die Treiber manuell installiert werden:
 # sudo pacman -S cuda opencl-nvidia
 # sudo pacman -S rocm-opencl-runtime
 
