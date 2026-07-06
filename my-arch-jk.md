@@ -782,6 +782,12 @@ sudo pacman -S qalculate-gtk
 
 ```bash
 sudo pacman -S obs-studio
+# sudo pacman -S xdg-desktop-portal xdg-desktop-portal-hyprland pipewire wireplumber
+# systemctl --user status xdg-desktop-portal
+# systemctl --user status xdg-desktop-portal-hyprland
+# systemctl --user restart xdg-desktop-portal
+# systemctl --user restart xdg-desktop-portal-hyprland
+# systemctl --user restart pipewire wireplumber
 ```
 
 ### Das Software-Zentrum Discover und das Flatpak-System installieren
