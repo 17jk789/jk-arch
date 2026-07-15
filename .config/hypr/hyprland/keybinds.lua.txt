@@ -1,5 +1,5 @@
 hl.bind("SUPER + SHIFT + W", hl.dsp.exec_cmd("firefox-developer-edition"), { description = "App: Firefox Developer" })
 -- Magic Mouse Vor und Zurück mit SUPER-Taste + Wischen
 hl.bind("mouse:274", hl.dsp.exec_cmd("kitty"))
-hl.bind("SUPER + mouse_down", hl.dsp.exec_cmd("hyprctl dispatch workspace e+1"))
-hl.bind("SUPER + mouse_up", hl.dsp.exec_cmd("hyprctl dispatch workspace e-1"))
+-- hl.bind("SUPER + mouse_down", hl.dsp.exec_cmd("hyprctl dispatch workspace e+1"))
+-- hl.bind("SUPER + mouse_up", hl.dsp.exec_cmd("hyprctl dispatch workspace e-1"))
