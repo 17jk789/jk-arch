@@ -423,6 +423,7 @@ sudo pacman -S texlive-meta latexmk zathura zathura-pdf-poppler
 sudo pacman -S texlive-latexextra texlive-pictures, texlive-langgerman texlive-langenglish biber
 sudo pacman -S texlab
 sudo pacman -S tectonic
+sudo pacman -S texlive-langgreek
 ```
 
 ### Die Rechtschreibprüfung für Deutsch und Englisch installieren
