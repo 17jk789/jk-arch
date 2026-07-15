@@ -1,0 +1,37 @@
+-- This file contains modifications based on:
+-- https://github.com/end-4/dots-hyprland
+--
+-- Original author: end-4
+--
+-- SPDX-License-Identifier: GPL-3.0-only
+--
+-- This file is licensed under the GNU General Public License v3.0.
+-- It is distributed separately from the Apache-2.0 licensed files
+-- in this repository.
+
+$lock_cmd = hyprctl dispatch 'hl.dsp.global("quickshell:lock")' & pidof qs quickshell hyprlock || hyprlock
+# $lock_cmd = pidof hyprlock || hyprlock
+$suspend_cmd = systemctl suspend || loginctl suspend
+
+general {
+    lock_cmd = $lock_cmd
+    before_sleep_cmd = loginctl lock-session
+    after_sleep_cmd = hyprctl dispatch 'hl.dsp.global("quickshell:lockFocus")'
+    inhibit_sleep = 3
+}
+
+listener {
+    timeout = 300 # 5mins
+    on-timeout = loginctl lock-session
+}
+
+listener {
+    timeout = 600 # 10mins
+    on-timeout = hyprctl dispatch 'hl.dsp.dpms({ action = "disable" })'
+    on-resume = hyprctl dispatch 'hl.dsp.dpms({ action = "enable" })'
+}
+
+listener {
+    timeout = 900 # 15mins
+    on-timeout = $suspend_cmd
+}
