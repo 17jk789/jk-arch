@@ -36,4 +36,7 @@ hl.on("hyprland.start", function()
 
 	-- Cursor
 	hl.exec_cmd("hyprctl setcursor Bibata-Modern-Classic 24")
+
+	-- Bluetooth Maus automatisch verbinden
+	-- hl.exec_cmd("bluetoothctl connect XX:XX:XX:XX:XX:XX")
 end)
