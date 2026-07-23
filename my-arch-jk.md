@@ -1681,14 +1681,14 @@ cursor {
 
 ## Verbinden
 
-```text id="0u3v9h"
+```text
 Moonlight öffnen → Linux-PC auswählen → Pairing-Code eingeben
 ```
 
 # OpenClaw
 
-```
-npm i -g openclaw@latest
-openclaw onboard --install-daemon
-openclaw models auth login-github-copilot
+```bash
+# npm i -g openclaw@latest
+# openclaw onboard --install-daemon
+# openclaw models auth login-github-copilot
 ```
