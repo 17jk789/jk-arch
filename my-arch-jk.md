@@ -36,8 +36,8 @@ Bitte führen sie alle Commands aus und fügen sie .config in ihr Systhem ein.
     - [Das System aktualisieren](#das-system-aktualisieren)
     - [Paketdatenbank prüfen](#paketdatenbank-prüfen)
     - [Die Werkzeuge für den Bau von Software installieren](#die-werkzeuge-für-den-bau-von-software-installieren)
-    - [Die end-4 Hyperland Konfiguration herunterladen und die Installation starten](#die-end-4-hyperland-konfiguration-herunterladen-und-die-installation-starten)
     - [Die Firewall sofort einschalten und dauerhaft aktivieren](#die-firewall-sofort-einschalten-und-dauerhaft-aktivieren)
+    - [Die end-4 Hyperland Konfiguration herunterladen und die Installation starten](#die-end-4-hyperland-konfiguration-herunterladen-und-die-installation-starten)
     - [Den Quellcode von yay herunterladen und das Programm bauen und installieren](#den-quellcode-von-yay-herunterladen-und-das-programm-bauen-und-installieren)
     - [Kern-Werkzeuge und Entwickler-Tools installieren](#kern-werkzeuge-und-entwickler-tools-installieren)
     - [Das Multilib-Repository in den Systemquellen aktivieren](#das-multilib-repository-in-den-systemquellen-aktivieren)
@@ -194,6 +194,7 @@ Bitte führen sie alle Commands aus und fügen sie .config in ihr Systhem ein.
   - [Moonlight installieren](#moonlight-installieren)
   - [Verbinden](#verbinden)
 - [OpenClaw](#openclaw)
+- [Was ich noch machen würde](#was-ich-noch-machen-würde)
 
 # Meine Arch Config
 
@@ -234,7 +235,7 @@ expac --timefmt='%Y-%m-%d %T' '%l %n' | sort -r | head -50
 systemctl --type=service --state=running
 ```
 
-Bei Fehler, Programm neu istnalliren und:
+Bei Fehlern das Programm neu installieren und:
 
 ```bash
 sudo systemctl --failed
