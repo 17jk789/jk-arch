@@ -1,10 +1,7 @@
 # Default ignored files
 /shelf/
 /workspace.xml
-/editor.xml
-/jk-arch.iml
-/modules.xml
-/vcs.xml
+/.idea
 # Editor-based HTTP Client requests
 /httpRequests/
 # Ignored default folder with query files
