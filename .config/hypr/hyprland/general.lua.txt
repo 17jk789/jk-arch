@@ -124,7 +124,7 @@ hl.config({
 		},
 
 		shadow = {
-			enabled = true,
+			enabled = false,
 			range = 20,
 			offset = { 0, 12 },
 			render_power = 2,
@@ -198,7 +198,7 @@ hl.curve("stall", {
 -- windows
 hl.animation({
 	leaf = "windowsIn",
-	enabled = false,
+	enabled = true,
 	speed = 1,
 	bezier = "emphasizedDecel",
 	style = "popin 88%",
@@ -206,14 +206,14 @@ hl.animation({
 
 hl.animation({
 	leaf = "fadeIn",
-	enabled = false,
+	enabled = true,
 	speed = 1,
 	bezier = "emphasizedDecel",
 })
 
 hl.animation({
 	leaf = "windowsOut",
-	enabled = false,
+	enabled = true,
 	speed = 1,
 	bezier = "emphasizedDecel",
 	style = "popin 90%",
@@ -221,7 +221,7 @@ hl.animation({
 
 hl.animation({
 	leaf = "fadeOut",
-	enabled = false,
+	enabled = true,
 	speed = 1,
 	bezier = "emphasizedDecel",
 })
