@@ -230,7 +230,7 @@ hl.animation({
 	leaf = "windowsMove",
 	enabled = true,
 	speed = 1,
-	bezier = "expressiveDefaultSpatial",
+	bezier = "emphasizedDecel",
 	style = "slide",
 })
 
