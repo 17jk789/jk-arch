@@ -91,7 +91,7 @@ Bitte führen sie alle Commands aus und fügen sie .config in ihr Systhem ein.
     - [Die Programmiersprache Lua in der Version 5.1 installieren](#die-programmiersprache-lua-in-der-version-51-installieren)
     - [Microsoft Visual Studio Code (VS Code) über yay installieren](#microsoft-visual-studio-code-vs-code-über-yay-installieren)
     - [GitKraken über das offizielle Linux-Archiv installieren](#gitkraken-über-das-offizielle-linux-archiv-installieren)
-    - [Den Discord-Client über den Paketmanager installieren](#den-discord-client-über-den-paketmanager-installieren)
+    - [Den Discord-Client (Vesktop) über den Paketmanager installieren](#den-discord-client-vesktop-über-den-paketmanager-installieren)
     - [Den Signal Messenger installieren](#den-signal-messenger-installieren)
     - [Den Brave Browser über yay installieren](#den-brave-browser-über-yay-installieren)
     - [Den datenschutzfokussierten Mullvad Browser installieren](#den-datenschutzfokussierten-mullvad-browser-installieren)
@@ -689,10 +689,20 @@ sudo ln -s /opt/gitkraken/gitkraken /usr/local/bin/gitkraken
 mkdir -p ~/.local/share/applications; printf '%s\n' '[Desktop Entry]' 'Name=GitKraken' 'Comment=Git Client' 'Exec=/opt/gitkraken/gitkraken' 'Icon=/opt/gitkraken/gitkraken.png' 'Terminal=false' 'Type=Application' 'Categories=Development;' > ~/.local/share/applications/gitkraken.desktop
 ```
 
-### Den Discord-Client über den Paketmanager installieren
+### Den Discord-Client (Vesktop) über den Paketmanager installieren
 
 ```bash
-yay -S discord
+# yay -S discord
+sudo pacman -S vesktop
+```
+
+Bie Problemen:
+
+```bash
+systemctl --user restart xdg-desktop-portal
+systemctl --user restart xdg-desktop-portal-hyprland
+systemctl --user status xdg-desktop-portal-hyprland
+systemctl --user status xdg-desktop-portal
 ```
 
 ### Den Signal Messenger installieren
