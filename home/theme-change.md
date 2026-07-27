@@ -20,98 +20,121 @@ und dann:
 
 ```python
 from pygments.style import Style
-from pygments.token import Keyword, Name, Comment, String, Error, Token, \
-     Number, Operator, Generic, Whitespace, Punctuation, Other, Literal
+from pygments.token import (
+    Keyword, Name, Comment, String, Error, Token,
+    Number, Operator, Generic, Whitespace,
+    Punctuation, Other, Literal
+)
 
 __all__ = ['CatppuccinMochaStyle']
 
 
 class CatppuccinMochaStyle(Style):
     name = 'catppuccin_mocha'
-    
-    background_color = "#1e1e2e"
-    highlight_color = "#313244"
+
+    # Catppuccin Mocha
+    background_color = "#1e1e2e"  # Base
+    highlight_color = "#313244"   # Surface0
 
     styles = {
-        Token:                     "#cdd6f4",
-        Whitespace:                "",
-        Error:                     "#f38ba8 bg:#1e1e2e",
-        Other:                     "",
+        # Text
+        Token:                      "#cdd6f4",  # Text
+        Whitespace:                 "",
+        Other:                      "#cdd6f4",
 
-        Comment:                   "#6c7086 italic",
-        Comment.Multiline:         "#6c7086",
-        Comment.Preproc:           "#f38ba8",
-        Comment.Single:            "#6c7086",
-        Comment.Special:           "#89b4fa",
+        # Errors
+        Error:                      "#f38ba8 bg:#1e1e2e",  # Red
 
-        Keyword:                   "#cba6f7",
-        Keyword.Constant:          "#fab387",
-        Keyword.Declaration:       "#cba6f7",
-        Keyword.Namespace:         "#f38ba8",
-        Keyword.Pseudo:            "#cba6f7",
-        Keyword.Reserved:          "#cba6f7",
-        Keyword.Type:              "#89b4fa",
+        # Comments
+        Comment:                    "#6c7086 italic",  # Overlay0
+        Comment.Multiline:          "#6c7086",
+        Comment.Preproc:            "#f38ba8",
+        Comment.Single:             "#6c7086",
+        Comment.Special:            "#89b4fa",  # Blue
 
-        Operator:                  "#89dceb",
-        Operator.Word:             "#cba6f7",
+        # Keywords
+        Keyword:                    "#cba6f7",  # Mauve
+        Keyword.Constant:           "#fab387",  # Peach
+        Keyword.Declaration:        "#cba6f7",
+        Keyword.Namespace:          "#f38ba8",  # Red
+        Keyword.Pseudo:             "#cba6f7",
+        Keyword.Reserved:           "#cba6f7",
+        Keyword.Type:               "#89b4fa",  # Blue
 
-        Punctuation:               "#bac2de",
+        # Operators
+        Operator:                   "#94e2d5",  # Teal
+        Operator.Word:              "#cba6f7",
 
-        Name:                      "#cdd6f4",
-        Name.Attribute:            "#a6e3a1",
-        Name.Builtin:              "#89b4fa",
-        Name.Builtin.Pseudo:       "#89b4fa",
-        Name.Class:                "#f9e2af",
-        Name.Constant:             "#fab387",
-        Name.Decorator:            "#f5c2e7",
-        Name.Entity:               "#f5e0e6",
-        Name.Exception:            "#f38ba8",
-        Name.Function:             "#89b4fa",
-        Name.Property:             "#89dceb",
-        Name.Label:                "#f38ba8",
-        Name.Namespace:            "#89b4fa",
-        Name.Other:                "#cdd6f4",
-        Name.Tag:                  "#f38ba8",
-        Name.Variable:             "#cdd6f4",
-        Name.Variable.Class:       "#f9e2af",
-        Name.Variable.Global:      "#f9e2af",
-        Name.Variable.Instance:    "#cdd6f4",
+        # Punctuation
+        Punctuation:                "#bac2de",  # Subtext1
 
-        Number:                    "#fab387",
-        Number.Float:              "#fab387",
-        Number.Hex:                "#fab387",
-        Number.Integer:            "#fab387",
-        Number.Integer.Long:       "#fab387",
-        Number.Oct:                "#fab387",
+        # Names
+        Name:                       "#cdd6f4",
 
-        Literal:                   "#fab387",
-        Literal.Date:              "#f5c2e7",
+        Name.Attribute:             "#a6e3a1",  # Green
+        Name.Builtin:               "#89b4fa",  # Blue
+        Name.Builtin.Pseudo:        "#89b4fa",
 
-        String:                    "#a6e3a1",
-        String.Backtick:           "#a6e3a1",
-        String.Char:               "#a6e3a1",
-        String.Doc:                "#6c7086",
-        String.Double:             "#a6e3a1",
-        String.Escape:             "#f5c2e7",
-        String.Heredoc:            "#a6e3a1",
-        String.Interpol:           "#f5c2e7",
-        String.Other:              "#a6e3a1",
-        String.Regex:              "#f38ba8",
-        String.Single:             "#a6e3a1",
-        String.Symbol:             "#fab387",
+        Name.Class:                 "#f9e2af",  # Yellow
+        Name.Constant:              "#fab387",  # Peach
 
-        Generic:                   "",
-        Generic.Deleted:           "#f38ba8",
-        Generic.Emph:              "italic",
-        Generic.Error:             "#f38ba8",
-        Generic.Heading:           "#89b4fa",
-        Generic.Inserted:          "#a6e3a1",
-        Generic.Output:            "#89dceb",
-        Generic.Prompt:            "bold #cba6f7",
-        Generic.Strong:            "bold",
-        Generic.EmphStrong:        "bold italic",
-        Generic.Subheading:        "#89b4fa",
-        Generic.Traceback:         "#f38ba8",
+        Name.Decorator:             "#f5c2e7",  # Pink
+        Name.Entity:                "#f5e0dc",  # Rosewater
+
+        Name.Exception:             "#f38ba8",  # Red
+        Name.Function:              "#89b4fa",  # Blue
+
+        Name.Label:                 "#f38ba8",
+        Name.Namespace:             "#89b4fa",
+
+        Name.Other:                 "#cdd6f4",
+        Name.Property:              "#89dceb",  # Sky
+
+        Name.Tag:                   "#f38ba8",
+
+        Name.Variable:              "#cdd6f4",
+        Name.Variable.Class:        "#f9e2af",
+        Name.Variable.Global:       "#f9e2af",
+        Name.Variable.Instance:     "#cdd6f4",
+
+        # Numbers
+        Number:                     "#fab387",
+        Number.Float:               "#fab387",
+        Number.Hex:                 "#fab387",
+        Number.Integer:             "#fab387",
+        Number.Integer.Long:        "#fab387",
+        Number.Oct:                 "#fab387",
+
+        # Literals
+        Literal:                    "#fab387",
+        Literal.Date:               "#f5c2e7",
+
+        # Strings
+        String:                     "#a6e3a1",  # Green
+        String.Backtick:            "#a6e3a1",
+        String.Char:                "#a6e3a1",
+        String.Doc:                 "#6c7086",
+        String.Double:              "#a6e3a1",
+        String.Escape:              "#f5c2e7",
+        String.Heredoc:             "#a6e3a1",
+        String.Interpol:            "#f5c2e7",
+        String.Other:               "#a6e3a1",
+        String.Regex:               "#f38ba8",
+        String.Single:              "#a6e3a1",
+        String.Symbol:              "#fab387",
+
+        # Generic output
+        Generic:                    "",
+        Generic.Deleted:            "#f38ba8",
+        Generic.Emph:               "italic",
+        Generic.Error:              "#f38ba8",
+        Generic.Heading:            "#89b4fa",
+        Generic.Inserted:           "#a6e3a1",
+        Generic.Output:             "#94e2d5",
+        Generic.Prompt:             "bold #cba6f7",
+        Generic.Strong:             "bold",
+        Generic.EmphStrong:         "bold italic",
+        Generic.Subheading:         "#89b4fa",
+        Generic.Traceback:          "#f38ba8",
     }
-
 ```
