@@ -296,11 +296,12 @@ makepkg -si
 ### Kern-Werkzeuge und Entwickler-Tools installieren
 
 ```bash
-sudo pacman -S curl wget unzip cmark fzf luarocks gcc git-delta shellcheck lib32-gcc-libs llvm clang lldb gdb gef strace ltrace radare2 gtk4 libadwaita network-manager-applet polkit-gnome librsvg adwaita-icon-theme perf afl++ cppcheck
+sudo pacman -S curl wget unzip cmark fzf luarocks gcc git-delta shellcheck lib32-gcc-libs llvm clang lldb gdb gef pwndbg strace ltrace radare2 gtk4 libadwaita network-manager-applet polkit-gnome librsvg adwaita-icon-theme perf afl++ cppcheck
 ```
 
 ```bash
-echo "source /usr/share/gef/gef.py" >> ~/.gdbinit
+# echo "source /usr/share/gef/gef.py" >> ~/.gdbinit
+# echo "source /usr/share/pwndbg/gdbinit.py" >> ~/.gdbinit
 ```
 
 ```bash
