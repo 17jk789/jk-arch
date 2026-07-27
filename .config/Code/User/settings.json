@@ -17,7 +17,7 @@
     "editor.smoothScrolling": true,
     // "editor.bracketPairColorization.enabled": true, // Seit VS Code 1.71+ ist das Standard
     "editor.guides.bracketPairs": true,
-    // "editor.lineNumbers": "relative",
+    "editor.lineNumbers": "relative",
     "editor.occurrencesHighlight": "off",
     "editor.selectionHighlight": false,
 
