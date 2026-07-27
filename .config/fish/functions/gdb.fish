@@ -7,7 +7,7 @@ function gdb
     else if test "$argv[1]" = -pwndbg
         command gdb \
             -ex "source /usr/share/pwndbg/gdbinit.py" \
-            -ex "set syntax-highlight-style monokai" \
+            -ex "set syntax-highlight-style catppuccin_mocha" \
             $argv[2..-1]
 
     else
