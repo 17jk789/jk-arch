@@ -1,13 +1,33 @@
-# für sudo nvim /usr/lib/python3.14/site-packages/pygments/styles/monokai.py
+Führe: 
 
+```bash
+sudo nvim $(python -c "import pygments.styles._mapping as m; print(m.__file__)")
+```
+
+aus und füge:
+
+```python
+'CatppuccinMochaStyle': ('pygments.styles.catppuccin_mocha', 'catppuccin_mocha', ()),
+```
+
+hinzu, dann:
+
+```bash
+sudo nvim /usr/lib/python3.14/site-packages/pygments/styles/catppuccin_mocha.py 
+```
+
+und dann:
+
+```python
 from pygments.style import Style
 from pygments.token import Keyword, Name, Comment, String, Error, Token, \
      Number, Operator, Generic, Whitespace, Punctuation, Other, Literal
 
-__all__ = ['MonokaiStyle']
+__all__ = ['CatppuccinMochaStyle']
 
-class MonokaiStyle(Style):
-    name = 'monokai'
+
+class CatppuccinMochaStyle(Style):
+    name = 'catppuccin_mocha'
     
     background_color = "#1e1e2e"
     highlight_color = "#313244"
@@ -93,3 +113,5 @@ class MonokaiStyle(Style):
         Generic.Subheading:        "#89b4fa",
         Generic.Traceback:         "#f38ba8",
     }
+
+```
