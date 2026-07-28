@@ -7,6 +7,8 @@ function gdb
     set -l use_cat 0
     set -l use_intel 0
     set -l use_context_config 0
+    set -l has_stack_arg 0
+    set -l has_code_arg 0
     set -l stack_lines 30
     set -l code_lines 25
     set -l filtered_args
@@ -30,19 +32,21 @@ function gdb
 
             case '--stack-lines=*' '--stack_lines=*' '-stack-lines=*' '-stack_lines=*'
                 set use_context_config 1
+                set has_stack_arg 1
                 set -l value (string replace -r -- '^--?stack[_-]?lines?=' '' $arg)
                 if test "$value" = "all"
                     set stack_lines 999
-                else
+                else if string match -qr -- '^[0-9]+$' "$value"
                     set stack_lines $value
                 end
 
             case '--codelines=*' '--code_lines=*' '-codelines=*' '-code_lines=*' '-code-lines=*' '--code-lines=*'
                 set use_context_config 1
+                set has_code_arg 1
                 set -l value (string replace -r -- '^--?code[_-]?lines?=' '' $arg)
                 if test "$value" = "all"
                     set code_lines 999
-                else
+                else if string match -qr -- '^[0-9]+$' "$value"
                     set code_lines $value
                 end
 
@@ -81,9 +85,17 @@ function gdb
 
         if test $use_all -eq 1; or test $use_context_config -eq 1
             set gef_cmds $gef_cmds \
-                -iex "gef config context.layout 'legend regs code args source memory stack threads trace extra dereference'" \
-                -iex "gef config context.nb_lines_code $code_lines" \
-                -iex "gef config context.nb_lines_stack $stack_lines" \
+                -iex "gef config context.layout 'legend regs code args source memory stack threads trace extra dereference'"
+
+            if test $use_all -eq 1; or test $has_code_arg -eq 1
+                set gef_cmds $gef_cmds -iex "gef config context.nb_lines_code $code_lines"
+            end
+
+            if test $use_all -eq 1; or test $has_stack_arg -eq 1
+                set gef_cmds $gef_cmds -iex "gef config context.nb_lines_stack $stack_lines"
+            end
+
+            set gef_cmds $gef_cmds \
                 -iex "gef config context.grow_stack_down True" \
                 -iex "gef config context.enable True" \
                 -iex "gef config context.clear_screen False" \
@@ -117,10 +129,17 @@ function gdb
                 -iex "set detach-on-fork off" \
                 -iex "set disassemble-next-line on" \
                 -iex "set history save on" \
-                -iex "set confirm off" \
-                -iex "set context-stack-lines $stack_lines" \
-                -iex "set context-code-lines $code_lines" \
-                -iex "set context-clear-screen off"
+                -iex "set confirm off"
+
+            if test $use_all -eq 1; or test $has_stack_arg -eq 1
+                set pwndbg_cmds $pwndbg_cmds -iex "set context-stack-lines $stack_lines"
+            end
+
+            if test $use_all -eq 1; or test $has_code_arg -eq 1
+                set pwndbg_cmds $pwndbg_cmds -iex "set context-code-lines $code_lines"
+            end
+
+            set pwndbg_cmds $pwndbg_cmds -iex "set context-clear-screen off"
         end
 
         if test $use_cat -eq 1
