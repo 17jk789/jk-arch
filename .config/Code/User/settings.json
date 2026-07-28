@@ -2,11 +2,10 @@
     "editor.mouseWheelZoom": true,
     // "python.defaultInterpreterPath": "...",
     "github.copilot.enable": {
-        "*": false,
-        "plaintext": false,
-        "markdown": false,
-        "scminput": false,
-        "java": false
+        "*": true,
+        "plaintext": true,
+        "markdown": true,
+        "scminput": true
     },
     "gitlens.ai.model": "vscode",
     "gitlens.ai.vscode.model": "copilot:gpt-4.1",
@@ -118,9 +117,9 @@
     "vim.statusBarColors.surroundinputmode": ["#11111A", "#11111b"],
     "editor.wordWrap": "off",
     "workbench.colorCustomizations": {
-        "statusBar.background": "#b4befe",
-        "statusBar.noFolderBackground": "#b4befe",
-        "statusBar.debuggingBackground": "#b4befe",
+        "statusBar.background": "#C5AAF1",
+        "statusBar.noFolderBackground": "#C5AAF1",
+        "statusBar.debuggingBackground": "#C5AAF1",
         "statusBar.foreground": "#11111b",
         "statusBar.debuggingForeground": "#11111b"
     },
@@ -153,7 +152,7 @@
     "rust-analyzer.server.extraEnv": {
         "RA_LRU_CAP": "100000"
     },
-    "material-code.primaryColor": "#9FD2E0",
+    // "material-code.primaryColor": "#9FD2E0",
     "git.autofetch": true,
 
     // Terminal-Optimierung für das Fish-Shell-Design
