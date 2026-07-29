@@ -1397,9 +1397,9 @@ mkdir -p ~/.config/lazygit/
 nvim ~/.config/quickshell/ii/modules/common/Config.qml
 ```
 
-zeile 476
+zeile 480
 ```qml
-# property list<string> excludedSites: ["quora.com", "facebook.com"]
+// property list<string> excludedSites: ["quora.com", "facebook.com"]
 property list<string> excludedSites: []
 ```
 
