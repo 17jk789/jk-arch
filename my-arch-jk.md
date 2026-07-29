@@ -340,7 +340,7 @@ cargo install --locked cargo-deny
 # r2pm -init
 # r2pm -i r2ghidra
 sudo pacman -Syu radare2 r2ghidra
-sudo pacman -S python-r2pipe
+# sudo pacman -S python-r2pipe
 
 ```
 
