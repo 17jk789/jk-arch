@@ -1311,7 +1311,7 @@ sudo systemctl disable --now sshd # Falls du SSH nicht brauchst
 ### Das Begrüßungsprogramm von CachyOS entfernen 
 
 ```bash
-sudo pacman -R cachyos-hell
+sudo pacman -R cachyos-hello
 rm ~/.config/autostart/cachyos-hello.desktop
 ```
 
