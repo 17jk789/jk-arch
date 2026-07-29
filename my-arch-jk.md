@@ -296,7 +296,7 @@ makepkg -si
 ### Kern-Werkzeuge und Entwickler-Tools installieren
 
 ```bash
-sudo pacman -S curl wget unzip cmark fzf luarocks gcc git-delta shellcheck lib32-gcc-libs llvm clang lldb gdb gef pwndbg strace ltrace radare2 gtk4 libadwaita network-manager-applet polkit-gnome librsvg adwaita-icon-theme perf afl++ cppcheck
+sudo pacman -S curl wget unzip cmark fzf luarocks gcc git-delta shellcheck lib32-gcc-libs llvm clang lldb gdb gef pwndbg strace ltrace gtk4 libadwaita network-manager-applet polkit-gnome librsvg adwaita-icon-theme perf afl++ cppcheck
 ```
 
 ```bash
@@ -336,9 +336,12 @@ cargo install --locked cargo-deny
 ### Plugin für Decompilation in radare2 (Terminal)
 
 ```bash
-r2pm -U
-r2pm -init
-r2pm -i r2ghidra
+# r2pm -U
+# r2pm -init
+# r2pm -i r2ghidra
+sudo pacman -Syu radare2 r2ghidra
+sudo pacman -S python-r2pipe
+
 ```
 
 ### Go und Make über den Paketmanager installieren
@@ -360,7 +363,8 @@ sudo pacman -S make go
 ### C/C++ Compiler, Build-Systeme und Advanced Debugging installieren
 
 ```bash
-sudo pacman -S clang cmake ninja gdb lldb rr
+sudo pacman -S clang cmake ninja gdb lldb
+# yay -S rr
 ```
 
 ### Mehrere Java-Versionen und die Build-Tool Gradle und Maven installieren
