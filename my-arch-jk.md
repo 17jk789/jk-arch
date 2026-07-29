@@ -1177,7 +1177,8 @@ sudo pacman -S difftastic
 ### Das Software-Reverse-Engineering-Framework Ghidra über yay installieren
 
 ```bash
-yay -S ghidra
+sudo pacman -S ghidra
+# yay -S ghidra
 # https://github.com/catppuccin/ghidra/blob/main/themes/catppuccin-mocha.theme
 ```
 
