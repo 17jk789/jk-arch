@@ -1520,7 +1520,8 @@ sudo cachyos-rate-mirrors
 # WARP Cloudflair "1.1.1.1"
 
 ```bash
-yay -S cloudflare-warp-bin
+sudo pacman -S cloudflare-warp-bin
+# yay -S cloudflare-warp-bin
 ```
 
 Alternatively, for a version without the GUI taskbar (useful for servers), use cloudflare-warp-nox-bin.
