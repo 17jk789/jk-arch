@@ -720,7 +720,8 @@ sudo pacman -S signal-desktop
 ### Den Brave Browser über yay installieren
 
 ```bash
-yay -S brave-bin
+sudo pacman -S brave-bin
+# yay -S brave-bin
 ```
 
 ### Den datenschutzfokussierten Mullvad Browser installieren
