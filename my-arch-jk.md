@@ -99,7 +99,7 @@ Bitte führen sie alle Commands aus und fügen sie .config in ihr Systhem ein.
     - [Den datenschutzfokussierten LibreWolf Browser installieren](#den-datenschutzfokussierten-librewolf-browser-installieren)
     - [Die Firefox Developer Edition installieren](#die-firefox-developer-edition-installieren)
     - [Das grafische Archivierungsprogramm Ark installieren](#das-grafische-archivierungsprogramm-ark-installieren)
-    - [sudo pacman -S kate](#sudo-pacman--s-kate)
+    - [Den erweiterten KDE-Texteditor Kate installieren](#den-erweiterten-kde-texteditor-kate-installieren)
     - [Der grafische Bildbetrachter Gwenview installieren](#der-grafische-bildbetrachter-gwenview-installieren)
     - [Der universelle Dokumentenbetrachter Okular installieren](#der-universelle-dokumentenbetrachter-okular-installieren)
     - [Den universellen Medienplayer VLC installieren](#den-universellen-medienplayer-vlc-installieren)
@@ -754,7 +754,7 @@ sudo pacman -S firefox-developer-edition
 sudo pacman -S ark
 ```
 
-### sudo pacman -S kate
+### Den erweiterten KDE-Texteditor Kate installieren
 
 ```bash
 sudo pacman -S kate
