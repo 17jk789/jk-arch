@@ -713,7 +713,8 @@ systemctl --user status xdg-desktop-portal
 ### Den Signal Messenger installieren
 
 ```bash
-yay -S signal-desktop
+sudo pacman -S signal-desktop
+# yay -S signal-desktop
 ```
 
 ### Den Brave Browser über yay installieren
