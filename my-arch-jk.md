@@ -469,11 +469,12 @@ sudo pacman -S gzip
 ### Die ultimative LaTeX-Umgebung installieren
 
 ```bash
-sudo pacman -S texlive-meta latexmk zathura zathura-pdf-poppler
-sudo pacman -S texlive-latexextra texlive-pictures, texlive-langgerman texlive-langenglish biber
-sudo pacman -S texlab
-sudo pacman -S tectonic
-sudo pacman -S texlive-langgreek
+# sudo pacman -S texlive-meta latexmk zathura zathura-pdf-poppler
+# sudo pacman -S texlive-latexextra texlive-pictures, texlive-langgerman texlive-langenglish biber
+# sudo pacman -S texlab
+# sudo pacman -S tectonic
+# sudo pacman -S texlive-langgreek
+sudo pacman -S texlive-meta texlive-latexextra texlive-pictures texlive-langgerman texlive-langenglish texlive-langgreek biber zathura zathura-pdf-poppler texlab tectonic
 ```
 
 ### Die Rechtschreibprüfung für Deutsch und Englisch installieren
