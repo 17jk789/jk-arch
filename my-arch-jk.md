@@ -295,8 +295,52 @@ makepkg -si
 
 ### Kern-Werkzeuge und Entwickler-Tools installieren
 
+#### Basis-Tools
+
 ```bash
-sudo pacman -S curl wget unzip cmark fzf luarocks gcc git-delta shellcheck lib32-gcc-libs llvm clang lldb gdb gef pwndbg strace ltrace gtk4 libadwaita network-manager-applet polkit-gnome librsvg adwaita-icon-theme perf afl++ cppcheck checksec rizin binwalk yara elfutils
+sudo pacman -S curl wget unzip git-delta fzf cmark shellcheck
+```
+
+#### Compiler & Toolchain
+
+```bash
+sudo pacman -S gcc lib32-gcc-libs llvm clang lldb cmake ninja
+```
+
+#### Debugging
+
+```bash
+sudo pacman -S gdb gef pwndbg strace ltrace
+```
+
+#### Reverse Engineering
+
+```bash
+sudo pacman -S rizin binwalk yara elfutils checksec
+```
+
+#### Fuzzing & Performance
+
+```bash
+sudo pacman -S afl++ perf cppcheck
+```
+
+#### GUI-Bibliotheken
+
+```bash
+sudo pacman -S gtk4 libadwaita librsvg adwaita-icon-theme
+```
+
+#### Desktop-Integration
+
+```bash
+sudo pacman -S network-manager-applet polkit-gnome
+```
+
+#### Lua-Entwicklung
+
+```bash
+sudo pacman -S luarocks
 ```
 
 ```bash
@@ -341,7 +385,6 @@ cargo install --locked cargo-deny
 # r2pm -i r2ghidra
 sudo pacman -Syu radare2 r2ghidra
 # sudo pacman -S python-r2pipe
-
 ```
 
 ### Go und Make über den Paketmanager installieren
@@ -356,14 +399,14 @@ sudo pacman -S make go
 ```
 
 ### Für C/C++ (keines extra)
+
 ```bash
 # yay -S checksec
 ```
 
-### C/C++ Compiler, Build-Systeme und Advanced Debugging installieren
+### C/C++ Advanced Debugging installieren
 
 ```bash
-sudo pacman -S clang cmake ninja gdb lldb
 # yay -S rr
 ```
 
