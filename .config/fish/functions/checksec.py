@@ -5,6 +5,29 @@ import sys
 import os
 import re
 
+DISPLAY_NAMES = {
+    "relro": "RELRO",
+    "canary": "Stack Canary",
+    "cfi": "CFI",
+    "nx": "NX",
+    "pie": "PIE",
+    "rpath": "RPATH",
+    "runpath": "RUNPATH",
+    "symbols": "Symbols",
+    "safestack": "SafeStack",
+    "stack_clash": "Stack Clash",
+    "wx": "W^X Seg",
+    "w_x": "W^X Seg",
+    "separate_code": "Separate Code (W^X Seg)",
+    "selfrando": "Selfrando",
+    "sanitizers": "Sanitizers",
+    "fortify_level": "FORTIFY Lvl",
+    "glibcxx_assert": "GLIBCXX Assert",
+    "fortify_source": "FORTIFY",
+    "fortified": "Fortified",
+    "fortifyable": "Fortifiable",
+}
+
 
 RESET = "\033[0m"
 BOLD = "\033[1m"
@@ -107,7 +130,7 @@ def render(checks, name):
     for key in order:
         item = checks[key]
 
-        title = key.replace("_", " ").title()
+        title = DISPLAY_NAMES.get(key, key.replace("_", " ").title())
 
         items.append(
             (title, colorize(item.get("status", "unset"), item.get("value", "")))
