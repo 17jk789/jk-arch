@@ -296,7 +296,7 @@ makepkg -si
 ### Kern-Werkzeuge und Entwickler-Tools installieren
 
 ```bash
-sudo pacman -S curl wget unzip cmark fzf luarocks gcc git-delta shellcheck lib32-gcc-libs llvm clang lldb gdb gef pwndbg strace ltrace gtk4 libadwaita network-manager-applet polkit-gnome librsvg adwaita-icon-theme perf afl++ cppcheck checksec
+sudo pacman -S curl wget unzip cmark fzf luarocks gcc git-delta shellcheck lib32-gcc-libs llvm clang lldb gdb gef pwndbg strace ltrace gtk4 libadwaita network-manager-applet polkit-gnome librsvg adwaita-icon-theme perf afl++ cppcheck checksec rizin binwalk yara elfutils
 ```
 
 ```bash
