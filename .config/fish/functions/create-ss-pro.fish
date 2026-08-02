@@ -36,17 +36,33 @@ function create-ss-pro --description 'Create a malware analysis environment with
     echo "Installing analysis tools..."
     python -m pip install \
         angr \
+        pwntools \
         capstone \
-        unicorn \
         keystone-engine \
+        unicorn \
+        lief \
+        pyelftools \
+        ROPGadget \
+        ropper \
+        z3-solver \
         pefile \
-        pwn \
         flare-floss \
+        flare-capa \
         olefile \
         scapy \
         malduck \
         yara-python \
-        flare-capa
+        pycryptodome \
+        cryptography \
+        requests \
+        httpx \
+        impacket \
+        paramiko \
+        dnspython \
+        python-nmap \
+        psutil \
+        rich \
+        hexdump
 
     echo "Setup complete. Environment is active."
 end
