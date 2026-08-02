@@ -1145,6 +1145,28 @@ qemu-system-x86_64 \
   -device virtio-sound-pci,audiodev=audio0 \
   -rtc base=localtime,clock=host
 
+# or
+
+qemu-system-x86_64 \
+  -enable-kvm \
+  -cpu host,hv_relaxed,hv_spinlocks=0x1fff,hv_vapic,hv_time,kvm=on \
+  -smp 6,sockets=1,cores=6,threads=1 \
+  -m 10G \
+  -device virtio-vga-gl,max_outputs=1,xres=3840,yres=2160 \
+  -display spice-app,gl=on,grab-mod=rctrl \
+  -device virtio-blk-pci,drive=hd0,num-queues=6 \
+  -drive file=ubuntu.qcow2,id=hd0,if=none,format=qcow2,cache=writeback,aio=threads,discard=unmap \
+  -device qemu-xhci,id=xhci \
+  -device usb-tablet,bus=xhci.0 \
+  -netdev user,id=net0 \
+  -device virtio-net-pci,netdev=net0 \
+  -device virtio-serial-pci \
+  -device virtserialport,chardev=spicechannel0,name=com.redhat.spice.0 \
+  -chardev spicevmc,id=spicechannel0,name=vdagent \
+  -audiodev pipewire,id=audio0 \
+  -device virtio-sound-pci,audiodev=audio0 \
+  -rtc base=localtime,clock=host
+
 # bei Ubuntu noch: 
 
 sudo apt install spice-vdagent
