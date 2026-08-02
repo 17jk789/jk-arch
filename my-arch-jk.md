@@ -176,6 +176,9 @@ Bitte führen sie alle Commands aus und fügen sie .config in ihr Systhem ein.
     - [Kontrolle installierter Fremdpakete \& Paketmanager-Historie](#kontrolle-installierter-fremdpakete--paketmanager-historie)
     - [Virenscan mit ClamAV (Deep Scan sensibler Entwickler-Ordner)](#virenscan-mit-clamav-deep-scan-sensibler-entwickler-ordner)
     - [Rootkit-Erkennung mit Rootkit Hunter (rkhunter)](#rootkit-erkennung-mit-rootkit-hunter-rkhunter)
+    - [chkrootkit](#chkrootkit)
+    - [lynis](#lynis)
+    - [AppArmor sauber aktivieren](#apparmor-sauber-aktivieren)
     - [Den SSH-Server sofort ausschalten und dauerhaft deaktivieren](#den-ssh-server-sofort-ausschalten-und-dauerhaft-deaktivieren)
     - [Das Begrüßungsprogramm von CachyOS entfernen](#das-begrüßungsprogramm-von-cachyos-entfernen)
     - [Instalation von En Croissant, eine moderne grafische Benutzeroberfläche (GUI) für Schachdatenbanken und Partienanalysen.](#instalation-von-en-croissant-eine-moderne-grafische-benutzeroberfläche-gui-für-schachdatenbanken-und-partienanalysen)
@@ -1553,6 +1556,85 @@ sudo pacman -S rkhunter
 sudo rkhunter --update
 sudo rkhunter --propupd
 sudo rkhunter --check
+```
+
+### chkrootkit
+
+```bash
+sudo pacman -S chkrootkit
+sudo chkrootkit
+```
+
+### lynis
+
+```bash
+sudo pacman -S lynis
+sudo lynis audit system
+```
+
+### AppArmor sauber aktivieren
+
+```bash
+sudo pacman -S apparmor
+```
+
+Dann:
+
+```bash
+sudo systemctl enable --now apparmor
+```
+
+Danach:
+
+```bash
+sudo nvim /boot/limine.conf
+```
+
+und füge es hinzu:
+
+```text
+lsm=landlock,lockdown,yama,integrity,apparmor,bpf
+```
+
+also:
+
+```text
+# CachyOS Limine theme
+
+...
+/+CachyOS
+  //linux-cachyos
+
+  ...
+
+  cmdline: quiet nowatchdog splash rw rootflags=subvol=/@ ... lsm=landlock,lockdown,yama,integrity,apparmor,bpf
+
+```
+
+Danach:
+
+```bash
+sudo nvim /etc/apparmor/parser.conf
+```
+
+und
+
+```text
+write-cache
+Optimize=compress-fast
+cache-loc /etc/apparmor/earlypolicy/
+```
+
+Danach:
+
+```bash
+sudo reboot
+```
+
+und
+
+```bash
+sudo aa-status
 ```
 
 ### Den SSH-Server sofort ausschalten und dauerhaft deaktivieren
