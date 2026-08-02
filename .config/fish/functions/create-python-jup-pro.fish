@@ -22,8 +22,9 @@ function create-python-jup-pro --argument-names action name
 
     source venv/bin/activate.fish
 
-    pip install --upgrade pip
-    pip install \
+    python -m pip install --upgrade pip
+
+    python -m pip install \
         pynvim jupyter_client ipykernel pylatexenc jupytext \
         nbformat nbconvert notebook \
         bandit black mypy pytest
