@@ -1,11 +1,17 @@
 function create-ss-pro --description 'Create a malware analysis environment with Python venv'
-    if test (count $argv) -lt 1
-        echo "Error: Please provide a folder name."
-        echo "Usage: create-ss-pro project_name"
+    if test (count $argv) -lt 2
+        echo "Error: Please provide a command and folder name."
+        echo "Usage: create-ss-pro new <project_name>"
         return 1
     end
 
-    set -l folder_name $argv[1]
+    if test "$argv[1]" != new
+        echo "Error: Unknown command '$argv[1]'."
+        echo "Usage: create-ss-pro new <project_name>"
+        return 1
+    end
+
+    set -l folder_name $argv[2]
 
     echo "Creating directory: $folder_name..."
     mkdir -p "$folder_name"; and cd "$folder_name"
@@ -25,10 +31,10 @@ function create-ss-pro --description 'Create a malware analysis environment with
     source venv/bin/activate.fish
 
     echo "Upgrading pip..."
-    pip install --upgrade pip
+    python -m pip install --upgrade pip
 
     echo "Installing analysis tools..."
-    pip install \
+    python -m pip install \
         angr \
         capstone \
         unicorn \
