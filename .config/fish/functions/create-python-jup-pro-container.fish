@@ -101,9 +101,9 @@ function create-python-jup-pro-container --argument-names action name
     sudo docker exec $CONTAINER_NAME fish -c "
         source /workspace/venv/bin/activate.fish;
 
-        pip install --upgrade pip;
+        python -m pip install --upgrade pip;
 
-        pip install \
+        python -m pip install \
             pynvim \
             jupyter_client \
             ipykernel \
@@ -115,14 +115,12 @@ function create-python-jup-pro-container --argument-names action name
             bandit \
             requests \
             black \
-            black \
             mypy \
-            pytest \
             pytest;
 
         python -m ipykernel install \
             --sys-prefix \
-            --name=$PROJECT_NAME \
+            --name="$PROJECT_NAME" \
             --display-name="Python ($PROJECT_NAME)"
     "
 
