@@ -1602,6 +1602,7 @@ also:
 # CachyOS Limine theme
 
 ...
+
 /+CachyOS
   //linux-cachyos
 
