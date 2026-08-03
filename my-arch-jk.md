@@ -1489,7 +1489,7 @@ sudo apt install -y \
 #### Ghidra
 
 ```bash
-sudo apt install ghidra
+sudo apt install -y ghidra
 ```
 
 #### Fish
@@ -1497,15 +1497,26 @@ sudo apt install ghidra
 ```bash
 sudo apt install -y fish
 chsh -s /usr/bin/fish
-sudo apt install -y starship
+curl -sS https://starship.rs/install.sh | sh
 sudo apt install -y zoxide
 sudo apt install -y eza
 sudo apt install -y neovim
 # cargo install yazi-fm yazi-cli
 # sudo apt install -y lazygit
-sudo apt install -y navi
+# sudo apt install -y navi
 sudo apt install -y fonts-firacode
 sudo apt install -y ripgrep fd-find bat htop
+```
+
+```bash
+fish
+curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish -o fisher.fish
+less fisher.fish
+```
+
+```bash
+source fisher.fish
+fisher install jorgebucaran/fisher
 fisher install jorgebucaran/autopair.fish nickeb96/fish-vim edc/bass PatrickF1/fzf.fish
 ```
 
