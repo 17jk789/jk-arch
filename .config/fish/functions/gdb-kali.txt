@@ -139,30 +139,16 @@ function gdb
 
     else if test $use_pwndbg -eq 1
 
-        set -l pwndbg_cmds
-
-
-        if test -f /usr/lib/pwndbg-gdb/lib/python3.13/site-packages/pwndbginit/gdbinit.py
-
-            set pwndbg_cmds $pwndbg_cmds \
-                -iex "source /usr/lib/pwndbg-gdb/lib/python3.13/site-packages/pwndbginit/gdbinit.py"
-
-        else
-            echo "Error: Pwndbg not found"
-            return 1
-        end
-
-
+        set -l pwngdb_cmds
 
         if test $use_intel -eq 1
-            set pwndbg_cmds $pwndbg_cmds \
+            set pwngdb_cmds $pwngdb_cmds \
                 -iex "set disassembly-flavor intel"
         end
 
-
         if test $use_all -eq 1; or test $use_context_config -eq 1
 
-            set pwndbg_cmds $pwndbg_cmds \
+            set pwngdb_cmds $pwngdb_cmds \
                 -iex "set pagination off" \
                 -iex "set print pretty on" \
                 -iex "set print asm-demangle on" \
@@ -173,31 +159,26 @@ function gdb
                 -iex "set history save on" \
                 -iex "set confirm off"
 
-
             if test $use_all -eq 1; or test $has_stack_arg -eq 1
-                set pwndbg_cmds $pwndbg_cmds \
+                set pwngdb_cmds $pwngdb_cmds \
                     -iex "set context-stack-lines $stack_lines"
             end
 
-
             if test $use_all -eq 1; or test $has_code_arg -eq 1
-                set pwndbg_cmds $pwndbg_cmds \
+                set pwngdb_cmds $pwngdb_cmds \
                     -iex "set context-code-lines $code_lines"
             end
 
-
-            set pwndbg_cmds $pwndbg_cmds \
+            set pwngdb_cmds $pwngdb_cmds \
                 -iex "set context-clear-screen off"
         end
 
-
         if test $use_cat -eq 1
-            set pwndbg_cmds $pwndbg_cmds \
+            set pwngdb_cmds $pwngdb_cmds \
                 -iex "set syntax-highlight-style catppuccin_mocha"
         end
 
-
-        command gdb $pwndbg_cmds $filtered_args
+        command pwngdb $pwngdb_cmds $filtered_args
 
 
     else
