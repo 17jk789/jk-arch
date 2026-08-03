@@ -1094,7 +1094,7 @@ sudo usermod -aG libvirt,kvm $(whoami)
 ### Das Highlight: Der optimale QEMU-Startbefehl (Die 2. Variante ist besser!)
 
 ```bash
-sudo pacman -Syu qemu-ui-gtk qemu-ui-sdl qemu-audio-pa spice-gtk virglrenderer libvdpau libva-mesa-driver
+sudo pacman -Syu qemu-ui-gtk qemu-ui-sdl qemu-audio-pa spice-gtk virglrenderer libvdpau libva-mesa-driver spice-vdagent
 ```
 
 ```bash
@@ -1430,7 +1430,7 @@ sudo snap install brave
 ```bash
 sudo apt update
 sudo apt install -y \
-    curl wget unzip git git-delta fzf cmark shellcheck
+    curl wget unzip git fzf cmark shellcheck
 ```
 
 #### Compiler & Toolchain
@@ -1450,7 +1450,7 @@ sudo apt install -y \
 Go to `https://github.com/pwndbg/pwndbg/releases` and:
 
 ```bash
-apt install ./pwndbg_2026.07.29_amd64.deb
+sudo apt install ./pwndbg_2026.07.29_amd64.deb
 ```
 
 #### Reverse Engineering
