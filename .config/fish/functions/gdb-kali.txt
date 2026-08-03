@@ -1,4 +1,3 @@
-```fish
 function gdb
     set -l args $argv
 
@@ -172,4 +171,3 @@ function gdb
         command gdb $filtered_args
     end
 end
-```
