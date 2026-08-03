@@ -1562,8 +1562,8 @@ sudo rkhunter --check
 ### chkrootkit
 
 ```bash
-sudo pacman -S chkrootkit
-sudo chkrootkit
+# yay -S chkrootkit
+# sudo chkrootkit
 ```
 
 ### lynis
