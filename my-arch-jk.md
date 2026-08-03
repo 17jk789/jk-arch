@@ -1575,7 +1575,7 @@ sudo lynis audit system
 ### AppArmor sauber aktivieren
 
 ```bash
-sudo pacman -S apparmor
+sudo pacman -S apparmor apparmor.d
 ```
 
 Dann:
