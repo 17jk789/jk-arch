@@ -142,10 +142,10 @@ function gdb
         set -l pwndbg_cmds
 
 
-        if test -f /usr/lib/pwndbg-gdb/lib/python3.13/site-packages/pwndbg/gdbinit.py
+        if test -f /usr/lib/pwndbg-gdb/lib/python3.13/site-packages/pwndbginit/gdbinit.py
 
             set pwndbg_cmds $pwndbg_cmds \
-                -iex "source /usr/lib/pwndbg-gdb/lib/python3.13/site-packages/pwndbg/gdbinit.py"
+                -iex "source /usr/lib/pwndbg-gdb/lib/python3.13/site-packages/pwndbginit/gdbinit.py"
 
         else
             echo "Error: Pwndbg not found"
