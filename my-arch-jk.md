@@ -151,6 +151,15 @@ Bitte führen sie alle Commands aus und fügen sie .config in ihr Systhem ein.
     - [Festplatten-Diagnosewerkzeuge scannen](#festplatten-diagnosewerkzeuge-scannen)
     - [Erweiterte Gruppenrechte für native Kernel-Virtualisierung (KVM) setzen](#erweiterte-gruppenrechte-für-native-kernel-virtualisierung-kvm-setzen)
     - [Das Highlight: Der optimale QEMU-Startbefehl (Die 2. Variante ist besser!)](#das-highlight-der-optimale-qemu-startbefehl-die-2-variante-ist-besser)
+      - [Snap installieren](#snap-installieren)
+      - [Basis-Tools](#basis-tools-1)
+      - [Compiler \& Toolchain](#compiler--toolchain-1)
+      - [Debugging](#debugging-1)
+      - [Reverse Engineering](#reverse-engineering-1)
+      - [Fuzzing \& Performance](#fuzzing--performance-1)
+      - [GUI-Bibliotheken](#gui-bibliotheken-1)
+      - [Ghidra](#ghidra)
+      - [Fish](#fish)
     - [Den grafischen Audio-Mixer pwvucontrol installieren](#den-grafischen-audio-mixer-pwvucontrol-installieren)
     - [Den grafischen Audio-Verkabelungs-Manager qpwgraph installieren](#den-grafischen-audio-verkabelungs-manager-qpwgraph-installieren)
     - [Die lokale KI-Laufzeitumgebung Ollama installieren](#die-lokale-ki-laufzeitumgebung-ollama-installieren)
@@ -316,7 +325,7 @@ sudo pacman -S curl wget unzip git-delta fzf cmark shellcheck
 #### Compiler & Toolchain
 
 ```bash
-sudo pacman -S gcc lib32-gcc-libs llvm clang lldb cmake ninja
+sudo pacman -S gcc lib32-gcc-libs llvm clang lldb cmake ninja valgrind
 ```
 
 #### Debugging
@@ -1383,6 +1392,124 @@ qemu-system-x86_64 \
 # und wen was nicht leuft:
 # sudo pacman -S virglrenderer
 ```
+
+<details>
+<summary>Kali-Linux Configuration</summary>
+
+#### Snap installieren
+
+```bash
+sudo apt install -y snapd
+sudo systemctl enable --now snapd.socket
+sudo ln -s /var/lib/snapd/snap /snap
+sudo reboot
+```
+
+und dann:
+
+```bash
+snap version
+sudo snap install code --classic
+# ✓ C/C++
+# ✓ clangd
+# ✓ CMake Tools
+# ✓ CodeLLDB
+# ✓ SonarQube for IDE
+# ✓ clang-tidy
+# ✓ Hex Editor
+# ✓ Compiler Explorer
+# ✓ x86 and x86_64 Assembly
+# ✓ Makefile Tools
+# ✓ GitLens
+# ✓ Error Lens
+sudo snap install brave
+```
+
+#### Basis-Tools
+
+```bash
+sudo apt update
+sudo apt install -y \
+    curl wget unzip git git-delta fzf cmark shellcheck
+```
+
+#### Compiler & Toolchain
+
+```bash
+sudo apt install -y \
+    build-essential gcc g++ clang llvm lldb cmake ninja-build clang-tidy valgrind
+```
+
+#### Debugging
+
+```bash
+sudo apt install -y \
+    gdb gdbserver strace ltrace gef
+```
+
+Go to `https://github.com/pwndbg/pwndbg/releases` and:
+
+```bash
+apt install ./pwndbg_2026.07.29_amd64.deb
+```
+
+#### Reverse Engineering
+
+```bash
+sudo apt install -y \
+    rizin binwalk yara elfutils checksec
+```
+
+#### Fuzzing & Performance
+
+```bash
+sudo apt install -y \
+    afl++ linux-perf cppcheck
+```
+
+> Falls `linux-perf` nicht gefunden wird:
+
+```bash
+apt search linux-perf
+```
+
+oder
+
+```bash
+sudo apt install linux-tools-common
+```
+
+#### GUI-Bibliotheken
+
+```bash
+sudo apt install -y \
+    libgtk-4-dev libadwaita-1-dev librsvg2-dev adwaita-icon-theme
+```
+
+#### Ghidra
+
+```bash
+sudo apt install ghidra
+```
+
+#### Fish
+
+```bash
+sudo apt install -y fish
+chsh -s /usr/bin/fish
+sudo apt install -y starship
+sudo apt install -y zoxide
+sudo apt install -y eza
+sudo apt install -y neovim
+# cargo install yazi-fm yazi-cli
+# sudo apt install -y lazygit
+sudo apt install -y navi
+sudo apt install -y fonts-firacode
+sudo apt install -y ripgrep fd-find bat htop
+fisher install jorgebucaran/autopair.fish nickeb96/fish-vim edc/bass PatrickF1/fzf.fish
+```
+
+</details>
 
 ### Den grafischen Audio-Mixer pwvucontrol installieren
 
