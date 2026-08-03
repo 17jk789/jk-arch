@@ -179,6 +179,7 @@ Bitte führen sie alle Commands aus und fügen sie .config in ihr Systhem ein.
     - [chkrootkit](#chkrootkit)
     - [lynis](#lynis)
     - [AppArmor sauber aktivieren](#apparmor-sauber-aktivieren)
+    - [Globales Menü aktivieren](#globales-menü-aktivieren)
     - [Den SSH-Server sofort ausschalten und dauerhaft deaktivieren](#den-ssh-server-sofort-ausschalten-und-dauerhaft-deaktivieren)
     - [Das Begrüßungsprogramm von CachyOS entfernen](#das-begrüßungsprogramm-von-cachyos-entfernen)
     - [Instalation von En Croissant, eine moderne grafische Benutzeroberfläche (GUI) für Schachdatenbanken und Partienanalysen.](#instalation-von-en-croissant-eine-moderne-grafische-benutzeroberfläche-gui-für-schachdatenbanken-und-partienanalysen)
@@ -1636,6 +1637,12 @@ und
 
 ```bash
 sudo aa-status
+```
+
+### Globales Menü aktivieren
+
+```bash
+sudo pacman -S appmenu-gtk-module libdbusmenu-glib
 ```
 
 ### Den SSH-Server sofort ausschalten und dauerhaft deaktivieren
