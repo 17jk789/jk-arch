@@ -33,22 +33,24 @@ function gdb
             case '--stack-lines=*' '--stack_lines=*' '-stack-lines=*' '-stack_lines=*'
                 set use_context_config 1
                 set has_stack_arg 1
+
                 set -l value (string replace -r -- '^--?stack[_-]?lines?=' '' $arg)
 
                 if test "$value" = "all"
                     set stack_lines 999
-                else if string match -qr -- '^[0-9]+$' "$value"
+                else if string match -qr '^[0-9]+$' "$value"
                     set stack_lines $value
                 end
 
             case '--codelines=*' '--code_lines=*' '-codelines=*' '-code_lines=*' '-code-lines=*' '--code-lines=*'
                 set use_context_config 1
                 set has_code_arg 1
+
                 set -l value (string replace -r -- '^--?code[_-]?lines?=' '' $arg)
 
                 if test "$value" = "all"
                     set code_lines 999
-                else if string match -qr -- '^[0-9]+$' "$value"
+                else if string match -qr '^[0-9]+$' "$value"
                     set code_lines $value
                 end
 
@@ -56,6 +58,7 @@ function gdb
                 set filtered_args $filtered_args $arg
         end
     end
+
 
     if test $use_gef -eq 1; and test $use_pwndbg -eq 1
         echo "Error: choose either -gef or -pwndbg"
@@ -72,6 +75,7 @@ function gdb
         return 1
     end
 
+
     if test $use_all -eq 1
         set use_cat 1
         set use_context_config 1
@@ -79,31 +83,41 @@ function gdb
 
 
     if test $use_gef -eq 1
+
         set -l gef_cmds
 
-        if test -f /usr/share/gef.py
-            set gef_cmds $gef_cmds -iex "source /usr/share/gef.py"
+        if test -f /usr/share/gdb/gef.py
+            set gef_cmds $gef_cmds -iex "source /usr/share/gdb/gef.py"
+
+        else if test -f /usr/bin/gef
+            set gef_cmds $gef_cmds -iex "source /usr/bin/gef"
+
         else
-            echo "Error: GEF not found at /usr/share/gef.py"
+            echo "Error: GEF not found"
             return 1
         end
+
 
         if test $use_intel -eq 1
             set gef_cmds $gef_cmds -iex "set disassembly-flavor intel"
         end
+
 
         if test $use_all -eq 1; or test $use_context_config -eq 1
 
             set gef_cmds $gef_cmds \
                 -iex "gef config context.layout 'legend regs code args source memory stack threads trace extra dereference'"
 
+
             if test $use_all -eq 1; or test $has_code_arg -eq 1
                 set gef_cmds $gef_cmds -iex "gef config context.nb_lines_code $code_lines"
             end
 
+
             if test $use_all -eq 1; or test $has_stack_arg -eq 1
                 set gef_cmds $gef_cmds -iex "gef config context.nb_lines_stack $stack_lines"
             end
+
 
             set gef_cmds $gef_cmds \
                 -iex "gef config context.grow_stack_down True" \
@@ -119,22 +133,32 @@ function gdb
                 -iex "set confirm off"
         end
 
+
         command gdb $gef_cmds $filtered_args
 
 
     else if test $use_pwndbg -eq 1
+
         set -l pwndbg_cmds
 
+
         if test -f /usr/lib/pwndbg-gdb/lib/python3.13/site-packages/pwndbg/gdbinit.py
-            set pwndbg_cmds $pwndbg_cmds -iex "source /usr/lib/pwndbg-gdb/lib/python3.13/site-packages/pwndbg/gdbinit.py"
+
+            set pwndbg_cmds $pwndbg_cmds \
+                -iex "source /usr/lib/pwndbg-gdb/lib/python3.13/site-packages/pwndbg/gdbinit.py"
+
         else
-            echo "Error: Pwndbg not found at /usr/lib/pwndbg-gdb/lib/python3.13/site-packages/pwndbg/gdbinit.py"
+            echo "Error: Pwndbg not found"
             return 1
         end
 
+
+
         if test $use_intel -eq 1
-            set pwndbg_cmds $pwndbg_cmds -iex "set disassembly-flavor intel"
+            set pwndbg_cmds $pwndbg_cmds \
+                -iex "set disassembly-flavor intel"
         end
+
 
         if test $use_all -eq 1; or test $use_context_config -eq 1
 
@@ -149,25 +173,37 @@ function gdb
                 -iex "set history save on" \
                 -iex "set confirm off"
 
+
             if test $use_all -eq 1; or test $has_stack_arg -eq 1
-                set pwndbg_cmds $pwndbg_cmds -iex "set context-stack-lines $stack_lines"
+                set pwndbg_cmds $pwndbg_cmds \
+                    -iex "set context-stack-lines $stack_lines"
             end
+
 
             if test $use_all -eq 1; or test $has_code_arg -eq 1
-                set pwndbg_cmds $pwndbg_cmds -iex "set context-code-lines $code_lines"
+                set pwndbg_cmds $pwndbg_cmds \
+                    -iex "set context-code-lines $code_lines"
             end
 
-            set pwndbg_cmds $pwndbg_cmds -iex "set context-clear-screen off"
+
+            set pwndbg_cmds $pwndbg_cmds \
+                -iex "set context-clear-screen off"
         end
 
+
         if test $use_cat -eq 1
-            set pwndbg_cmds $pwndbg_cmds -iex "set syntax-highlight-style catppuccin_mocha"
+            set pwndbg_cmds $pwndbg_cmds \
+                -iex "set syntax-highlight-style catppuccin_mocha"
         end
+
 
         command gdb $pwndbg_cmds $filtered_args
 
 
     else
+
         command gdb $filtered_args
+
     end
 end
+
