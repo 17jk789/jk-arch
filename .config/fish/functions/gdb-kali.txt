@@ -1,3 +1,4 @@
+```fish
 function gdb
     set -l args $argv
 
@@ -34,6 +35,7 @@ function gdb
                 set use_context_config 1
                 set has_stack_arg 1
                 set -l value (string replace -r -- '^--?stack[_-]?lines?=' '' $arg)
+
                 if test "$value" = "all"
                     set stack_lines 999
                 else if string match -qr -- '^[0-9]+$' "$value"
@@ -44,6 +46,7 @@ function gdb
                 set use_context_config 1
                 set has_code_arg 1
                 set -l value (string replace -r -- '^--?code[_-]?lines?=' '' $arg)
+
                 if test "$value" = "all"
                     set code_lines 999
                 else if string match -qr -- '^[0-9]+$' "$value"
@@ -75,15 +78,14 @@ function gdb
         set use_context_config 1
     end
 
+
     if test $use_gef -eq 1
         set -l gef_cmds
 
-        if test -f /usr/share/gef/gef.py
-            set gef_cmds $gef_cmds -iex "source /usr/share/gef/gef.py"
-        else if test -f /usr/share/gef/gef.pyc
-            set gef_cmds $gef_cmds -iex "source /usr/share/gef/gef.pyc"
+        if test -f /usr/share/gef.py
+            set gef_cmds $gef_cmds -iex "source /usr/share/gef.py"
         else
-            echo "Error: GEF not found"
+            echo "Error: GEF not found at /usr/share/gef.py"
             return 1
         end
 
@@ -92,6 +94,7 @@ function gdb
         end
 
         if test $use_all -eq 1; or test $use_context_config -eq 1
+
             set gef_cmds $gef_cmds \
                 -iex "gef config context.layout 'legend regs code args source memory stack threads trace extra dereference'"
 
@@ -119,15 +122,14 @@ function gdb
 
         command gdb $gef_cmds $filtered_args
 
+
     else if test $use_pwndbg -eq 1
         set -l pwndbg_cmds
 
-        if test -f /usr/share/pwndbg/gdbinit.py
-            set pwndbg_cmds $pwndbg_cmds -iex "source /usr/share/pwndbg/gdbinit.py"
-        else if test -f /usr/lib/python3/dist-packages/pwndbg/gdbinit.py
-            set pwndbg_cmds $pwndbg_cmds -iex "source /usr/lib/python3/dist-packages/pwndbg/gdbinit.py"
+        if test -f /usr/lib/pwndbg-gdb/lib/python3.13/site-packages/pwndbg/gdbinit.py
+            set pwndbg_cmds $pwndbg_cmds -iex "source /usr/lib/pwndbg-gdb/lib/python3.13/site-packages/pwndbg/gdbinit.py"
         else
-            echo "Error: Pwndbg not found"
+            echo "Error: Pwndbg not found at /usr/lib/pwndbg-gdb/lib/python3.13/site-packages/pwndbg/gdbinit.py"
             return 1
         end
 
@@ -136,6 +138,7 @@ function gdb
         end
 
         if test $use_all -eq 1; or test $use_context_config -eq 1
+
             set pwndbg_cmds $pwndbg_cmds \
                 -iex "set pagination off" \
                 -iex "set print pretty on" \
@@ -164,7 +167,9 @@ function gdb
 
         command gdb $pwndbg_cmds $filtered_args
 
+
     else
         command gdb $filtered_args
     end
 end
+```
