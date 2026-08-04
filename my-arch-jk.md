@@ -1415,9 +1415,7 @@ sudo snap install code --classic
 # ✓ CMake Tools
 # ✓ CodeLLDB
 # ✓ SonarQube for IDE
-# ✓ clang-tidy
 # ✓ Hex Editor
-# ✓ Compiler Explorer
 # ✓ x86 and x86_64 Assembly
 # ✓ Makefile Tools
 # ✓ GitLens
@@ -1437,7 +1435,7 @@ sudo apt install -y \
 
 ```bash
 sudo apt install -y \
-    build-essential gcc g++ clang llvm lldb cmake ninja-build clang-tidy valgrind
+    build-essential gcc g++ clang llvm lldb cmake ninja-build clang-tidy valgrind clangd openjdk-21-jdk
 ```
 
 #### Debugging
@@ -1506,7 +1504,27 @@ sudo apt install -y neovim
 # sudo apt install -y navi
 sudo apt install -y fonts-firacode
 sudo apt install -y ripgrep fd-find bat htop
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt install -y nodejs
 ```
+
+```bash
+mkdir -p ~/.local/share/fonts
+cd ~/.local/share/fonts
+
+wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip
+unzip JetBrainsMono.zip -d JetBrainsMono
+
+sudo mkdir -p /usr/share/fonts/truetype/nerd
+
+sudo cp JetBrainsMono/*.ttf /usr/share/fonts/truetype/nerd/
+
+sudo fc-cache -fv
+
+rm JetBrainsMono.zip
+cd ~
+```
+
 
 ```bash
 fish
