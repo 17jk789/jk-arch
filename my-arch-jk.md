@@ -1477,12 +1477,6 @@ sudo apt install -y \
 apt search linux-perf
 ```
 
-oder
-
-```bash
-sudo apt install linux-tools-common
-```
-
 #### GUI-Bibliotheken
 
 ```bash
@@ -1510,6 +1504,7 @@ sudo apt install -y neovim
 # sudo apt install -y navi
 sudo apt install -y fonts-firacode
 sudo apt install -y ripgrep fd-find bat htop
+sudo apt install -y kitty alacritty
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 sudo apt install -y nodejs
 ```
@@ -1531,9 +1526,11 @@ rm JetBrainsMono.zip
 cd ~
 ```
 
-
 ```bash
 fish
+```
+
+```bash
 curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish -o fisher.fish
 less fisher.fish
 ```
