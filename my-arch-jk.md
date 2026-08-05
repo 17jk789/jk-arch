@@ -1455,7 +1455,13 @@ sudo apt install ./pwndbg_2026.07.29_amd64.deb
 
 ```bash
 sudo apt install -y \
-    rizin binwalk yara elfutils checksec
+    rizin binwalk yara elfutils
+```
+
+Go to `https://github.com/slimm609/checksec/releases` and:
+
+```bash
+sudo apt install ./checksec_3.2.0_amd64.deb 
 ```
 
 #### Fuzzing & Performance
