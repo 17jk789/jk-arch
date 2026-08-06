@@ -1503,7 +1503,7 @@ sudo apt install -y neovim
 # sudo apt install -y lazygit
 # sudo apt install -y navi
 sudo apt install -y fonts-firacode
-sudo apt install -y ripgrep fd-find bat htop
+sudo apt install -y ripgrep fd-find bat htop btop
 sudo apt install -y kitty alacritty
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 sudo apt install -y nodejs
