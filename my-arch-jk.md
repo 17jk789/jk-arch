@@ -1837,6 +1837,10 @@ rm ~/.config/autostart/cachyos-hello.desktop
 # sudo plymouth-set-default-theme -R bgrt
 # sudo mkinitcpio -P
 # /home/jk/.config/quickshell/ii/assets/icons/
+# /usr/share/plymouth/themes/cachyos/
+# sudo mv ~/Pictures/auto.png /usr/share/plymouth/themes/cachyos/
+# sudo mv watermark.png watermark3.png
+# sudo mv auto.png watermark.png
 # arch-logo
 ```
 
