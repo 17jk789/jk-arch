@@ -1389,6 +1389,23 @@ qemu-system-x86_64 \
   -rtc base=utc,clock=host \
   -sandbox on,obsolete=deny,elevateprivileges=deny,spawn=deny,resourcecontrol=deny
 
+# or  (sehr sicher)
+
+qemu-system-x86_64 \
+  -enable-kvm \
+  -machine q35 \
+  -cpu host \
+  -smp 2 \
+  -m 4G \
+  -display gtk \
+  -device virtio-vga \
+  -drive file=kali-linux-2026.2-qemu-amd64.qcow2,if=virtio,format=qcow2,cache=none,aio=native,discard=unmap \
+  -netdev user,id=net0 \
+  -device virtio-net-pci,netdev=net0 \
+  -rtc base=utc \
+  -sandbox on,obsolete=deny,elevateprivileges=deny,spawn=deny,resourcecontrol=deny \
+  -no-user-config
+
 # und wen was nicht leuft:
 # sudo pacman -S virglrenderer
 ```
