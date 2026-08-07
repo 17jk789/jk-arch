@@ -1420,6 +1420,7 @@ sudo snap install code --classic
 # ✓ Makefile Tools
 # ✓ GitLens
 # ✓ Error Lens
+sudo snap install firefox --beta
 sudo snap install brave
 ```
 
