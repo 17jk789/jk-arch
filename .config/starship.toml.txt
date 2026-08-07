@@ -16,11 +16,11 @@ $character"""
 [os]
 disabled = false
 style = "bg:252 fg:235"
-format = " [](bold fg:252)[  jk-arch]($style)[](bold fg:252)"
-# format = " [](bold fg:252)[  jk-kali]($style)[](bold fg:252)"
+format = "\n [](bold fg:252)[  jk-arch]($style)[](bold fg:252)"
+# format = "\n [](bold fg:252)[  jk-kali]($style)[](bold fg:252)"
 
 [fill]
-symbol = '─'
+symbol = ' ─'
 style = 'fg:245'
 
 # Replace the "❯" symbol in the prompt with "➜"
