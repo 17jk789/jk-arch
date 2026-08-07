@@ -10,7 +10,7 @@ add_newline = false
 # $directory $fill $git_branch $cmd_duration
 #  $character"""
 format = """
-$os$cmd_duration$directory$git_branch$git_status$python$rust$nodejs$golang$lua$java$c$bash
+$os$username$hostname$directory$git_branch$git_status$python$rust$golang$nodejs$java$c$lua$fill$cmd_duration$jobs$battery$time
 $character"""
 
 [os]
@@ -20,7 +20,7 @@ format = " [](bold fg:252)[  jk-arch]($style)[](bold fg:252)"
 # format = " [](bold fg:252)[  jk-kali]($style)[](bold fg:252)"
 
 [fill]
-symbol = '-'
+symbol = '─'
 style = 'fg:245'
 
 # Replace the "❯" symbol in the prompt with "➜"
@@ -65,9 +65,9 @@ behind = "😰"
 diverged = "😵"
 
 [hostname]
-ssh_only = false
+ssh_only = true
 style = "bg:252 fg:235"
-format =  " [•$hostname]($style)[](bold fg:252)"
+format =  " [](bold fg:252)[•$hostname]($style)[](bold fg:252)"
 trim_at = ".companyname.com"
 disabled = false
 
@@ -81,17 +81,31 @@ symbol = " "
 style = "bold dimmed green"
 
 [time]
-disabled = true
+disabled = false
 style = "bg:252 fg:235"
-format = ' 🕙[\[ $time \]]($style)'
+format = ' [](bold fg:252)[󰥔 $time]($style)[](bold fg:252)'
 time_format = "%T"
 
 [username]
-style = "bold bg:252 fg:235"
+style_user = "bold bg:252 fg:235"
 style_root = "red bold"
-format = " [](bold fg:252)[$user]($style)"
+format = " [](bold fg:252)[$user]($style)[](bold fg:252)"
 disabled = false
-show_always = true
+show_always = false
+
+[jobs]
+symbol = "󰒋"
+style = "bg:252 fg:235"
+format = " [](bold fg:252)[$symbol $number]($style)[](bold fg:252)"
+number_threshold = 1
+
+[battery]
+full_symbol = "󰁹 "
+charging_symbol = "󰂄 "
+discharging_symbol = "󰂃 "
+empty_symbol = "󰂎 "
+unknown_symbol = "󰂑 "
+format = " [](bold fg:246)[$symbol$percentage](bg:246 fg:235)[](bold fg:246)"
 
 [directory]
 home_symbol = " "
