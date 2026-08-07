@@ -2,9 +2,9 @@
   <img src="images/5.png" width="1000" />
 </p>
 
-# My Visual Studio Code, IDEA Vim and NeoVim (LazyVim) setting on Windows and Linux (Ubuntu and Arch)
+# My JK-Arch Config: Visual Studio Code, IDEA Vim and NeoVim (LazyVim) settings etc.
 
-This repository contains my personal **Visual Studio Code / IDEA Vim / NeoVim (LazyVim) settings**.
+This repository contains my personal **Visual Studio Code / IDEA Vim / NeoVim (LazyVim) etc. settings**.
 
 > ⚠️ **Important:**
 > This repo was not created for public distribution.
