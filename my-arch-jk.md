@@ -1421,6 +1421,8 @@ sudo snap install code --classic
 # ✓ GitLens
 # ✓ Error Lens
 sudo snap install firefox --beta
+# about:config
+# Suche nach: devtools
 sudo snap install brave
 ```
 
