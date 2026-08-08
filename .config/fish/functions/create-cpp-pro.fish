@@ -2006,7 +2006,7 @@ function __cpro_scaffold --argument-names name full_scan
         '' \
         '    while ((n = std::fread(buf.data(), 1, buf.size(), stdin)) > 0)' \
         '    {' \
-        '        (void)LLVMFuzzerTestOneInput(buf, n);' \
+        '        (void)LLVMFuzzerTestOneInput(buf.data(), n);' \
         '    }' \
         '' \
         '    if (std::ferror(stdin))' \
