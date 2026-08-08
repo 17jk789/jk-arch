@@ -1586,6 +1586,8 @@ sudo apt install -y nodejs
 
 ```bash
 cd ~/Downloads
+sudo apt install -y libreadline-dev golang-go
+cargo install asm-lsp --version 0.10.1
 wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
 tar -xzf nvim-linux-x86_64.tar.gz
 sudo mv nvim-linux-x86_64 /opt/nvim
