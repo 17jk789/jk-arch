@@ -1504,6 +1504,49 @@ sudo apt install -y \
     libgtk-4-dev libadwaita-1-dev librsvg2-dev adwaita-icon-theme
 ```
 
+#### Benchmarking & Profiling
+
+```bash
+sudo apt install -y time hyperfine
+```
+
+#### Rust
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+#### Java
+
+```bash
+curl -s "https://get.sdkman.io" | bash
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+sdk install gradle
+```
+
+#### Docker
+
+```bash
+# Ich würde noch Docker installieren
+# Add Docker's official GPG key:
+sudo apt update
+sudo apt install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+# Add the repository to Apt sources:
+sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/ubuntu
+Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+Components: stable
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
+sudo apt update
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+docker --version
+```
+
 #### Ghidra
 
 ```bash
@@ -1525,11 +1568,38 @@ sudo apt install -y neovim
 sudo apt install -y fonts-firacode
 sudo apt install -y ripgrep fd-find bat htop btop
 sudo apt install -y kitty alacritty
+sudo apt install -y wl-clipboard fd-find
+sudo apt install -y python3-venv python3-pip
+# sudo apt install pipx
+# pipx ensurepath
+# pipx install black
+# pipx install ruff
+sudo apt install -y ripgrep
+sudo apt install -y nodejs npm
+sudo apt install -y gzip
+sudo npm install -g typescript
+sudo apt install -y hunspell-de-de hunspell-en-us
+sudo apt install -y acpi
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 sudo apt install -y nodejs
 ```
 
 ```bash
+cd ~/Downloads
+wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
+tar -xzf nvim-linux-x86_64.tar.gz
+sudo mv nvim-linux-x86_64 /opt/nvim
+echo 'export PATH="$PATH:/opt/nvim/bin"' >> ~/.bashrc
+source ~/.bashrc
+# required
+# mv ~/.config/nvim{,.bak}
+# optional but recommended
+# mv ~/.local/share/nvim{,.bak}
+# mv ~/.local/state/nvim{,.bak}
+# mv ~/.cache/nvim{,.bak}
+git clone https://github.com/LazyVim/starter ~/.config/nvim
+# Das Entfernen von .git ist Absicht, sonst hängt man am Starter-Repo.
+rm -rf ~/.config/nvim/.git 
 mkdir -p ~/.local/share/fonts
 cd ~/.local/share/fonts
 
@@ -1544,6 +1614,8 @@ sudo fc-cache -fv
 
 rm JetBrainsMono.zip
 cd ~
+
+nvim
 ```
 
 ```bash
@@ -1559,6 +1631,29 @@ less fisher.fish
 source fisher.fish
 fisher install jorgebucaran/fisher
 fisher install jorgebucaran/autopair.fish nickeb96/fish-vim edc/bass PatrickF1/fzf.fish
+```
+
+#### Update NeoVim
+
+```bash
+# 1) Alte Version prüfen
+/opt/nvim/bin/nvim --version
+
+# 2) Neue Version laden oder von https://neovim.io/
+cd ~/Downloads
+wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
+
+# 3) Entpacken
+tar -xzf nvim-linux-x86_64.tar.gz
+
+# 4) Backup der alten Version (wichtig!)
+sudo mv /opt/nvim /opt/nvim.bak
+
+# 5) Neue Version installieren
+sudo mv nvim-linux-x86_64 /opt/nvim
+
+# 6) Test
+/opt/nvim/bin/nvim --version
 ```
 
 </details>
