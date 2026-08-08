@@ -9,8 +9,10 @@ function gdb
     set -l use_context_config 0
     set -l has_stack_arg 0
     set -l has_code_arg 0
+    set -l has_disasm_arg 0
     set -l stack_lines 30
     set -l code_lines 25
+    set -l disasm_lines 25
     set -l filtered_args
 
     for arg in $args
@@ -48,6 +50,16 @@ function gdb
                     set code_lines 999
                 else if string match -qr -- '^[0-9]+$' "$value"
                     set code_lines $value
+                end
+
+            case '--disasm-lines=*' '--disasm_lines=*' '-disasm-lines=*' '-disasm_lines=*'
+                set use_context_config 1
+                set has_disasm_arg 1
+                set -l value (string replace -r -- '^--?disasm[_-]?lines?=' '' $arg)
+                if test "$value" = "all"
+                    set disasm_lines 999
+                else if string match -qr -- '^[0-9]+$' "$value"
+                    set disasm_lines $value
                 end
 
             case '*'
@@ -95,6 +107,10 @@ function gdb
                 set gef_cmds $gef_cmds -iex "gef config context.nb_lines_stack $stack_lines"
             end
 
+            if test $use_all -eq 1; or test $has_disasm_arg -eq 1
+                set gef_cmds $gef_cmds -iex "gef config context.nb_lines_disasm $disasm_lines"
+            end
+
             set gef_cmds $gef_cmds \
                 -iex "gef config context.grow_stack_down True" \
                 -iex "gef config context.enable True" \
@@ -137,6 +153,10 @@ function gdb
 
             if test $use_all -eq 1; or test $has_code_arg -eq 1
                 set pwndbg_cmds $pwndbg_cmds -iex "set context-code-lines $code_lines"
+            end
+
+            if test $use_all -eq 1; or test $has_disasm_arg -eq 1
+                set pwndbg_cmds $pwndbg_cmds -iex "set context-disasm-lines $disasm_lines"
             end
 
             set pwndbg_cmds $pwndbg_cmds -iex "set context-clear-screen off"
