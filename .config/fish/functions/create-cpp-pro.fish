@@ -1,6 +1,6 @@
 # ============================================================
 #
-# Fish configuration — C Security Research
+# Fish configuration — C++ Security Research
 #
 # Arch Linux
 # C++23
@@ -14,7 +14,7 @@
 # Valgrind
 # Static analysis
 #
-# Intended for C development, debugging and authorized
+# Intended for C++ development, debugging and authorized
 # defensive/security research.
 #
 # ============================================================
@@ -95,7 +95,7 @@ alias gl 'git log --oneline --graph --decorate --all'
 
 alias cm cmake
 
-function c-config
+function cpp-config
     cmake -S . -B build \
         -DCMAKE_BUILD_TYPE=Debug \
         -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
@@ -117,10 +117,10 @@ function c-config
 end
 
 
-function c-build
+function cpp-build
     if not test -d build
         echo "No build directory."
-        echo "Run: c-config"
+        echo "Run: cpp-config"
         return 1
     end
 
@@ -128,19 +128,19 @@ function c-build
 end
 
 
-function c-rebuild
+function cpp-rebuild
     if test -d build
         rm -rf build
     end
 
-    c-config
+    cpp-config
     or return 1
 
-    c-build
+    cpp-build
 end
 
 
-function c-clean
+function cpp-clean
     if test -d build
         rm -rf build
     end
@@ -173,10 +173,10 @@ function c-clean
 end
 
 
-function c-test
+function cpp-test
     if not test -d build
         echo "No build directory."
-        echo "Run: c-config"
+        echo "Run: cpp-config"
         return 1
     end
 
@@ -184,15 +184,15 @@ function c-test
 end
 
 
-function c-check
-    c-build
+function cpp-check
+    cpp-build
     or return 1
 
-    c-test
+    cpp-test
     or return 1
 
-    if command -q clang-tidy
-        cmake --build build --target analyze-clang-tidy
+    if command -q clangxx-tidy
+        cmake --build build --target analyze-clangxx-tidy
         or return 1
     end
 
@@ -205,11 +205,11 @@ function c-check
 end
 
 
-function c-debug
-    c-config
+function cpp-debug
+    cpp-config
     or return 1
 
-    c-build
+    cpp-build
 end
 
 
@@ -250,7 +250,7 @@ end
 
 
 # ============================================================
-# DIRECT CLANG C++23 DEBUG BUILD
+# DIRECT CLANG++ C++23 DEBUG BUILD
 # ============================================================
 
 function clangxx-debug
@@ -307,9 +307,9 @@ function gxx-analyze
 end
 
 
-function c-analyze
+function cpp-analyze
     if not test -d build
-        c-config
+        cpp-config
         or return 1
     end
 
@@ -321,9 +321,9 @@ function c-analyze
     clangxx-analyze src/*.cpp
     or return 1
 
-    if command -q clang-tidy
-        echo "=== clang-tidy ==="
-        cmake --build build --target analyze-clang-tidy
+    if command -q clangxx-tidy
+        echo "=== clangxx-tidy ==="
+        cmake --build build --target analyze-clangxx-tidy
     end
 
     if command -q cppcheck
@@ -339,18 +339,18 @@ end
 
 
 # ============================================================
-# CLANG STATIC ANALYSIS
+# CLANG++ STATIC ANALYSIS
 # ============================================================
 
-function clang-analyze
+function clangxx-analyze
     if test (count $argv) -eq 0
-        echo "Usage: clang-analyze <source.c> [arguments...]"
+        echo "Usage: clangxx-analyze <source.cpp> [arguments...]"
         return 1
     end
 
-    clang \
+    clang++ \
         --analyze \
-        -std=c23 \
+        -std=c++23 \
         -Wall \
         -Wextra \
         -Wpedantic \
@@ -397,17 +397,17 @@ end
 
 
 # ============================================================
-# HARDENED CLANG BUILD
+# HARDENED CLANG++ BUILD
 # ============================================================
 
-function clang-hardened
+function clangxx-hardened
     if test (count $argv) -eq 0
-        echo "Usage: clang-hardened <source.c> [-o output]"
+        echo "Usage: clangxx-hardened <source.cpp> [-o output]"
         return 1
     end
 
-    clang \
-        -std=c23 \
+    clang++ \
+        -std=c++23 \
         -O2 \
         -D_FORTIFY_SOURCE=3 \
         -fstack-protector-strong \
@@ -982,8 +982,12 @@ function cgrep
         --exclude-dir=build-msan \
         --exclude-dir=build-tsan \
         --exclude-dir=build-release \
-        --include='*.c' \
-        --include='*.h' \
+        --include='*.cpp' \
+        --include='*.cc' \
+        --include='*.cxx' \
+        --include='*.hpp' \
+        --include='*.hh' \
+        --include='*.hxx' \
         -- "$argv[1]" .
 end
 
@@ -997,8 +1001,12 @@ function security-todo
         --exclude-dir=build-msan \
         --exclude-dir=build-tsan \
         --exclude-dir=build-release \
-        --include='*.c' \
-        --include='*.h' \
+        --include='*.cpp' \
+        --include='*.cc' \
+        --include='*.cxx' \
+        --include='*.hpp' \
+        --include='*.hh' \
+        --include='*.hxx' \
         -E 'TODO|FIXME|SECURITY|BUG|XXX|HACK|unsafe|overflow|underflow' \
         .
 end
@@ -1012,7 +1020,7 @@ function asan-build
     cmake -S . -B build-asan \
         -DCMAKE_BUILD_TYPE=Debug \
         -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
-        -DCMAKE_C_FLAGS_DEBUG="-O0 -g3 -fsanitize=address,undefined -fno-omit-frame-pointer" \
+        -DCMAKE_CXX_FLAGS_DEBUG="-O0 -g3 -fsanitize=address,undefined -fno-omit-frame-pointer" \
         -DCMAKE_EXE_LINKER_FLAGS_DEBUG="-fsanitize=address,undefined"
 
     if test $status -ne 0
@@ -1045,7 +1053,7 @@ function ubsan-build
     cmake -S . -B build-ubsan \
         -DCMAKE_BUILD_TYPE=Debug \
         -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
-        -DCMAKE_C_FLAGS_DEBUG="-O0 -g3 -fsanitize=undefined -fno-omit-frame-pointer" \
+        -DCMAKE_CXX_FLAGS_DEBUG="-O0 -g3 -fsanitize=undefined -fno-omit-frame-pointer" \
         -DCMAKE_EXE_LINKER_FLAGS_DEBUG="-fsanitize=undefined"
 
     if test $status -ne 0
@@ -1072,22 +1080,22 @@ end
 # ============================================================
 # MEMORYSANITIZER
 #
-# Clang only.
+# Clang++ only.
 #
 # Useful for uninitialized-memory analysis.
 # ============================================================
 
 function msan-build
-    if not command -q clang
-        echo "clang not found."
+    if not command -q clang++
+        echo "clang++ not found."
         return 1
     end
 
     cmake -S . -B build-msan \
         -DCMAKE_BUILD_TYPE=Debug \
-        -DCMAKE_C_COMPILER=clang \
+        -DCMAKE_CXX_COMPILER=clang++ \
         -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
-        -DCMAKE_C_FLAGS_DEBUG="-O1 -g3 -fsanitize=memory -fno-omit-frame-pointer" \
+        -DCMAKE_CXX_FLAGS_DEBUG="-O1 -g3 -fsanitize=memory -fno-omit-frame-pointer" \
         -DCMAKE_EXE_LINKER_FLAGS_DEBUG="-fsanitize=memory"
 
     if test $status -ne 0
@@ -1117,7 +1125,7 @@ function tsan-build
     cmake -S . -B build-tsan \
         -DCMAKE_BUILD_TYPE=Debug \
         -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
-        -DCMAKE_C_FLAGS_DEBUG="-O1 -g3 -fsanitize=thread -fno-omit-frame-pointer" \
+        -DCMAKE_CXX_FLAGS_DEBUG="-O1 -g3 -fsanitize=thread -fno-omit-frame-pointer" \
         -DCMAKE_EXE_LINKER_FLAGS_DEBUG="-fsanitize=thread"
 
     if test $status -ne 0
@@ -1274,12 +1282,12 @@ end
 
 
 # ============================================================
-# C COMPILER / TOOLCHAIN INFORMATION
+# C++ COMPILER / TOOLCHAIN INFORMATION
 # ============================================================
 
-function c-toolchain
+function cpp-toolchain
     echo "============================================================"
-    echo "C TOOLCHAIN"
+    echo "C++ TOOLCHAIN"
     echo "============================================================"
 
     if command -q g++
@@ -1362,9 +1370,9 @@ end
 # CMAKE TOOLCHAIN INFO
 # ============================================================
 
-function c-info
+function cpp-info
     echo "============================================================"
-    echo "C PROJECT"
+    echo "C++ PROJECT"
     echo "============================================================"
 
     if test -f compile_commands.json
@@ -1388,15 +1396,15 @@ function c-info
     echo ""
     echo "Useful commands:"
     echo ""
-    echo "  c-config"
-    echo "  c-build"
-    echo "  c-rebuild"
-    echo "  c-clean"
+    echo "  cpp-config"
+    echo "  cpp-build"
+    echo "  cpp-rebuild"
+    echo "  cpp-clean"
     echo ""
-    echo "  g++-debug"
-    echo "  clang++-debug"
-    echo "  g++-analyze"
-    echo "  clang++-analyze"
+    echo "  gxx-debug"
+    echo "  clangxx-debug"
+    echo "  gxx-analyze"
+    echo "  clangxx-analyze"
     echo ""
     echo "  gapp"
     echo "  gapp-args"
@@ -1491,7 +1499,7 @@ function security-tools
         nvim
 
     echo "============================================================"
-    echo "C SECURITY / DEBUG TOOLCHAIN"
+    echo "C++ SECURITY / DEBUG TOOLCHAIN"
     echo "============================================================"
 
     for tool in $tools
@@ -1532,7 +1540,7 @@ function addr
 end
 
 # ============================================================
-# C PROJECT GENERATOR
+# C++ PROJECT GENERATOR
 # ============================================================
 
 function __cpro_scaffold --argument-names name full_scan
@@ -1597,7 +1605,7 @@ function __cpro_scaffold --argument-names name full_scan
         '    -Wdouble-promotion' \
         '    -Wformat-security' \
         '    -Wnull-dereference' \
-        '    -Wextra-semi'\
+        '    -Wextra-semi' \
         ')' \
         '' \
         'if(ENABLE_WERROR)' \
@@ -1612,7 +1620,7 @@ function __cpro_scaffold --argument-names name full_scan
         '        -D_FORTIFY_SOURCE=3' \
         '        -fno-omit-frame-pointer' \
         '    )' \
-        '    if(CMAKE_C_COMPILER_ID MATCHES "GNU|Clang")' \
+        '    if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")' \
         '        list(APPEND PROJECT_HARDENING -fPIE)' \
         '        add_link_options(-pie -Wl,-z,relro,-z,now -Wl,-z,noexecstack)' \
         '    endif()' \
@@ -1629,7 +1637,7 @@ function __cpro_scaffold --argument-names name full_scan
         '    if(ENABLE_TSAN)' \
         '        list(APPEND PROJECT_SANITIZERS -fsanitize=thread)' \
         '    endif()' \
-        '    if(ENABLE_MSAN AND CMAKE_C_COMPILER_ID STREQUAL "Clang")' \
+        '    if(ENABLE_MSAN AND CMAKE_CXX_COMPILER_ID STREQUAL "Clang")' \
         '        list(APPEND PROJECT_SANITIZERS -fsanitize=memory)' \
         '    endif()' \
         'endif()' \
@@ -1644,30 +1652,39 @@ function __cpro_scaffold --argument-names name full_scan
         '    endif()' \
         'endif()' \
         '' \
+        '# Main application' \
         'add_executable(app' \
         '    src/main.cpp' \
         '    src/target.cpp' \
         ')' \
-        '' \
+        'target_compile_features(app PRIVATE cxx_std_23)' \
         'target_include_directories(app PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)' \
         'target_compile_options(app PRIVATE ${PROJECT_WARNINGS} ${PROJECT_HARDENING} ${PROJECT_SANITIZERS})' \
         'target_link_options(app PRIVATE ${PROJECT_SANITIZERS})' \
         '' \
+        '# Fuzz target' \
         'add_executable(fuzz_target' \
         '    fuzz/fuzz_target.cpp' \
         '    src/target.cpp' \
         ')' \
+        'target_compile_features(fuzz_target PRIVATE cxx_std_23)' \
         'target_include_directories(fuzz_target PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)' \
         'target_compile_options(fuzz_target PRIVATE ${PROJECT_WARNINGS} ${PROJECT_HARDENING} ${PROJECT_SANITIZERS})' \
         'target_link_options(fuzz_target PRIVATE ${PROJECT_SANITIZERS})' \
         '' \
+        '# Unit tests' \
         'enable_testing()' \
-        'add_executable(unit_tests tests/test_target.cpp src/target.cpp)' \
+        'add_executable(unit_tests' \
+        '    tests/test_target.cpp' \
+        '    src/target.cpp' \
+        ')' \
+        'target_compile_features(unit_tests PRIVATE cxx_std_23)' \
         'target_include_directories(unit_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)' \
         'target_compile_options(unit_tests PRIVATE ${PROJECT_WARNINGS} ${PROJECT_HARDENING} ${PROJECT_SANITIZERS})' \
         'target_link_options(unit_tests PRIVATE ${PROJECT_SANITIZERS})' \
         'add_test(NAME test_target COMMAND unit_tests)' \
         '' \
+        '# clang-tidy' \
         'find_program(CLANG_TIDY_EXE NAMES clang-tidy)' \
         'if(CLANG_TIDY_EXE)' \
         '    add_custom_target(analyze-clang-tidy' \
@@ -1683,13 +1700,14 @@ function __cpro_scaffold --argument-names name full_scan
         '    )' \
         'endif()' \
         '' \
+        '# cppcheck' \
         'find_program(CPPCHECK_EXE NAMES cppcheck)' \
         'if(CPPCHECK_EXE)' \
         '    add_custom_target(analyze-cppcheck' \
         '        COMMAND ${CPPCHECK_EXE}' \
         '        --enable=all' \
         '        --inconclusive' \
-        '        --std=c23' \
+        '        --std=c++23' \
         '        --error-exitcode=1' \
         '        --quiet' \
         '        --inline-suppr' \
@@ -1703,6 +1721,7 @@ function __cpro_scaffold --argument-names name full_scan
         '    )' \
         'endif()' \
         '' \
+        '# flawfinder' \
         'find_program(FLAWFINDER_EXE NAMES flawfinder)' \
         'if(FLAWFINDER_EXE)' \
         '    add_custom_target(analyze-flawfinder' \
@@ -1719,6 +1738,7 @@ function __cpro_scaffold --argument-names name full_scan
         '    )' \
         'endif()' \
         '' \
+        '# ELF inspection' \
         'find_program(READELF_EXE NAMES readelf llvm-readelf)' \
         'if(READELF_EXE)' \
         '    add_custom_target(sec-elf' \
@@ -1733,6 +1753,7 @@ function __cpro_scaffold --argument-names name full_scan
         '    )' \
         'endif()' \
         '' \
+        '# Disassembly' \
         'find_program(OBJDUMP_EXE NAMES objdump llvm-objdump)' \
         'if(OBJDUMP_EXE)' \
         '    add_custom_target(sec-disasm' \
@@ -1747,6 +1768,7 @@ function __cpro_scaffold --argument-names name full_scan
         '    )' \
         'endif()' \
         '' \
+        '# Symbols' \
         'find_program(NM_EXE NAMES nm llvm-nm)' \
         'if(NM_EXE)' \
         '    add_custom_target(sec-symbols' \
@@ -1761,6 +1783,7 @@ function __cpro_scaffold --argument-names name full_scan
         '    )' \
         'endif()' \
         '' \
+        '# Printable strings' \
         'find_program(STRINGS_EXE NAMES strings llvm-strings)' \
         'if(STRINGS_EXE)' \
         '    add_custom_target(sec-strings' \
@@ -1775,6 +1798,7 @@ function __cpro_scaffold --argument-names name full_scan
         '    )' \
         'endif()' \
         '' \
+        '# checksec' \
         'find_program(CHECKSEC_EXE NAMES checksec checksec.sh)' \
         'if(CHECKSEC_EXE)' \
         '    add_custom_target(sec-checksec' \
@@ -1789,111 +1813,86 @@ function __cpro_scaffold --argument-names name full_scan
         '    )' \
         'endif()' \
         '' \
-        'add_custom_target(sec-all DEPENDS app)' \
+        '# Combined security inspection' \
+        'add_custom_target(sec-all)' \
         'add_dependencies(sec-all sec-elf sec-disasm sec-symbols sec-strings sec-checksec)' \
         '' \
-        'add_custom_target(analyze-all DEPENDS analyze-clang-tidy analyze-cppcheck analyze-flawfinder)'
+        '# Combined static analysis' \
+        'add_custom_target(analyze-all)' \
+        'add_dependencies(analyze-all analyze-clang-tidy analyze-cppcheck analyze-flawfinder)'
 
     printf '%s\n' $cmake_content > CMakeLists.txt
 
     # ========================================================
-    # include/target.h
+    # include/target.hpp
     # ========================================================
 
     set -l target_h_content \
-        '#ifndef TARGET_H' \
-        '#define TARGET_H' \
+        '#pragma once' \
         '' \
-        '#include <stddef.h>' \
+        '#include <cstddef>' \
+        '#include <string_view>' \
         '' \
-        'size_t bounded_strlen(const char *s, size_t max_len);' \
-        'int parse_port(const char *input, int *out_port);' \
-        '' \
-        '#endif'
+        'std::size_t bounded_strlen(std::string_view text, std::size_t max_len);' \
+        'bool parse_port(std::string_view input, int &out_port);'
 
-    printf '%s\n' $target_h_content > include/target.h
+    printf '%s\n' $target_h_content > include/target.hpp
 
     # ========================================================
     # src/target.cpp
     # ========================================================
 
-    set -l target_c_content \
+    set -l target_cpp_content \
         '#include "target.hpp"' \
         '' \
-        '#include <errno.h>' \
-        '#include <limits.h>' \
-        '#include <stddef.h>' \
-        '#include <stdlib.h>' \
+        '#include <charconv>' \
+        '#include <cstddef>' \
+        '#include <string_view>' \
+        '#include <system_error>' \
         '' \
-        'size_t bounded_strlen(const char *s, size_t max_len)' \
+        'std::size_t bounded_strlen(std::string_view text, std::size_t max_len)' \
         '{' \
-        '    size_t i;' \
-        '' \
-        '    if (s == NULL)' \
-        '    {' \
-        '        return 0;' \
-        '    }' \
-        '' \
-        '    for (i = 0; i < max_len; ++i)' \
-        '    {' \
-        '        if (s[i] == '\''\0'\'')' \
-        '        {' \
-        '            return i;' \
-        '        }' \
-        '    }' \
-        '' \
-        '    return max_len;' \
+        '    return text.size() < max_len ? text.size() : max_len;' \
         '}' \
         '' \
-        'int parse_port(const char *input, int *out_port)' \
+        'bool parse_port(std::string_view input, int &out_port)' \
         '{' \
-        '    char *end = NULL;' \
-        '    long value;' \
+        '    int value = 0;' \
+        '    const char *begin = input.data();' \
+        '    const char *end = begin + input.size();' \
+        '    auto [ptr, ec] = std::from_chars(begin, end, value);' \
         '' \
-        '    if (input == NULL || out_port == NULL || *input == '\''\0'\'')' \
+        '    if (input.empty() || ec != std::errc{} || ptr != end || value < 1 || value > 65535)' \
         '    {' \
-        '        return -1;' \
+        '        return false;' \
         '    }' \
         '' \
-        '    errno = 0;' \
-        '    value = strtol(input, &end, 10);' \
-        '' \
-        '    if (errno != 0 || end == input || *end != '\''\0'\'')' \
-        '    {' \
-        '        return -1;' \
-        '    }' \
-        '' \
-        '    if (value < 1 || value > 65535 || value > INT_MAX)' \
-        '    {' \
-        '        return -1;' \
-        '    }' \
-        '' \
-        '    *out_port = (int)value;' \
-        '    return 0;' \
+        '    out_port = value;' \
+        '    return true;' \
         '}'
 
-    printf '%s\n' $target_c_content > src/target.cpp
+    printf '%s\n' $target_cpp_content > src/target.cpp
 
     # ========================================================
     # src/main.cpp
     # ========================================================
 
-    set -l main_c_content \
-        '#include "target.h"' \
+    set -l main_cpp_content \
+        '#include "target.hpp"' \
         '' \
-        '#include <stdio.h>' \
+        '#include <iostream>' \
         '' \
-        'int main(void)' \
+        'int main()' \
         '{' \
         '    int port = 0;' \
         '' \
-        '    if (parse_port("8080", &port) != 0)' \
+        '    if (!parse_port("8080", port))' \
         '    {' \
-        '        fputs("parse_port failed\n", stderr);' \
+        '        std::cerr << "parse_port failed\n";' \
         '        return 1;' \
         '    }' \
         '' \
-        '    printf("C23 security research scaffold: port=%d\n", port);' \
+        '    std::cout << "C++23 security research scaffold: port=" << port << '\''\n'\'';' \
         '    return 0;' \
         '}'
 
@@ -1904,36 +1903,34 @@ function __cpro_scaffold --argument-names name full_scan
     # ========================================================
 
     set -l test_content \
-        '#include "target.h"' \
+        '#include "target.hpp"' \
         '' \
-        '#include <assert.h>' \
-        '#include <stddef.h>' \
+        '#include <cassert>' \
         '' \
         'static void test_bounded_strlen(void)' \
         '{' \
         '    assert(bounded_strlen("hello", 10) == 5);' \
         '    assert(bounded_strlen("hello", 3) == 3);' \
-        '    assert(bounded_strlen(NULL, 10) == 0);' \
+        '    assert(bounded_strlen({}, 10) == 0);' \
         '}' \
         '' \
         'static void test_parse_port(void)' \
         '{' \
         '    int port = 0;' \
         '' \
-        '    assert(parse_port("80", &port) == 0);' \
+        '    assert(parse_port("80", port));' \
         '    assert(port == 80);' \
         '' \
-        '    assert(parse_port("65535", &port) == 0);' \
+        '    assert(parse_port("65535", port));' \
         '    assert(port == 65535);' \
         '' \
-        '    assert(parse_port("0", &port) != 0);' \
-        '    assert(parse_port("65536", &port) != 0);' \
-        '    assert(parse_port("abc", &port) != 0);' \
-        '    assert(parse_port(NULL, &port) != 0);' \
-        '    assert(parse_port("80", NULL) != 0);' \
+        '    assert(!parse_port("0", port));' \
+        '    assert(!parse_port("65536", port));' \
+        '    assert(!parse_port("abc", port));' \
+        '    assert(!parse_port({}, port));' \
         '}' \
         '' \
-        'int main(void)' \
+        'int main()' \
         '{' \
         '    test_bounded_strlen();' \
         '    test_parse_port();' \
@@ -1965,51 +1962,54 @@ function __cpro_scaffold --argument-names name full_scan
     # ========================================================
 
     set -l fuzz_content \
-        '#include "target.h"' \
+        '#include "target.hpp"' \
         '' \
-        '#include <stdio.h>' \
-        '#include <stdlib.h>' \
-        '#include <stddef.h>' \
-        '#include <stdint.h>' \
+        '#include <array>' \
+        '#include <cstddef>' \
+        '#include <cstdint>' \
+        '#include <cstdio>' \
+        '#include <cstdlib>' \
+        '#include <string_view>' \
         '' \
-        'int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size);' \
-        'int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size)' \
+        'extern "C" int LLVMFuzzerTestOneInput(const std::uint8_t *data, std::size_t size);' \
+        'extern "C" int LLVMFuzzerTestOneInput(const std::uint8_t *data, std::size_t size)' \
         '{' \
         '    int out = 0;' \
-        '    char buf[64];' \
-        '    size_t i = 0;' \
+        '    std::array<char, 64> buf{};' \
+        '    std::size_t i = 0;' \
         '' \
-        '    if (data == NULL || size == 0)' \
+        '    if (data == nullptr || size == 0)' \
         '    {' \
         '        return 0;' \
         '    }' \
         '' \
-        '    for (i = 0; i < size && i < sizeof(buf) - 1; ++i)' \
+        '    for (i = 0; i < size && i < buf.size() - 1; ++i)' \
         '    {' \
         '        buf[i] = (char)data[i];' \
         '    }' \
         '' \
         '    buf[i] = '\''\0'\'';' \
         '' \
-        '    (void)bounded_strlen(buf, sizeof(buf));' \
-        '    (void)parse_port(buf, &out);' \
+        '    auto text = std::string_view(buf.data(), i);' \
+        '    (void)bounded_strlen(text, buf.size());' \
+        '    (void)parse_port(text, out);' \
         '' \
         '    return 0;' \
         '}'
 
     set fuzz_content $fuzz_content \
         '' \
-        'int main(void)' \
+        'int main()' \
         '{' \
-        '    uint8_t buf[64];' \
-        '    size_t n = 0;' \
+        '    std::array<std::uint8_t, 64> buf{};' \
+        '    std::size_t n = 0;' \
         '' \
-        '    while ((n = fread(buf, 1, sizeof(buf), stdin)) > 0)' \
+        '    while ((n = std::fread(buf.data(), 1, buf.size(), stdin)) > 0)' \
         '    {' \
         '        (void)LLVMFuzzerTestOneInput(buf, n);' \
         '    }' \
         '' \
-        '    if (ferror(stdin))' \
+        '    if (std::ferror(stdin))' \
         '    {' \
         '        return EXIT_FAILURE;' \
         '    }' \
@@ -2132,7 +2132,7 @@ function __cpro_scaffold --argument-names name full_scan
         '      "inherits": "debug",' \
         '      "binaryDir": "${sourceDir}/build-msan",' \
         '      "cacheVariables": {' \
-        '        "CMAKE_C_COMPILER": "clang",' \
+        '        "CMAKE_CXX_COMPILER": "clang++",' \
         '        "ENABLE_ASAN": "OFF",' \
         '        "ENABLE_UBSAN": "OFF",' \
         '        "ENABLE_TSAN": "OFF",' \
@@ -2177,11 +2177,11 @@ function __cpro_scaffold --argument-names name full_scan
     # ========================================================
 
     set -l readme_content \
-        '# C23 Security Research Project' \
+        '# C++23 Security Research Project' \
         '' \
         '## Tooling' \
         '' \
-        '- C23 + CMake' \
+        '- C++23 + CMake' \
         '- G++ / Clang++' \
         '- clangd / clang-format / clang-tidy' \
         '- GDB / LLDB' \
@@ -2227,7 +2227,7 @@ function __cpro_scaffold --argument-names name full_scan
     # ========================================================
 
     echo ""
-    echo "C23 security research project created:"
+    echo "C++23 security research project created:"
     echo "  $project_dir"
     echo ""
     echo "Running bootstrap: configure + build + test"
@@ -2304,19 +2304,19 @@ end
 # ============================================================
 # PUBLIC COMMAND
 # Usage:
-#   create-c-pro new NAME
-#   create-c-pro new NAME 1
+#   create-cpp-pro new NAME
+#   create-cpp-pro new NAME 1
 # ============================================================
 
-function create-c-pro --argument-names command name full_scan
+function create-cpp-pro --argument-names command name full_scan
     switch "$command"
         case new
             if test -z "$name"
-                echo "Usage: create-c-pro new NAME [full_scan]"
+                echo "Usage: create-cpp-pro new NAME [full_scan]"
                 echo ""
                 echo "Examples:"
-                echo "  create-c-pro new testnew"
-                echo "  create-c-pro new testnew 1"
+                echo "  create-cpp-pro new testnew"
+                echo "  create-cpp-pro new testnew 1"
                 return 2
             end
 
@@ -2327,14 +2327,14 @@ function create-c-pro --argument-names command name full_scan
             end
 
         case '*'
-            echo "Usage: create-c-pro new NAME [full_scan]"
+            echo "Usage: create-cpp-pro new NAME [full_scan]"
             return 2
     end
 end
 
-# function create-c-pro
+# function create-cpp-pro
 #     if test (count $argv) -lt 2
-#         echo "Usage: create-c-pro new <project-name> [--full-scan]"
+#         echo "Usage: create-cpp-pro new <project-name> [--full-scan]"
 #         return 1
 #     end
 
@@ -2343,7 +2343,7 @@ end
 #     switch $action
 #         case new
 #             if test (count $argv) -lt 2
-#                 echo "Usage: create-c-pro new <project-name> [--full-scan]"
+#                 echo "Usage: create-cpp-pro new <project-name> [--full-scan]"
 #                 return 1
 #             end
 
@@ -2355,7 +2355,7 @@ end
 #                             set full_scan 1
 #                         case '*'
 #                             echo "Unknown option: $opt"
-#                             echo "Usage: create-c-pro new <project-name> [--full-scan]"
+#                             echo "Usage: create-cpp-pro new <project-name> [--full-scan]"
 #                             return 1
 #                     end
 #                 end
@@ -2365,19 +2365,19 @@ end
 #             return $status
 #         case '*'
 #             echo "Unknown action: $action"
-#             echo "Usage: create-c-pro new <project-name> [--full-scan]"
+#             echo "Usage: create-cpp-pro new <project-name> [--full-scan]"
 #             return 1
 #     end
 # end
 
 
-function create-c
+function create-cpp
     if test (count $argv) -ne 1
-        echo "Usage: create-c <project-name>"
+        echo "Usage: create-cpp <project-name>"
         return 1
     end
 
-    create-c-pro new $argv[1]
+    create-cpp-pro new $argv[1]
 end
 
 
@@ -2385,9 +2385,9 @@ end
 # OPTIONAL FORMAT / LINT HELPERS
 # ============================================================
 
-function cformat
+function cppformat
     if test (count $argv) -eq 0
-        echo "Usage: cformat <file.c> [file.h ...]"
+        echo "Usage: cppformat <file.cpp> [file.hpp ...]"
         return 1
     end
 
@@ -2395,9 +2395,9 @@ function cformat
 end
 
 
-function cformat-check
+function cppformat-check
     if test (count $argv) -eq 0
-        echo "Usage: cformat-check <file.c> [file.h ...]"
+        echo "Usage: cppformat-check <file.cpp> [file.hpp ...]"
         return 1
     end
 
@@ -2405,10 +2405,10 @@ function cformat-check
 end
 
 
-function ctidy
+function cpptidy
     if not test -f compile_commands.json
         echo "compile_commands.json not found."
-        echo "Run: c-config"
+        echo "Run: cpp-config"
         return 1
     end
 
