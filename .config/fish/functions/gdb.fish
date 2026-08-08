@@ -91,8 +91,10 @@ function gdb
         set -l gef_cmds
         set gef_cmds $gef_cmds -iex "source /usr/share/gef/gef.py"
 
-        if test $use_intel -eq 1
-            set gef_cmds $gef_cmds -iex "set disassembly-flavor intel"
+        if test $use_all -eq 1; or test $has_disasm_arg -eq 1
+            set gef_cmds $gef_cmds \
+                -iex "gef config context.nb_lines_code $disasm_lines" \
+                -iex "gef config context.nb_lines_code_prev $disasm_lines"
         end
 
         if test $use_all -eq 1; or test $use_context_config -eq 1
