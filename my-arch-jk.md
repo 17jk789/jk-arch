@@ -1615,6 +1615,8 @@ sudo fc-cache -fv
 rm JetBrainsMono.zip
 cd ~
 
+find_add_path /opt/nvim/bin
+
 nvim
 ```
 
