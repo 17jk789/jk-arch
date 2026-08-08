@@ -53,6 +53,7 @@ set -g fish_greeting ""
 
 function reload
     source ~/.config/fish/config.fish
+    echo "Fish configuration reloaded."
 end
 
 
@@ -172,6 +173,38 @@ function c-clean
 end
 
 
+function c-test
+    if not test -d build
+        echo "No build directory."
+        echo "Run: c-config"
+        return 1
+    end
+
+    ctest --test-dir build --output-on-failure
+end
+
+
+function c-check
+    c-build
+    or return 1
+
+    c-test
+    or return 1
+
+    if command -q clang-tidy
+        cmake --build build --target analyze-clang-tidy
+        or return 1
+    end
+
+    if command -q cppcheck
+        cmake --build build --target analyze-cppcheck
+        or return 1
+    end
+
+    echo "Security/quality checks completed."
+end
+
+
 function c-debug
     c-config
     or return 1
@@ -205,10 +238,14 @@ function gcc-debug
         -Wsign-conversion \
         -Wshadow \
         -Wformat=2 \
+        -Wformat-overflow=2 \
+        -Wformat-truncation=2 \
         -Wundef \
         -Wstrict-prototypes \
         -Wmissing-prototypes \
         -Wold-style-definition \
+        -Wvla \
+        -Wdouble-promotion \
         -Wnull-dereference \
         $argv
 end
@@ -267,6 +304,37 @@ function gcc-analyze
         -Wformat=2 \
         -fanalyzer \
         $argv
+end
+
+
+function c-analyze
+    if not test -d build
+        c-config
+        or return 1
+    end
+
+    echo "=== GCC analyzer ==="
+    gcc-analyze src/*.c
+    or return 1
+
+    echo "=== Clang analyzer ==="
+    clang-analyze src/*.c
+    or return 1
+
+    if command -q clang-tidy
+        echo "=== clang-tidy ==="
+        cmake --build build --target analyze-clang-tidy
+    end
+
+    if command -q cppcheck
+        echo "=== cppcheck ==="
+        cmake --build build --target analyze-cppcheck
+    end
+
+    if command -q flawfinder
+        echo "=== flawfinder ==="
+        cmake --build build --target analyze-flawfinder
+    end
 end
 
 
@@ -366,6 +434,9 @@ end
 #
 # If Pwndbg is configured through GDB startup files,
 # simply launching gdb will use it automatically.
+# 
+# But I alreade create a nocther cuntion gdb wich is 
+# more powerful and can be used to launch gdb with arguments.
 # ============================================================
 
 alias gdb-debug gdb
@@ -412,6 +483,22 @@ function gapp-args
     end
 
     gdb --args "$target" $args
+end
+
+
+function gdb-info
+    if not command -q gdb
+        echo "GDB: missing"
+        return 1
+    end
+
+    gdb --version | head -1
+
+    if test -f ~/.gdbinit
+        echo "GDB init: ~/.gdbinit"
+    end
+
+    gdb -q -ex 'python import sys; print(sys.version)' -ex quit
 end
 
 
@@ -537,49 +624,204 @@ function elf-info
         return 1
     end
 
-    set target $argv[1]
+    set -l target $argv[1]
 
     if not test -e "$target"
         echo "File not found: $target"
         return 1
     end
 
+    if not command -q readelf
+        echo "readelf not found."
+        return 1
+    end
+
     echo "============================================================"
-    echo "FILE"
+    echo "BASIC & SECURITY PROPERTIES"
     echo "============================================================"
+
+    echo ""
+    echo "File type:"
     file "$target"
+
+    # ========================================================
+    # NX / GNU_STACK
+    # ========================================================
+
+    echo ""
+    echo -n "NX / Executable Stack: "
+
+    set -l stack_line (readelf -W -l "$target" 2>/dev/null | grep 'GNU_STACK')
+
+    if test (count $stack_line) -eq 0
+        echo "UNKNOWN (No GNU_STACK segment found)"
+    else
+        set -l stack_flags (string split -n ' ' -- $stack_line | tail -1)
+
+        if string match -q '*X*' -- "$stack_flags"
+            echo "DISABLED (Stack is executable!)"
+        else
+            echo "ENABLED (Stack is non-executable)"
+        end
+    end
+
+    # ========================================================
+    # RELRO
+    # ========================================================
+
+    echo -n "RELRO: "
+
+    set -l relro (readelf -W -l "$target" 2>/dev/null | grep 'GNU_RELRO')
+
+    if test (count $relro) -eq 0
+        echo "No RELRO"
+    else
+        set -l bind_now (readelf -W -d "$target" 2>/dev/null | grep -E 'BIND_NOW|FLAGS.*NOW')
+
+        if test (count $bind_now) -gt 0
+            echo "Full RELRO"
+        else
+            echo "Partial RELRO"
+        end
+    end
+
+    # ========================================================
+    # STACK CANARY
+    # ========================================================
+
+    echo -n "Stack Canary: "
+
+    if readelf -Ws "$target" 2>/dev/null | grep -q '__stack_chk_fail'
+        echo "ENABLED (__stack_chk_fail found)"
+    else
+        echo "DISABLED / Not detected"
+    end
+
+    # ========================================================
+    # FORTIFY SOURCE
+    # ========================================================
+
+    echo -n "Fortify Source: "
+
+    if readelf -Ws "$target" 2>/dev/null | grep -q -E '_chk(@|$)'
+        echo "ENABLED (Fortified functions found)"
+    else
+        echo "DISABLED / Not detected"
+    end
+
+    # ========================================================
+    # RPATH / RUNPATH
+    # ========================================================
+
+    echo -n "RPATH / RUNPATH: "
+
+    set -l paths (readelf -W -d "$target" 2>/dev/null \
+        | grep -E 'RPATH|RUNPATH' \
+        | sed -E 's/.*\[(.*)\].*/\1/')
+
+    if test (count $paths) -gt 0
+        string join ', ' $paths
+    else
+        echo "None"
+    end
+
+    # ========================================================
+    # GNU PROPERTIES
+    # ========================================================
 
     echo ""
     echo "============================================================"
-    echo "ELF HEADER"
+    echo "GNU PROPERTIES (.note.gnu.property)"
     echo "============================================================"
-    readelf -h "$target"
+
+    set -l gnu_properties (readelf -n "$target" 2>/dev/null \
+        | grep -A 8 -E 'GNU_PROPERTY|GNU properties')
+
+    if test (count $gnu_properties) -gt 0
+        printf '%s\n' $gnu_properties
+    else
+        echo "No GNU properties found."
+        echo "Examples: IBT / SHSTK"
+    end
+
+    # ========================================================
+    # DYNAMIC SYMBOLS
+    # ========================================================
+
+    echo ""
+    echo "============================================================"
+    echo "DYNAMIC SYMBOLS (dynsym)"
+    echo "============================================================"
+
+    set -l dynsyms (readelf --dyn-syms -W "$target" 2>/dev/null | head -150)
+
+    if test (count $dynsyms) -gt 0
+        printf '%s\n' $dynsyms
+    else
+        echo "No dynamic symbols."
+    end
+
+    # ========================================================
+    # RELOCATIONS
+    # ========================================================
+
+    echo ""
+    echo "============================================================"
+    echo "RELOCATIONS"
+    echo "============================================================"
+
+    set -l relocations (readelf -r -W "$target" 2>/dev/null | head -150)
+
+    if test (count $relocations) -gt 0
+        printf '%s\n' $relocations
+    else
+        echo "No relocations."
+    end
+
+    # ========================================================
+    # ELF HEADER
+    # ========================================================
+
+    echo ""
+    echo "============================================================"
+    echo "STANDARD ELF HEADER"
+    echo "============================================================"
+
+    readelf -W -h "$target"
+
+    # ========================================================
+    # PROGRAM HEADERS
+    # ========================================================
 
     echo ""
     echo "============================================================"
     echo "PROGRAM HEADERS"
     echo "============================================================"
-    readelf -l "$target"
+
+    readelf -W -l "$target"
+
+    # ========================================================
+    # SECTIONS
+    # ========================================================
 
     echo ""
     echo "============================================================"
     echo "SECTIONS"
     echo "============================================================"
-    readelf -S "$target"
+
+    readelf -W -S "$target"
+
+    # ========================================================
+    # DYNAMIC INFORMATION
+    # ========================================================
 
     echo ""
     echo "============================================================"
     echo "DYNAMIC INFORMATION"
     echo "============================================================"
-    readelf -d "$target" 2>/dev/null
 
-    echo ""
-    echo "============================================================"
-    echo "SYMBOLS"
-    echo "============================================================"
-    nm -C "$target" 2>/dev/null | head -150
+    readelf -W -d "$target" 2>/dev/null
 end
-
 
 # ============================================================
 # SECURITY PROPERTIES
@@ -597,17 +839,68 @@ function sec
         return 1
     end
 
+    echo "=== checksec ==="
+
     if command -q checksec
-        command checksec --file="$target"
-        return $status
+        checksec --file="$target"
+    else
+        echo "checksec not installed."
     end
 
-    echo "checksec is not installed."
     echo ""
-    echo "Manual ELF inspection:"
-    echo "  readelf -h $target"
-    echo "  readelf -l $target"
-    echo "  readelf -d $target"
+    echo "=== ELF ==="
+    readelf -W -h "$target"
+
+    echo ""
+    echo "=== Program Headers ==="
+    readelf -W -l "$target"
+
+    echo ""
+    echo "=== Dynamic ==="
+    readelf -W -d "$target"
+end
+
+
+function elf-rpath
+    if test (count $argv) -eq 0
+        echo "Usage: elf-rpath <binary>"
+        return 1
+    end
+
+    readelf -W -d "$argv[1]" \
+        | grep -E 'RPATH|RUNPATH'
+end
+
+
+function elf-needed
+    if test (count $argv) -eq 0
+        echo "Usage: elf-needed <binary>"
+        return 1
+    end
+
+    readelf -W -d "$argv[1]" \
+        | grep 'NEEDED'
+end
+
+
+function elf-relocs
+    if test (count $argv) -eq 0
+        echo "Usage: elf-relocs <binary>"
+        return 1
+    end
+
+    readelf -W --relocs "$argv[1]"
+end
+
+
+function symgrep
+    if test (count $argv) -lt 2
+        echo "Usage: symgrep <binary> <pattern>"
+        return 1
+    end
+
+    nm -anC "$argv[1]" \
+        | grep -Ei -- "$argv[2]"
 end
 
 
@@ -706,7 +999,8 @@ function security-todo
         --exclude-dir=build-release \
         --include='*.c' \
         --include='*.h' \
-        -E 'TODO|FIXME|SECURITY|BUG|XXX|HACK|unsafe|overflow|underflow' .
+        -E 'TODO|FIXME|SECURITY|BUG|XXX|HACK|unsafe|overflow|underflow' \
+        .
 end
 
 
@@ -899,9 +1193,12 @@ function trace
 
     strace \
         -f \
-        -s 256 \
         -yy \
+        -s 512 \
+        -o trace.log \
         $argv
+
+    echo "Trace written to trace.log"
 end
 
 
@@ -1124,6 +1421,40 @@ function c-info
 end
 
 
+function target-info
+    set target ./build/app
+
+    if test (count $argv) -ge 1
+        set target $argv[1]
+    end
+
+    if not test -e "$target"
+        echo "File not found: $target"
+        return 1
+    end
+
+    echo "=== File ==="
+    file "$target"
+
+    echo ""
+    echo "=== Architecture ==="
+    readelf -W -h "$target" \
+        | grep -E 'Class:|Data:|Machine:|Type:|Entry point'
+
+    echo ""
+    echo "=== Security ==="
+
+    if command -q checksec
+        checksec --file="$target"
+    end
+
+    echo ""
+    echo "=== Dependencies ==="
+    readelf -W -d "$target" \
+        | grep 'NEEDED'
+end
+
+
 # ============================================================
 # TOOL AVAILABILITY
 # ============================================================
@@ -1135,15 +1466,24 @@ function security-tools
         clangd \
         clang-format \
         clang-tidy \
+        cppcheck \
+        flawfinder \
         cmake \
+        ninja \
         gdb \
         lldb \
         readelf \
+        llvm-readelf \
         objdump \
+        llvm-objdump \
         nm \
+        llvm-nm \
         strings \
+        llvm-strings \
         addr2line \
+        llvm-addr2line \
         c++filt \
+        llvm-symbolizer \
         strace \
         ltrace \
         valgrind \
@@ -1175,6 +1515,20 @@ function security-tools
     else
         printf "%-16s %s\n" "codelldb" "not CLI-installed"
     end
+end
+
+
+function addr
+    if test (count $argv) -lt 2
+        echo "Usage: addr <binary> <address>"
+        return 1
+    end
+
+    addr2line \
+        -e "$argv[1]" \
+        -f \
+        -C \
+        "$argv[2]"
 end
 
 # ============================================================
@@ -1583,6 +1937,24 @@ function __cpro_scaffold --argument-names name full_scan
         '}'
 
     printf '%s\n' $test_content > tests/test_target.c
+
+
+    # ========================================================
+    # .clangd
+    # ========================================================
+
+    set -l clangd_content \
+        'CompileFlags:' \
+        '  CompilationDatabase: build' \
+        '' \
+        'Diagnostics:' \
+        '  UnusedIncludes: Strict' \
+        '' \
+        'Index:' \
+        '  Background: Build'
+
+    printf '%s\n' $clangd_content > .clangd
+
 
     # ========================================================
     # fuzz/fuzz_target.c
