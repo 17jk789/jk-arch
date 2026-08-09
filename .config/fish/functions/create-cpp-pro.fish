@@ -295,6 +295,7 @@ function gxx-analyze
     g++ \
         -std=c++23 \
         -O0 \
+        -g3 \
         -Wall \
         -Wextra \
         -Wpedantic \
@@ -302,6 +303,45 @@ function gxx-analyze
         -Wsign-conversion \
         -Wshadow \
         -Wformat=2 \
+        -Wformat-overflow=2 \
+        -Wformat-truncation=2 \
+        -Warray-bounds=2 \
+        -Wstringop-overflow=4 \
+        -Wstringop-overread \
+        -Wrestrict \
+        -Wnonnull \
+        -Walloca \
+        -Wvla \
+        -Wnull-dereference \
+        -Wduplicated-cond \
+        -Wduplicated-branches \
+        -Wlogical-op \
+        -Wshift-overflow=2 \
+        -Wshift-negative-value \
+        -Wpointer-arith \
+        -Wcast-align=strict \
+        -Wstrict-overflow=5 \
+        -Wtype-limits \
+        -Wundef \
+        -Wunused \
+        -Wuninitialized \
+        -Wmaybe-uninitialized \
+        -Wreturn-type \
+        -Winit-self \
+        -Wclass-memaccess \
+        -Wnon-virtual-dtor \
+        -Woverloaded-virtual \
+        -Wold-style-cast \
+        -Wuseless-cast \
+        -Wextra-semi \
+        -Wdelete-non-virtual-dtor \
+        -Wmismatched-tags \
+        -Wconversion-null \
+        -Wdeprecated-copy \
+        -Wdeprecated-copy-dtor \
+        -Wredundant-move \
+        -Wplacement-new=2 \
+        -Wbidi-chars=unpaired \
         -fanalyzer \
         $argv
 end

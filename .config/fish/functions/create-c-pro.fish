@@ -295,6 +295,7 @@ function gcc-analyze
     gcc \
         -std=c23 \
         -O0 \
+        -g3 \
         -Wall \
         -Wextra \
         -Wpedantic \
@@ -302,6 +303,36 @@ function gcc-analyze
         -Wsign-conversion \
         -Wshadow \
         -Wformat=2 \
+        -Wformat-overflow=2 \
+        -Wformat-truncation=2 \
+        -Warray-bounds=2 \
+        -Wstringop-overflow=4 \
+        -Wstringop-overread \
+        -Wrestrict \
+        -Wnonnull \
+        -Walloca \
+        -Wvla \
+        -Wnull-dereference \
+        -Wstrict-prototypes \
+        -Wmissing-prototypes \
+        -Wold-style-definition \
+        -Wduplicated-cond \
+        -Wduplicated-branches \
+        -Wlogical-op \
+        -Wshift-overflow=2 \
+        -Wshift-negative-value \
+        -Wpointer-arith \
+        -Wcast-align=strict \
+        -Wwrite-strings \
+        -Wtrampolines \
+        -Wdate-time \
+        -Wstack-protector \
+        -Wstrict-overflow=5 \
+        -Wtype-limits \
+        -Wundef \
+        -Wunused \
+        -Wuninitialized \
+        -Wmaybe-uninitialized \
         -fanalyzer \
         $argv
 end
