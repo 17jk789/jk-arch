@@ -1568,9 +1568,16 @@ function __cpro_scaffold --argument-names name full_scan
         'set(CMAKE_C_EXTENSIONS OFF)' \
         'set(CMAKE_EXPORT_COMPILE_COMMANDS ON)' \
         '' \
+        '# This project targets Linux/ELF with GCC or Clang.' \
+        'if(NOT UNIX OR APPLE)' \
+        '    message(FATAL_ERROR "C23SecurityResearch currently requires a Linux/ELF environment.")' \
+        'endif()' \
+        '' \
         'if(NOT CMAKE_BUILD_TYPE)' \
         '    set(CMAKE_BUILD_TYPE Debug CACHE STRING "Build type" FORCE)' \
         'endif()' \
+        '' \
+        'set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS Debug Release RelWithDebInfo MinSizeRel)' \
         '' \
         'option(ENABLE_ASAN "Enable AddressSanitizer" ON)' \
         'option(ENABLE_UBSAN "Enable UndefinedBehaviorSanitizer" ON)' \
@@ -1579,6 +1586,19 @@ function __cpro_scaffold --argument-names name full_scan
         'option(ENABLE_HARDENING "Enable hardening flags" ON)' \
         'option(ENABLE_WERROR "Treat warnings as errors" OFF)' \
         'option(ENABLE_LTO "Enable link time optimization" OFF)' \
+        'option(ENABLE_LIBFUZZER "Enable Clang libFuzzer for fuzz_target" OFF)' \
+        '' \
+        '# -----------------------------------------------------------------------------' \
+        '# Compiler checks' \
+        '# -----------------------------------------------------------------------------' \
+        '' \
+        'if(NOT CMAKE_C_COMPILER_ID MATCHES "GNU|Clang")' \
+        '    message(FATAL_ERROR "This project requires GCC or Clang.")' \
+        'endif()' \
+        '' \
+        '# -----------------------------------------------------------------------------' \
+        '# Warnings' \
+        '# -----------------------------------------------------------------------------' \
         '' \
         'set(PROJECT_WARNINGS' \
         '    -Wall' \
@@ -1600,18 +1620,60 @@ function __cpro_scaffold --argument-names name full_scan
         '    list(APPEND PROJECT_WARNINGS -Werror)' \
         'endif()' \
         '' \
+        '# -----------------------------------------------------------------------------' \
+        '# Optimization' \
+        '# -----------------------------------------------------------------------------' \
+        '' \
+        'set(PROJECT_OPTIMIZATION)' \
+        'if(ENABLE_HARDENING)' \
+        '    list(APPEND PROJECT_OPTIMIZATION -O2)' \
+        'endif()' \
+        '' \
+        '# -----------------------------------------------------------------------------' \
+        '# Hardening' \
+        '# -----------------------------------------------------------------------------' \
+        '' \
         'set(PROJECT_HARDENING)' \
         'if(ENABLE_HARDENING)' \
         '    list(APPEND PROJECT_HARDENING' \
-        '        -O2' \
         '        -fstack-protector-strong' \
         '        -D_FORTIFY_SOURCE=3' \
         '        -fno-omit-frame-pointer' \
+        '        -fPIE' \
         '    )' \
-        '    if(CMAKE_C_COMPILER_ID MATCHES "GNU|Clang")' \
-        '        list(APPEND PROJECT_HARDENING -fPIE)' \
-        '        add_link_options(-pie -Wl,-z,relro,-z,now -Wl,-z,noexecstack)' \
-        '    endif()' \
+        'endif()' \
+        '' \
+        'set(PROJECT_HARDENING_LINK)' \
+        'if(ENABLE_HARDENING)' \
+        '    list(APPEND PROJECT_HARDENING_LINK' \
+        '        -pie' \
+        '        -Wl,-z,relro,-z,now' \
+        '        -Wl,-z,noexecstack' \
+        '    )' \
+        'endif()' \
+        '' \
+        '# -----------------------------------------------------------------------------' \
+        '# Sanitizers' \
+        '# -----------------------------------------------------------------------------' \
+        '' \
+        'if(ENABLE_ASAN AND ENABLE_TSAN)' \
+        '    message(FATAL_ERROR "ASan and TSan cannot be enabled together.")' \
+        'endif()' \
+        '' \
+        'if(ENABLE_ASAN AND ENABLE_MSAN)' \
+        '    message(FATAL_ERROR "ASan and MSan cannot be enabled together.")' \
+        'endif()' \
+        '' \
+        'if(ENABLE_TSAN AND ENABLE_MSAN)' \
+        '    message(FATAL_ERROR "TSan and MSan cannot be enabled together.")' \
+        'endif()' \
+        '' \
+        'if(ENABLE_MSAN AND NOT CMAKE_C_COMPILER_ID STREQUAL "Clang")' \
+        '    message(FATAL_ERROR "MSan requires Clang.")' \
+        'endif()' \
+        '' \
+        'if(ENABLE_LIBFUZZER AND NOT CMAKE_C_COMPILER_ID STREQUAL "Clang")' \
+        '    message(FATAL_ERROR "libFuzzer requires Clang.")' \
         'endif()' \
         '' \
         'set(PROJECT_SANITIZERS)' \
@@ -1619,20 +1681,27 @@ function __cpro_scaffold --argument-names name full_scan
         '    if(ENABLE_ASAN)' \
         '        list(APPEND PROJECT_SANITIZERS -fsanitize=address)' \
         '    endif()' \
+        '' \
         '    if(ENABLE_UBSAN)' \
         '        list(APPEND PROJECT_SANITIZERS -fsanitize=undefined)' \
         '    endif()' \
+        '' \
         '    if(ENABLE_TSAN)' \
         '        list(APPEND PROJECT_SANITIZERS -fsanitize=thread)' \
         '    endif()' \
-        '    if(ENABLE_MSAN AND CMAKE_C_COMPILER_ID STREQUAL "Clang")' \
+        '' \
+        '    if(ENABLE_MSAN)' \
         '        list(APPEND PROJECT_SANITIZERS -fsanitize=memory)' \
         '    endif()' \
         'endif()' \
         '' \
+        '# -----------------------------------------------------------------------------' \
+        '# LTO' \
+        '# -----------------------------------------------------------------------------' \
+        '' \
         'if(ENABLE_LTO)' \
         '    include(CheckIPOSupported)' \
-        '    check_ipo_supported(RESULT ipo_ok OUTPUT ipo_msg)' \
+        '    check_ipo_supported(RESULT ipo_ok OUTPUT ipo_msg LANGUAGES C)' \
         '    if(ipo_ok)' \
         '        set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)' \
         '    else()' \
@@ -1640,36 +1709,84 @@ function __cpro_scaffold --argument-names name full_scan
         '    endif()' \
         'endif()' \
         '' \
+        '# -----------------------------------------------------------------------------' \
+        '# Helper function' \
+        '# -----------------------------------------------------------------------------' \
+        '' \
+        'function(configure_security_target target)' \
+        '    target_include_directories(${target} PRIVATE' \
+        '        ${CMAKE_CURRENT_SOURCE_DIR}/include' \
+        '    )' \
+        '' \
+        '    target_compile_options(${target} PRIVATE' \
+        '        ${PROJECT_WARNINGS}' \
+        '        ${PROJECT_OPTIMIZATION}' \
+        '        ${PROJECT_HARDENING}' \
+        '        ${PROJECT_SANITIZERS}' \
+        '    )' \
+        '' \
+        '    target_link_options(${target} PRIVATE' \
+        '        ${PROJECT_HARDENING_LINK}' \
+        '        ${PROJECT_SANITIZERS}' \
+        '    )' \
+        'endfunction()' \
+        '' \
+        '# -----------------------------------------------------------------------------' \
+        '# Main application' \
+        '# -----------------------------------------------------------------------------' \
+        '' \
         'add_executable(app' \
         '    src/main.c' \
         '    src/target.c' \
         ')' \
         '' \
-        'target_include_directories(app PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)' \
-        'target_compile_options(app PRIVATE ${PROJECT_WARNINGS} ${PROJECT_HARDENING} ${PROJECT_SANITIZERS})' \
-        'target_link_options(app PRIVATE ${PROJECT_SANITIZERS})' \
+        'configure_security_target(app)' \
+        '' \
+        '# -----------------------------------------------------------------------------' \
+        '# Fuzzing target' \
+        '# -----------------------------------------------------------------------------' \
         '' \
         'add_executable(fuzz_target' \
         '    fuzz/fuzz_target.c' \
         '    src/target.c' \
         ')' \
-        'target_include_directories(fuzz_target PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)' \
-        'target_compile_options(fuzz_target PRIVATE ${PROJECT_WARNINGS} ${PROJECT_HARDENING} ${PROJECT_SANITIZERS})' \
-        'target_link_options(fuzz_target PRIVATE ${PROJECT_SANITIZERS})' \
+        '' \
+        'configure_security_target(fuzz_target)' \
+        '' \
+        'if(ENABLE_LIBFUZZER)' \
+        '    target_compile_options(fuzz_target PRIVATE -fsanitize=fuzzer)' \
+        '    target_link_options(fuzz_target PRIVATE -fsanitize=fuzzer)' \
+        'endif()' \
+        '' \
+        '# -----------------------------------------------------------------------------' \
+        '# Unit tests' \
+        '# -----------------------------------------------------------------------------' \
         '' \
         'enable_testing()' \
-        'add_executable(unit_tests tests/test_target.c src/target.c)' \
-        'target_include_directories(unit_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)' \
-        'target_compile_options(unit_tests PRIVATE ${PROJECT_WARNINGS} ${PROJECT_HARDENING} ${PROJECT_SANITIZERS})' \
-        'target_link_options(unit_tests PRIVATE ${PROJECT_SANITIZERS})' \
+        '' \
+        'add_executable(unit_tests' \
+        '    tests/test_target.c' \
+        '    src/target.c' \
+        ')' \
+        '' \
+        'configure_security_target(unit_tests)' \
+        '' \
         'add_test(NAME test_target COMMAND unit_tests)' \
         '' \
+        '# -----------------------------------------------------------------------------' \
+        '# clang-tidy' \
+        '# -----------------------------------------------------------------------------' \
+        '' \
         'find_program(CLANG_TIDY_EXE NAMES clang-tidy)' \
+        '' \
         'if(CLANG_TIDY_EXE)' \
         '    add_custom_target(analyze-clang-tidy' \
         '        COMMAND ${CLANG_TIDY_EXE}' \
-        '        -p ${CMAKE_BINARY_DIR}' \
-        '        src/main.c src/target.c tests/test_target.c fuzz/fuzz_target.c' \
+        '            -p ${CMAKE_BINARY_DIR}' \
+        '            src/main.c' \
+        '            src/target.c' \
+        '            tests/test_target.c' \
+        '            fuzz/fuzz_target.c' \
         '        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}' \
         '        COMMENT "Running clang-tidy"' \
         '    )' \
@@ -1679,17 +1796,25 @@ function __cpro_scaffold --argument-names name full_scan
         '    )' \
         'endif()' \
         '' \
+        '# -----------------------------------------------------------------------------' \
+        '# cppcheck' \
+        '# -----------------------------------------------------------------------------' \
+        '' \
         'find_program(CPPCHECK_EXE NAMES cppcheck)' \
+        '' \
         'if(CPPCHECK_EXE)' \
         '    add_custom_target(analyze-cppcheck' \
         '        COMMAND ${CPPCHECK_EXE}' \
-        '        --enable=all' \
-        '        --inconclusive' \
-        '        --std=c23' \
-        '        --error-exitcode=1' \
-        '        --quiet' \
-        '        --inline-suppr' \
-        '        -I include src tests fuzz' \
+        '            --enable=all' \
+        '            --inconclusive' \
+        '            --std=c23' \
+        '            --error-exitcode=1' \
+        '            --quiet' \
+        '            --inline-suppr' \
+        '            -I include' \
+        '            src' \
+        '            tests' \
+        '            fuzz' \
         '        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}' \
         '        COMMENT "Running cppcheck"' \
         '    )' \
@@ -1699,13 +1824,21 @@ function __cpro_scaffold --argument-names name full_scan
         '    )' \
         'endif()' \
         '' \
+        '# -----------------------------------------------------------------------------' \
+        '# flawfinder' \
+        '# -----------------------------------------------------------------------------' \
+        '' \
         'find_program(FLAWFINDER_EXE NAMES flawfinder)' \
+        '' \
         'if(FLAWFINDER_EXE)' \
         '    add_custom_target(analyze-flawfinder' \
         '        COMMAND ${FLAWFINDER_EXE}' \
-        '        --quiet' \
-        '        --dataonly' \
-        '        src include tests fuzz' \
+        '            --quiet' \
+        '            --dataonly' \
+        '            src' \
+        '            include' \
+        '            tests' \
+        '            fuzz' \
         '        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}' \
         '        COMMENT "Running flawfinder"' \
         '    )' \
@@ -1715,7 +1848,12 @@ function __cpro_scaffold --argument-names name full_scan
         '    )' \
         'endif()' \
         '' \
+        '# -----------------------------------------------------------------------------' \
+        '# ELF inspection' \
+        '# -----------------------------------------------------------------------------' \
+        '' \
         'find_program(READELF_EXE NAMES readelf llvm-readelf)' \
+        '' \
         'if(READELF_EXE)' \
         '    add_custom_target(sec-elf' \
         '        COMMAND ${READELF_EXE} -W -h -l -S -s app' \
@@ -1729,7 +1867,12 @@ function __cpro_scaffold --argument-names name full_scan
         '    )' \
         'endif()' \
         '' \
+        '# -----------------------------------------------------------------------------' \
+        '# Disassembly' \
+        '# -----------------------------------------------------------------------------' \
+        '' \
         'find_program(OBJDUMP_EXE NAMES objdump llvm-objdump)' \
+        '' \
         'if(OBJDUMP_EXE)' \
         '    add_custom_target(sec-disasm' \
         '        COMMAND ${OBJDUMP_EXE} -d -M intel app' \
@@ -1743,7 +1886,12 @@ function __cpro_scaffold --argument-names name full_scan
         '    )' \
         'endif()' \
         '' \
+        '# -----------------------------------------------------------------------------' \
+        '# Symbol inspection' \
+        '# -----------------------------------------------------------------------------' \
+        '' \
         'find_program(NM_EXE NAMES nm llvm-nm)' \
+        '' \
         'if(NM_EXE)' \
         '    add_custom_target(sec-symbols' \
         '        COMMAND ${NM_EXE} -an app' \
@@ -1757,7 +1905,12 @@ function __cpro_scaffold --argument-names name full_scan
         '    )' \
         'endif()' \
         '' \
+        '# -----------------------------------------------------------------------------' \
+        '# Strings' \
+        '# -----------------------------------------------------------------------------' \
+        '' \
         'find_program(STRINGS_EXE NAMES strings llvm-strings)' \
+        '' \
         'if(STRINGS_EXE)' \
         '    add_custom_target(sec-strings' \
         '        COMMAND ${STRINGS_EXE} -a app' \
@@ -1771,7 +1924,12 @@ function __cpro_scaffold --argument-names name full_scan
         '    )' \
         'endif()' \
         '' \
+        '# -----------------------------------------------------------------------------' \
+        '# checksec' \
+        '# -----------------------------------------------------------------------------' \
+        '' \
         'find_program(CHECKSEC_EXE NAMES checksec checksec.sh)' \
+        '' \
         'if(CHECKSEC_EXE)' \
         '    add_custom_target(sec-checksec' \
         '        COMMAND ${CHECKSEC_EXE} --file=app' \
@@ -1785,12 +1943,42 @@ function __cpro_scaffold --argument-names name full_scan
         '    )' \
         'endif()' \
         '' \
-        'add_custom_target(sec-all DEPENDS app)' \
-        'add_dependencies(sec-all sec-elf sec-disasm sec-symbols sec-strings sec-checksec)' \
+        '# -----------------------------------------------------------------------------' \
+        '# Aggregate security targets' \
+        '# -----------------------------------------------------------------------------' \
         '' \
-        'add_custom_target(analyze-all DEPENDS analyze-clang-tidy analyze-cppcheck analyze-flawfinder)'
+        'add_custom_target(sec-all DEPENDS app)' \
+        'add_dependencies(sec-all' \
+        '    sec-elf' \
+        '    sec-disasm' \
+        '    sec-symbols' \
+        '    sec-strings' \
+        '    sec-checksec' \
+        ')' \
+        '' \
+        'add_custom_target(analyze-all' \
+        '    DEPENDS' \
+        '        analyze-clang-tidy' \
+        '        analyze-cppcheck' \
+        '        analyze-flawfinder' \
+        ')' \
+        '' \
+        'message(STATUS "C23SecurityResearch configured")' \
+        'message(STATUS "  Build type:       ${CMAKE_BUILD_TYPE}")' \
+        'message(STATUS "  Compiler:         ${CMAKE_C_COMPILER_ID}")' \
+        'message(STATUS "  C standard:       C${CMAKE_C_STANDARD}")' \
+        'message(STATUS "  Hardening:        ${ENABLE_HARDENING}")' \
+        'message(STATUS "  ASan:             ${ENABLE_ASAN}")' \
+        'message(STATUS "  UBSan:            ${ENABLE_UBSAN}")' \
+        'message(STATUS "  MSan:             ${ENABLE_MSAN}")' \
+        'message(STATUS "  TSan:             ${ENABLE_TSAN}")' \
+        'message(STATUS "  libFuzzer:        ${ENABLE_LIBFUZZER}")' \
+        'message(STATUS "  LTO:              ${ENABLE_LTO}")' \
+        'message(STATUS "  Werror:           ${ENABLE_WERROR}")'
 
     printf '%s\n' $cmake_content > CMakeLists.txt
+
+    echo "CMakeLists.txt created successfully."
 
     # ========================================================
     # include/target.h
@@ -2261,16 +2449,32 @@ function __cpro_scaffold --argument-names name full_scan
     echo ""
     echo "Bootstrap complete."
     echo ""
-    echo "Optional analysis targets:"
+    echo "Build & test:"
+    echo "  cmake --build build"
+    echo "  ctest --test-dir build --output-on-failure"
+    echo ""
+    echo "Static analysis:"
     echo "  cmake --build build --target analyze-clang-tidy"
     echo "  cmake --build build --target analyze-cppcheck"
     echo "  cmake --build build --target analyze-flawfinder"
+    echo "  cmake --build build --target analyze-all"
+    echo ""
+    echo "Binary / ELF security analysis:"
     echo "  cmake --build build --target sec-elf"
     echo "  cmake --build build --target sec-disasm"
     echo "  cmake --build build --target sec-symbols"
     echo "  cmake --build build --target sec-strings"
     echo "  cmake --build build --target sec-checksec"
     echo "  cmake --build build --target sec-all"
+    echo ""
+    echo "Targets:"
+    echo "  app         - main application"
+    echo "  unit_tests  - unit test suite"
+    echo "  fuzz_target - fuzzing harness"
+    echo ""
+    echo "Example:"
+    echo "  cmake --build build --target sec-all"
+    echo ""
 
     if test "$full_scan" = "1"
         echo ""
