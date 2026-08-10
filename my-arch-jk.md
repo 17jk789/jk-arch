@@ -1408,6 +1408,76 @@ qemu-system-x86_64 \
 
 # und wen was nicht leuft:
 # sudo pacman -S virglrenderer
+
+# Chachy OS + Black Arch
+
+qemu-img create -f qcow2 cachyos.qcow2 80G
+
+cp /usr/share/edk2/x64/OVMF_VARS.4m.fd cachyos_VARS.fd
+
+qemu-system-x86_64 \
+  -enable-kvm \
+  -machine q35 \
+  -cpu host \
+  -smp sockets=1,cores=6,threads=1 \
+  -m 10G \
+  -vga none \
+  -device virtio-vga-gl,xres=1920,yres=1080 \
+  -display gtk,gl=on,grab-on-hover=on \
+  -drive file=cachyos.qcow2,if=virtio,cache=writeback,format=qcow2 \
+  -drive if=pflash,format=raw,readonly=on,file=/usr/share/edk2/x64/OVMF_CODE.4m.fd \
+  -drive if=pflash,format=raw,file=cachyos_VARS.fd \
+  -cdrom /home/jk/blackarch/cachyos-desktop-linux-260809.iso \
+  -boot d \
+  -netdev user,id=net0,restrict=no \
+  -device virtio-net-pci,netdev=net0 \
+  -sandbox on,obsolete=deny,elevateprivileges=deny,spawn=deny,resourcecontrol=deny \
+  -rtc base=localtime,clock=vm \
+  -device qemu-xhci \
+  -device usb-tablet \
+  -device usb-kbd
+
+# (empfohlen)
+
+qemu-system-x86_64 \
+  -enable-kvm \
+  -machine q35 \
+  -cpu host \
+  -smp 6,sockets=1,cores=6,threads=1 \
+  -m 10G \
+  -device virtio-vga-gl,max_outputs=1,xres=3840,yres=2160 \
+  -global virtio-vga.max_hostmem=268435456 \
+  -display sdl,gl=on,grab-mod=rctrl \
+  -drive file=cachyos.qcow2,if=none,id=hd0,format=qcow2,cache=none,aio=native,discard=unmap \
+  -device virtio-blk-pci,drive=hd0,num-queues=6 \
+  -drive if=pflash,format=raw,readonly=on,file=/usr/share/edk2/x64/OVMF_CODE.4m.fd \
+  -drive if=pflash,format=raw,file=cachyos_VARS.fd \
+  -device qemu-xhci,id=xhci \
+  -device usb-tablet,bus=xhci.0 \
+  -netdev user,id=net0 \
+  -device virtio-net-pci,netdev=net0 \
+  -audiodev pipewire,id=audio0 \
+  -device virtio-sound-pci,audiodev=audio0 \
+  -rtc base=utc,clock=host \
+  -sandbox on,obsolete=deny,elevateprivileges=deny,spawn=deny,resourcecontrol=deny
+
+# or (sehr sicher)
+
+qemu-system-x86_64 \
+  -enable-kvm \
+  -machine q35 \
+  -cpu host \
+  -smp 2 \
+  -m 4G \
+  -display gtk \
+  -device virtio-vga \
+  -drive file=kali-linux-2026.2-qemu-amd64.qcow2,if=virtio,format=qcow2,cache=none,aio=native,discard=unmap \
+  -netdev user,id=net0 \
+  -device virtio-net-pci,netdev=net0 \
+  -rtc base=utc \
+  -sandbox on,obsolete=deny,elevateprivileges=deny,spawn=deny,resourcecontrol=deny \
+  -no-user-config
+
 ```
 
 <details>
