@@ -1092,7 +1092,7 @@ sudo systemctl enable --now libvirtd
 sudo usermod -aG libvirt,kvm $(whoami)
 ```
 
-#### Das Highlight: Der optimale QEMU-Startbefell für Ubuntu 26.04 LTS, Kali Linux 2026, Chachy OS + BlackArch Linux
+#### Das Highlight: Der optimale QEMU-Startbefell für Ubuntu 26.04 LTS, Kali Linux 2026, Cachy OS + BlackArch Linux
 
 ##### Ubuntu
 
@@ -1224,7 +1224,7 @@ qemu-system-x86_64 \
   -smp 6,sockets=1,cores=6,threads=1 \
   -m 10G \
   -device virtio-vga-gl,max_outputs=1,xres=3840,yres=2160 \
-  -global virtio-vga.max_hostmem=268435456 \
+  # -global virtio-vga.max_hostmem=268435456 \
   -display sdl,gl=on,grab-mod=rctrl \
   -device virtio-blk-pci,drive=hd0,num-queues=6 \
   -drive file=ubuntu.qcow2,id=hd0,if=none,format=qcow2,cache=none,aio=native,discard=unmap \
@@ -1400,7 +1400,7 @@ qemu-system-x86_64 \
   -smp 6,sockets=1,cores=6,threads=1 \
   -m 10G \
   -device virtio-vga-gl,max_outputs=1,xres=3840,yres=2160 \
-  -global virtio-vga.max_hostmem=268435456 \
+  # -global virtio-vga.max_hostmem=268435456 \
   -display sdl,gl=on,grab-mod=rctrl \
   -device virtio-blk-pci,drive=hd0,num-queues=6 \
   -drive file=kali-linux-2026.2-qemu-amd64.qcow2,id=hd0,if=none,format=qcow2,cache=none,aio=native,discard=unmap \
@@ -1439,7 +1439,7 @@ qemu-system-x86_64 \
 sudo pacman -S virglrenderer
 ```
 
-##### Chachy OS + Black Arch
+##### Cachy OS + Black Arch
 
 ```bash
 qemu-img create -f qcow2 cachyos.qcow2 80G
@@ -1483,7 +1483,7 @@ qemu-system-x86_64 \
   -smp 6,sockets=1,cores=6,threads=1 \
   -m 10G \
   -device virtio-vga-gl,max_outputs=1,xres=3840,yres=2160 \
-  -global virtio-vga.max_hostmem=268435456 \
+  # -global virtio-vga.max_hostmem=268435456 \
   -display sdl,gl=on,grab-mod=rctrl \
   -drive file=cachyos.qcow2,if=none,id=hd0,format=qcow2,cache=none,aio=native,discard=unmap \
   -device virtio-blk-pci,drive=hd0,num-queues=6 \
@@ -1506,11 +1506,11 @@ qemu-system-x86_64 \
   -enable-kvm \
   -machine q35 \
   -cpu host \
-  -smp 2 \
-  -m 4G \
+  -smp 6 \
+  -m 8G \
   -display gtk \
   -device virtio-vga \
-  -drive file=kali-linux-2026.2-qemu-amd64.qcow2,if=virtio,format=qcow2,cache=none,aio=native,discard=unmap \
+  -drive file=cachyos.qcow2,if=virtio,format=qcow2,cache=none,aio=native,discard=unmap \
   -netdev user,id=net0 \
   -device virtio-net-pci,netdev=net0 \
   -rtc base=utc \
