@@ -1071,35 +1071,36 @@ sudo pacman -S 7zip
 
 ```bash
 sudo pacman -S qemu-full virt-manager libvirt virt-viewer dnsmasq
+sudo pacman -Syu qemu-ui-gtk qemu-ui-sdl qemu-audio-pa spice-gtk virglrenderer libvdpau libva-mesa-driver spice-vdagent
 ```
 
-### Den Virtualisierungs-Dienst für KVM/QEMU aktivieren
+#### Den Virtualisierungs-Dienst für KVM/QEMU aktivieren
 
 ```bash
 sudo systemctl enable --now libvirtd
 ```
 
-### Festplatten-Diagnosewerkzeuge scannen
+#### Festplatten-Diagnosewerkzeuge scannen
 
 ```bash
 # sudo smartctl --scan
 ```
 
-### Erweiterte Gruppenrechte für native Kernel-Virtualisierung (KVM) setzen
+#### Erweiterte Gruppenrechte für native Kernel-Virtualisierung (KVM) setzen
 
 ```bash
 sudo usermod -aG libvirt,kvm $(whoami)
 ```
 
-### Das Highlight: Der optimale QEMU-Startbefehl (Die 2. Variante ist besser!)
+#### Das Highlight: Der optimale QEMU-Startbefell für Ubuntu 26.04 LTS, Kali Linux 2026, Chachy OS + BlackArch Linux
 
-```bash
-sudo pacman -Syu qemu-ui-gtk qemu-ui-sdl qemu-audio-pa spice-gtk virglrenderer libvdpau libva-mesa-driver spice-vdagent
-```
+##### Ubuntu
 
 ```bash
 qemu-img create -f qcow2 ubuntu.qcow2 50G
+```
 
+```bash
 qemu-system-x86_64 \
   -enable-kvm \
   -cpu host,kvm=off \
@@ -1120,7 +1121,9 @@ qemu-system-x86_64 \
   -device qemu-xhci \
   -device usb-tablet \
   -device usb-kbd
+```
 
+```bash
 qemu-system-x86_64 \
    -enable-kvm \
    -cpu host \
@@ -1135,9 +1138,11 @@ qemu-system-x86_64 \
    -netdev user,id=net0 \
    -device virtio-net-pci,netdev=net0 \
    -rtc base=localtime,clock=host
+```
 
-# or
+##### oder
 
+```bash
 qemu-system-x86_64 \
   -enable-kvm \
   -cpu host,hv_relaxed,hv_spinlocks=0x1fff,hv_vapic,hv_time,kvm=on \
@@ -1157,9 +1162,11 @@ qemu-system-x86_64 \
   -audiodev pipewire,id=audio0 \
   -device virtio-sound-pci,audiodev=audio0 \
   -rtc base=localtime,clock=host
+```
 
-# or
+##### oder
 
+```bash
 qemu-system-x86_64 \
   -enable-kvm \
   -cpu host,hv_relaxed,hv_spinlocks=0x1fff,hv_vapic,hv_time \
@@ -1177,9 +1184,11 @@ qemu-system-x86_64 \
   -device virtio-sound-pci,audiodev=audio0 \
   -rtc base=utc,clock=host \
   -sandbox on,obsolete=deny,elevateprivileges=deny,spawn=deny,resourcecontrol=deny
+```
 
-# or
+##### oder
 
+```bash
 qemu-system-x86_64 \
   -machine type=q35,accel=kvm \
   -enable-kvm \
@@ -1204,9 +1213,11 @@ qemu-system-x86_64 \
   -audiodev pipewire,id=audio0 \
   -device virtio-sound-pci,audiodev=audio0 \
   -rtc base=localtime,clock=host
+```
 
-# or (empfohlen)
+##### oder (empfohlen)
 
+```bash
 qemu-system-x86_64 \
   -enable-kvm \
   -cpu host \
@@ -1225,14 +1236,11 @@ qemu-system-x86_64 \
   -device virtio-sound-pci,audiodev=audio0 \
   -rtc base=utc,clock=host \
   -sandbox on,obsolete=deny,elevateprivileges=deny,spawn=deny,resourcecontrol=deny
+```
 
+##### Kali
 
-# bei Ubuntu noch: 
-
-sudo apt install spice-vdagent
-
-# or
-
+```bash
 qemu-system-x86_64 \
       -enable-kvm \
       -m 6144 \
@@ -1243,9 +1251,11 @@ qemu-system-x86_64 \
       -vga virtio \
       -display gtk,gl=on \
       -drive file=kali-linux-2026.1-qemu-amd64.qcow2,format=qcow2
+```
 
-# or
+##### oder
 
+```bash
 qemu-system-x86_64 \
       -enable-kvm \
       -m 6144 \
@@ -1256,9 +1266,11 @@ qemu-system-x86_64 \
       -device virtio-vga-gl,max_outputs=1,xres=3840,yres=2160,vgamem_mb=256 \
       -display gtk,gl=on \
       -drive file=kali-linux-2026.1-qemu-amd64.qcow2,format=qcow2
+```
 
-# or
+##### oder
 
+```bash
 qemu-system-x86_64 \
     -enable-kvm \
     -cpu host,hv_relaxed,hv_spinlocks=0x1fff,hv_vapic,hv_time,kvm=on \
@@ -1278,7 +1290,11 @@ qemu-system-x86_64 \
     -audiodev pipewire,id=audio0 \
     -device virtio-sound-pci,audiodev=audio0 \
     -rtc base=localtime,clock=host
+```
 
+##### oder
+
+```bash
 qemu-system-x86_64 \
   -machine type=q35,accel=kvm \
   -enable-kvm \
@@ -1303,9 +1319,11 @@ qemu-system-x86_64 \
   -audiodev pipewire,id=audio0 \
   -device virtio-sound-pci,audiodev=audio0 \
   -rtc base=localtime,clock=host
+```
 
-# or
+##### oder
 
+```bash
 qemu-system-x86_64 \
     -enable-kvm \
     -cpu host,hv_relaxed,hv_spinlocks=0x1fff,hv_vapic,hv_time,kvm=on \
@@ -1325,9 +1343,11 @@ qemu-system-x86_64 \
     -audiodev pipewire,id=audio0 \
     -device virtio-sound-pci,audiodev=audio0 \
     -rtc base=localtime,clock=host
+```
 
-# or
+##### oder
 
+```bash
 qemu-system-x86_64 \
   -enable-kvm \
   -cpu host,hv_relaxed,hv_spinlocks=0x1fff,hv_vapic,hv_time,kvm=on \
@@ -1347,9 +1367,11 @@ qemu-system-x86_64 \
   -audiodev pipewire,id=audio0 \
   -device virtio-sound-pci,audiodev=audio0 \
   -rtc base=localtime,clock=host
+```
 
-# or
+##### oder
 
+```bash
 qemu-system-x86_64 \
   -enable-kvm \
   -cpu host,hv_relaxed,hv_spinlocks=0x1fff,hv_vapic,hv_time \
@@ -1367,9 +1389,11 @@ qemu-system-x86_64 \
   -device virtio-sound-pci,audiodev=audio0 \
   -rtc base=utc,clock=host \
   -sandbox on,obsolete=deny,elevateprivileges=deny,spawn=deny,resourcecontrol=deny
+```
 
-# or (empfohlen)
+##### oder (empfohlen)
 
+```bash
 qemu-system-x86_64 \
   -enable-kvm \
   -cpu host \
@@ -1388,9 +1412,11 @@ qemu-system-x86_64 \
   -device virtio-sound-pci,audiodev=audio0 \
   -rtc base=utc,clock=host \
   -sandbox on,obsolete=deny,elevateprivileges=deny,spawn=deny,resourcecontrol=deny
+```
 
-# or  (sehr sicher)
+##### oder (sehr sicher)
 
+```bash
 qemu-system-x86_64 \
   -enable-kvm \
   -machine q35 \
@@ -1405,16 +1431,25 @@ qemu-system-x86_64 \
   -rtc base=utc \
   -sandbox on,obsolete=deny,elevateprivileges=deny,spawn=deny,resourcecontrol=deny \
   -no-user-config
+```
 
-# und wen was nicht leuft:
-# sudo pacman -S virglrenderer
+###### und wen was nicht leuft:
 
-# Chachy OS + Black Arch
+```bash
+sudo pacman -S virglrenderer
+```
 
+##### Chachy OS + Black Arch
+
+```bash
 qemu-img create -f qcow2 cachyos.qcow2 80G
+```
 
+```bash
 cp /usr/share/edk2/x64/OVMF_VARS.4m.fd cachyos_VARS.fd
+```
 
+```bash
 qemu-system-x86_64 \
   -enable-kvm \
   -machine q35 \
@@ -1436,9 +1471,11 @@ qemu-system-x86_64 \
   -device qemu-xhci \
   -device usb-tablet \
   -device usb-kbd
+```
 
-# (empfohlen)
+#### (empfohlen)
 
+```bash
 qemu-system-x86_64 \
   -enable-kvm \
   -machine q35 \
@@ -1460,9 +1497,11 @@ qemu-system-x86_64 \
   -device virtio-sound-pci,audiodev=audio0 \
   -rtc base=utc,clock=host \
   -sandbox on,obsolete=deny,elevateprivileges=deny,spawn=deny,resourcecontrol=deny
+```
 
-# or (sehr sicher)
+##### oder (sehr sicher)
 
+```bash
 qemu-system-x86_64 \
   -enable-kvm \
   -machine q35 \
@@ -1477,8 +1516,38 @@ qemu-system-x86_64 \
   -rtc base=utc \
   -sandbox on,obsolete=deny,elevateprivileges=deny,spawn=deny,resourcecontrol=deny \
   -no-user-config
-
 ```
+
+<details>
+<summary>Ubuntu Configuration</summary>
+
+#### Bei Ubuntu noch: 
+sudo apt install spice-vdagent
+
+</details>
+
+<details>
+<summary>BlackArch Configuration</summary>
+
+Du kannst die gleiche config wie bei JK-Arch verwenden nur bitte kein Hyperland in der QEMU VM verweden sonder KDE Plasma oder XFCE.
+
+#### BlackArch installieren
+
+```bash
+cd ~
+curl -O https://blackarch.org/strap.sh
+echo 00688950aaf5e5804d2abebb8d3d3ea1d28525ed strap.sh | sha1sum -c
+cat strap.sh
+```
+
+```bash
+chmod +x strap.sh
+sudo ./strap.sh
+sudo pacman -Syu
+sudo pacman -Sgg | grep blackarch | cut -d' ' -f2 | sort -u
+```
+
+</details>
 
 <details>
 <summary>Kali-Linux Configuration</summary>
@@ -2120,7 +2189,7 @@ options edns0 trust-ad
 sudo nvim /etc/modprobe.d/8821ce.conf
 ```
 
-and 
+and
 
 ```text
 options 8821ce rtw_power_mgnt=0 rtw_enusbss=0 rtw_ips_mode=0
