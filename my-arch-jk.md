@@ -1522,7 +1522,10 @@ qemu-system-x86_64 \
 <summary>Ubuntu Configuration</summary>
 
 #### Bei Ubuntu noch: 
+
+```bash
 sudo apt install spice-vdagent
+```
 
 </details>
 
