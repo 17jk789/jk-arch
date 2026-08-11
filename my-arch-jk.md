@@ -1550,6 +1550,17 @@ sudo pacman -Syu
 sudo pacman -Sgg | grep blackarch | cut -d' ' -f2 | sort -u
 ```
 
+##### Cool bei Kde Plasma: 
+
+```bash
+git clone --depth=1 https://github.com/catppuccin/kde catppuccin-kde && cd catppuccin-kde
+cat ./install.sh
+```
+
+```bash
+./install.sh
+```
+
 </details>
 
 <details>
