@@ -1561,10 +1561,29 @@ cat ./install.sh
 ./install.sh
 ```
 
+
+#### Pentesting Tools installieren
+
+```bash
+# sudo pacman -S blackarch -> 2.860 Tools
+
+# Web-Hacking: sudo pacman -S blackarch-webapp
+# Netzwerk-Werkzeuge: sudo pacman -S blackarch-network
+# WLAN-Hacking: sudo pacman -S blackarch-wireless
+
+sudo pacman -Syu nmap metasploit hydra wireshark-qt john
+```
+
 </details>
 
 <details>
 <summary>Kali-Linux Configuration</summary>
+
+#### Passwort ändern
+
+```bash
+passwd
+```
 
 #### Snap installieren
 
