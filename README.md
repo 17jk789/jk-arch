@@ -2,7 +2,7 @@
   <img src="images/5.png" width="1000" />
 </p>
 
-# My JK-Arch Config: Visual Studio Code, IDEA Vim and NeoVim (LazyVim) settings etc.
+# My Arch-Linux (JK-Arch) Config
 
 This repository contains my personal **Visual Studio Code / IDEA Vim / NeoVim (LazyVim) etc. settings**.
 
@@ -10,11 +10,11 @@ This repository contains my personal **Visual Studio Code / IDEA Vim / NeoVim (L
 > This repo was not created for public distribution.
 > It is intended only for my own use, so I can use my settings on another computer without logging into my GitHub account.
 
-new:
+New:
 
-- [`JK Arch`](my-arch-jk.md)
+- [`JK-Arch (Deutsch) + .config`](my-arch-jk.md)
 
-old:
+Old:
 
 - [`NeoVim Ubuntu`](README-neovim-config-Ubuntu.md)  
 - [`NeoVim Arch`](README-neovim-config-Arch.md)
