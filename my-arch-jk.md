@@ -1840,6 +1840,156 @@ sudo mv nvim-linux-x86_64 /opt/nvim
 
 </details>
 
+<details>
+<summary>Metaexploitable 2 (test)</summary>
+
+### Metaexploitable 2
+
+```bash
+# 1. TAP Interface erstellen (sicherstellen, dass Ownership beim User bleibt)
+# Wichtig: Wir nutzen 'user $USER', damit QEMU (als User) es nutzen kann.
+sudo ip tuntap add dev tap0 mode tap user $USER
+
+# 2. IP auf dem Host-Interface setzen (als "Gateway" für die VMs, aber kein Weiterleitung)
+# Wir entfernen vorherige IPs, um Konflikte zu vermeiden
+sudo ip addr flush dev tap0
+sudo ip addr add 192.168.56.1/24 dev tap0
+
+# 3. Interface aktivieren
+sudo ip link set tap0 up
+
+# 4. CRITICAL: IP Forwarding dauerhaft deaktivieren
+# Dies verhindert, dass Daten vom TAP-Interface ins Internet weitergeleitet werden
+sudo sysctl -w net.ipv4.ip_forward=0
+# (Optional: Damit es nach Neustart erhalten bleibt, addiere es zu /etc/sysctl.conf)
+# echo "net.ipv4.ip_forward = 0" | sudo tee -a /etc/sysctl.conf
+
+# 5. Firewall-Regeln (Korrekte Reihenfolge!)
+
+# A. Erlaube Verkehr zwischen den VMs im Subnetz (Muss zuerst!)
+sudo iptables -A FORWARD -i tap0 -o tap0 -s 192.168.56.0/24 -d 192.168.56.0/24 -j ACCEPT
+
+# B. Erlaube etablierte Verbindungen (für Rückantworten)
+sudo iptables -A FORWARD -i tap0 -m state --state ESTABLISHED,RELATED -j ACCEPT
+sudo iptables -A INPUT -i tap0 -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+# C. Blockiere ALLEN anderen Verkehr (Muss ganz unten!)
+sudo iptables -A INPUT -i tap0 -j DROP
+sudo iptables -A FORWARD -i tap0 -j DROP
+sudo iptables -A OUTPUT -o tap0 -j DROP
+
+# D. (Optional) ARP blockieren? NEIN, lass es weg für normale Kommunikation.
+# sudo iptables -A INPUT -i tap0 -p arp -j DROP
+
+sudo iptables -L -n -v
+```
+
+#### Blackarch starten
+
+```bash
+qemu-system-x86_64 \
+  -enable-kvm \
+  -cpu host \
+  -smp 4,sockets=1,cores=4,threads=1 \
+  -m 8G \
+  -drive file=cachy.qcow2,id=hd0,if=none,format=qcow2,cache=none \
+  -device virtio-blk-pci,drive=hd0 \
+  -device virtio-net-pci,netdev=net0,mac=52:54:00:11:11:11 \
+  -netdev tap,id=net0,ifname=tap0,script=no,downscript=no \
+  -display sdl,gl=on \
+  -name "BlackArch-Attacker" \
+  -sandbox on,obsolete=deny,elevateprivileges=deny,spawn=deny,resourcecontrol=deny
+```
+
+#### Metasploitable 2 starten
+
+```bash
+# etv.: qemu-img convert -f vmdk -O qcow2 metasploitable2.vmdk metasploitable2.qcow2
+
+qemu-system-x86_64 \
+  -enable-kvm \
+  -cpu host \
+  -smp 2,sockets=1,cores=2,threads=1 \
+  -m 2G \
+  -drive file=metasploitable2.qcow2,id=hd0,if=none,format=qcow2,cache=none \
+  -device virtio-blk-pci,drive=hd0 \
+  -device virtio-net-pci,netdev=net0,mac=52:54:00:22:22:22 \
+  -netdev tap,id=net0,ifname=tap0,script=no,downscript=no \
+  -display sdl,gl=on \
+  -name "Metasploitable2-Target" \
+  -sandbox on,obsolete=deny,elevateprivileges=deny,spawn=deny,resourcecontrol=deny
+```
+
+#### In Blackarch
+
+```bash
+# sudo ip addr add 192.168.56.100/24 dev eth0
+# sudo ip link set eth0 up
+
+# IP setzen (z.B. 192.168.56.100)
+sudo ip addr add 192.168.56.100/24 dev eth0
+sudo ip link set eth0 up
+
+# Gateway NICHT setzen
+sudo route del default
+
+ip addr
+```
+
+#### Metasploitable 2
+
+```bash
+# sudo ifconfig eth0 192.168.56.101 netmask 255.255.255.0 up
+
+# IP setzen (z.B. 192.168.56.101)
+sudo ifconfig eth0 192.168.56.101 netmask 255.255.255.0 up
+
+# Gateway NICHT setzen (damit kein Internet möglich ist)
+# default gateway entfernen, falls vorhanden
+sudo route del default
+
+ifconfig
+```
+
+#### Verbindung testen: Von BlackArch aus
+
+##### Ping Metasploitable:
+
+```bash
+ping -c 3 192.168.56.101
+# Sollte funktionieren
+```
+
+##### Ping Internet (muss fehlschlagen):
+
+```bash
+ping -c 3 8.8.8.8
+# Sollte fehlschlagen: "Network unreachable" oder "Destination Host Unreachable"
+```
+
+##### Prüfe Firewall-Regeln:
+
+```bash
+sudo iptables -L -n -v
+# Du solltest DROP-Regeln für tap0 sehen
+```
+
+Wenn das klappt, bist du sicher im isolierten Netzwerk.
+
+#### Metasploit starten
+
+```bash
+msfconsole
+use exploit/multi/handler
+# Oder einen spezifischen Exploit für Metasploitable, z.B. vsftpd
+search vsftpd
+use exploit/unix/ftp/vsftpd_234_backdoor
+set RHOSTS 192.168.56.101
+exploit
+```
+
+</details>
+
 ### Den grafischen Audio-Mixer pwvucontrol installieren
 
 ```bash
