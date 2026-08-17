@@ -1070,8 +1070,7 @@ sudo pacman -S 7zip
 ### QEMU, KVM und die grafische Verwaltung Virt-Manager installieren
 
 ```bash
-sudo pacman -S qemu-full virt-manager libvirt virt-viewer dnsmasq
-sudo pacman -Syu qemu-ui-gtk qemu-ui-sdl qemu-audio-pa spice-gtk virglrenderer libvdpau libva-mesa-driver spice-vdagent
+sudo pacman -Syu qemu-full virt-manager libvirt virt-viewer dnsmasq qemu-ui-gtk qemu-ui-sdl qemu-audio-pa spice-gtk virglrenderer libvdpau libva-mesa-driver spice-vdagent
 ```
 
 #### Den Virtualisierungs-Dienst für KVM/QEMU aktivieren
@@ -1090,6 +1089,13 @@ sudo systemctl enable --now libvirtd
 
 ```bash
 sudo usermod -aG libvirt,kvm $(whoami)
+```
+
+### Vagrant und das Libvirt-Plugin installieren
+
+```bash
+# yay -S vagrant
+# vagrant plugin install vagrant-libvirt
 ```
 
 #### Das Highlight: Der optimale QEMU-Startbefell für Ubuntu 26.04 LTS, Kali Linux 2026, Cachy OS + BlackArch Linux
