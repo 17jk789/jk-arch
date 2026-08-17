@@ -1577,7 +1577,27 @@ cat ./install.sh
 # Netzwerk-Werkzeuge: sudo pacman -S blackarch-network
 # WLAN-Hacking: sudo pacman -S blackarch-wireless
 
-sudo pacman -Syu nmap metasploit hydra wireshark-qt john
+sudo pacman -Syu \
+  nmap \           # Port-Scan und Schwachstellen-Check
+  metasploit \     # Exploitation
+  hydra \          # Passwort-Cracking
+  wireshark-qt \   # Netzwerk-Analyse
+  john \           # Passwort-Hash-Cracking
+  nikto \          # Web-Scanner (perfekt für Metasploitable)
+  whatweb \        # Web-Technologie-Erkennung
+  theHarvester \   # OSINT (E-Mails, Domains)
+  shodan \         # Shodan-CLI (falls API-Key vorhanden)
+  bind-tools \     # host, dig, nslookup
+  tcpdump \        # Paket-Mitschnitt
+  netcat-openbsd \ # Schweizer Taschenmesser
+  koadic \         # C2 Framework
+  setoolkit \      # Social Engineering
+  sliver \         # Modernes C2 Framework
+  powersploit \    # PowerShell Exploits
+  sslyze \         # SSL/TLS Analyse
+  sslscan \        # SSL/TLS Analyse
+  testssl.sh       # SSL/TLS Analyse
+  hashcat          # GPU-basiertes Cracking (optional)
 ```
 
 </details>
