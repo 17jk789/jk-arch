@@ -136,18 +136,29 @@ cherry_pick = "[🍒 PICKING](bold #f38ba8)"
 [git_status]
 style = "bg:#f9e2af fg:#1e1e2e"
 
-format = " [](bold fg:#f9e2af)[$all_status]($style)[](bold fg:#f9e2af)"
+format = " [](bold fg:#f9e2af)[ $all_status]($style)[](bold fg:#f9e2af)"
 
-conflicted = "🏳"
-untracked = "🤷"
-modified = "📝"
-deleted = "🗑"
-renamed = "✍️"
-stashed = "📦"
+# conflicted = " 🏳 "
+# ahead = " 🏎💨 "
+# behind = " 😰 "
+# diverged = " 😵 "
+# untracked = " 🤷 ‍"
+# stashed = " 📦 "
+# modified = " 📝 "
+# staged = '[++\($count\)](green)'
+# renamed = " ✍️ "
+# deleted = " 🗑 "
+
+conflicted = "conflicted"
+untracked = "untracked"
+modified = "modified"
+deleted = "deleted"
+renamed = "renamed"
+stashed = "stashed"
 staged = " ++($count)"
-ahead = "🏎💨"
-behind = "😰"
-diverged = "😵"
+ahead = "ahead"
+behind = "behind"
+diverged = "diverged"
 
 # ============================================================
 # HOSTNAME
