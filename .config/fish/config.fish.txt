@@ -1,6 +1,11 @@
 # Commands to run in interactive sessions can go here
 if status is-interactive
 
+    # IPs EINMAL beim Start von Fish holen und exportieren
+    # set -gx MY_IP (ip route get 1 | awk '{print $7}')
+    set -gx MY_IP (ip route get 1 | sed -n 's/.*src \([^ ]*\).*/\1/p' | string trim)
+    set -gx PUB_IP (curl -fsS --max-time 5 ifconfig.me)
+
     set -g fish_key_bindings fish_vi_key_bindings
 
     # No greeting

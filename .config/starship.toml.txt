@@ -10,15 +10,27 @@ add_newline = false
 # $directory $fill $git_branch $cmd_duration
 #  $character"""
 format = """
-$os$username$hostname$directory$git_branch$git_status$python$rust$golang$nodejs$java$c$lua$fill$cmd_duration$jobs$battery$time
+$os$username$hostname$directory${env_var.MY_IP}${env_var.PUB_IP}$git_branch$git_status$python$rust$golang$nodejs$java$c$lua$fill$cmd_duration$jobs$battery$time
 $character"""
 
 [os]
 disabled = false
 style = "bg:252 fg:235"
-format = " [](bold fg:252)[  jk-arch]($style)[](bold fg:252)"
-# format = " [](bold fg:252)[  jk-black]($style)[](bold fg:252)"
-# format = " [](bold fg:252)[  jk-kali]($style)[](bold fg:252)"
+format = " [](bold fg:252)[ ]($style)"
+
+[username]
+disabled = false
+show_always = true
+style_user = "bg:252 fg:235"
+style_root = "bg:252 fg:235"
+format = "[$user]($style)"
+
+[hostname]
+disabled = false
+ssh_only = false
+style = "bg:252 fg:235"
+format = "[@$hostname]($style)[](bold fg:252)"
+trim_at = "."
 
 [fill]
 symbol = ' ─'
@@ -65,12 +77,12 @@ ahead = "🏎💨"
 behind = "😰"
 diverged = "😵"
 
-[hostname]
-ssh_only = true
-style = "bg:252 fg:235"
-format =  " [](bold fg:252)[•$hostname]($style)[](bold fg:252)"
-trim_at = ".companyname.com"
-disabled = false
+# [hostname]
+# ssh_only = true
+# style = "bg:252 fg:235"
+# format =  " [](bold fg:252)[•$hostname]($style)[](bold fg:252)"
+# trim_at = ".companyname.com"
+# disabled = false
 
 [line_break]
 disabled = false
@@ -87,12 +99,12 @@ style = "bg:252 fg:235"
 format = ' [](bold fg:252)[󰥔 $time]($style)[](bold fg:252)'
 time_format = "%T"
 
-[username]
-style_user = "bold bg:252 fg:235"
-style_root = "red bold"
-format = " [](bold fg:252)[$user]($style)[](bold fg:252)"
-disabled = false
-show_always = false
+# [username]
+# style_user = "bold bg:252 fg:235"
+# style_root = "red bold"
+# format = " [](bold fg:252)[$user]($style)[](bold fg:252)"
+# disabled = false
+# show_always = false
 
 [jobs]
 symbol = "󰒋"
@@ -188,3 +200,13 @@ detect_files = ["CMakeLists.txt", "Makefile"]
 # format = " [](bold fg:248)[$symbol $version]($style)[](bold fg:248)"
 # detect_extensions = ["cpp", "hpp", "cc"]
 # detect_files = ["CMakeLists.txt", "Makefile"]
+
+[env_var.MY_IP]
+variable = "MY_IP"
+style = "bg:252 fg:235"
+format = " [](bold fg:252)[󰒋 $env_value](bg:252 fg:235)[](bold fg:252)"
+
+[env_var.PUB_IP]
+variable = "PUB_IP"
+style = "bg:252 fg:235"
+format = " [](bold fg:252)[󰖟 $env_value](bg:252 fg:235)[](bold fg:252)"
