@@ -185,7 +185,7 @@ style = "bold dimmed #a6e3a1"
 [time]
 disabled = false
 style = "bg:#313244 fg:#cdd6f4"
-format = ' [](bold fg:#313244)[󰥔 $time]($style)[](bold fg:#313244)'
+format = " [](bold fg:#313244)[󰥔 $time]($style)[](bold fg:#313244) "
 time_format = "%T"
 
 
@@ -260,7 +260,7 @@ format = " [](bold fg:#313244)[󰉋 → $path]($style)[](bold fg:#313244)"
 min_time = 0
 show_milliseconds = true
 style = "bold bg:#313244 fg:#cdd6f4"
-format = " [](bold fg:#313244)[󰪢 $duration]($style)[](bold fg:#313244)"
+format = "[](bold fg:#313244)[󰪢 $duration]($style)[](bold fg:#313244)"
 
 # ============================================================
 # PYTHON
