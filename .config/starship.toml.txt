@@ -69,8 +69,8 @@ format = "[$user]($style)"
 [hostname]
 disabled = false
 ssh_only = false
-style = "bg:#45475a fg:#cdd6f4"
-format = "[@$hostname]($style)[](bold fg:#45475a)"
+style = "bg:#313244 fg:#cdd6f4"
+format = "[@$hostname]($style)[](bold fg:#313244)"
 trim_at = "."
 
 # ============================================================
