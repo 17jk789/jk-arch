@@ -186,35 +186,38 @@ Bitte führen sie alle Commands aus und fügen sie .config in ihr Systhem ein.
           - [Cachy OS \& BlackArch: Installation mit UEFI und Sandbox](#cachy-os--blackarch-installation-mit-uefi-und-sandbox)
           - [Cachy OS \& BlackArch: **Empfohlene Konfiguration** (UEFI, OpenGL, PipeWire)](#cachy-os--blackarch-empfohlene-konfiguration-uefi-opengl-pipewire)
           - [Cachy OS \& BlackArch: **Minimales Sicherheits-Setup** ohne UEFI-Komplexität](#cachy-os--blackarch-minimales-sicherheits-setup-ohne-uefi-komplexität)
-      - [Bei Ubuntu noch](#bei-ubuntu-noch)
-      - [BlackArch installieren](#blackarch-installieren)
-        - [Cool bei Kde Plasma](#cool-bei-kde-plasma)
-      - [Pentesting Tools installieren](#pentesting-tools-installieren)
-      - [Passwort ändern](#passwort-ändern)
-      - [Snap installieren](#snap-installieren)
-      - [Basis-Tools](#basis-tools-1)
-      - [Compiler \& Toolchain](#compiler--toolchain-1)
-      - [Debugging](#debugging-1)
-      - [Reverse Engineering](#reverse-engineering-1)
-      - [Fuzzing \& Performance](#fuzzing--performance-1)
-      - [GUI-Bibliotheken](#gui-bibliotheken-1)
-      - [Benchmarking \& Profiling](#benchmarking--profiling)
-      - [Rust](#rust)
-      - [Java](#java)
-      - [Docker](#docker)
-      - [Ghidra](#ghidra)
-      - [Fish](#fish)
-      - [Update NeoVim](#update-neovim)
-    - [Metaexploitable 2](#metaexploitable-2)
-      - [Blackarch starten](#blackarch-starten)
-      - [Metasploitable 2 starten](#metasploitable-2-starten)
-      - [In Blackarch](#in-blackarch)
-      - [Metasploitable 2](#metasploitable-2)
-      - [Verbindung testen: Von BlackArch aus](#verbindung-testen-von-blackarch-aus)
-        - [Ping Metasploitable](#ping-metasploitable)
-        - [Ping Internet (muss fehlschlagen)](#ping-internet-muss-fehlschlagen)
-        - [Prüfe Firewall-Regeln](#prüfe-firewall-regeln)
-      - [Metasploit starten](#metasploit-starten)
+      - [Ubuntu Configuration](#ubuntu-configuration)
+        - [Bei Ubuntu noch](#bei-ubuntu-noch)
+      - [BlackArch Configuration](#blackarch-configuration)
+        - [BlackArch installieren](#blackarch-installieren)
+          - [Cool bei Kde Plasma](#cool-bei-kde-plasma)
+        - [Pentesting Tools installieren](#pentesting-tools-installieren)
+      - [Kali-Linux Configuration](#kali-linux-configuration)
+        - [Passwort ändern](#passwort-ändern)
+        - [Snap installieren](#snap-installieren)
+        - [Basis-Tools](#basis-tools-1)
+        - [Compiler \& Toolchain](#compiler--toolchain-1)
+        - [Debugging](#debugging-1)
+        - [Reverse Engineering](#reverse-engineering-1)
+        - [Fuzzing \& Performance](#fuzzing--performance-1)
+        - [GUI-Bibliotheken](#gui-bibliotheken-1)
+        - [Benchmarking \& Profiling](#benchmarking--profiling)
+        - [Rust](#rust)
+        - [Java](#java)
+        - [Docker](#docker)
+        - [Ghidra](#ghidra)
+        - [Fish](#fish)
+        - [Update NeoVim](#update-neovim)
+      - [Metaexploitable 2](#metaexploitable-2)
+        - [Blackarch starten](#blackarch-starten)
+        - [Metasploitable 2 starten](#metasploitable-2-starten)
+        - [In Blackarch](#in-blackarch)
+        - [In Metasploitable 2](#in-metasploitable-2)
+        - [Verbindung testen: Von BlackArch aus](#verbindung-testen-von-blackarch-aus)
+          - [Ping Metasploitable](#ping-metasploitable)
+          - [Ping Internet (muss fehlschlagen)](#ping-internet-muss-fehlschlagen)
+          - [Prüfe Firewall-Regeln](#prüfe-firewall-regeln)
+        - [Metasploit starten](#metasploit-starten)
     - [Den grafischen Audio-Mixer pwvucontrol installieren](#den-grafischen-audio-mixer-pwvucontrol-installieren)
     - [Den grafischen Audio-Verkabelungs-Manager qpwgraph installieren](#den-grafischen-audio-verkabelungs-manager-qpwgraph-installieren)
     - [Die lokale KI-Laufzeitumgebung Ollama installieren](#die-lokale-ki-laufzeitumgebung-ollama-installieren)
@@ -1588,7 +1591,9 @@ sudo pacman -S virglrenderer
 <details>
 <summary>Ubuntu Configuration</summary>
 
-#### Bei Ubuntu noch
+#### Ubuntu Configuration
+
+##### Bei Ubuntu noch
 
 ```bash
 sudo apt install spice-vdagent
@@ -1599,9 +1604,11 @@ sudo apt install spice-vdagent
 <details>
 <summary>BlackArch Configuration</summary>
 
+#### BlackArch Configuration
+
 Du kannst die gleiche config wie bei JK-Arch verwenden nur bitte kein Hyperland in der QEMU VM verweden sonder KDE Plasma oder XFCE.
 
-#### BlackArch installieren
+##### BlackArch installieren
 
 ```bash
 cd ~
@@ -1617,7 +1624,7 @@ sudo pacman -Syu
 sudo pacman -Sgg | grep blackarch | cut -d' ' -f2 | sort -u
 ```
 
-##### Cool bei Kde Plasma
+###### Cool bei Kde Plasma
 
 ```bash
 git clone --depth=1 https://github.com/catppuccin/kde catppuccin-kde && cd catppuccin-kde
@@ -1628,7 +1635,7 @@ cat ./install.sh
 ./install.sh
 ```
 
-#### Pentesting Tools installieren
+##### Pentesting Tools installieren
 
 ```bash
 # sudo pacman -S blackarch -> 2.860 Tools
@@ -1665,13 +1672,15 @@ sudo pacman -Syu \
 <details>
 <summary>Kali-Linux Configuration</summary>
 
-#### Passwort ändern
+#### Kali-Linux Configuration
+
+##### Passwort ändern
 
 ```bash
 passwd
 ```
 
-#### Snap installieren
+##### Snap installieren
 
 ```bash
 sudo apt install -y snapd
@@ -1701,7 +1710,7 @@ sudo snap install firefox --beta
 sudo snap install brave
 ```
 
-#### Basis-Tools
+##### Basis-Tools
 
 ```bash
 sudo apt update
@@ -1709,14 +1718,14 @@ sudo apt install -y \
     curl wget unzip git fzf cmark shellcheck
 ```
 
-#### Compiler & Toolchain
+##### Compiler & Toolchain
 
 ```bash
 sudo apt install -y \
     build-essential gcc g++ clang llvm lldb cmake ninja-build clang-tidy valgrind clangd openjdk-21-jdk
 ```
 
-#### Debugging
+##### Debugging
 
 ```bash
 sudo apt install -y \
@@ -1729,7 +1738,7 @@ Go to `https://github.com/pwndbg/pwndbg/releases` and:
 sudo apt install ./pwndbg_2026.07.29_amd64.deb
 ```
 
-#### Reverse Engineering
+##### Reverse Engineering
 
 ```bash
 sudo apt install -y \
@@ -1742,7 +1751,7 @@ Go to `https://github.com/slimm609/checksec/releases` and:
 sudo apt install ./checksec_3.2.0_amd64.deb 
 ```
 
-#### Fuzzing & Performance
+##### Fuzzing & Performance
 
 ```bash
 sudo apt install -y \
@@ -1755,26 +1764,26 @@ sudo apt install -y \
 apt search linux-perf
 ```
 
-#### GUI-Bibliotheken
+##### GUI-Bibliotheken
 
 ```bash
 sudo apt install -y \
     libgtk-4-dev libadwaita-1-dev librsvg2-dev adwaita-icon-theme
 ```
 
-#### Benchmarking & Profiling
+##### Benchmarking & Profiling
 
 ```bash
 sudo apt install -y time hyperfine
 ```
 
-#### Rust
+##### Rust
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
-#### Java
+##### Java
 
 ```bash
 curl -s "https://get.sdkman.io" | bash
@@ -1782,7 +1791,7 @@ source "$HOME/.sdkman/bin/sdkman-init.sh"
 sdk install gradle
 ```
 
-#### Docker
+##### Docker
 
 ```bash
 # Ich würde noch Docker installieren
@@ -1805,13 +1814,13 @@ sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin dock
 docker --version
 ```
 
-#### Ghidra
+##### Ghidra
 
 ```bash
 sudo apt install -y ghidra
 ```
 
-#### Fish
+##### Fish
 
 ```bash
 sudo apt install -y fish
@@ -1895,7 +1904,7 @@ fisher install jorgebucaran/fisher
 fisher install jorgebucaran/autopair.fish nickeb96/fish-vim edc/bass PatrickF1/fzf.fish
 ```
 
-#### Update NeoVim
+##### Update NeoVim
 
 ```bash
 # 1) Alte Version prüfen
@@ -1923,7 +1932,7 @@ sudo mv nvim-linux-x86_64 /opt/nvim
 <details>
 <summary>Metaexploitable 2 (test)</summary>
 
-### Metaexploitable 2
+#### Metaexploitable 2
 
 ```bash
 # 1. TAP Interface erstellen (sicherstellen, dass Ownership beim User bleibt)
@@ -1964,7 +1973,7 @@ sudo iptables -A OUTPUT -o tap0 -j DROP
 sudo iptables -L -n -v
 ```
 
-#### Blackarch starten
+##### Blackarch starten
 
 ```bash
 qemu-system-x86_64 \
@@ -1981,7 +1990,7 @@ qemu-system-x86_64 \
   -sandbox on,obsolete=deny,elevateprivileges=deny,spawn=deny,resourcecontrol=deny
 ```
 
-#### Metasploitable 2 starten
+##### Metasploitable 2 starten
 
 ```bash
 # etv.: qemu-img convert -f vmdk -O qcow2 metasploitable2.vmdk metasploitable2.qcow2
@@ -2000,7 +2009,7 @@ qemu-system-x86_64 \
   -sandbox on,obsolete=deny,elevateprivileges=deny,spawn=deny,resourcecontrol=deny
 ```
 
-#### In Blackarch
+##### In Blackarch
 
 ```bash
 # sudo ip addr add 192.168.56.100/24 dev eth0
@@ -2016,7 +2025,7 @@ sudo route del default
 ip addr
 ```
 
-#### Metasploitable 2
+##### In Metasploitable 2
 
 ```bash
 # sudo ifconfig eth0 192.168.56.101 netmask 255.255.255.0 up
@@ -2031,23 +2040,23 @@ sudo route del default
 ifconfig
 ```
 
-#### Verbindung testen: Von BlackArch aus
+##### Verbindung testen: Von BlackArch aus
 
-##### Ping Metasploitable
+###### Ping Metasploitable
 
 ```bash
 ping -c 3 192.168.56.101
 # Sollte funktionieren
 ```
 
-##### Ping Internet (muss fehlschlagen)
+###### Ping Internet (muss fehlschlagen)
 
 ```bash
 ping -c 3 8.8.8.8
 # Sollte fehlschlagen: "Network unreachable" oder "Destination Host Unreachable"
 ```
 
-##### Prüfe Firewall-Regeln
+###### Prüfe Firewall-Regeln
 
 ```bash
 sudo iptables -L -n -v
@@ -2056,7 +2065,7 @@ sudo iptables -L -n -v
 
 Wenn das klappt, bist du sicher im isolierten Netzwerk.
 
-#### Metasploit starten
+##### Metasploit starten
 
 ```bash
 msfconsole
