@@ -164,23 +164,28 @@ Bitte führen sie alle Commands aus und fügen sie .config in ihr Systhem ein.
     - [Vagrant und das Libvirt-Plugin installieren](#vagrant-und-das-libvirt-plugin-installieren)
       - [Das Highlight: Der optimale QEMU-Startbefell für Ubuntu 26.04 LTS, Kali Linux 2026, Cachy OS + BlackArch Linux](#das-highlight-der-optimale-qemu-startbefell-für-ubuntu-2604-lts-kali-linux-2026-cachy-os--blackarch-linux)
         - [Ubuntu](#ubuntu)
-        - [oder](#oder)
-        - [oder](#oder-1)
-        - [oder](#oder-2)
-        - [oder (empfohlen)](#oder-empfohlen)
+          - [Ubuntu: Installation mit GTK und Sicherheits-Sandbox](#ubuntu-installation-mit-gtk-und-sicherheits-sandbox)
+          - [Ubuntu: Standard-Start mit GTK-Display und Hardware-GL](#ubuntu-standard-start-mit-gtk-display-und-hardware-gl)
+          - [Ubuntu: Erweiterte Ausführung mit SDL-OpenGL und Hardware-Virtualisierung](#ubuntu-erweiterte-ausführung-mit-sdl-opengl-und-hardware-virtualisierung)
+          - [Ubuntu: Full-Featured mit Spice-Unterstützung und Audio-PipeWire](#ubuntu-full-featured-mit-spice-unterstützung-und-audio-pipewire)
+          - [Ubuntu: High-Performance mit Cache=none und Native AIO](#ubuntu-high-performance-mit-cachenone-und-native-aio)
+          - [Ubuntu: Spice-Server mit RNG-Entropie und Vollem Sicherheits-Setup](#ubuntu-spice-server-mit-rng-entropie-und-vollem-sicherheits-setup)
+          - [Ubuntu: **Empfohlener Standard** (Optimiert für Performance \& Sicherheit)](#ubuntu-empfohlener-standard-optimiert-für-performance--sicherheit)
         - [Kali](#kali)
-        - [oder](#oder-3)
-        - [oder](#oder-4)
-        - [oder](#oder-5)
-        - [oder](#oder-6)
-        - [oder](#oder-7)
-        - [oder](#oder-8)
-        - [oder (empfohlen)](#oder-empfohlen-1)
-        - [oder (sehr sicher)](#oder-sehr-sicher)
-          - [und wen was nicht leuft](#und-wen-was-nicht-leuft)
+          - [Kali Linux: Minimal-Konfiguration für schnelle Tests](#kali-linux-minimal-konfiguration-für-schnelle-tests)
+          - [Kali Linux: Erweitertes Setup mit hochauflösender Grafik](#kali-linux-erweitertes-setup-mit-hochauflösender-grafik)
+          - [Kali Linux: Komfortabel mit Spice und Clipboard-Integration](#kali-linux-komfortabel-mit-spice-und-clipboard-integration)
+          - [Kali Linux: Maximal sicher mit Q35-Maschine und RNG](#kali-linux-maximal-sicher-mit-q35-maschine-und-rng)
+          - [Kali Linux: Kompakt mit 1080p-Auflösung und Spice](#kali-linux-kompakt-mit-1080p-auflösung-und-spice)
+          - [Kali Linux: SDL-Display mit Hardware-Virtualisierung und Audio](#kali-linux-sdl-display-mit-hardware-virtualisierung-und-audio)
+          - [Kali Linux: Hochperformant mit Cache=none und Native AIO](#kali-linux-hochperformant-mit-cachenone-und-native-aio)
+          - [Kali Linux: **Empfohlene Standard-Konfiguration** (Sicher \& Schnell)](#kali-linux-empfohlene-standard-konfiguration-sicher--schnell)
+          - [Kali Linux: **Minimales Sicherheits-Setup** für Isolation](#kali-linux-minimales-sicherheits-setup-für-isolation)
         - [Cachy OS + Black Arch](#cachy-os--black-arch)
-        - [empfohlen](#empfohlen)
-        - [oder sehr sicher](#oder-sehr-sicher-1)
+          - [Cachy OS \& BlackArch: Vorbereitung (Disk \& UEFI-Variablen)](#cachy-os--blackarch-vorbereitung-disk--uefi-variablen)
+          - [Cachy OS \& BlackArch: Installation mit UEFI und Sandbox](#cachy-os--blackarch-installation-mit-uefi-und-sandbox)
+          - [Cachy OS \& BlackArch: **Empfohlene Konfiguration** (UEFI, OpenGL, PipeWire)](#cachy-os--blackarch-empfohlene-konfiguration-uefi-opengl-pipewire)
+          - [Cachy OS \& BlackArch: Minimales Sicherheits-Setup ohne UEFI-Komplexität](#cachy-os--blackarch-minimales-sicherheits-setup-ohne-uefi-komplexität)
       - [Bei Ubuntu noch](#bei-ubuntu-noch)
       - [BlackArch installieren](#blackarch-installieren)
         - [Cool bei Kde Plasma](#cool-bei-kde-plasma)
@@ -1140,9 +1145,13 @@ sudo usermod -aG libvirt,kvm $(whoami)
 
 ##### Ubuntu
 
+###### Ubuntu: Installation mit GTK und Sicherheits-Sandbox
+
 ```bash
 qemu-img create -f qcow2 ubuntu.qcow2 50G
 ```
+
+###### Ubuntu: Standard-Start mit GTK-Display und Hardware-GL
 
 ```bash
 qemu-system-x86_64 \
@@ -1167,6 +1176,8 @@ qemu-system-x86_64 \
   -device usb-kbd
 ```
 
+###### Ubuntu: Erweiterte Ausführung mit SDL-OpenGL und Hardware-Virtualisierung
+
 ```bash
 qemu-system-x86_64 \
    -enable-kvm \
@@ -1184,7 +1195,7 @@ qemu-system-x86_64 \
    -rtc base=localtime,clock=host
 ```
 
-##### oder
+###### Ubuntu: Full-Featured mit Spice-Unterstützung und Audio-PipeWire
 
 ```bash
 qemu-system-x86_64 \
@@ -1208,7 +1219,7 @@ qemu-system-x86_64 \
   -rtc base=localtime,clock=host
 ```
 
-##### oder
+###### Ubuntu: High-Performance mit Cache=none und Native AIO
 
 ```bash
 qemu-system-x86_64 \
@@ -1230,7 +1241,7 @@ qemu-system-x86_64 \
   -sandbox on,obsolete=deny,elevateprivileges=deny,spawn=deny,resourcecontrol=deny
 ```
 
-##### oder
+###### Ubuntu: Spice-Server mit RNG-Entropie und Vollem Sicherheits-Setup
 
 ```bash
 qemu-system-x86_64 \
@@ -1259,7 +1270,7 @@ qemu-system-x86_64 \
   -rtc base=localtime,clock=host
 ```
 
-##### oder (empfohlen)
+###### Ubuntu: **Empfohlener Standard** (Optimiert für Performance & Sicherheit)
 
 ```bash
 qemu-system-x86_64 \
@@ -1284,6 +1295,8 @@ qemu-system-x86_64 \
 
 ##### Kali
 
+###### Kali Linux: Minimal-Konfiguration für schnelle Tests
+
 ```bash
 qemu-system-x86_64 \
       -enable-kvm \
@@ -1297,7 +1310,7 @@ qemu-system-x86_64 \
       -drive file=kali-linux-2026.1-qemu-amd64.qcow2,format=qcow2
 ```
 
-##### oder
+###### Kali Linux: Erweitertes Setup mit hochauflösender Grafik
 
 ```bash
 qemu-system-x86_64 \
@@ -1312,7 +1325,7 @@ qemu-system-x86_64 \
       -drive file=kali-linux-2026.1-qemu-amd64.qcow2,format=qcow2
 ```
 
-##### oder
+###### Kali Linux: Komfortabel mit Spice und Clipboard-Integration
 
 ```bash
 qemu-system-x86_64 \
@@ -1336,7 +1349,7 @@ qemu-system-x86_64 \
     -rtc base=localtime,clock=host
 ```
 
-##### oder
+###### Kali Linux: Maximal sicher mit Q35-Maschine und RNG
 
 ```bash
 qemu-system-x86_64 \
@@ -1365,7 +1378,7 @@ qemu-system-x86_64 \
   -rtc base=localtime,clock=host
 ```
 
-##### oder
+###### Kali Linux: Kompakt mit 1080p-Auflösung und Spice
 
 ```bash
 qemu-system-x86_64 \
@@ -1389,7 +1402,7 @@ qemu-system-x86_64 \
     -rtc base=localtime,clock=host
 ```
 
-##### oder
+###### Kali Linux: SDL-Display mit Hardware-Virtualisierung und Audio
 
 ```bash
 qemu-system-x86_64 \
@@ -1413,7 +1426,7 @@ qemu-system-x86_64 \
   -rtc base=localtime,clock=host
 ```
 
-##### oder
+###### Kali Linux: Hochperformant mit Cache=none und Native AIO
 
 ```bash
 qemu-system-x86_64 \
@@ -1435,7 +1448,7 @@ qemu-system-x86_64 \
   -sandbox on,obsolete=deny,elevateprivileges=deny,spawn=deny,resourcecontrol=deny
 ```
 
-##### oder (empfohlen)
+###### Kali Linux: **Empfohlene Standard-Konfiguration** (Sicher & Schnell)
 
 ```bash
 qemu-system-x86_64 \
@@ -1458,7 +1471,7 @@ qemu-system-x86_64 \
   -sandbox on,obsolete=deny,elevateprivileges=deny,spawn=deny,resourcecontrol=deny
 ```
 
-##### oder (sehr sicher)
+###### Kali Linux: **Minimales Sicherheits-Setup** für Isolation
 
 ```bash
 qemu-system-x86_64 \
@@ -1477,13 +1490,15 @@ qemu-system-x86_64 \
   -no-user-config
 ```
 
-###### und wen was nicht leuft
+####### Fehlerbehebung: Fehlende Bibliotheken reparieren
 
 ```bash
 sudo pacman -S virglrenderer
 ```
 
 ##### Cachy OS + Black Arch
+
+###### Cachy OS & BlackArch: Vorbereitung (Disk & UEFI-Variablen)
 
 ```bash
 qemu-img create -f qcow2 cachyos.qcow2 80G
@@ -1492,6 +1507,8 @@ qemu-img create -f qcow2 cachyos.qcow2 80G
 ```bash
 cp /usr/share/edk2/x64/OVMF_VARS.4m.fd cachyos_VARS.fd
 ```
+
+###### Cachy OS & BlackArch: Installation mit UEFI und Sandbox
 
 ```bash
 qemu-system-x86_64 \
@@ -1517,7 +1534,7 @@ qemu-system-x86_64 \
   -device usb-kbd
 ```
 
-##### empfohlen
+###### Cachy OS & BlackArch: **Empfohlene Konfiguration** (UEFI, OpenGL, PipeWire)
 
 ```bash
 qemu-system-x86_64 \
@@ -1543,7 +1560,7 @@ qemu-system-x86_64 \
   -sandbox on,obsolete=deny,elevateprivileges=deny,spawn=deny,resourcecontrol=deny
 ```
 
-##### oder sehr sicher
+###### Cachy OS & BlackArch: Minimales Sicherheits-Setup ohne UEFI-Komplexität
 
 ```bash
 qemu-system-x86_64 \
@@ -1560,6 +1577,12 @@ qemu-system-x86_64 \
   -rtc base=utc \
   -sandbox on,obsolete=deny,elevateprivileges=deny,spawn=deny,resourcecontrol=deny \
   -no-user-config
+```
+
+####### Fehlerbehebung: Fehlende Bibliotheken reparieren
+
+```bash
+sudo pacman -S virglrenderer
 ```
 
 <details>
