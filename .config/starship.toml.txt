@@ -48,8 +48,8 @@ $character"""
 [os]
 disabled = false
 style = "bg:#313244 fg:#cdd6f4"
-format = " [](bold fg:#313244)[ ]($style)"
-# format = " [](bold fg:#313244)[  ]($style)"
+format = "[](bold fg:#313244)[ ]($style)"
+# format = "[](bold fg:#313244)[  ]($style)"
 
 # ============================================================
 # USERNAME
