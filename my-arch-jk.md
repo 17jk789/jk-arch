@@ -82,7 +82,7 @@ Bitte führen sie alle Commands aus und fügen sie .config in ihr Systhem ein.
     - [Moderne Terminal-Emulatoren installieren](#moderne-terminal-emulatoren-installieren)
     - [Akku- und Hardware-Informationen auslesen](#akku--und-hardware-informationen-auslesen)
     - [LazyVim und JetBrains Mono Nerd Font installieren](#lazyvim-und-jetbrains-mono-nerd-font-installieren)
-  - [Fun:](#fun)
+  - [Fun](#fun)
     - [Das System-Informationswerkzeug Fastfetch installieren](#das-system-informationswerkzeug-fastfetch-installieren)
     - [Den interaktiven Prozess-Viewer htop installieren](#den-interaktiven-prozess-viewer-htop-installieren)
     - [Den hochentwickelten System-Monitor btop installieren](#den-hochentwickelten-system-monitor-btop-installieren)
@@ -177,13 +177,13 @@ Bitte führen sie alle Commands aus und fügen sie .config in ihr Systhem ein.
         - [oder](#oder-8)
         - [oder (empfohlen)](#oder-empfohlen-1)
         - [oder (sehr sicher)](#oder-sehr-sicher)
-          - [und wen was nicht leuft:](#und-wen-was-nicht-leuft)
+          - [und wen was nicht leuft](#und-wen-was-nicht-leuft)
         - [Cachy OS + Black Arch](#cachy-os--black-arch)
-      - [(empfohlen)](#empfohlen)
-        - [oder (sehr sicher)](#oder-sehr-sicher-1)
-      - [Bei Ubuntu noch:](#bei-ubuntu-noch)
+        - [empfohlen](#empfohlen)
+        - [oder sehr sicher](#oder-sehr-sicher-1)
+      - [Bei Ubuntu noch](#bei-ubuntu-noch)
       - [BlackArch installieren](#blackarch-installieren)
-        - [Cool bei Kde Plasma:](#cool-bei-kde-plasma)
+        - [Cool bei Kde Plasma](#cool-bei-kde-plasma)
       - [Pentesting Tools installieren](#pentesting-tools-installieren)
       - [Passwort ändern](#passwort-ändern)
       - [Snap installieren](#snap-installieren)
@@ -206,9 +206,9 @@ Bitte führen sie alle Commands aus und fügen sie .config in ihr Systhem ein.
       - [In Blackarch](#in-blackarch)
       - [Metasploitable 2](#metasploitable-2)
       - [Verbindung testen: Von BlackArch aus](#verbindung-testen-von-blackarch-aus)
-        - [Ping Metasploitable:](#ping-metasploitable)
-        - [Ping Internet (muss fehlschlagen):](#ping-internet-muss-fehlschlagen)
-        - [Prüfe Firewall-Regeln:](#prüfe-firewall-regeln)
+        - [Ping Metasploitable](#ping-metasploitable)
+        - [Ping Internet (muss fehlschlagen)](#ping-internet-muss-fehlschlagen)
+        - [Prüfe Firewall-Regeln](#prüfe-firewall-regeln)
       - [Metasploit starten](#metasploit-starten)
     - [Den grafischen Audio-Mixer pwvucontrol installieren](#den-grafischen-audio-mixer-pwvucontrol-installieren)
     - [Den grafischen Audio-Verkabelungs-Manager qpwgraph installieren](#den-grafischen-audio-verkabelungs-manager-qpwgraph-installieren)
@@ -243,7 +243,7 @@ Bitte führen sie alle Commands aus und fügen sie .config in ihr Systhem ein.
     - [Das Begrüßungsprogramm von CachyOS entfernen](#das-begrüßungsprogramm-von-cachyos-entfernen)
     - [Instalation von En Croissant, eine moderne grafische Benutzeroberfläche (GUI) für Schachdatenbanken und Partienanalysen.](#instalation-von-en-croissant-eine-moderne-grafische-benutzeroberfläche-gui-für-schachdatenbanken-und-partienanalysen)
     - [Den Boot-Bildschirm (Plymouth) anpassen und das System-Abbild neu bauen](#den-boot-bildschirm-plymouth-anpassen-und-das-system-abbild-neu-bauen)
-  - [Nach der neovim config:](#nach-der-neovim-config)
+  - [Nach der neovim config](#nach-der-neovim-config)
     - [Code über den LSP-Server im Editor formatieren](#code-über-den-lsp-server-im-editor-formatieren)
     - [Emfehlungen bei end-4](#emfehlungen-bei-end-4)
 - [UFW ist langsam](#ufw-ist-langsam)
@@ -253,7 +253,7 @@ Bitte führen sie alle Commands aus und fügen sie .config in ihr Systhem ein.
 - [Reparieren von Haskell](#reparieren-von-haskell)
 - [WARP Cloudflair "1.1.1.1"](#warp-cloudflair-1111)
 - [TailScale](#tailscale)
-- [Korrigiertes Skript (Optimiert für 16 GB RAM):](#korrigiertes-skript-optimiert-für-16-gb-ram)
+- [Korrigiertes Skript (Optimiert für 16 GB RAM)](#korrigiertes-skript-optimiert-für-16-gb-ram)
 - [Cachy OS optimirung](#cachy-os-optimirung)
 - [Remote Desktop Connection (Windows ↔ Linux)](#remote-desktop-connection-windows--linux)
 - [Remote Desktop für Hyprland (Windows ↔ Linux)](#remote-desktop-für-hyprland-windows--linux)
@@ -628,7 +628,7 @@ fc-cache -fv
 nvim
 ```
 
-## Fun:
+## Fun
 
 ### Das System-Informationswerkzeug Fastfetch installieren
 
@@ -1477,7 +1477,7 @@ qemu-system-x86_64 \
   -no-user-config
 ```
 
-###### und wen was nicht leuft:
+###### und wen was nicht leuft
 
 ```bash
 sudo pacman -S virglrenderer
@@ -1517,7 +1517,7 @@ qemu-system-x86_64 \
   -device usb-kbd
 ```
 
-#### (empfohlen)
+##### empfohlen
 
 ```bash
 qemu-system-x86_64 \
@@ -1543,7 +1543,7 @@ qemu-system-x86_64 \
   -sandbox on,obsolete=deny,elevateprivileges=deny,spawn=deny,resourcecontrol=deny
 ```
 
-##### oder (sehr sicher)
+##### oder sehr sicher
 
 ```bash
 qemu-system-x86_64 \
@@ -1565,7 +1565,7 @@ qemu-system-x86_64 \
 <details>
 <summary>Ubuntu Configuration</summary>
 
-#### Bei Ubuntu noch: 
+#### Bei Ubuntu noch
 
 ```bash
 sudo apt install spice-vdagent
@@ -1594,7 +1594,7 @@ sudo pacman -Syu
 sudo pacman -Sgg | grep blackarch | cut -d' ' -f2 | sort -u
 ```
 
-##### Cool bei Kde Plasma: 
+##### Cool bei Kde Plasma
 
 ```bash
 git clone --depth=1 https://github.com/catppuccin/kde catppuccin-kde && cd catppuccin-kde
@@ -1604,7 +1604,6 @@ cat ./install.sh
 ```bash
 ./install.sh
 ```
-
 
 #### Pentesting Tools installieren
 
@@ -2011,21 +2010,21 @@ ifconfig
 
 #### Verbindung testen: Von BlackArch aus
 
-##### Ping Metasploitable:
+##### Ping Metasploitable
 
 ```bash
 ping -c 3 192.168.56.101
 # Sollte funktionieren
 ```
 
-##### Ping Internet (muss fehlschlagen):
+##### Ping Internet (muss fehlschlagen)
 
 ```bash
 ping -c 3 8.8.8.8
 # Sollte fehlschlagen: "Network unreachable" oder "Destination Host Unreachable"
 ```
 
-##### Prüfe Firewall-Regeln:
+##### Prüfe Firewall-Regeln
 
 ```bash
 sudo iptables -L -n -v
@@ -2349,7 +2348,7 @@ rm ~/.config/autostart/cachyos-hello.desktop
 # arch-logo
 ```
 
-## Nach der neovim config:
+## Nach der neovim config
 
 ```bash
 # Cpp
@@ -2641,7 +2640,7 @@ tailscale ip
 tailscale up --authkey [key]
 ```
 
-# Korrigiertes Skript (Optimiert für 16 GB RAM):
+# Korrigiertes Skript (Optimiert für 16 GB RAM)
 
 ```bash
 sudo nvim /etc/systemd/zram-generator.conf
