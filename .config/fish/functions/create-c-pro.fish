@@ -375,27 +375,64 @@ end
 
 function clang-analyze
     if test (count $argv) -eq 0
-        echo "Usage: clang-analyze <source.c> [arguments...]"
+        echo "Usage: clang-analyze <source.c> [compiler arguments...]"
         return 1
     end
 
     clang \
         --analyze \
+        -Xanalyzer -analyzer-output=text \
         -std=c23 \
-        -Wall \
-        -Wextra \
-        -Wpedantic \
+        -O2 \
+        -g3 \
+        -Weverything \
         -Wconversion \
+        -Wsign-conversion \
         -Wshadow \
         -Wformat=2 \
+        -Wformat-security \
+        -Wnull-dereference \
+        -Warray-bounds \
+        -Warray-parameter \
+        -Wconditional-uninitialized \
+        -Wuninitialized \
+        -Wtautological-compare \
+        -Wunreachable-code \
+        -Wpointer-arith \
+        -Wcast-align \
+        -Wcast-qual \
+        -Wwrite-strings \
+        -Wswitch-enum \
+        -Wstrict-prototypes \
+        -Wmissing-prototypes \
+        -Wmissing-variable-declarations \
+        -Wold-style-definition \
+        -Wundef \
+        -Wvla \
+        -Walloca \
+        -Wfloat-equal \
+        -Wdouble-promotion \
+        -Wdocumentation \
+        -Wthread-safety \
+        -Wcomma \
+        -Wextra-semi \
+        -Wcovered-switch-default \
+        -Wloop-analysis \
+        -Wrange-loop-analysis \
+        -Wunreachable-code-aggressive \
+        -Werror=implicit-function-declaration \
+        -Werror=incompatible-pointer-types \
+        -Werror=return-type \
+        -Werror=format-security \
         $argv
 end
 
 
 # ============================================================
-# HARDENED GCC BUILD
+# MAXIMUM HARDENED GCC BUILD
 #
 # Production-oriented defensive build.
+# Target: GNU/Linux, preferably x86-64.
 # ============================================================
 
 function gcc-hardened
@@ -407,10 +444,13 @@ function gcc-hardened
     gcc \
         -std=c23 \
         -O2 \
-        -D_FORTIFY_SOURCE=3 \
-        -fstack-protector-strong \
-        -fstack-clash-protection \
-        -fPIE \
+        -flto=auto \
+        -fhardened \
+        -fharden-compares \
+        -fharden-conditional-branches \
+        -fharden-control-flow-redundancy \
+        -fvisibility=hidden \
+        -fzero-call-used-regs=used-gpr \
         -Wall \
         -Wextra \
         -Wpedantic \
@@ -418,17 +458,24 @@ function gcc-hardened
         -Wsign-conversion \
         -Wshadow \
         -Wformat=2 \
+        -Wformat-security \
         -Werror=format-security \
-        $argv \
-        -pie \
-        -Wl,-z,relro \
-        -Wl,-z,now \
-        -Wl,-z,noexecstack
+        -Werror=implicit-function-declaration \
+        -Werror=incompatible-pointer-types \
+        -Werror=return-type \
+        -Werror=strict-prototypes \
+        -Werror=missing-prototypes \
+        -Werror=missing-declarations \
+        -Werror=write-strings \
+        $argv
 end
 
 
 # ============================================================
-# HARDENED CLANG BUILD
+# MAXIMUM HARDENED CLANG BUILD
+#
+# Production-oriented defensive build with LLVM CFI.
+# Target: GNU/Linux, preferably x86-64.
 # ============================================================
 
 function clang-hardened
@@ -440,10 +487,17 @@ function clang-hardened
     clang \
         -std=c23 \
         -O2 \
+        -flto=full \
+        -fvisibility=hidden \
+        -fPIE \
         -D_FORTIFY_SOURCE=3 \
         -fstack-protector-strong \
         -fstack-clash-protection \
-        -fPIE \
+        -ftrivial-auto-var-init=zero \
+        -fzero-call-used-regs=used-gpr \
+        -fcf-protection=full \
+        -fsanitize=cfi \
+        -fsanitize-trap=cfi \
         -Wall \
         -Wextra \
         -Wpedantic \
@@ -451,12 +505,24 @@ function clang-hardened
         -Wsign-conversion \
         -Wshadow \
         -Wformat=2 \
+        -Wformat-security \
         -Werror=format-security \
+        -Werror=implicit-function-declaration \
+        -Werror=incompatible-pointer-types \
+        -Werror=return-type \
+        -Werror=strict-prototypes \
+        -Werror=missing-prototypes \
+        -Werror=missing-declarations \
+        -Werror=write-strings \
         $argv \
         -pie \
         -Wl,-z,relro \
         -Wl,-z,now \
-        -Wl,-z,noexecstack
+        -Wl,-z,noexecstack \
+        -Wl,-z,separate-code \
+        -Wl,-z,defs \
+        -Wl,-z,pack-relative-relocs \
+        -Wl,-z,shstk
 end
 
 
