@@ -1,28 +1,36 @@
-> ## 🚨 Arch Linux AUR-Malware? So prüfst du dein System!
-> Im Juni 2026 gab es eine massive Supply-Chain-Attacke auf das Arch User Repository (AUR), bei der über 1600 Pakete mit Infostealern und eBPF-Rootkits infiziert wurden.
-> Die Arch-Community hat ein großartiges Open-Source-Tool entwickelt, mit dem ihr euer System komplett durchleuchten könnt (inklusive aller Pacman-Logs, systemd-Dienste und npm/bun/yarn/pnpm-Caches).
-> ## Schnell-Check in 3 Schritten:
-> 1. Repository klonen und Ordner öffnen:
-> 
-> ```bash
-> git clone https://github.com/lenucksi/aur-malware-check.git
-> cd aur-malware-check
-> ```
-> 
-> 2. Risikofreier Testlauf (holt die neuesten Listen, scannt ohne Root):
-> 
-> ```bash
-> python -m aur_check --refresh-campaigns --dry-run
-> ```
-> 
-> 3. Der vollständige Tiefenscan (erfordert sudo für eBPF- und Systemd-Prüfungen):
->
-> ```bash
-> sudo python -m aur_check --refresh --full
-> ```
-> 
-> Wenn am Ende RESULT: CLEAN steht, ist alles im grünen Bereich! Falls das Tool anschlägt, solltet ihr umgehend eure Passwörter und SSH-Keys von einem anderen Gerät aus ändern.
-> Bleibt sicher! 🐧
+<details>
+<summary>🚨 Arch Linux AUR-Malware? So prüfst du dein System!</summary>
+
+# 🚨 Arch Linux AUR-Malware? So prüfst du dein System!
+
+Im Juni 2026 gab es eine massive Supply-Chain-Attacke auf das Arch User Repository (AUR), bei der über 1600 Pakete mit Infostealern und eBPF-Rootkits infiziert wurden.
+Die Arch-Community hat ein großartiges Open-Source-Tool entwickelt, mit dem ihr euer System komplett durchleuchten könnt (inklusive aller Pacman-Logs, systemd-Dienste und npm/bun/yarn/pnpm-Caches).
+
+## Schnell-Check in 3 Schritten
+
+1. Repository klonen und Ordner öffnen
+
+```bash
+git clone https://github.com/lenucksi/aur-malware-check.git
+cd aur-malware-check
+```
+
+2. Risikofreier Testlauf (holt die neuesten Listen, scannt ohne Root)
+
+```bash
+python -m aur_check --refresh-campaigns --dry-run
+```
+
+3. Der vollständige Tiefenscan (erfordert sudo für eBPF- und Systemd-Prüfungen)
+
+```bash
+sudo python -m aur_check --refresh --full
+```
+
+Wenn am Ende RESULT: CLEAN steht, ist alles im grünen Bereich! Falls das Tool anschlägt, solltet ihr umgehend eure Passwörter und SSH-Keys von einem anderen Gerät aus ändern.
+Bleibt sicher! 🐧
+
+</details>
 
 Bitte installieren Sie eine Arch-basierte Distribution – vorzugsweise [Arch Linux](https://archlinux.org), [CachyOS](https://cachyos.org), [EndeavourOS](https://endeavouros.com), [Garuda Linux](https://garudalinux.org) oder [Manjaro](https://manjaro.org). Die Konfiguration sollte vollständig auf Hyprland unter Wayland basieren.
 
@@ -228,40 +236,22 @@ Bitte führen sie alle Commands aus und fügen sie .config in ihr Systhem ein.
 cd ~
 ```
 
-```bash
-# sudo cachyos-rate-mirrors
+### Die schnellsten Mirrors finden
 
-# DNS temporär auf Cloudflare (1.1.1.1) setzen
-# echo "nameserver 1.1.1.1" | sudo tee /etc/resolv.conf
+```bash
+sudo cachyos-rate-mirrors
+```
+
+### DNS temporär auf Cloudflare (1.1.1.1) setzen
+
+```bash
+echo "nameserver 1.1.1.1" | sudo tee /etc/resolv.conf
 ```
 
 ### Das System aktualisieren
 
 ```bash
 sudo pacman -Syu
-```
-### Paketdatenbank prüfen
-
-```bash
-# pacman -Qk
-# pacman -Qkk
-sudo pacman -Qkk | grep -v "0 altered files"
-pacman -Qm
-grep installed /var/log/pacman.log | tail -100
-grep -RinE "curl|wget|base64|eval|bash -c|sh -c" ~/.cache/yay
-
-# Kürzlich installierte Pakete ansehen
-expac --timefmt='%Y-%m-%d %T' '%l %n' | sort -r | head -50
-
-# Unbekannte laufende Dienste prüfen
-systemctl --type=service --state=running
-```
-
-Bei Fehlern das Programm neu installieren und:
-
-```bash
-sudo systemctl --failed
-sudo journalctl -p 3 -xb
 ```
 
 ### Die Werkzeuge für den Bau von Software installieren
@@ -629,7 +619,7 @@ sudo pacman -S ranger w3m
 sudo pacman -S time
 ```
 
-### Install Radare2 (often called r2), the advanced command-line hex editor and reverse engineering framework
+### Installiere Radare2 (oft r2 genannt), den fortgeschrittenen Hex-Editor und Reverse-Engineering-Framework
 
 ```bash
 sudo pacman -S radare2
@@ -744,6 +734,7 @@ sudo pacman -S --needed lua51
 ```
 
 ### Microsoft Visual Studio Code (VS Code) über yay installieren
+
 ```bash
 # sudo pacman -S code
 yay -S visual-studio-code-bin
@@ -824,7 +815,7 @@ sudo pacman -S ark
 ```bash
 sudo pacman -S kate
 ```
- 
+
 ### Der grafische Bildbetrachter Gwenview installieren
 
 ```bash
@@ -2219,13 +2210,13 @@ sudo nvim /boot/limine.conf
 
 und füge es hinzu:
 
-```text
+```ini
 lsm=landlock,lockdown,yama,integrity,apparmor,bpf
 ```
 
 also:
 
-```text
+```ini
 # CachyOS Limine theme
 
 ...
@@ -2247,7 +2238,7 @@ sudo nvim /etc/apparmor/parser.conf
 
 und
 
-```text
+```ini
 write-cache
 Optimize=compress-fast
 cache-loc /etc/apparmor/earlypolicy/
@@ -2365,19 +2356,20 @@ mkdir -p ~/.config/lazygit/
 :lua vim.lsp.buf.format()
 ```
 
-### emfehlungen:
+### Emfehlungen bei end-4
 
 ```bash
 nvim ~/.config/quickshell/ii/modules/common/Config.qml
 ```
 
-zeile 480
+Zeile 480:
+
 ```qml
 // property list<string> excludedSites: ["quora.com", "facebook.com"]
 property list<string> excludedSites: []
 ```
 
-### ufw ist langsam:
+# UFW ist langsam
 
 ```bash
 sudo nvim /etc/resolv.conf
@@ -2392,15 +2384,15 @@ options single-request
 options edns0 trust-ad
 ```
 
-### Langsames Internet
+# Langsames Internet
 
 ```bash
 sudo nvim /etc/modprobe.d/8821ce.conf
 ```
 
-and
+und
 
-```text
+```ini
 options 8821ce rtw_power_mgnt=0 rtw_enusbss=0 rtw_ips_mode=0
 ```
 
@@ -2411,7 +2403,7 @@ sudo limine-mkinitcpio # Arch + Limine
 reboot
 ```
 
-and
+und
 
 ```bash
 iw dev wlan0 get power_save
@@ -2429,7 +2421,7 @@ oder für immer:
 sudo nvim /etc/NetworkManager/conf.d/wifi-powersave.conf
 ```
 
-```text
+```ini
 [connection]
 wifi.powersave = 2
 ```
@@ -2449,7 +2441,7 @@ Prüfen:
 iw dev wlan0 get power_save
 ```
 
-```text
+```ini
 Power save: off
 ```
 
@@ -2461,7 +2453,7 @@ und evt. bei Problemen:
 yay -S rtw88-dkms-git
 ```
 
-### Firefox ist langsam
+# Firefox ist langsam
 
 > Ist nicht notwenig bei modernen Linux OS.
 Firefox nutzt unter Linux nicht immer automatisch deine Grafikkarte. So schaltest du sie manuell ein:
@@ -2476,20 +2468,41 @@ Dies kann durch das Ändern der internen Einstellungen im Firefox erfolgen.
 - Suche nach der Einstellung `browser.cache.disk.enable`.
 - Klicke doppelt darauf, um den Wert auf `false` zu setzen.
 
-### librewulf google securtiy:
+# Librewulf Google securtiy
 
 ```bash
 # Erstellt den Ordner und schreibt die Zeilen in die Datei
 mkdir -p ~/.librewolf && printf 'defaultPref("browser.safebrowsing.malware.enabled", true);\ndefaultPref("browser.safebrowsing.phishing.enabled", true);\ndefaultPref("browser.safebrowsing.blockedURIs.enabled", true);\n' >> ~/.librewolf/librewolf.overrides.cfg
 ```
 
-###  repairen von haskel
+# Reparieren von Haskell
 
 ```bash
-sudo pacman -S $(pacman -Qq | grep '^haskell-') shellcheck pandoc
-sudo systemctl restart NetworkManager
+# Alt: ist nicht die empfohlene Methode, um Haskell-Pakete zu reparieren, und kann das Problem sogar verschlimmern.
+# sudo pacman -S $(pacman -Qq | grep '^haskell-') shellcheck pandoc
+# sudo systemctl restart NetworkManager
+# sudo cachyos-rate-mirrors
+
+# Neu:
+# 1. Mirror-Liste aktualisieren für schnelle Downloads
 sudo cachyos-rate-mirrors
+
+# 2. System vollständig aktualisieren (baut Haskell-Pakete bei Bedarf neu)
+sudo pacman -Syu
+
+# 3. Nicht mehr benötigte Abhängigkeiten entfernen (bereinigt alte Bibliotheken)
+sudo pacman -Rns $(pacman -Qdtq)
+
+# 4. Spezifische Tools sicher neu installieren
+sudo pacman -S --asexplicit shellcheck pandoc
+
 ```
+
+> **Wichtige Änderungen gegenüber dem Original:**
+> *   **Reihenfolge:** `cachyos-rate-mirrors` kommt jetzt an den Anfang, damit das Update schnell läuft.
+> *   **Sicherheit:** Der riskante One-Liner `$(pacman -Qq | grep ...)` wurde entfernt. Stattdessen sorgt `pacman -Syu` dafür, dass alle Pakete konsistent neu gebaut werden, was bei Haskell zwingend notwendig ist.
+> *   **Bereinigung:** Der Schritt `pacman -Rns $(pacman -Qdtq)` entfernt verwaiste Pakete, die oft die Ursache für Haskell-Fehler sind.
+> *   **Entfernt:** `systemctl restart NetworkManager` wurde gestrichen, da er für die Paket-Reparatur irrelevant ist.   
 
 # WARP Cloudflair "1.1.1.1"
 
@@ -2581,30 +2594,39 @@ tailscale ip
 tailscale up --authkey [key]
 ```
 
-# Swap erhöhen:
+# Korrigiertes Skript (Optimiert für 16 GB RAM):
 
 ```bash
 sudo nvim /etc/systemd/zram-generator.conf
 ```
 
-```txt
+```ini
 [zram0]
+# Setzt die Größe auf 100% des RAMs (hier 16GB), was komprimiert ca. 5-8GB physischen RAM nutzt.
+# Das ist sicherer und performanter als künstliche Begrenzung auf 1,5x.
 zram-size = 16384
+# compression-algorithm = zstd
 ```
 
-Nie über 1,5:1 gehen!!! Bei 16Gb RAM die über 24576 ZRAM, gehe, auch 1,5:1 ist die Schmerzgrenze.
+> Nie über 1,5:1 gehen!!! Bei 16Gb RAM die über 24576 ZRAM, gehe, auch 1,5:1 ist die Schmerzgrenze.
 
 ```bash
 sudo systemctl daemon-reload
 sudo systemctl restart systemd-zram-setup@zram0.service
 reboot
+
+# 3. Dienst sicher neu starten (ohne Reboot, falls genug RAM frei ist)
+# sudo swapoff /dev/zram0 2>/dev/null || true
+# sudo systemctl restart systemd-zram-setup@zram0.service
+# sudo swapon /dev/zram0
 ```
 
 ```bash
+zramctl
 swapon --show
 ```
 
-# cachy os optimirung
+# Cachy OS optimirung
 
 Prüfen, ob aktiv: Geben Sie im Terminal ein:
 
@@ -2648,7 +2670,7 @@ mkdir -p ~/.config/systemd/user
 nvim ~/.config/systemd/user/sunshine.service
 ```
 
-```txt
+```ini
 [Unit]
 Description=Sunshine Game Streaming Host
 After=graphical-session.target
@@ -2684,7 +2706,7 @@ sudo ufw delete allow from 192.168.x.x to any port 47998:48010 proto udp
 
 ### Setup öffnen
 
-```text
+```url
 https://localhost:47990
 ```
 
@@ -2704,7 +2726,7 @@ systemctl --user start sunshine
 
 Tip: Es kann bei Sunshine mit Kurserausblenden zu Probelem führen, diebezüglich würde ich volgende einstellungen für end-4 Hyperland bervorzugen:
 
-```text
+```ini
 cursor {
     no_hardware_cursors = true
     inactive_timeout = 0
@@ -2723,7 +2745,7 @@ cursor {
 
 ## Verbinden
 
-```text
+```ini
 Moonlight öffnen → Linux-PC auswählen → Pairing-Code eingeben
 ```
 
@@ -2737,28 +2759,49 @@ Moonlight öffnen → Linux-PC auswählen → Pairing-Code eingeben
 
 # Was ich noch machen würde
 
-Einmal:
+## 1. System aktualisieren & Fehler prüfen
 
 ```bash
 sudo pacman -Syu
-```
 
-Dann:
-
-```bash
 sudo pacman -Qk
-```
 
-Dann:
-
-```bash
 systemctl --failed
 ```
 
-Dann:
+## 2. Netzwerk-Analyse (Der wichtigste Sicherheitscheck)
 
 ```bash
 ss -tulpen
 ```
 
-Damit siehst du offene Netzwerkdienste.
+> Hinweis: Achte hier besonders auf Dienste, die du nicht kennst oder die an 0.0.0.0 (weltweit erreichbar) lauschen. 
+
+## 3.1. Paketdatenbank & Integrität prüfen
+
+```bash
+# pacman -Qk
+# pacman -Qkk
+sudo pacman -Qkk | grep -v "0 altered files"
+pacman -Qm
+```
+
+## 3.2. Vertiefte Analyse (Logs & Verdächtige Skripte)
+
+```bash
+grep installed /var/log/pacman.log | tail -100
+grep -RinE "curl|wget|base64|eval|bash -c|sh -c" ~/.cache/yay
+
+# Kürzlich installierte Pakete ansehen
+expac --timefmt='%Y-%m-%d %T' '%l %n' | sort -r | head -50
+
+# Unbekannte laufende Dienste prüfen
+systemctl --type=service --state=running
+```
+
+## 3.3 Bei Fehlern das Programm neu installieren und:
+
+```bash
+sudo systemctl --failed
+sudo journalctl -p 3 -xb
+```
