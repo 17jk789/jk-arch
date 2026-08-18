@@ -185,7 +185,7 @@ Bitte führen sie alle Commands aus und fügen sie .config in ihr Systhem ein.
           - [Cachy OS \& BlackArch: Vorbereitung (Disk \& UEFI-Variablen)](#cachy-os--blackarch-vorbereitung-disk--uefi-variablen)
           - [Cachy OS \& BlackArch: Installation mit UEFI und Sandbox](#cachy-os--blackarch-installation-mit-uefi-und-sandbox)
           - [Cachy OS \& BlackArch: **Empfohlene Konfiguration** (UEFI, OpenGL, PipeWire)](#cachy-os--blackarch-empfohlene-konfiguration-uefi-opengl-pipewire)
-          - [Cachy OS \& BlackArch: Minimales Sicherheits-Setup ohne UEFI-Komplexität](#cachy-os--blackarch-minimales-sicherheits-setup-ohne-uefi-komplexität)
+          - [Cachy OS \& BlackArch: **Minimales Sicherheits-Setup** ohne UEFI-Komplexität](#cachy-os--blackarch-minimales-sicherheits-setup-ohne-uefi-komplexität)
       - [Bei Ubuntu noch](#bei-ubuntu-noch)
       - [BlackArch installieren](#blackarch-installieren)
         - [Cool bei Kde Plasma](#cool-bei-kde-plasma)
@@ -1560,7 +1560,7 @@ qemu-system-x86_64 \
   -sandbox on,obsolete=deny,elevateprivileges=deny,spawn=deny,resourcecontrol=deny
 ```
 
-###### Cachy OS & BlackArch: Minimales Sicherheits-Setup ohne UEFI-Komplexität
+###### Cachy OS & BlackArch: **Minimales Sicherheits-Setup** ohne UEFI-Komplexität
 
 ```bash
 qemu-system-x86_64 \
