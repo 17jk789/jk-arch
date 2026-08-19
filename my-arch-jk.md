@@ -370,7 +370,7 @@ sudo pacman -S curl wget unzip git-delta fzf cmark shellcheck
 #### Compiler & Toolchain
 
 ```bash
-sudo pacman -S gcc lib32-gcc-libs llvm clang lldb cmake ninja valgrind
+sudo pacman -S gcc lib32-gcc-libs llvm clang lldb cmake ninja valgrind clang-tools-extra flawfinder splint bear
 ```
 
 #### Debugging
