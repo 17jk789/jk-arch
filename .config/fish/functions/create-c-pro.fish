@@ -620,7 +620,7 @@ function c-analyze
     end
 
     echo "╔════════════════════════════════════════════════════════════╗"
-    echo "║         COMPREHENSIVE C CODE ANALYSIS                     ║"
+    echo "║         COMPREHENSIVE C CODE ANALYSIS                      ║"
     echo "╚════════════════════════════════════════════════════════════╝"
     echo ""
     echo "Files: $files"
