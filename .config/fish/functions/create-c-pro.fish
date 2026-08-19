@@ -426,12 +426,23 @@ function gcc-check
     echo "▶ Result"
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
+    set msg_ok "✓ GCC compiler + static analyzer: OK"
+    set msg_err "✗ GCC compiler + static analyzer: ISSUES FOUND"
+
     if test $status_code -eq 0
-        echo "✓ GCC compiler + static analyzer: OK"
-        set analysis_results $analysis_results "✓ GCC compiler + static analyzer: OK"
+        if not string match -q "$msg_ok" $analysis_results
+            echo "$msg_ok"
+            set analysis_results $analysis_results $msg_ok
+        else
+            echo "✓ GCC compiler + static analyzer: OK (bereits protokolliert)"
+        end
     else
-        echo "✗ GCC compiler + static analyzer: ISSUES FOUND"
-        set analysis_results $analysis_results "✗ GCC compiler + static analyzer: ISSUES FOUND"
+        if not string match -q "$msg_err" $analysis_results
+            echo "$msg_err"
+            set analysis_results $analysis_results $msg_err
+        else
+            echo "✗ GCC compiler + static analyzer: ISSUES FOUND (bereits protokolliert)"
+        end
     end
 
     return $status_code
@@ -562,19 +573,23 @@ function clang-check
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
     if test $compile_status -eq 0
-        echo "✓ Clang compiler checks: OK"
-        set analysis_results $analysis_results "✓ Clang compiler checks: OK"
+        set msg "✓ Clang compiler checks: OK"
     else
-        echo "✗ Clang compiler checks: FAILED"
-        set analysis_results $analysis_results "✗ Clang compiler checks: FAILED"
+        set msg "✗ Clang compiler checks: FAILED"
+    end
+    echo "$msg"
+    if not string match -q "$msg" $analysis_results
+        set analysis_results $analysis_results $msg
     end
 
     if test $analyzer_status -eq 0
-        echo "✓ Clang Static Analyzer: OK"
-        set analysis_results $analysis_results "✓ Clang Static Analyzer: OK"
+        set msg "✓ Clang Static Analyzer: OK"
     else
-        echo "✗ Clang Static Analyzer: ISSUES FOUND"
-        set analysis_results $analysis_results "✗ Clang Static Analyzer: ISSUES FOUND"
+        set msg "✗ Clang Static Analyzer: ISSUES FOUND"
+    end
+    echo "$msg"
+    if not string match -q "$msg" $analysis_results
+        set analysis_results $analysis_results $msg
     end
 
     if test $compile_status -ne 0; or test $analyzer_status -ne 0
@@ -611,16 +626,23 @@ function c-analyze
     echo "Files: $files"
     echo ""
 
-    set -l gcc_warnings 0
-    set -l clang_warnings 0
-    set -l tidy_warnings 0
-    set -l cppcheck_warnings 0
+    set -l gcc_issues 0
+    set -l clang_issues 0
+    set -l tidy_issues 0
+    set -l cppcheck_issues 0
+    set -l flawfinder_issues 0
+    set -l splint_issues 0
 
     echo "▶ GCC Static Analyzer..."
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     gcc-check $files 2>&1
     gcc-check $files 2>&1 | tee /tmp/gcc-output.txt >/dev/null
-    set gcc_warnings (grep -c "warning:" /tmp/gcc-output.txt 2>/dev/null; or echo 0)
+    set gcc_issues (grep -c -E "error:|warning:" /tmp/gcc-output.txt 2>/dev/null)
+
+    if test $status -ne 0
+        set gcc_issues 0
+    end
+
     echo ""
 
     if command -q clang
@@ -628,7 +650,12 @@ function c-analyze
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
         clang-check $files 2>&1
         clang-check $files 2>&1 | tee /tmp/clang-output.txt >/dev/null
-        set clang_warnings (grep -c "warning:" /tmp/clang-output.txt 2>/dev/null; or echo 0)
+        set clang_issues (grep -c -E "error:|warning:" /tmp/clang-output.txt 2>/dev/null)
+
+        if test $status -ne 0
+            set clang_issues 0
+        end
+
         echo ""
     else
         echo "⚠️  clang not found"
@@ -798,9 +825,15 @@ function c-analyze
         set tidy_status $pipestatus[1]
 
         set tidy_errors (
-        grep -Ec 'error:|warning:' $tidy_output 2>/dev/null
-        or echo 0
-    )
+            grep -Ec "error:|warning:|error|warning" $tidy_output 2>/dev/null
+            or echo 0
+        )
+
+        set tidy_issues (grep -c -E "error:|warning:|error|warning" $tidy_output 2>/dev/null)
+
+        if test $status -ne 0
+            set tidy_issues 0
+        end
 
         echo ""
         echo "▶ Result"
@@ -835,10 +868,18 @@ function c-analyze
             --suppress=missingIncludeSystem \
             --suppress=unusedFunction \
             $files 2>&1 | tee /tmp/cppcheck-output.txt
-        set cppcheck_warnings (grep -c "warning:" /tmp/cppcheck-output.txt 2>/dev/null; or echo 0)
+        set cppcheck_issues (grep -c -E "error:|warning:|error|warning" /tmp/cppcheck-output.txt 2>/dev/null)
 
-        if test $cppcheck_warnings -gt 0
-            set analysis_results $analysis_results "✗ Cppcheck: $cppcheck_warnings findings"
+        if test $status -ne 0
+            set cppcheck_issues 0
+        end
+
+        echo ""
+        echo "▶ Result"
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+        if test $cppcheck_issues -gt 0
+            set analysis_results $analysis_results "✗ Cppcheck: $cppcheck_issues findings"
         else
             set analysis_results $analysis_results "✓ Cppcheck: OK"
         end
@@ -893,12 +934,21 @@ function c-analyze
             echo "📑 PDF Report:  $flawfinder_pdf"
         end
 
-        if test $flawfinder_status -eq 0
+        set flawfinder_issues (grep -o "Hits = [0-9]*" "$flawfinder_html" 2>/dev/null | string replace "Hits = " "")
+
+        if test (count $flawfinder_issues) -eq 0 || test -z "$flawfinder_issues"
+            set flawfinder_issues 0
+        end
+
+        echo "Gefundene Issues (Hits): $flawfinder_issues"
+
+        # Entscheide basierend auf der Anzahl der Hits, nicht nur dem Exit-Code
+        if test $flawfinder_issues -gt 0
+            echo "✗ Flawfinder: ISSUES FOUND ($flawfinder_issues)"
+            set analysis_results $analysis_results "✗ Flawfinder: ISSUES FOUND ($flawfinder_issues)"
+        else
             echo "✓ Flawfinder: OK"
             set analysis_results $analysis_results "✓ Flawfinder: OK"
-        else
-            echo "✗ Flawfinder: ISSUES FOUND"
-            set analysis_results $analysis_results "✗ Flawfinder: ISSUES FOUND"
         end
 
         echo ""
@@ -943,18 +993,22 @@ function c-analyze
 
         set splint_status $pipestatus[1]
 
+        set splint_issues (grep -c -E "error:|warning:|error|warning" /tmp/splint-output.txt 2>/dev/null)
+
+        if test $status -ne 0
+            set splint_isszes 0
+        end
+
+        echo ""
+        echo "▶ Result"
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
         if test $splint_status -eq 0
-            echo ""
-            echo "▶ Result"
-            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
             echo "✓ Splint: OK"
             set analysis_results $analysis_results "✓ Splint: OK"
         else
-            echo ""
-            echo "▶ Result"
-            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-            echo "✗ Splint: ISSUES FOUND"
-            set analysis_results $analysis_results "✗ Splint: ISSUES FOUND"
+            echo "✗ Splint: ISSUES FOUND ($splint_issues)"
+            set analysis_results $analysis_results "✗ Splint: ISSUES FOUND ($splint_issues)"
         end
 
         echo ""
@@ -998,19 +1052,19 @@ function c-analyze
     # Normalize counters
     # ------------------------------------------------------------
 
-    set gcc_warnings (__c_safe_int $gcc_warnings)
-    set clang_warnings (__c_safe_int $clang_warnings)
-    set tidy_warnings (__c_safe_int $tidy_warnings)
-    set cppcheck_warnings (__c_safe_int $cppcheck_warnings)
-    set flawfinder_warnings (__c_safe_int $flawfinder_warnings)
-    set splint_warnings (__c_safe_int $splint_warnings)
+    set gcc_issues (__c_safe_int $gcc_issues)
+    set clang_issues (__c_safe_int $clang_issues)
+    set tidy_issues (__c_safe_int $tidy_issues)
+    set cppcheck_issues (__c_safe_int $cppcheck_issues)
+    set flawfinder_issues (__c_safe_int $flawfinder_issues)
+    set splint_issues (__c_safe_int $splint_issues)
 
     # ------------------------------------------------------------
     # Calculate totals
     # ------------------------------------------------------------
 
     set -l total_issues (math \
-        "$gcc_warnings + $clang_warnings + $tidy_warnings + $cppcheck_warnings + $flawfinder_warnings + $splint_warnings")
+        "$gcc_issues + $clang_issues + $tidy_issues + $cppcheck_issues + $flawfinder_issues + $splint_issues")
 
     # ------------------------------------------------------------
     # Normalize statuses
@@ -1064,19 +1118,19 @@ function c-analyze
     echo "╠══════════════════════════════════════════════════════════════╣"
     echo "║                                                              ║"
 
-    __c_analyze_center "GCC          $gcc_warnings issues"
-    __c_analyze_center "Clang        $clang_warnings issues"
-    __c_analyze_center "Clang-Tidy   $tidy_warnings issues"
-    __c_analyze_center "Cppcheck     $cppcheck_warnings issues"
-    __c_analyze_center "Flawfinder   $flawfinder_warnings issues"
-    __c_analyze_center "Splint       $splint_warnings issues"
+    __c_analyze_center "GCC          $gcc_issues issues"
+    __c_analyze_center "Clang        $clang_issues issues"
+    __c_analyze_center "Clang-Tidy   $tidy_issues issues"
+    __c_analyze_center "Cppcheck     $cppcheck_issues issues"
+    __c_analyze_center "Flawfinder   $flawfinder_issues issues"
+    __c_analyze_center "Splint       $splint_issues issues"
 
     echo "║                                                              ║"
     echo "╠══════════════════════════════════════════════════════════════╣"
 
     __c_analyze_center "TOTAL ISSUES: $total_issues"
     __c_analyze_center "FAILED CHECKS: $failed_checks"
-    __c_analyze_center "DURATION: $duration"s
+    # __c_analyze_center "DURATION: $duration"s
 
     echo "║                                                              ║"
     echo "╠══════════════════════════════════════════════════════════════╣"
