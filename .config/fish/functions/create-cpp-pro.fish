@@ -281,16 +281,23 @@ function clangxx-debug
         $argv
 end
 
-
 # ============================================================
-# G++ STATIC ANALYSIS
+# G++ COMPREHENSIVE STATIC ANALYSIS
 # ============================================================
 
-function gxx-analyze
+function gxx-check
     if test (count $argv) -eq 0
-        echo "Usage: gxx-analyze <source.cpp> [arguments...]"
+        echo "Usage: gxx-check <source.cpp> [arguments...]"
         return 1
     end
+
+    if not command -q g++
+        echo "Error: g++ not found. Install it with: sudo apt install g++"
+        return 1
+    end
+
+    echo "▶ G++ comprehensive static check..."
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
     g++ \
         -std=c++23 \
@@ -305,96 +312,152 @@ function gxx-analyze
         -Wformat=2 \
         -Wformat-overflow=2 \
         -Wformat-truncation=2 \
+        -Wformat-security \
         -Warray-bounds=2 \
+        -Warray-parameter \
         -Wstringop-overflow=4 \
         -Wstringop-overread \
+        -Wstringop-truncation \
         -Wrestrict \
         -Wnonnull \
+        -Wnonnull-compare \
         -Walloca \
         -Wvla \
+        -Wvla-larger-than=4096 \
         -Wnull-dereference \
+        -Wuse-after-free=3 \
+        -Wfree-nonheap-object \
+        -Wmismatched-dealloc \
         -Wduplicated-cond \
         -Wduplicated-branches \
         -Wlogical-op \
+        -Wlogical-not-parentheses \
         -Wshift-overflow=2 \
         -Wshift-negative-value \
+        -Wshift-count-negative \
+        -Wshift-count-overflow \
         -Wpointer-arith \
         -Wcast-align=strict \
+        -Wcast-qual \
+        -Wold-style-cast \
+        -Wwrite-strings \
+        -Wuseless-cast \
+        -Wtrampolines \
+        -Wdate-time \
+        -Wstack-protector \
+        -Wstack-usage=4096 \
+        -Wlarger-than=4096 \
         -Wstrict-overflow=5 \
         -Wtype-limits \
         -Wundef \
         -Wunused \
+        -Wunused-function \
+        -Wunused-variable \
+        -Wunused-parameter \
+        -Wunused-value \
+        -Wunused-but-set-variable \
+        -Wunused-but-set-parameter \
         -Wuninitialized \
         -Wmaybe-uninitialized \
+        -Wfloat-equal \
+        -Wdouble-promotion \
+        -Wswitch \
+        -Wswitch-enum \
+        -Wswitch-default \
+        -Wswitch-unreachable \
         -Wreturn-type \
+        -Wimplicit-fallthrough \
+        -Wmissing-braces \
+        -Wparentheses \
+        -Wsequence-point \
+        -Wstrict-aliasing=3 \
+        -Wtrigraphs \
+        -Wunknown-pragmas \
         -Winit-self \
         -Wclass-memaccess \
         -Wnon-virtual-dtor \
         -Woverloaded-virtual \
-        -Wold-style-cast \
-        -Wuseless-cast \
-        -Wextra-semi \
         -Wdelete-non-virtual-dtor \
         -Wmismatched-tags \
-        -Wconversion-null \
         -Wdeprecated-copy \
         -Wdeprecated-copy-dtor \
         -Wredundant-move \
         -Wplacement-new=2 \
         -Wbidi-chars=unpaired \
+        -Wold-style-definition \
+        -Werror=format-security \
+        -Werror=return-type \
+        -Werror=int-conversion \
         -fanalyzer \
+        -Wanalyzer-too-complex \
+        -Wanalyzer-null-dereference \
+        -Wanalyzer-use-after-free \
+        -Wanalyzer-double-free \
+        -Wanalyzer-free-of-non-heap \
+        -Wanalyzer-malloc-leak \
+        -Wanalyzer-possible-null-dereference \
+        -Wanalyzer-possible-null-argument \
+        -Wanalyzer-null-argument \
+        -Wanalyzer-unsafe-call-within-signal-handler \
+        -Wanalyzer-tainted-array-index \
+        -Wanalyzer-tainted-offset \
+        -Wanalyzer-tainted-size \
+        -Wanalyzer-tainted-divisor \
+        -Wanalyzer-out-of-bounds \
+        -Wanalyzer-overlapping-buffers \
+        -Wanalyzer-stale-setjmp-buffer \
+        -Wanalyzer-jump-through-null \
+        -Wanalyzer-infinite-loop \
+        -Wanalyzer-write-to-const \
+        -Wanalyzer-use-of-pointer-in-stale-stack-frame \
+        -fno-common \
+        -fstack-protector-strong \
+        -fstack-clash-protection \
+        -fno-omit-frame-pointer \
+        -fstrict-flex-arrays=3 \
+        -fdiagnostics-show-option \
+        -fdiagnostics-show-caret \
+        -fdiagnostics-show-line-numbers \
+        -fdiagnostics-show-context=2 \
+        -fmax-errors=0 \
         $argv
+
+    set status_code $status
+
+    echo ""
+    echo "▶ Result"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+    if test $status_code -eq 0
+        echo "✓ G++ compiler + static analyzer: OK"
+    else
+        echo "✗ G++ compiler + static analyzer: ISSUES FOUND"
+    end
+
+    return $status_code
 end
-
-
-function cpp-analyze
-    if not test -d build
-        cpp-config
-        or return 1
-    end
-
-    echo "=== G++ analyzer ==="
-    gxx-analyze src/*.cpp
-    or return 1
-
-    echo "=== Clang++ analyzer ==="
-    clangxx-analyze src/*.cpp
-    or return 1
-
-    if command -q clangxx-tidy
-        echo "=== clangxx-tidy ==="
-        cmake --build build --target analyze-clangxx-tidy
-    end
-
-    if command -q cppcheck
-        echo "=== cppcheck ==="
-        cmake --build build --target analyze-cppcheck
-    end
-
-    if command -q flawfinder
-        echo "=== flawfinder ==="
-        cmake --build build --target analyze-flawfinder
-    end
-end
-
 
 # ============================================================
 # CLANG++ STATIC ANALYSIS
-#
-# Aggressive Clang Static Analyzer configuration for C++23.
 # ============================================================
 
-function clangxx-analyze
+function clangxx-check
     if test (count $argv) -eq 0
-        echo "Usage: clangxx-analyze <source.cpp> [compiler arguments...]"
+        echo "Usage: clangxx-check <source.cpp> [arguments...]"
         return 1
     end
 
+    if not command -q clang++
+        echo "Error: clang++ not found. Install it with: sudo apt install clang"
+        return 1
+    end
+
+    echo "▶ Clang++ comprehensive static check..."
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
     clang++ \
-        --analyze \
-        -Xanalyzer -analyzer-output=text \
         -std=c++23 \
-        -O2 \
+        -O0 \
         -g3 \
         -Weverything \
         -Wconversion \
@@ -408,27 +471,501 @@ function clangxx-analyze
         -Wconditional-uninitialized \
         -Wuninitialized \
         -Wtautological-compare \
+        -Wtautological-constant-out-of-range-compare \
         -Wunreachable-code \
+        -Wunreachable-code-aggressive \
         -Wpointer-arith \
         -Wcast-align \
         -Wcast-qual \
+        -Wold-style-cast \
+        -Wwrite-strings \
+        -Wswitch \
         -Wswitch-enum \
+        -Wswitch-default \
+        -Wcovered-switch-default \
+        -Wundef \
+        -Wvla \
+        -Wvla-extension \
+        -Walloca \
+        -Wfloat-equal \
+        -Wdouble-promotion \
+        -Wcomma \
+        -Wextra-semi \
+        -Wimplicit-fallthrough \
+        -Wdeprecated \
+        -Wdeprecated-declarations \
+        -Wframe-larger-than=4096 \
+        -Wnon-virtual-dtor \
+        -Wdelete-non-abstract-non-virtual-dtor \
+        -Woverloaded-virtual \
+        -Wmismatched-tags \
+        -Wclass-memaccess \
+        -Wdeprecated-copy \
+        -Wdeprecated-copy-with-user-provided-copy \
+        -Wredundant-move \
+        -Wrange-loop-analysis \
+        -Wloop-analysis \
+        -Wdocumentation \
+        -Werror=return-type \
+        -Werror=format-security \
+        -fno-common \
+        -fstack-protector-strong \
+        -fstack-clash-protection \
+        -fno-omit-frame-pointer \
+        $argv
+
+    set compile_status $status
+
+    echo ""
+    echo "▶ Clang++ Static Analyzer..."
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+    clang++ \
+        --analyze \
+        -std=c++23 \
+        -Weverything \
+        -Wconversion \
+        -Wsign-conversion \
+        -Wshadow \
+        -Wnull-dereference \
+        -Warray-bounds \
+        -Warray-parameter \
+        -Wconditional-uninitialized \
+        -Wuninitialized \
+        -Wtautological-compare \
+        -Wtautological-constant-out-of-range-compare \
+        -Wunreachable-code \
+        -Wunreachable-code-aggressive \
+        -Wpointer-arith \
+        -Wcast-align \
+        -Wcast-qual \
+        -Wold-style-cast \
+        -Wswitch \
+        -Wswitch-enum \
+        -Wswitch-default \
         -Wundef \
         -Wvla \
         -Walloca \
         -Wfloat-equal \
         -Wdouble-promotion \
-        -Wdocumentation \
-        -Wthread-safety \
-        -Wcomma \
-        -Wextra-semi \
-        -Wcovered-switch-default \
-        -Wloop-analysis \
+        -Wimplicit-fallthrough \
+        -Wnon-virtual-dtor \
+        -Woverloaded-virtual \
+        -Wmismatched-tags \
+        -Wredundant-move \
         -Wrange-loop-analysis \
-        -Wunreachable-code-aggressive \
-        -Werror=return-type \
-        -Werror=format-security \
+        -Wloop-analysis \
+        -Xanalyzer -analyzer-checker=core \
+        -Xanalyzer -analyzer-checker=deadcode \
+        -Xanalyzer -analyzer-checker=security \
+        -Xanalyzer -analyzer-checker=unix \
         $argv
+
+    set analyzer_status $status
+
+    echo ""
+    echo "▶ Result"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+    if test $compile_status -eq 0
+        echo "✓ Clang++ compiler checks: OK"
+    else
+        echo "✗ Clang++ compiler checks: FAILED"
+    end
+
+    if test $analyzer_status -eq 0
+        echo "✓ Clang Static Analyzer: OK"
+    else
+        echo "✗ Clang Static Analyzer: ISSUES FOUND"
+    end
+
+    if test $compile_status -ne 0; or test $analyzer_status -ne 0
+        return 1
+    end
+
+    return 0
+end
+
+# ============================================================
+# COMPREHENSIVE C++ ANALYSIS
+# ============================================================
+
+function cpp-analyze
+    set -l files $argv
+    set -l start_time (date +%s)
+
+    # ------------------------------------------------------------
+    # Source files
+    # ------------------------------------------------------------
+
+    if test (count $files) -eq 0
+        if test -d src
+            set files src/*.cpp
+
+            if test (count $files) -eq 0
+                echo "Error: No .cpp source files found in src/"
+                return 1
+            end
+        else
+            echo "Error: No source files specified and src/ directory not found"
+            return 1
+        end
+    end
+
+    echo "╔══════════════════════════════════════════════════════════════╗"
+    echo "║             COMPREHENSIVE C++ CODE ANALYSIS                 ║"
+    echo "╚══════════════════════════════════════════════════════════════╝"
+    echo ""
+    echo "Files: $files"
+    echo ""
+
+    # ------------------------------------------------------------
+    # Counters
+    # ------------------------------------------------------------
+
+    set -l gcc_warnings 0
+    set -l clang_warnings 0
+    set -l tidy_warnings 0
+    set -l cppcheck_warnings 0
+    set -l flawfinder_warnings 0
+
+    # ------------------------------------------------------------
+    # Statuses
+    # ------------------------------------------------------------
+
+    set -l gcc_status 127
+    set -l clang_status 127
+    set -l tidy_status 127
+    set -l cppcheck_status 127
+    set -l flawfinder_status 127
+
+    # ============================================================
+    # G++ STATIC ANALYZER
+    # ============================================================
+
+    if command -q g++
+        echo "▶ G++ Static Analyzer..."
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+        gxx-check $files 2>&1
+        gxx-check $files 2>&1 | tee /tmp/gxx-output.txt >/dev/null
+
+        set gcc_status $pipestatus[1]
+
+        set gcc_warnings (
+            grep -Ec 'warning:|error:' /tmp/gxx-output.txt 2>/dev/null
+            or echo 0
+        )
+
+        if test $gcc_status -eq 0
+            echo "✓ G++: OK"
+        else
+            echo "✗ G++: ISSUES FOUND"
+        end
+
+        echo ""
+    else
+        echo "⚠️  g++ not found"
+        echo ""
+    end
+
+    # ============================================================
+    # CLANG++ STATIC ANALYZER
+    # ============================================================
+
+    if command -q clang++
+        echo "▶ Clang++ Static Analyzer..."
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+        clangxx-check $files 2>&1
+        clangxx-check $files 2>&1 | tee /tmp/clangxx-output.txt >/dev/null
+
+        set clang_status $pipestatus[1]
+
+        set clang_warnings (
+            grep -Ec 'warning:|error:' /tmp/clangxx-output.txt 2>/dev/null
+            or echo 0
+        )
+
+        if test $clang_status -eq 0
+            echo "✓ Clang++: OK"
+        else
+            echo "✗ Clang++: ISSUES FOUND"
+        end
+
+        echo ""
+    else
+        echo "⚠️  clang++ not found"
+        echo ""
+    end
+
+    # ============================================================
+    # CLANG-TIDY
+    # ============================================================
+
+    if command -q clang-tidy
+        echo "▶ Clang-Tidy..."
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+        if test -f compile_commands.json
+
+            clang-tidy \
+                $files \
+                -p=. \
+                -checks='*,-llvmlibc-*' \
+                -warnings-as-errors='*' \
+                -header-filter='.*' \
+                --system-headers 2>&1 | tee /tmp/clang-tidy-output.txt
+
+        else if test -f build/compile_commands.json
+
+            clang-tidy \
+                $files \
+                -p=build \
+                -checks='*,-llvmlibc-*' \
+                -warnings-as-errors='*' \
+                -header-filter='.*' \
+                --system-headers 2>&1 | tee /tmp/clang-tidy-output.txt
+
+        else
+
+            echo "⚠️  compile_commands.json not found"
+            echo "   Running clang-tidy with fallback C++23 configuration..."
+            echo ""
+
+            clang-tidy \
+                $files \
+                -checks='*,-llvmlibc-*' \
+                -warnings-as-errors='*' \
+                -header-filter='.*' \
+                --system-headers \
+                -- \
+                -std=c++23 \
+                -O0 \
+                -g3 \
+                -Wall \
+                -Wextra \
+                -Wpedantic \
+                -Wconversion \
+                -Wsign-conversion \
+                -Wshadow 2>&1 | tee /tmp/clang-tidy-output.txt
+
+        end
+
+        set tidy_status $pipestatus[1]
+
+        set tidy_warnings (
+            grep -Ec 'warning:|error:' /tmp/clang-tidy-output.txt 2>/dev/null
+            or echo 0
+        )
+
+        if test $tidy_status -eq 0
+            echo "✓ Clang-Tidy: OK"
+        else
+            echo "✗ Clang-Tidy: ISSUES FOUND"
+        end
+
+        echo ""
+    else
+        echo "⚠️  clang-tidy not found"
+        echo ""
+    end
+
+    # ============================================================
+    # CPPCHECK
+    # ============================================================
+
+    if command -q cppcheck
+        echo "▶ Cppcheck..."
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+        cppcheck \
+            --enable=all \
+            --std=c++23 \
+            --inconclusive \
+            --force \
+            --inline-suppr \
+            --quiet \
+            --template='{file}:{line}:{column}: {severity}: {id}: {message}' \
+            --suppress=missingIncludeSystem \
+            --suppress=unusedFunction \
+            $files 2>&1 | tee /tmp/cppcheck-output.txt
+
+        set cppcheck_status $pipestatus[1]
+
+        set cppcheck_warnings (
+            grep -Ec 'warning:|error:|style:|performance:|portability:' \
+                /tmp/cppcheck-output.txt 2>/dev/null
+            or echo 0
+        )
+
+        if test $cppcheck_status -eq 0
+            echo "✓ Cppcheck: OK"
+        else
+            echo "✗ Cppcheck: ISSUES FOUND"
+        end
+
+        echo ""
+    else
+        echo "⚠️  cppcheck not found"
+        echo ""
+    end
+
+    # ============================================================
+    # FLAWFINDER
+    # ============================================================
+
+    if command -q flawfinder
+        echo "▶ Flawfinder..."
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+        flawfinder \
+            --context \
+            --minlevel=0 \
+            --columns \
+            $files 2>&1 | tee /tmp/flawfinder-output.txt
+
+        set flawfinder_status $pipestatus[1]
+
+        set flawfinder_warnings (
+            grep -Ec 'Hits =|Warning|warning|error' \
+                /tmp/flawfinder-output.txt 2>/dev/null
+            or echo 0
+        )
+
+        if test $flawfinder_status -eq 0
+            echo "✓ Flawfinder: OK"
+        else
+            echo "✗ Flawfinder: ISSUES FOUND"
+        end
+
+        echo ""
+    else
+        echo "⚠️  flawfinder not found"
+        echo ""
+    end
+
+    # ============================================================
+    # FINAL RESULT
+    # ============================================================
+
+    set -l end_time (date +%s)
+    set -l duration (math "$end_time - $start_time")
+
+    # Ensure numeric counters.
+    set -q gcc_warnings[1]; or set gcc_warnings 0
+    set -q clang_warnings[1]; or set clang_warnings 0
+    set -q tidy_warnings[1]; or set tidy_warnings 0
+    set -q cppcheck_warnings[1]; or set cppcheck_warnings 0
+    set -q flawfinder_warnings[1]; or set flawfinder_warnings 0
+
+    # ------------------------------------------------------------
+    # Total issues
+    # ------------------------------------------------------------
+
+    set -l total_issues (math \
+        "$gcc_warnings + $clang_warnings + $tidy_warnings + $cppcheck_warnings + $flawfinder_warnings")
+
+    # ------------------------------------------------------------
+    # Normalize statuses
+    # ------------------------------------------------------------
+
+    set -l gcc_ok 0
+    set -l clang_ok 0
+    set -l tidy_ok 0
+    set -l cppcheck_ok 0
+    set -l flawfinder_ok 0
+
+    if test "$gcc_status" -eq 0
+        set gcc_ok 1
+    end
+
+    if test "$clang_status" -eq 0
+        set clang_ok 1
+    end
+
+    if test "$tidy_status" -eq 0
+        set tidy_ok 1
+    end
+
+    if test "$cppcheck_status" -eq 0
+        set cppcheck_ok 1
+    end
+
+    if test "$flawfinder_status" -eq 0
+        set flawfinder_ok 1
+    end
+
+    # ------------------------------------------------------------
+    # Number of failed checks
+    # ------------------------------------------------------------
+
+    set -l failed_checks (math \
+        "5 - $gcc_ok - $clang_ok - $tidy_ok - $cppcheck_ok - $flawfinder_ok")
+
+    # ------------------------------------------------------------
+    # Center helper
+    # ------------------------------------------------------------
+
+    function __cpp_analyze_center
+        set -l text "$argv"
+        set -l width 62
+        set -l length (string length -- "$text")
+        set -l left (math "floor(($width - $length) / 2)")
+        set -l right (math "$width - $length - $left")
+
+        printf "║%*s%s%*s║\n" $left "" "$text" $right ""
+    end
+
+    # ============================================================
+    # SUMMARY
+    # ============================================================
+
+    echo ""
+    echo "╔══════════════════════════════════════════════════════════════╗"
+    __cpp_analyze_center "C++ CODE ANALYSIS COMPLETE"
+    echo "╠══════════════════════════════════════════════════════════════╣"
+    echo "║                                                              ║"
+
+    __cpp_analyze_center "G++          $gcc_warnings issues"
+    __cpp_analyze_center "Clang++      $clang_warnings issues"
+    __cpp_analyze_center "Clang-Tidy   $tidy_warnings issues"
+    __cpp_analyze_center "Cppcheck     $cppcheck_warnings issues"
+    __cpp_analyze_center "Flawfinder   $flawfinder_warnings issues"
+
+    echo "║                                                              ║"
+    echo "╠══════════════════════════════════════════════════════════════╣"
+
+    __cpp_analyze_center "TOTAL ISSUES: $total_issues"
+    __cpp_analyze_center "FAILED CHECKS: $failed_checks"
+    __cpp_analyze_center "DURATION: $duration""s"
+
+    echo "║                                                              ║"
+    echo "╠══════════════════════════════════════════════════════════════╣"
+
+    if test "$total_issues" -eq 0; and test "$failed_checks" -eq 0
+        __cpp_analyze_center "✓✓✓  NO ISSUES DETECTED  ✓✓✓"
+    else
+        __cpp_analyze_center "✗✗✗  ISSUES DETECTED  ✗✗✗"
+    end
+
+    echo "╚══════════════════════════════════════════════════════════════╝"
+
+    # ------------------------------------------------------------
+    # Cleanup helper function
+    # ------------------------------------------------------------
+
+    functions -e __cpp_analyze_center
+
+    # ------------------------------------------------------------
+    # Return failure if any analyzer failed
+    # ------------------------------------------------------------
+
+    if test "$failed_checks" -ne 0
+        return 1
+    end
+
+    return 0
 end
 
 
