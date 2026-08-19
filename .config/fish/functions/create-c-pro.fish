@@ -30,6 +30,8 @@ set -gx VISUAL nvim
 set -gx PAGER less
 set -gx MANPAGER 'less -R'
 
+set -gx analysis_results
+
 # User binaries
 fish_add_path $HOME/.local/bin
 fish_add_path $HOME/bin
@@ -426,8 +428,10 @@ function gcc-check
 
     if test $status_code -eq 0
         echo "✓ GCC compiler + static analyzer: OK"
+        set analysis_results $analysis_results "✓ GCC compiler + static analyzer: OK"
     else
         echo "✗ GCC compiler + static analyzer: ISSUES FOUND"
+        set analysis_results $analysis_results "✗ GCC compiler + static analyzer: ISSUES FOUND"
     end
 
     return $status_code
@@ -559,14 +563,18 @@ function clang-check
 
     if test $compile_status -eq 0
         echo "✓ Clang compiler checks: OK"
+        set analysis_results $analysis_results "✓ Clang compiler checks: OK"
     else
         echo "✗ Clang compiler checks: FAILED"
+        set analysis_results $analysis_results "✗ Clang compiler checks: FAILED"
     end
 
     if test $analyzer_status -eq 0
         echo "✓ Clang Static Analyzer: OK"
+        set analysis_results $analysis_results "✓ Clang Static Analyzer: OK"
     else
         echo "✗ Clang Static Analyzer: ISSUES FOUND"
+        set analysis_results $analysis_results "✗ Clang Static Analyzer: ISSUES FOUND"
     end
 
     if test $compile_status -ne 0; or test $analyzer_status -ne 0
@@ -583,6 +591,9 @@ end
 function c-analyze
     set -l files $argv
     set -l start_time (date +%s)
+    set -l result_file /tmp/c-analyze-results.txt
+    rm -f $result_file
+    touch $result_file
 
     if test (count $files) -eq 0
         if test -d src
@@ -792,14 +803,16 @@ function c-analyze
     )
 
         echo ""
-        echo "▶ Ergebnis"
+        echo "▶ Result"
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
         if test $tidy_status -ne 0
             echo "✗ CLANG-TIDY SECURITY FAIL"
             echo "  Findings: $tidy_errors"
+            set analysis_results $analysis_results "✗ CLANG-TIDY SECURITY FAIL ($tidy_errors findings)"
         else
             echo "✓ CLANG-TIDY SECURITY PASS"
+            set analysis_results $analysis_results "✓ CLANG-TIDY SECURITY PASS"
         end
 
         echo ""
@@ -823,6 +836,13 @@ function c-analyze
             --suppress=unusedFunction \
             $files 2>&1 | tee /tmp/cppcheck-output.txt
         set cppcheck_warnings (grep -c "warning:" /tmp/cppcheck-output.txt 2>/dev/null; or echo 0)
+
+        if test $cppcheck_warnings -gt 0
+            set analysis_results $analysis_results "✗ Cppcheck: $cppcheck_warnings findings"
+        else
+            set analysis_results $analysis_results "✓ Cppcheck: OK"
+        end
+
         echo ""
     else
         echo "⚠️  cppcheck not found"
@@ -875,8 +895,10 @@ function c-analyze
 
         if test $flawfinder_status -eq 0
             echo "✓ Flawfinder: OK"
+            set analysis_results $analysis_results "✓ Flawfinder: OK"
         else
             echo "✗ Flawfinder: ISSUES FOUND"
+            set analysis_results $analysis_results "✗ Flawfinder: ISSUES FOUND"
         end
 
         echo ""
@@ -926,11 +948,13 @@ function c-analyze
             echo "▶ Result"
             echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
             echo "✓ Splint: OK"
+            set analysis_results $analysis_results "✓ Splint: OK"
         else
             echo ""
             echo "▶ Result"
             echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
             echo "✗ Splint: ISSUES FOUND"
+            set analysis_results $analysis_results "✗ Splint: ISSUES FOUND"
         end
 
         echo ""
@@ -1052,7 +1076,7 @@ function c-analyze
 
     __c_analyze_center "TOTAL ISSUES: $total_issues"
     __c_analyze_center "FAILED CHECKS: $failed_checks"
-    __c_analyze_center "DURATION: $duration s"
+    __c_analyze_center "DURATION: $duration"s
 
     echo "║                                                              ║"
     echo "╠══════════════════════════════════════════════════════════════╣"
@@ -1065,10 +1089,24 @@ function c-analyze
 
     echo "╚══════════════════════════════════════════════════════════════╝"
 
+    echo ""
+    echo "╔══════════════════════════════════════════════════════════════╗"
+    __c_analyze_center "FINAL TOOL RESULTS"
+    echo "╠══════════════════════════════════════════════════════════════╣"
+    echo "║                                                              ║"
+
+    for result in $analysis_results
+        __c_analyze_center "$result"
+    end
+
+    echo "║                                                              ║"
+    echo "╚══════════════════════════════════════════════════════════════╝"
+
     # cleanup helper functions
     functions -e __c_analyze_center
     functions -e __c_safe_int
 end
+
 
 
 # ============================================================
