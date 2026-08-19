@@ -625,58 +625,187 @@ function c-analyze
     end
 
     if command -q clang-tidy
-        echo "▶ Clang-Tidy..."
+        echo "▶ Clang-Tidy HARDENED SECURITY SCAN..."
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+        set project_root (pwd)
+        set include_path "$project_root/include"
+
+        # Nur diese Projektbereiche werden analysiert
+        set scan_dirs \
+            "$project_root/src" \
+            "$project_root/include" \
+            "$project_root/tests" \
+            "$project_root/fuzz"
+
+        set files
+
+        for dir in $scan_dirs
+            if test -d "$dir"
+                for file in (find "$dir" \
+                -type f \
+                \( \
+                    -name '*.c' \
+                    -o -name '*.cc' \
+                    -o -name '*.cpp' \
+                    -o -name '*.cxx' \
+                    -o -name '*.h' \
+                    -o -name '*.hpp' \
+                    -o -name '*.hh' \
+                    -o -name '*.hxx' \
+                    -o -name '*.h++' \
+                \) \
+                -not -path '*/build/*' \
+                -not -path '*/.git/*' \
+                -not -path '*/CMakeFiles/*' \
+                -not -path '*/third_party/*' \
+                -not -path '*/vendor/*' \
+                -not -path '*/external/*' \
+                -not -path '*/generated/*' \
+            )
+                    set files $files $file
+                end
+            end
+        end
+
+        if test (count $files) -eq 0
+            echo "⚠️  Keine Projekt-Quelldateien gefunden"
+            return 1
+        end
+
+        echo "▶ Scan-Dateien:"
+        for file in $files
+            echo "  • "(string replace "$project_root/" "" "$file")
+        end
+
+        echo ""
+
+        # HARD SECURITY PROFILE
+        set tidy_checks \
+            '-*' \
+            'clang-analyzer-*' \
+            'clang-analyzer-security.*' \
+            'clang-analyzer-unix.*' \
+            'clang-analyzer-core.*' \
+            'cert-*' \
+            'security-*' \
+            'bugprone-*' \
+            'clang-diagnostic-*' \
+            -bugprone-easily-swappable-parameters \
+            -bugprone-branch-clone \
+            -bugprone-narrowing-conversions \
+            -bugprone-signed-char-misuse \
+            '-readability-*' \
+            '-modernize-*' \
+            '-cppcoreguidelines-*' \
+            '-hicpp-*' \
+            '-llvm-*' \
+            '-google-*' \
+            '-fuchsia-*' \
+            '-zircon-*' \
+            '-llvmlibc-*'
+
+        set checks (string join -- ',' $tidy_checks)
+
+        set tidy_output /tmp/clang-tidy-output.txt
 
         if test -f compile_commands.json
             clang-tidy \
                 $files \
                 -p=. \
-                -checks='*,-llvmlibc-*' \
+                -checks="$checks" \
                 -warnings-as-errors='*' \
-                -header-filter='.*' \
-                --system-headers 2>&1 | tee /tmp/clang-tidy-output.txt
+                -header-filter="^$project_root/(src|include|tests|fuzz)/" \
+                -- \
+                -std=c23 \
+                -Wall \
+                -Wextra \
+                -Wpedantic \
+                -Wconversion \
+                -Wsign-conversion \
+                -Wshadow \
+                -Wformat=2 \
+                -Wundef \
+                -Wstrict-prototypes \
+                -Wmissing-prototypes \
+                -Wnull-dereference \
+                -Wcast-align \
+                -Wcast-qual \
+                -Wwrite-strings \
+                -isystem "$include_path" 2>&1 | tee $tidy_output
 
         else if test -f build/compile_commands.json
             clang-tidy \
                 $files \
                 -p=build \
-                -checks='*,-llvmlibc-*' \
+                -checks="$checks" \
                 -warnings-as-errors='*' \
-                -header-filter='.*' \
-                --system-headers 2>&1 | tee /tmp/clang-tidy-output.txt
-
-        else
-            clang-tidy \
-                $files \
-                -checks='*,-llvmlibc-*' \
-                -warnings-as-errors='*' \
-                -header-filter='.*' \
-                --system-headers \
+                -header-filter="^$project_root/(src|include|tests|fuzz)/" \
                 -- \
                 -std=c23 \
-                -O0 \
-                -g3 \
                 -Wall \
                 -Wextra \
                 -Wpedantic \
                 -Wconversion \
-                -Wsign-conversion 2>&1 | tee /tmp/clang-tidy-output.txt
+                -Wsign-conversion \
+                -Wshadow \
+                -Wformat=2 \
+                -Wundef \
+                -Wstrict-prototypes \
+                -Wmissing-prototypes \
+                -Wnull-dereference \
+                -Wcast-align \
+                -Wcast-qual \
+                -Wwrite-strings \
+                -isystem "$include_path" 2>&1 | tee $tidy_output
+
+        else
+            clang-tidy \
+                $files \
+                -checks="$checks" \
+                -warnings-as-errors='*' \
+                -header-filter="^$project_root/(src|include|tests|fuzz)/" \
+                -- \
+                -std=c23 \
+                -Wall \
+                -Wextra \
+                -Wpedantic \
+                -Wconversion \
+                -Wsign-conversion \
+                -Wshadow \
+                -Wformat=2 \
+                -Wundef \
+                -Wstrict-prototypes \
+                -Wmissing-prototypes \
+                -Wnull-dereference \
+                -Wcast-align \
+                -Wcast-qual \
+                -Wwrite-strings \
+                -isystem "$include_path" 2>&1 | tee $tidy_output
         end
 
         set tidy_status $pipestatus[1]
-        set tidy_warnings (grep -Ec 'warning:|error:' /tmp/clang-tidy-output.txt 2>/dev/null; or echo 0)
+
+        set tidy_errors (
+        grep -Ec 'error:|warning:' $tidy_output 2>/dev/null
+        or echo 0
+    )
+
+        echo ""
+        echo "▶ Ergebnis"
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
         if test $tidy_status -ne 0
-            echo "✗ Clang-Tidy: ISSUES FOUND"
+            echo "✗ CLANG-TIDY SECURITY FAIL"
+            echo "  Findings: $tidy_errors"
         else
-            echo "✓ Clang-Tidy: OK"
+            echo "✓ CLANG-TIDY SECURITY PASS"
         end
 
         echo ""
+
     else
-        echo "⚠️  clang-tidy not found"
-        echo ""
+        echo "⚠️ clang-tidy nicht installiert"
     end
 
     if command -q cppcheck
@@ -704,28 +833,54 @@ function c-analyze
         echo "▶ Flawfinder..."
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
+        set reports_dir "$project_root/reports"
+        set flawfinder_html "$reports_dir/flawfinder-report.html"
+        set flawfinder_pdf "$reports_dir/flawfinder-report.pdf"
+
+        # Erstelle reports-Verzeichnis
+        mkdir -p "$reports_dir"
+
+        # HTML-Report generieren
         flawfinder \
             --context \
             --minlevel=0 \
             --columns \
             --html \
-            $files 2>&1 | tee /tmp/flawfinder-output.txt
+            $files >"$flawfinder_html" 2>&1
 
-        set flawfinder_status $pipestatus[1]
+        set flawfinder_status $status
+
+        # HTML zu PDF konvertieren (wenn wkhtmltopdf verfügbar)
+        if command -q wkhtmltopdf
+            wkhtmltopdf "$flawfinder_html" "$flawfinder_pdf" 2>/dev/null
+            if test $status -eq 0
+                echo "✓ PDF generiert: $flawfinder_pdf"
+            end
+        else if command -q weasyprint
+            weasyprint "$flawfinder_html" "$flawfinder_pdf" 2>/dev/null
+            if test $status -eq 0
+                echo "✓ PDF generiert: $flawfinder_pdf"
+            end
+        else
+            echo "⚠️  wkhtmltopdf/weasyprint nicht gefunden - nur HTML verfügbar"
+        end
+
+        echo ""
+        echo "▶ Result"
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        echo "📄 HTML Report: $flawfinder_html"
+        if test -f "$flawfinder_pdf"
+            echo "📑 PDF Report:  $flawfinder_pdf"
+        end
 
         if test $flawfinder_status -eq 0
-            echo ""
-            echo "▶ Result"
-            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
             echo "✓ Flawfinder: OK"
         else
-            echo ""
-            echo "▶ Result"
-            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
             echo "✗ Flawfinder: ISSUES FOUND"
         end
 
         echo ""
+
     else
         echo "⚠️  flawfinder not found (install: sudo pacman -S flawfinder)"
         echo ""
@@ -784,45 +939,73 @@ function c-analyze
         echo ""
     end
 
-    set -l end_time (date +%s)
-    set -l duration (math "$end_time - $start_time")
-    set -l total_warnings (math "$gcc_warnings + $clang_warnings + $tidy_warnings + $cppcheck_warnings")
-
     # ============================================================
     # FINAL RESULT
     # ============================================================
 
     set -l end_time (date +%s)
-    set -l duration (math "$end_time - $start_time")
 
-    # Ensure numeric counters.
-    set -q gcc_warnings[1]; or set gcc_warnings 0
-    set -q clang_warnings[1]; or set clang_warnings 0
-    set -q tidy_warnings[1]; or set tidy_warnings 0
-    set -q cppcheck_warnings[1]; or set cppcheck_warnings 0
-    set -q flawfinder_warnings[1]; or set flawfinder_warnings 0
-    set -q splint_warnings[1]; or set splint_warnings 0
+    if test -n "$start_time"
+        set -l duration (math "$end_time - $start_time")
+    else
+        set -l duration 0
+    end
+
+    # ------------------------------------------------------------
+    # Safe integer converter
+    # ------------------------------------------------------------
+
+    function __c_safe_int
+        if test (count $argv) -eq 0
+            echo 0
+            return
+        end
+
+        set -l value $argv[1]
+
+        if string match -rq '^[0-9]+$' -- "$value"
+            echo "$value"
+        else
+            echo 0
+        end
+    end
+
+    # ------------------------------------------------------------
+    # Normalize counters
+    # ------------------------------------------------------------
+
+    set gcc_warnings (__c_safe_int $gcc_warnings)
+    set clang_warnings (__c_safe_int $clang_warnings)
+    set tidy_warnings (__c_safe_int $tidy_warnings)
+    set cppcheck_warnings (__c_safe_int $cppcheck_warnings)
+    set flawfinder_warnings (__c_safe_int $flawfinder_warnings)
+    set splint_warnings (__c_safe_int $splint_warnings)
+
+    # ------------------------------------------------------------
+    # Calculate totals
+    # ------------------------------------------------------------
 
     set -l total_issues (math \
         "$gcc_warnings + $clang_warnings + $tidy_warnings + $cppcheck_warnings + $flawfinder_warnings + $splint_warnings")
 
-    # Normalize statuses.
-    set -l gcc_ok 0
-    set -l clang_ok 0
-    set -l tidy_ok 0
-    set -l cppcheck_ok 0
-    set -l flawfinder_ok 0
-    set -l splint_ok 0
+    # ------------------------------------------------------------
+    # Normalize statuses
+    # ------------------------------------------------------------
 
-    string match -rq '^0$' -- "$gcc_status"; and set gcc_ok 1
-    string match -rq '^0$' -- "$clang_status"; and set clang_ok 1
-    string match -rq '^0$' -- "$tidy_status"; and set tidy_ok 1
-    string match -rq '^0$' -- "$cppcheck_status"; and set cppcheck_ok 1
-    string match -rq '^0$' -- "$flawfinder_status"; and set flawfinder_ok 1
-    string match -rq '^0$' -- "$splint_status"; and set splint_ok 1
+    set -l failed_checks 0
 
-    set -l failed_checks (math \
-        "6 - $gcc_ok - $clang_ok - $tidy_ok - $cppcheck_ok - $flawfinder_ok - $splint_ok")
+    for check_status in \
+        "$gcc_status" \
+        "$clang_status" \
+        "$tidy_status" \
+        "$cppcheck_status" \
+        "$flawfinder_status" \
+        "$splint_status"
+
+        if not string match -rq '^0$' -- "$check_status"
+            set failed_checks (math "$failed_checks + 1")
+        end
+    end
 
     # ------------------------------------------------------------
     # Center helper
@@ -832,15 +1015,28 @@ function c-analyze
         set -l text "$argv"
         set -l width 62
         set -l length (string length -- "$text")
-        set -l left (math "floor(($width - $length) / 2)")
-        set -l right (math "$width - $length - $left")
+
+        set -l padding (math "$width - $length")
+
+        if test $padding -lt 0
+            set padding 0
+        end
+
+        set -l left (math "floor($padding / 2)")
+        set -l right (math "$padding - $left")
 
         printf "║%*s%s%*s║\n" $left "" "$text" $right ""
     end
 
+    # ------------------------------------------------------------
+    # Output
+    # ------------------------------------------------------------
+
     echo ""
     echo "╔══════════════════════════════════════════════════════════════╗"
+
     __c_analyze_center "C CODE ANALYSIS COMPLETE"
+
     echo "╠══════════════════════════════════════════════════════════════╣"
     echo "║                                                              ║"
 
@@ -856,12 +1052,12 @@ function c-analyze
 
     __c_analyze_center "TOTAL ISSUES: $total_issues"
     __c_analyze_center "FAILED CHECKS: $failed_checks"
-    __c_analyze_center "DURATION: $duration"s
+    __c_analyze_center "DURATION: $duration s"
 
     echo "║                                                              ║"
     echo "╠══════════════════════════════════════════════════════════════╣"
 
-    if test "$total_issues" -eq 0
+    if test $total_issues -eq 0
         __c_analyze_center "✓✓✓  NO ISSUES DETECTED  ✓✓✓"
     else
         __c_analyze_center "✗✗✗  ISSUES DETECTED  ✗✗✗"
@@ -869,8 +1065,11 @@ function c-analyze
 
     echo "╚══════════════════════════════════════════════════════════════╝"
 
+    # cleanup helper functions
     functions -e __c_analyze_center
+    functions -e __c_safe_int
 end
+
 
 # ============================================================
 # MAXIMUM HARDENED GCC BUILD
