@@ -5,8 +5,8 @@
   "description": "Exakte Nachbildung von Catppuccin Mocha",
   "theme": {
     "colors": {
-      "frame": [30, 30, 46],
-      "frame_inactive": [30, 30, 46],
+      "frame": [17, 17, 27],
+      "frame_inactive": [17, 17, 27],
       "frame_incognito": [49, 50, 68],
       "frame_incognito_inactive": [49, 50, 68],
       "toolbar": [30, 30, 46],
@@ -38,7 +38,7 @@
       "menu_text": [205, 214, 244],
       "control_button_background": [49, 50, 68],
       "control_button_background_hover": [69, 71, 91],
-      "highlight": [137, 180, 250],
+      "highlight": [255, 255, 255],
       "bookmark_bar_background": [30, 30, 46]
     },
     "tints": {
