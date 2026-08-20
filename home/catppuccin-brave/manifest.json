@@ -38,7 +38,7 @@
       "menu_text": [205, 214, 244],
       "control_button_background": [49, 50, 68],
       "control_button_background_hover": [69, 71, 91],
-      "highlight": [255, 255, 255],
+      "highlight": [137, 180, 250],
       "bookmark_bar_background": [30, 30, 46]
     },
     "tints": {
