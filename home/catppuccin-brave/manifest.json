@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Catppuccin Mocha (Kitty Exact)",
+  "name": "Catppuccin Mocha",
   "version": "1.0",
-  "description": "Exakte Nachbildung von Catppuccin Mocha aus kitty.conf",
+  "description": "Exakte Nachbildung von Catppuccin Mocha",
   "theme": {
     "colors": {
       "frame": [30, 30, 46],
