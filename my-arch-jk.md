@@ -109,7 +109,7 @@ Bitte führen sie alle Commands aus und fügen sie .config in ihr Systhem ein.
     - [Den Tippfehler-Korrektor thefuck installieren](#den-tippfehler-korrektor-thefuck-installieren)
     - [Die Programmiersprache Lua in der Version 5.1 installieren](#die-programmiersprache-lua-in-der-version-51-installieren)
     - [Microsoft Visual Studio Code (VS Code) über yay installieren](#microsoft-visual-studio-code-vs-code-über-yay-installieren)
-    - [GitKraken über das offizielle Linux-Archiv installieren](#gitkraken-über-das-offizielle-linux-archiv-installieren)
+    - [GitKraken über yay installieren](#gitkraken-über-yay-installieren)
     - [Den Discord-Client (Vesktop) über den Paketmanager installieren](#den-discord-client-vesktop-über-den-paketmanager-installieren)
     - [Den Signal Messenger installieren](#den-signal-messenger-installieren)
     - [Den Brave Browser über yay installieren](#den-brave-browser-über-yay-installieren)
@@ -795,14 +795,16 @@ sudo pacman -S --needed lua51
 yay -S visual-studio-code-bin
 ```
 
-### GitKraken über das offizielle Linux-Archiv installieren
+### GitKraken über yay installieren
 
 ```bash
-wget https://release.gitkraken.com/linux/gitkraken-amd64.tar.gz
-sudo tar -xvzf gitkraken-amd64.tar.gz
-sudo mv gitkraken /opt/
-sudo ln -s /opt/gitkraken/gitkraken /usr/local/bin/gitkraken
-mkdir -p ~/.local/share/applications; printf '%s\n' '[Desktop Entry]' 'Name=GitKraken' 'Comment=Git Client' 'Exec=/opt/gitkraken/gitkraken' 'Icon=/opt/gitkraken/gitkraken.png' 'Terminal=false' 'Type=Application' 'Categories=Development;' > ~/.local/share/applications/gitkraken.desktop
+# wget https://release.gitkraken.com/linux/gitkraken-amd64.tar.gz
+# sudo tar -xvzf gitkraken-amd64.tar.gz
+# sudo mv gitkraken /opt/
+# sudo ln -s /opt/gitkraken/gitkraken /usr/local/bin/gitkraken
+# mkdir -p ~/.local/share/applications; printf '%s\n' '[Desktop Entry]' 'Name=GitKraken' 'Comment=Git Client' 'Exec=/opt/gitkraken/gitkraken' 'Icon=/opt/gitkraken/gitkraken.png' 'Terminal=false' 'Type=Application' 'Categories=Development;' > ~/.local/share/applications/gitkraken.desktop
+
+yay -S gitkraken
 ```
 
 ### Den Discord-Client (Vesktop) über den Paketmanager installieren

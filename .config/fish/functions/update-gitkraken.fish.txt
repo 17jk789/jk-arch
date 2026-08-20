@@ -1,3 +1,7 @@
+# WARNUNG: Dieses Skript ist NUR für die MANUELLE Installation von GitKraken (.tar.gz) gedacht!
+# Wenn Sie GitKraken über das AUR (z.B. mit 'yay -S gitkraken') installiert haben,
+# dürfen Sie dieses Skript NICHT verwenden.
+
 function update-gitkraken
     echo "Starting GitKraken update..."
 
