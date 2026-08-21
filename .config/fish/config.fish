@@ -209,6 +209,10 @@ $main_color ╚═╝     ╚═╝     $reset$white      ╚═╝   ╚══�
         bind -M insert \cx\ce edit-commandline
     end
 
+    if test "$TERM" != "linux"
+        alias ls 'eza --icons=auto'
+    end
+
     # ---------------------------------------------------------
     # Kitty SSH
     # ---------------------------------------------------------
