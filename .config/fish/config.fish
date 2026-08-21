@@ -161,6 +161,9 @@ $main_color ╚═╝     ╚═╝     $reset$white      ╚═╝   ╚══�
         bind -M default \ch prevd-or-backward-word
         bind -M default \cl nextd-or-forward-word
 
+        bind -M insert \ec 'clear; commandline -f repaint'
+        bind -M default \ec 'clear; commandline -f repaint'
+
         # ls -laa
         bind -M insert \cs "commandline -r 'ls -laa'; commandline -f execute"
         bind -M default \cs "commandline -r 'ls -laa'; commandline -f execute"
@@ -178,8 +181,8 @@ $main_color ╚═╝     ╚═╝     $reset$white      ╚═╝   ╚══�
         bind -M default \cg 'lazygit; commandline -f repaint'
 
         # Lazy Navi
-        bind -M insert \cc 'lazy_navi; commandline -f repaint'
-        bind -M default \cc 'lazy_navi; commandline -f repaint'
+        bind -M insert \ck 'lazy_navi; commandline -f repaint'
+        bind -M default \ck 'lazy_navi; commandline -f repaint'
     end
 
     # ---------------------------------------------------------
