@@ -183,6 +183,30 @@ $main_color ╚═╝     ╚═╝     $reset$white      ╚═╝   ╚══�
         # Lazy Navi
         bind -M insert \ck 'lazy_navi; commandline -f repaint'
         bind -M default \ck 'lazy_navi; commandline -f repaint'
+
+        # Strg + X, dann E: aktuelle Commandline in Neovim bearbeiten
+        function edit-commandline
+            set -l tmpfile (mktemp --suffix=.fish)
+
+            # Aufräumen, auch wenn nvim abgebrochen wird
+            function cleanup --on-event fish_exit
+                rm -f "$tmpfile"
+            end
+
+            printf '%s\n' (commandline) >"$tmpfile"
+
+            nvim "$tmpfile"
+
+            if test $status -eq 0
+                commandline -r -- (cat "$tmpfile")
+                commandline -f repaint
+            end
+
+            rm -f "$tmpfile"
+        end
+
+        bind -M default \cx\ce edit-commandline
+        bind -M insert \cx\ce edit-commandline
     end
 
     # ---------------------------------------------------------
