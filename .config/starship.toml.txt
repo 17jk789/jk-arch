@@ -48,8 +48,8 @@ $character"""
 [os]
 disabled = false
 style = "bg:#313244 fg:#cdd6f4"
-format = "[](bold fg:#313244)[ ]($style)"
-# format = "[](bold fg:#313244)[  ]($style)"
+format = " [](bold fg:#313244)[ ]($style)"
+# format = " [](bold fg:#313244)[  ]($style)"
 
 # ============================================================
 # USERNAME
@@ -87,8 +87,8 @@ style = "fg:#585b70"
 
 # Replace the "❯" symbol in the prompt with "➜"
 [character]                            # The name of the module we are configuring is "character"
-success_symbol = " [ ](bold #a6e3a1)"
-error_symbol = " [ ](bold #f38ba8)"
+success_symbol = "  [ ](bold #a6e3a1)"
+error_symbol = "  [ ](bold #f38ba8)"
 
 # Disable the package module, hiding it from the prompt completely
 
@@ -195,7 +195,7 @@ style = "bold dimmed #a6e3a1"
 [time]
 disabled = false
 style = "bg:#313244 fg:#cdd6f4"
-format = " [](bold fg:#313244)[󰥔 $time]($style)[](bold fg:#313244)"
+format = " [](bold fg:#313244)[󰥔 $time]($style)[](bold fg:#313244) "
 time_format = "%T"
 
 # ============================================================
