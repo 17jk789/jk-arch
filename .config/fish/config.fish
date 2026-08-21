@@ -209,17 +209,13 @@ $main_color ╚═╝     ╚═╝     $reset$white      ╚═╝   ╚══�
         bind -M insert \cx\ce edit-commandline
     end
 
-    if test "$TERM" != "linux"
-        alias ls 'eza --icons=auto'
-    end
+    # if test "$TERM" != "linux"
+    #     alias ls 'eza --icons=auto'
+    # end
 
-    # ---------------------------------------------------------
-    # Kitty SSH
-    # ---------------------------------------------------------
-
-    if test "$TERM" = xterm-kitty
-        alias ssh 'kitten ssh'
-    end
+    # if test "$TERM" = xterm-kitty
+    #     alias ssh 'kitten ssh'
+    # end
 
 end
 
