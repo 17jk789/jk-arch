@@ -151,8 +151,8 @@ $main_color ╚═╝     ╚═╝     $reset$white      ╚═╝   ╚══�
         # bind -M default -e \el
 
         # Disable Alt+L
-        bind -M insert \el true
-        bind -M default \el true
+        # bind -M insert \el true
+        # bind -M default \el true
 
         # Navigation
         bind -M insert \ch prevd-or-backward-word
