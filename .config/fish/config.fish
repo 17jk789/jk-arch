@@ -39,7 +39,7 @@ if status is-interactive
         alias ls 'eza --icons --group-directories-first'
         alias ll 'eza -l --icons --group-directories-first'
         alias la 'eza -a --icons --group-directories-first'
-        alias lla 'eza -la --icons --group-directories-first'
+        alias lla 'eza -laa --icons --group-directories-first'
     end
 
     # ---------------------------------------------------------
