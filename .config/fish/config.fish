@@ -217,14 +217,9 @@ $main_color ╚═╝     ╚═╝     $reset$white      ╚═╝   ╚══�
     #     alias ssh 'kitten ssh'
     # end
 
+    # set -gx EDITOR nvim
+    # set -gx VISUAL nvim
 end
-
-# -------------------------------------------------------------
-# Default Editor
-# -------------------------------------------------------------
-
-set -gx EDITOR nvim
-set -gx VISUAL nvim
 
 # Yazi Wrapper-Funktion (ändert das Verzeichnis beim Beenden)
 # function y
