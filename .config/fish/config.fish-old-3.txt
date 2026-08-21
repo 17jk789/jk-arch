@@ -1,36 +1,15 @@
-# ~/.config/fish/config.fish
-
 # Commands to run in interactive sessions can go here
 if status is-interactive
 
-    # ---------------------------------------------------------
-    # IPs
-    # ---------------------------------------------------------
-
     # IPs EINMAL beim Start von Fish holen und exportieren
     # set -gx MY_IP (ip route get 1 | awk '{print $7}')
-    # set -gx MY_IP (ip route get 1 | sed -n 's/.*src \([^ ]*\).*/\1/p' | string trim)
-    # set -gx PUB_IP (curl -fsS --max-time 5 ifconfig.me)
+    set -gx MY_IP (ip route get 1 | sed -n 's/.*src \([^ ]*\).*/\1/p' | string trim)
+    set -gx PUB_IP (curl -fsS --max-time 5 ifconfig.me)
 
-    # IPs are hidden by default.
-    # Use `showip` to restore the real IPs after `hideip`
-    # has stored them.
-    set -gx MY_IP "x.x.x.x"
-    set -gx PUB_IP "x.x.x.x"
-
-    # ---------------------------------------------------------
-    # Fish / Shell Settings
-    # ---------------------------------------------------------
-
-    # Vi key bindings
     set -g fish_key_bindings fish_vi_key_bindings
 
     # No greeting
     set fish_greeting
-
-    # ---------------------------------------------------------
-    # Banner
-    # ---------------------------------------------------------
 
     function print_banner
 
@@ -39,7 +18,64 @@ if status is-interactive
         set white "\033[97m"
         set reset "\033[0m"
 
+        function timestamp
+            date "+%H:%M:%S"
+        end
+
+        function get_commit_info
+            set local_path $argv[1]
+
+            if not test -d $local_path
+                echo "0 0"
+                return
+            end
+
+            set branch (git -C $local_path rev-parse --abbrev-ref HEAD 2>/dev/null)
+
+            if test -z "$branch"
+                echo "0 0"
+                return
+            end
+
+            git -C $local_path fetch >/dev/null 2>&1
+
+            set remote_total (git -C $local_path rev-list --count origin/$branch 2>/dev/null)
+            set behind (git -C $local_path rev-list --count $branch..origin/$branch 2>/dev/null)
+
+            echo "$remote_total $behind"
+        end
+
         set user_name $USER
+        set local_repo_path "$HOME/p-terminal"
+
+        set info (get_commit_info $local_repo_path)
+
+        set remote_total $info[1]
+        set behind $info[2]
+
+        if test -z "$remote_total"
+            set remote_total 0
+        end
+
+        if test -z "$behind"
+            set behind 0
+        end
+
+        set remote_total (string trim $remote_total)
+        set remote_total (string split " " $remote_total)[1] 2>/dev/null
+
+        if test -z "$remote_total"
+            set remote_total 0
+        end
+
+        set total (math 500 + 971 + $remote_total)
+
+        if test $behind -ne 0
+            echo -e "[(timestamp)] [INFO] The local repository is $main_color$behind$reset commits behind the remote repository."
+            echo -e "Remote contains $main_color$remote_total$reset / hole $main_color$total$reset commits."
+            echo -e "Update with 'update' in PP-Terminal."
+            echo
+        end
 
         echo -e "
 $main_color ██████╗ ██████╗$reset$white    ████████╗███████╗██████╗ ███╗   ███╗██╗███╗   ██╗ █████╗ ██╗     $reset
@@ -54,6 +90,25 @@ $main_color ╚═╝     ╚═╝     $reset$white      ╚═╝   ╚══�
  Developed by Peharge and JK (Peharge Projects 2025)
  Thank you so much for using PP-Terminal ❤️"
 
+        echo
+        printf "%b%b [%bGitHub Repository%b]%b\n" \
+            "\e]8;;https://github.com/peharge/p-terminal\e\\" \
+            "$white" \
+            "$main_color" \
+            "$reset" \
+            "\e]8;;\e\\"
+        printf "%b%b [%bProject Website%b]%b\n" \
+            "\e]8;;file://$HOME/peharge-web/p-term.html\e\\" \
+            "$white" \
+            "$main_color" \
+            "$reset" \
+            "\e]8;;\e\\"
+        printf "%b%b [%bLearn PP-Term%b]%b\n" \
+            "\e]8;;file://$HOME/peharge-web/pp-term-hole.html\e\\" \
+            "$white" \
+            "$main_color" \
+            "$reset" \
+            "\e]8;;\e\\"
         echo
         echo -e "$main_color PP-Terminal Version:$reset 8.3.9.26980"
         echo -e "$main_color PP-Term Launcher Version:$reset 8.3.3.6589"
@@ -82,16 +137,10 @@ $main_color ╚═╝     ╚═╝     $reset$white      ╚═╝   ╚══�
         echo
     end
 
-    # ---------------------------------------------------------
-    # Start Banner
-    # ---------------------------------------------------------
-
+    # Banner starten
     print_banner
 
-    # ---------------------------------------------------------
-    # Starship
-    # ---------------------------------------------------------
-
+    # Use starship
     function starship_transient_prompt_func
         starship module character
     end
@@ -101,10 +150,6 @@ $main_color ╚═╝     ╚═╝     $reset$white      ╚═╝   ╚══�
         enable_transience
     end
 
-    # ---------------------------------------------------------
-    # Zoxide
-    # ---------------------------------------------------------
-
     zoxide init fish | source
 
     # Colors
@@ -112,36 +157,25 @@ $main_color ╚═╝     ╚═╝     $reset$white      ╚═╝   ╚══�
     #     cat ~/.local/state/quickshell/user/generated/terminal/sequences.txt
     # end
 
-    # ---------------------------------------------------------
     # Aliases
-    # ---------------------------------------------------------
-
-    # Kitty doesn't clear properly, so we need this workaround.
-    alias clear 'printf "\033[2J\033[3J\033[1;1H"'
-
-    # Common typos
-    alias celar 'printf "\033[2J\033[3J\033[1;1H"'
-    alias claer 'printf "\033[2J\033[3J\033[1;1H"'
-
+    # kitty doesn't clear properly so we need to do this weird printing
+    alias clear "printf '\033[2J\033[3J\033[1;1H'"
+    alias celar "printf '\033[2J\033[3J\033[1;1H'"
+    alias claer "printf '\033[2J\033[3J\033[1;1H'"
     alias pamcan pacman
     alias q 'qs -c ii'
 
     if type -q eza
-        alias ls 'eza --icons --group-directories-first'
-        alias ll 'eza -l --icons --group-directories-first'
-        alias la 'eza -a --icons --group-directories-first'
+        alias ls='eza --icons --group-directories-first'
+        alias ll='eza -l --icons --group-directories-first'
+        alias la='eza -a --icons --group-directories-first'
     end
 
-    # ---------------------------------------------------------
-    # Key Bindings
-    # ---------------------------------------------------------
-
+    # Zentralisierte Key Bindings Funktion
     function fish_user_key_bindings
-
-        # Start Vi mode directly in Insert mode.
+        # Starte den Vi-Modus direkt im Insert-Modus
         fish_vi_key_bindings insert
 
-        # Autopair
         if functions -q _autopair_install
             _autopair_install
         end
@@ -150,68 +184,53 @@ $main_color ╚═╝     ╚═╝     $reset$white      ╚═╝   ╚══�
         # bind -M insert -e \el
         # bind -M default -e \el
 
-        # Disable Alt+L
+        # Alt+L deaktivieren, ohne die Bindungstabelle zu crashen
         bind -M insert \el true
         bind -M default \el true
 
-        # Navigation
+        # Deine eigenen Navigation-Bindings neu setzen
         bind -M insert \ch prevd-or-backward-word
         bind -M insert \cl nextd-or-forward-word
 
         bind -M default \ch prevd-or-backward-word
         bind -M default \cl nextd-or-forward-word
 
-        # ls -laa
         bind -M insert \cs "commandline -r 'ls -laa'; commandline -f execute"
         bind -M default \cs "commandline -r 'ls -laa'; commandline -f execute"
 
-        # Yazi
+        # TUI Bindings (MÜSSEN hier drin stehen)
         bind -M insert \cy 'yazi; commandline -f repaint'
         bind -M default \cy 'yazi; commandline -f repaint'
-
-        # Neovim
         bind -M insert \cn 'nvim (pwd); commandline -f repaint'
         bind -M default \cn 'nvim (pwd); commandline -f repaint'
-
-        # Lazygit
         bind -M insert \cg 'lazygit; commandline -f repaint'
         bind -M default \cg 'lazygit; commandline -f repaint'
-
-        # Lazy Navi
         bind -M insert \cc 'lazy_navi; commandline -f repaint'
         bind -M default \cc 'lazy_navi; commandline -f repaint'
     end
 
-    # ---------------------------------------------------------
-    # Kitty SSH
-    # ---------------------------------------------------------
-
     if test "$TERM" = xterm-kitty
         alias ssh 'kitten ssh'
     end
-
 end
 
-# -------------------------------------------------------------
-# Default Editor
-# -------------------------------------------------------------
-
+# Setze Neovim als Standard-Editor
 set -gx EDITOR nvim
 set -gx VISUAL nvim
 
 # Yazi Wrapper-Funktion (ändert das Verzeichnis beim Beenden)
-# function y
-#     set tmp (mktemp -t "yazi-cwd.XXXXXX")
-#     yazi "$argv" --cwd-file="$tmp"
-#
-#     if set cwd (command cat -- "$tmp")
-#         and test -n "$cwd"
-#         and test "$cwd" != "$PWD"
-#         builtin cd -- "$cwd"
-#     end
-#
-#     rm -f -- "$tmp"
-# end
+function y
+    set tmp (mktemp -t "yazi-cwd.XXXXXX")
+    yazi "$argv" --cwd-file="$tmp"
+
+    if set cwd (command cat -- "$tmp")
+        and test -n "$cwd"
+        and test "$cwd" != "$PWD"
+        builtin cd -- "$cwd"
+    end
+
+    rm -f -- "$tmp"
+end
 
 # set -g fish_key_bindings fish_vi_key_bindings
 
@@ -225,19 +244,19 @@ set -gx VISUAL nvim
 # end
 
 # Öffnet Dateien oder Verzeichnisse mit der Standard-App (xdg-open)
-# function open
-#     xdg-open $argv >/dev/null 2>&1 &
-#     disown
-# end
+function open
+    xdg-open $argv >/dev/null 2>&1 &
+    disown
+end
 
-# function lazy_navi
-#     # Prüfen, ob wir schon geladen haben
-#     if not functions -q __navi_loaded
-#         # optional: Repo sicherstellen
-#         navi repo add denisidoro/cheats 2>/dev/null
-#         # Dummy-Funktion als Marker
-#         function __navi_loaded
-#         end
-#     end
-#     command navi $argv
-# end
+function lazy_navi
+    # Prüfen, ob wir schon geladen haben
+    if not functions -q __navi_loaded
+        # optional: Repo sicherstellen
+        navi repo add denisidoro/cheats 2>/dev/null
+        # Dummy-Funktion als Marker
+        function __navi_loaded
+        end
+    end
+    command navi $argv
+end
