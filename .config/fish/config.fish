@@ -7,14 +7,7 @@ if status is-interactive
     # IPs
     # ---------------------------------------------------------
 
-    # IPs EINMAL beim Start von Fish holen und exportieren
-    # set -gx MY_IP (ip route get 1 | awk '{print $7}')
-    # set -gx MY_IP (ip route get 1 | sed -n 's/.*src \([^ ]*\).*/\1/p' | string trim)
-    # set -gx PUB_IP (curl -fsS --max-time 5 ifconfig.me)
-
     # IPs are hidden by default.
-    # Use `showip` to restore the real IPs after `hideip`
-    # has stored them.
     set -gx MY_IP "x.x.x.x"
     set -gx PUB_IP "x.x.x.x"
 
@@ -22,71 +15,8 @@ if status is-interactive
     # Fish / Shell Settings
     # ---------------------------------------------------------
 
-    # Vi key bindings
-    set -g fish_key_bindings fish_vi_key_bindings
-
     # No greeting
     set fish_greeting
-
-    # ---------------------------------------------------------
-    # Banner
-    # ---------------------------------------------------------
-
-    function print_banner
-
-        set main_color "\033[38;5;4m"
-        set red "\033[38;5;1m"
-        set white "\033[97m"
-        set reset "\033[0m"
-
-        set user_name $USER
-
-        echo -e "
-$main_color ██████╗ ██████╗$reset$white    ████████╗███████╗██████╗ ███╗   ███╗██╗███╗   ██╗ █████╗ ██╗     $reset
-$main_color ██╔══██╗██╔══██╗$reset$white   ╚══██╔══╝██╔════╝██╔══██╗████╗ ████║██║████╗  ██║██╔══██╗██║     $reset
-$main_color ██████╔╝██████╔╝$reset$white█████╗██║   █████╗  ██████╔╝██╔████╔██║██║██╔██╗ ██║███████║██║     $reset
-$main_color ██╔═══╝ ██╔═══╝ $reset$white╚════╝██║   ██╔══╝  ██╔══██╗██║╚██╔╝██║██║██║╚██╗██║██╔══██║██║     $reset
-$main_color ██║     ██║     $reset$white      ██║   ███████╗██║  ██║██║ ╚═╝ ██║██║██║ ╚████║██║  ██║███████╗$reset
-$main_color ╚═╝     ╚═╝     $reset$white      ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝ $reset
-"
-
-        echo -e " A warm welcome, $main_color$user_name$reset, to Peharge Python Terminal!
- Developed by Peharge and JK (Peharge Projects 2025)
- Thank you so much for using PP-Terminal ❤️"
-
-        echo
-        echo -e "$main_color PP-Terminal Version:$reset 8.3.9.26980"
-        echo -e "$main_color PP-Term Launcher Version:$reset 8.3.3.6589"
-        echo -e "$main_color Peharge Kernel Version:$reset 8.0.3.6984"
-        echo -e "$main_color Peharge Compiler Version:$reset 8.0.3.898"
-        echo -e "$main_color IQ Kernel Version:$reset 4.0.1.956"
-        echo -e "$main_color The Script Version:$reset 1.0.1.95698 EAP ($red""Not Activated""$reset)"
-        echo -e "$main_color JKNV Version:$reset 3.6.9"
-        echo
-
-        printf " "
-
-        for i in (seq 0 7)
-            printf "\033[48;5;%sm   \033[0m" $i
-        end
-
-        echo ""
-
-        printf " "
-
-        for i in (seq 8 15)
-            printf "\033[48;5;%sm   \033[0m" $i
-        end
-
-        echo ""
-        echo
-    end
-
-    # ---------------------------------------------------------
-    # Start Banner
-    # ---------------------------------------------------------
-
-    print_banner
 
     # ---------------------------------------------------------
     # Starship
@@ -102,34 +32,33 @@ $main_color ╚═╝     ╚═╝     $reset$white      ╚═╝   ╚══�
     end
 
     # ---------------------------------------------------------
-    # Zoxide
-    # ---------------------------------------------------------
-
-    zoxide init fish | source
-
-    # Colors
-    # if test -f ~/.local/state/quickshell/user/generated/terminal/sequences.txt
-    #     cat ~/.local/state/quickshell/user/generated/terminal/sequences.txt
-    # end
-
-    # ---------------------------------------------------------
     # Aliases
     # ---------------------------------------------------------
-
-    # Kitty doesn't clear properly, so we need this workaround.
-    alias clear 'printf "\033[2J\033[3J\033[1;1H"'
-
-    # Common typos
-    alias celar 'printf "\033[2J\033[3J\033[1;1H"'
-    alias claer 'printf "\033[2J\033[3J\033[1;1H"'
-
-    alias pamcan pacman
-    alias q 'qs -c ii'
 
     if type -q eza
         alias ls 'eza --icons --group-directories-first'
         alias ll 'eza -l --icons --group-directories-first'
         alias la 'eza -a --icons --group-directories-first'
+        alias lla 'eza -la --icons --group-directories-first'
+    end
+
+    # ---------------------------------------------------------
+    # Edit Commandline in NeoVim
+    # ---------------------------------------------------------
+
+    function edit-commandline
+        set -l tmpfile (mktemp --suffix=.fish)
+
+        printf '%s\n' (commandline) >$tmpfile
+
+        nvim $tmpfile
+
+        if test $status -eq 0
+            commandline -r -- (cat $tmpfile)
+            commandline -f repaint
+        end
+
+        rm -f -- $tmpfile
     end
 
     # ---------------------------------------------------------
@@ -145,10 +74,6 @@ $main_color ╚═╝     ╚═╝     $reset$white      ╚═╝   ╚══�
         if functions -q _autopair_install
             _autopair_install
         end
-
-        # bind -e \el
-        # bind -M insert -e \el
-        # bind -M default -e \el
 
         # Disable Alt+L
         # bind -M insert \el true
@@ -184,27 +109,7 @@ $main_color ╚═╝     ╚═╝     $reset$white      ╚═╝   ╚══�
         bind -M insert \ck 'lazy_navi; commandline -f repaint'
         bind -M default \ck 'lazy_navi; commandline -f repaint'
 
-        # Strg + X, dann E: aktuelle Commandline in Neovim bearbeiten
-        function edit-commandline
-            set -l tmpfile (mktemp --suffix=.fish)
-
-            # Aufräumen, auch wenn nvim abgebrochen wird
-            function cleanup --on-event fish_exit
-                rm -f "$tmpfile"
-            end
-
-            printf '%s\n' (commandline) >"$tmpfile"
-
-            nvim "$tmpfile"
-
-            if test $status -eq 0
-                commandline -r -- (cat "$tmpfile")
-                commandline -f repaint
-            end
-
-            rm -f "$tmpfile"
-        end
-
+        # Strg + X + E: aktuelle Commandline in Neovim bearbeiten
         bind -M default \cx\ce edit-commandline
         bind -M insert \cx\ce edit-commandline
     end
@@ -220,46 +125,3 @@ $main_color ╚═╝     ╚═╝     $reset$white      ╚═╝   ╚══�
     # set -gx EDITOR nvim
     # set -gx VISUAL nvim
 end
-
-# Yazi Wrapper-Funktion (ändert das Verzeichnis beim Beenden)
-# function y
-#     set tmp (mktemp -t "yazi-cwd.XXXXXX")
-#     yazi "$argv" --cwd-file="$tmp"
-#
-#     if set cwd (command cat -- "$tmp")
-#         and test -n "$cwd"
-#         and test "$cwd" != "$PWD"
-#         builtin cd -- "$cwd"
-#     end
-#
-#     rm -f -- "$tmp"
-# end
-
-# set -g fish_key_bindings fish_vi_key_bindings
-
-# function fuck
-#     # lädt thefuck nur beim ersten Aufruf
-#     functions -q __thefuck_loaded; or begin
-#         thefuck --alias | source
-#         functions -c __thefuck_loaded __thefuck_loaded
-#     end
-#     __thefuck_loaded
-# end
-
-# Öffnet Dateien oder Verzeichnisse mit der Standard-App (xdg-open)
-# function open
-#     xdg-open $argv >/dev/null 2>&1 &
-#     disown
-# end
-
-# function lazy_navi
-#     # Prüfen, ob wir schon geladen haben
-#     if not functions -q __navi_loaded
-#         # optional: Repo sicherstellen
-#         navi repo add denisidoro/cheats 2>/dev/null
-#         # Dummy-Funktion als Marker
-#         function __navi_loaded
-#         end
-#     end
-#     command navi $argv
-# end
