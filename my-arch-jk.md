@@ -2193,7 +2193,7 @@ sudo pacman -S perl-file-mimeinfo
 ### Mauszeiger-Animationen (Cursor Shaders) für Ghostty einrichten
 
 ```bash
-git clone https://github.com/sahaj-b/ghostty-cursor-shaders ~/.config/ghostty/shaders
+# git clone https://github.com/sahaj-b/ghostty-cursor-shaders ~/.config/ghostty/shaders
 ```
 
 ### Einen modularen Fish-Konfigurationsordner erstellen
@@ -2203,6 +2203,7 @@ mkdir -p ~/.config/fish/conf.d
 ```
 
 ### Den praktischen Befehls-Ausführer just installieren
+
 ```bash
 sudo pacman -S just
 ```
