@@ -82,7 +82,7 @@ Bitte führen sie alle Commands aus und fügen sie .config in ihr Systhem ein.
     - [Moderne Terminal-Emulatoren installieren](#moderne-terminal-emulatoren-installieren)
     - [Akku- und Hardware-Informationen auslesen](#akku--und-hardware-informationen-auslesen)
     - [LazyVim und JetBrains Mono Nerd Font installieren](#lazyvim-und-jetbrains-mono-nerd-font-installieren)
-  - [Fun](#fun)
+  - [Linux Power Tools](#linux-power-tools)
     - [Das System-Informationswerkzeug Fastfetch installieren](#das-system-informationswerkzeug-fastfetch-installieren)
     - [Den interaktiven Prozess-Viewer htop installieren](#den-interaktiven-prozess-viewer-htop-installieren)
     - [Den hochentwickelten System-Monitor btop installieren](#den-hochentwickelten-system-monitor-btop-installieren)
@@ -122,19 +122,20 @@ Bitte führen sie alle Commands aus und fügen sie .config in ihr Systhem ein.
     - [Der grafische Bildbetrachter Gwenview installieren](#der-grafische-bildbetrachter-gwenview-installieren)
     - [Der universelle Dokumentenbetrachter Okular installieren](#der-universelle-dokumentenbetrachter-okular-installieren)
     - [Den universellen Medienplayer VLC installieren](#den-universellen-medienplayer-vlc-installieren)
-    - [Den Audio-Editor Audacity installieren](#den-audio-editor-audacity-installieren)
+    - [✨ Den Audio-Editor Audacity installieren](#-den-audio-editor-audacity-installieren)
     - [Den funktionsreichen Terminal-Emulator Konsole installieren](#den-funktionsreichen-terminal-emulator-konsole-installieren)
-    - [Die Wissensdatenbank Obsidian installieren](#die-wissensdatenbank-obsidian-installieren)
+    - [✨ Die Wissensdatenbank Obsidian installieren](#-die-wissensdatenbank-obsidian-installieren)
     - [Den grafischen Plasma-Systemmonitor installieren](#den-grafischen-plasma-systemmonitor-installieren)
-    - [Den Taskmanager Mission Center über yay installieren](#den-taskmanager-mission-center-über-yay-installieren)
+    - [✨ Den Taskmanager Mission Center über yay installieren](#-den-taskmanager-mission-center-über-yay-installieren)
     - [Das digitale Mal- und Zeichenprogramm Krita installieren](#das-digitale-mal--und-zeichenprogramm-krita-installieren)
-    - [Das Bildbearbeitungsprogramm GIMP installieren](#das-bildbearbeitungsprogramm-gimp-installieren)
-    - [Das professionelle Videoschnittprogramm Kdenlive installieren](#das-professionelle-videoschnittprogramm-kdenlive-installieren)
-    - [Das professionelle All-in-One-Videoschnittprogramm DaVinci Resolve installieren](#das-professionelle-all-in-one-videoschnittprogramm-davinci-resolve-installieren)
-    - [Das plattformübergreifende Videoschnittprogramm Shotcut installieren](#das-plattformübergreifende-videoschnittprogramm-shotcut-installieren)
+    - [✨ Das Bildbearbeitungsprogramm GIMP installieren](#-das-bildbearbeitungsprogramm-gimp-installieren)
+    - [✨ Das professionelle Videoschnittprogramm Kdenlive installieren](#-das-professionelle-videoschnittprogramm-kdenlive-installieren)
+    - [✨ Das professionelle All-in-One-Videoschnittprogramm DaVinci Resolve installieren](#-das-professionelle-all-in-one-videoschnittprogramm-davinci-resolve-installieren)
+    - [✨ Das plattformübergreifende Videoschnittprogramm Shotcut installieren](#-das-plattformübergreifende-videoschnittprogramm-shotcut-installieren)
     - [Die 3D-Grafik- und Animations-Suite Blender installieren](#die-3d-grafik--und-animations-suite-blender-installieren)
     - [Den E-Mail- und Kalender-Client Thunderbird installieren](#den-e-mail--und-kalender-client-thunderbird-installieren)
     - [Den wissenschaftlichen Taschenrechner Qalculate! installieren](#den-wissenschaftlichen-taschenrechner-qalculate-installieren)
+    - [Den Screenshot- und Bildschirmaufnahme-Manager Flameshot installieren](#den-screenshot--und-bildschirmaufnahme-manager-flameshot-installieren)
     - [Die Streaming- und Aufnahme-Software OBS Studio installieren](#die-streaming--und-aufnahme-software-obs-studio-installieren)
     - [Das Software-Zentrum Discover und das Flatpak-System installieren](#das-software-zentrum-discover-und-das-flatpak-system-installieren)
     - [Die Desktop-Uhr KClock installieren](#die-desktop-uhr-kclock-installieren)
@@ -218,8 +219,8 @@ Bitte führen sie alle Commands aus und fügen sie .config in ihr Systhem ein.
           - [Ping Internet (muss fehlschlagen)](#ping-internet-muss-fehlschlagen)
           - [Prüfe Firewall-Regeln](#prüfe-firewall-regeln)
         - [Metasploit starten](#metasploit-starten)
-    - [Den grafischen Audio-Mixer pwvucontrol installieren](#den-grafischen-audio-mixer-pwvucontrol-installieren)
-    - [Den grafischen Audio-Verkabelungs-Manager qpwgraph installieren](#den-grafischen-audio-verkabelungs-manager-qpwgraph-installieren)
+    - [✨ Den grafischen Audio-Mixer pwvucontrol installieren](#-den-grafischen-audio-mixer-pwvucontrol-installieren)
+    - [✨ Den grafischen Audio-Verkabelungs-Manager qpwgraph installieren](#-den-grafischen-audio-verkabelungs-manager-qpwgraph-installieren)
     - [Die lokale KI-Laufzeitumgebung Ollama installieren](#die-lokale-ki-laufzeitumgebung-ollama-installieren)
     - [Die S.M.A.R.T.-Festplattenüberwachung installieren](#die-smart-festplattenüberwachung-installieren)
     - [Den Remote-Desktop-Client KRDC installieren](#den-remote-desktop-client-krdc-installieren)
@@ -636,7 +637,7 @@ fc-cache -fv
 nvim
 ```
 
-## Fun
+## Linux Power Tools
 
 ### Das System-Informationswerkzeug Fastfetch installieren
 
@@ -887,59 +888,107 @@ sudo pacman -S okular
 
 ### Den universellen Medienplayer VLC installieren
 
+> Zum Abspielen von Videos, Musik und nahezu allen gängigen Medienformaten.
+
 ```bash
 sudo pacman -S vlc
 ```
 
-### Den Audio-Editor Audacity installieren
+### ✨ Den Audio-Editor Audacity installieren
+
+> Zum Aufnehmen, Schneiden und Bearbeiten von Audiodateien.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
 sudo pacman -S audacity
 ```
 
+</details>
+
 ### Den funktionsreichen Terminal-Emulator Konsole installieren
+
+> Das KDE-eigene Terminal, das sich besonders gut zur Verwendung direkt aus Dolphin heraus eignet.
 
 ```bash
 sudo pacman -S konsole
 ```
 
-### Die Wissensdatenbank Obsidian installieren
+### ✨ Die Wissensdatenbank Obsidian installieren
+
+> Zum Erstellen, Organisieren und Verknüpfen von Notizen und Wissen.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
 sudo pacman -S obsidian
 ```
 
+</details>
+
 ### Den grafischen Plasma-Systemmonitor installieren
+
+> Zur Überwachung von CPU, RAM, Festplatten, Netzwerk und laufenden Prozessen.
 
 ```bash
 sudo pacman -S plasma-systemmonitor
 ```
 
-### Den Taskmanager Mission Center über yay installieren
+### ✨ Den Taskmanager Mission Center über yay installieren
+
+> Zur Übersicht und Überwachung von CPU, RAM, Festplatte und laufenden Prozessen.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
-# yay -S mission-center
+yay -S mission-center
 ```
 
+</details>
+
 ### Das digitale Mal- und Zeichenprogramm Krita installieren
+
+> Zum digitalen Zeichnen, Malen und Erstellen von Illustrationen.
 
 ```bash
 sudo pacman -S krita
 ```
 
-### Das Bildbearbeitungsprogramm GIMP installieren
+### ✨ Das Bildbearbeitungsprogramm GIMP installieren
+
+> Zum Bearbeiten, Retuschieren und Erstellen von Bildern und Grafiken.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
 sudo pacman -S gimp
 ```
 
-### Das professionelle Videoschnittprogramm Kdenlive installieren
+</details>
+
+### ✨ Das professionelle Videoschnittprogramm Kdenlive installieren
+
+> Zum Schneiden, Bearbeiten und Erstellen von Videos.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
 sudo pacman -S kdenlive
 ```
 
-### Das professionelle All-in-One-Videoschnittprogramm DaVinci Resolve installieren
+</details>
+
+### ✨ Das professionelle All-in-One-Videoschnittprogramm DaVinci Resolve installieren
+
+> Für professionellen Videoschnitt, Farbkorrektur, Effekte und Audiobearbeitung.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
 sudo pacman -S davinci-resolve
@@ -953,11 +1002,20 @@ sudo pacman -S davinci-resolve
 # mkdir -p konvertiert && for f in *.mp4; do ffmpeg -i "$f" -c:v prores_ks -profile:v 3 -c:a pcm_s16le "konvertiert/${f%.mp4}.mov"; done
 ```
 
-### Das plattformübergreifende Videoschnittprogramm Shotcut installieren
+</details>
+
+### ✨ Das plattformübergreifende Videoschnittprogramm Shotcut installieren
+
+> Zum einfachen Schneiden, Bearbeiten und Exportieren von Videos.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
-# sudo pacman -S shotcut
+sudo pacman -S shotcut
 ```
+
+</details>
 
 ### Die 3D-Grafik- und Animations-Suite Blender installieren
 
@@ -975,6 +1033,12 @@ sudo pacman -S blender
 
 ```bash
 sudo pacman -S qalculate-gtk
+```
+
+### Den Screenshot- und Bildschirmaufnahme-Manager Flameshot installieren
+
+```bash
+sudo pacman -S flameshot grim xdg-desktop-portal-hyprland
 ```
 
 ### Die Streaming- und Aufnahme-Software OBS Studio installieren
@@ -2081,16 +2145,16 @@ exploit
 
 </details>
 
-### Den grafischen Audio-Mixer pwvucontrol installieren
+### ✨ Den grafischen Audio-Mixer pwvucontrol installieren
 
 ```bash
 sudo pacman -S pwvucontrol
 ```
 
-### Den grafischen Audio-Verkabelungs-Manager qpwgraph installieren
+### ✨ Den grafischen Audio-Verkabelungs-Manager qpwgraph installieren
 
 ```bash
-# sudo pacman -S qpwgraph
+sudo pacman -S qpwgraph
 ```
 
 ### Die lokale KI-Laufzeitumgebung Ollama installieren
