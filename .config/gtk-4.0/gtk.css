@@ -6,20 +6,42 @@
 @media (prefers-color-scheme: light) {
   /*
    * Catppuccin Latte
-   * Light counterpart of the same semantic structure.
+   *
+   * Mirrored semantic structure of Catppuccin Mocha.
+   *
+   * Base background      #eff1f5
+   * Deep surface         #e6e9ef
+   * Deepest surface      #dce0e8
+   * Elevated             #e6e9ef
+   * Container            #ccd0da
+   * Primary              #8839ef
+   * Secondary            #5c5f77
+   * Tertiary             #179299
+   * Text                 #4c4f69
+   * Muted                #6c6f85
+   * Disabled             #9ca0b0
+   * Outline              #9ca0b0
    */
 
-  /* Accents */
+  /* =========================================================
+   * ACCENTS
+   * ========================================================= */
+
   @define-color accent_color #8839ef;
+
   @define-color accent_hover_color rgba(136, 57, 239, 0.08);
   @define-color accent_vibrant_hover_color rgba(136, 57, 239, 0.18);
+
   @define-color accent_active_color rgba(136, 57, 239, 0.12);
   @define-color accent_vibrant_active_color rgba(136, 57, 239, 0.26);
 
   @define-color accent_fg_color #eff1f5;
   @define-color accent_bg_color #8839ef;
 
-  /* Semantic status colors */
+  /* =========================================================
+   * SEMANTIC STATUS COLORS
+   * ========================================================= */
+
   @define-color destructive_bg_color #d20f39;
   @define-color destructive_fg_color #eff1f5;
   @define-color destructive_color #d20f39;
@@ -28,23 +50,32 @@
   @define-color success_fg_color #eff1f5;
   @define-color success_color #40a02b;
 
-  /* Base surfaces */
+  /* =========================================================
+   * BASE SURFACES
+   * ========================================================= */
+
+  /* KDE BackgroundNormal / Catppuccin Base */
   @define-color window_bg_color #eff1f5;
   @define-color window_fg_color #4c4f69;
 
-  @define-color headerbar_bg_color #e6e9ef;
-  @define-color headerbar_backdrop_color #e6e9ef;
+  /* KDE Header */
+  @define-color headerbar_bg_color #eff1f5;
+  @define-color headerbar_backdrop_color #eff1f5;
   @define-color headerbar_fg_color #4c4f69;
 
+  /* Elevated surface */
   @define-color card_bg_color #e6e9ef;
   @define-color card_fg_color #4c4f69;
 
+  /* Main sidebar */
   @define-color sidebar_bg_color #eff1f5;
   @define-color sidebar_fg_color #4c4f69;
 
-  @define-color sidebar_row_active_bg_color #dce0e8;
-  @define-color sidebar_row_active_fg_color #4c4f69;
+  /* Primary container */
+  @define-color sidebar_row_active_bg_color #8839ef;
+  @define-color sidebar_row_active_fg_color #eff1f5;
 
+  /* Secondary sidebar = deep surface */
   @define-color secondary_sidebar_bg_color #e6e9ef;
   @define-color secondary_sidebar_backdrop_color #e6e9ef;
   @define-color secondary_sidebar_fg_color #5c5f77;
@@ -52,15 +83,29 @@
   @define-color sidebar_border_color @sidebar_bg_color;
   @define-color sidebar_backdrop_color @sidebar_bg_color;
 
-  @define-color view_bg_color #ffffff;
+  /* Main browser/content view */
+  @define-color view_bg_color #eff1f5;
   @define-color view_fg_color #4c4f69;
 
-  @define-color overview_bg_color #ffffff;
+  /* Overview / new-tab type surfaces */
+  @define-color overview_bg_color #dce0e8;
   @define-color overview_fg_color #4c4f69;
 
-  /* Popups */
+  /* =========================================================
+   * POPUPS / MENUS / DIALOGS
+   * ========================================================= */
+
+  /*
+   * Catppuccin Latte surface hierarchy:
+   *
+   * surface_bright       #e6e9ef
+   * surface_container    #e6e9ef
+   * primary_container    #c6d0f5 equivalent semantic role
+   */
+
   @define-color popover_bg_color #e6e9ef;
   @define-color popover_fg_color #4c4f69;
+
   @define-color popover_fg_hover_color rgba(76, 79, 105, 0.08);
 
   @define-color dialog_bg_color #e6e9ef;
@@ -69,28 +114,58 @@
   @define-color thumbnail_bg_color #e6e9ef;
   @define-color thumbnail_fg_color #4c4f69;
 
-  /* Material / semantic surfaces */
+  /* =========================================================
+   * MATERIAL COLOR ROLES
+   * ========================================================= */
+
   @define-color inverse_on_surface #eff1f5;
-  @define-color inverse_primary #8839ef;
+
+  /*
+   * Blue is used here as the inverse primary,
+   * mirroring the Mocha configuration.
+   */
+  @define-color inverse_primary #1e66f5;
+
   @define-color inverse_surface #4c4f69;
 
+  /* =========================================================
+   * CATPPUCCIN LATTE SURFACE HIERARCHY
+   * ========================================================= */
+
+  /* Crust */
   @define-color surface_container_lowest #dce0e8;
+
+  /* Mantle */
   @define-color surface_container_low #e6e9ef;
+
+  /* Base / container */
   @define-color surface_container #e6e9ef;
+
+  /* Elevated */
   @define-color surface_container_high #dce0e8;
+
+  /* Highest container */
   @define-color surface_container_highest #ccd0da;
 
+  /* =========================================================
+   * ON-SURFACE / OUTLINES
+   * ========================================================= */
+
   @define-color on_surface_variant #5c5f77;
+
   @define-color surface_variant #dce0e8;
 
   @define-color outline #9ca0b0;
 
-  /* Material state layers */
+  /* =========================================================
+   * MATERIAL STATE LAYERS
+   * ========================================================= */
+
   @define-color inverse_on_surface_hover rgba(239, 241, 245, 0.08);
   @define-color inverse_on_surface_active rgba(239, 241, 245, 0.18);
 
-  @define-color inverse_primary_hover rgba(136, 57, 239, 0.08);
-  @define-color inverse_primary_active rgba(136, 57, 239, 0.18);
+  @define-color inverse_primary_hover rgba(30, 102, 245, 0.08);
+  @define-color inverse_primary_active rgba(30, 102, 245, 0.18);
 }
 
 @media (prefers-color-scheme: dark) {
