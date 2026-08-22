@@ -15,6 +15,10 @@ if status is-interactive
     # Fish / Shell Settings
     # ---------------------------------------------------------
 
+    # Enable Fish's Vi-style key bindings globally.
+    # This is required so features such as Autopair work correctly with Vi mode.
+    set -g fish_key_bindings fish_vi_key_bindings
+
     # No greeting
     set fish_greeting
 
