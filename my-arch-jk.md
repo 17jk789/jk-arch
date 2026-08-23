@@ -132,8 +132,7 @@ Okay, genug geredet – los geht’s. :)
     - [Rust und Cargo installieren](#rust-und-cargo-installieren)
     - [Plugin für Decompilation in radare2 (Terminal)](#plugin-für-decompilation-in-radare2-terminal)
     - [Go und Make über den Paketmanager installieren](#go-und-make-über-den-paketmanager-installieren)
-    - [Go-Entwicklungswerkzeuge](#go-entwicklungswerkzeuge)
-    - [Weitere optionale Tools](#weitere-optionale-tools)
+      - [Weitere optionale Tools](#weitere-optionale-tools)
     - [✨ C/C++ Advanced Debugging installieren](#-cc-advanced-debugging-installieren)
     - [Mehrere Java-Versionen sowie Gradle und Maven installieren](#mehrere-java-versionen-sowie-gradle-und-maven-installieren)
     - [Java-Versionen installieren](#java-versionen-installieren)
@@ -848,8 +847,6 @@ Installiere beides direkt über `pacman`:
 sudo pacman -S make go
 ```
 
-### Go-Entwicklungswerkzeuge
-
 <details>
 <summary>✨ Empfohlene Go-Tools</summary>
 
@@ -862,7 +859,7 @@ go install golang.org/x/tools/cmd/goimports@latest
 
 > `gopls` ist der Language Server für Go und liefert deinem Editor Funktionen wie Autovervollständigung, Fehlermeldungen, Navigation und Codeanalyse. `goimports` formatiert Go-Code und verwaltet automatisch die benötigten Imports.
 
-### Weitere optionale Tools
+#### Weitere optionale Tools
 
 **golangci-lint** bündelt zahlreiche Linter und statische Analysewerkzeuge für Go-Projekte:
 
