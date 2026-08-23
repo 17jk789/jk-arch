@@ -1,11 +1,11 @@
-```ini
+<p style="text-align: center; font-family: monospace; white-space: pre;">
      ██╗██╗  ██╗      █████╗ ██████╗  ██████╗██╗  ██╗    
      ██║██║ ██╔╝     ██╔══██╗██╔══██╗██╔════╝██║  ██║    
      ██║█████╔╝█████╗███████║██████╔╝██║     ███████║    
 ██   ██║██╔═██╗╚════╝██╔══██║██╔══██╗██║     ██╔══██║    
 ╚█████╔╝██║  ██╗     ██║  ██║██║  ██║╚██████╗██║  ██║    
  ╚════╝ ╚═╝  ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝   
-```
+</p>
 
 <details>
 <summary>🚨 Arch Linux AUR-Malware? So prüfst du dein System!</summary>
@@ -127,10 +127,11 @@ Okay, genug geredet – los geht’s. :)
       - [GUI-Bibliotheken](#gui-bibliotheken)
       - [Desktop-Integration](#desktop-integration)
       - [Lua-Entwicklung](#lua-entwicklung)
+      - [GDB-Konfiguration](#gdb-konfiguration)
     - [Das Multilib-Repository in den Systemquellen aktivieren](#das-multilib-repository-in-den-systemquellen-aktivieren)
+    - [Rust und Cargo installieren](#rust-und-cargo-installieren)
     - [Plugin für Decompilation in radare2 (Terminal)](#plugin-für-decompilation-in-radare2-terminal)
     - [Go und Make über den Paketmanager installieren](#go-und-make-über-den-paketmanager-installieren)
-    - [Für C/C++ (keines extra)](#für-cc-keines-extra)
     - [C/C++ Advanced Debugging installieren](#cc-advanced-debugging-installieren)
     - [Mehrere Java-Versionen und die Build-Tool Gradle und Maven installieren](#mehrere-java-versionen-und-die-build-tool-gradle-und-maven-installieren)
     - [Den x86-Assembler und grundlegende Binär-Werkzeuge installieren](#den-x86-assembler-und-grundlegende-binär-werkzeuge-installieren)
@@ -532,22 +533,48 @@ So bleiben deine bestehenden Einstellungen erhalten und die zusätzlichen JK-Arc
 
 ### Die end-4 Hyperland Konfiguration herunterladen und die Installation starten
 
+Als Nächstes installieren wir die end-4 Hyprland-Konfiguration. Sie dient als Grundlage für JK-Arch und wird später entsprechend angepasst.
+
+Zuerst klonen wir das Repository und wechseln in das Verzeichnis:
+
 ```bash
 git clone https://github.com/end-4/dots-hyprland.git
 cd dots-hyprland
 ```
 
+Bevor wir das Installationsscript ausführen, schauen wir kurz nach, woher das Repository kommt, welchen Stand wir gerade verwenden und ob sich darin auffällige Befehle befinden.
+
+Repository und Remote überprüfen:
+
 ```bash
 git remote -v
+```
+
+Die letzten Commits anzeigen:
+
+```bash
 git log --oneline -5
+```
+
+Anschließend können wir nach einigen häufig verwendeten Befehlen suchen, die in Installationsscripts relevant sein können:
+
+```bash
 grep -RinE "curl|wget|bash -c|sh -c|eval|base64|sudo rm|rm -rf" .
 ```
+
+Wenn alles für dich passt, kannst du die Installation starten:
 
 ```bash
 ./setup install
 ```
 
+> **Wichtig**: Lies dir die Ausgaben des Installers durch und bestätige nur Schritte, bei denen du weißt, was sie machen. Ein Installationsscript solltest du grundsätzlich nicht blind mit sudo oder Root-Rechten ausführen.
+
 ### Den Quellcode von yay herunterladen und das Programm bauen und installieren
+
+> `yay` ist ein AUR-Helper, mit dem du später bequem Pakete aus dem Arch User Repository (AUR) installieren und aktualisieren kannst.
+
+Zuerst wechseln wir nach `/tmp`, klonen das offizielle yay-Repository vom AUR und bauen anschließend das Paket:
 
 ```bash
 cd /tmp
@@ -556,9 +583,17 @@ cd yay
 makepkg -si
 ```
 
+`makepkg -si` übernimmt dabei das Bauen des Pakets und installiert anschließend das erzeugte Paket inklusive der benötigten Abhängigkeiten.
+
 ### Kern-Werkzeuge und Entwickler-Tools installieren
 
+Jetzt wird's spaßig. 😎
+
+Jetzt installieren wir die wichtigsten Werkzeuge für Entwicklung, Debugging, Reverse Engineering, Fuzzing und Security. Das ist der Teil, bei dem wir aus einer normalen Arch-Installation langsam eine richtige Power-User-Kiste machen.
+
 #### Basis-Tools
+
+> `curl` und `wget` laden Dateien aus dem Internet, `unzip` entpackt ZIP-Archive, `git-delta` macht Git-Diffs deutlich angenehmer lesbar, `fzf` bietet eine schnelle interaktive Suche im Terminal, `cmark` verarbeitet Markdown und `shellcheck` findet Fehler und typische Probleme in Shell-Scripts.
 
 ```bash
 sudo pacman -S curl wget unzip git-delta fzf cmark shellcheck
@@ -566,11 +601,15 @@ sudo pacman -S curl wget unzip git-delta fzf cmark shellcheck
 
 #### Compiler & Toolchain
 
+> `gcc`, `clang` und `llvm` bilden die Compiler-Toolchain, `lldb` und `clang-tools-extra` liefern zusätzliche Entwicklungs- und Debugging-Werkzeuge, `cmake` und `ninja` kümmern sich um Build-Systeme, `valgrind` analysiert Speicherfehler und `flawfinder`, `splint` und `bear` helfen bei Codeanalyse und der Entwicklung größerer C/C++-Projekte.
+
 ```bash
 sudo pacman -S gcc lib32-gcc-libs llvm clang lldb cmake ninja valgrind clang-tools-extra flawfinder splint bear
 ```
 
 #### Debugging
+
+> `gdb` ist der klassische GNU-Debugger, `gef` und `pwndbg` erweitern GDB speziell für modernes Debugging und Binary Exploitation, während `strace` und `ltrace` zeigen, welche System- bzw. Library-Aufrufe ein Programm ausführt.
 
 ```bash
 sudo pacman -S gdb gef pwndbg strace ltrace
@@ -578,11 +617,15 @@ sudo pacman -S gdb gef pwndbg strace ltrace
 
 #### Reverse Engineering
 
+> `rizin` dient zur Analyse und zum Reverse Engineering von Binaries, `binwalk` untersucht Firmware und Binärdateien, `yara` erkennt Dateien anhand definierter Regeln, `elfutils` liefert Werkzeuge für ELF-Dateien und `checksec` zeigt wichtige Security-Eigenschaften von Binaries.
+
 ```bash
 sudo pacman -S rizin binwalk yara elfutils checksec
 ```
 
 #### Fuzzing & Performance
+
+> `afl++` ist ein leistungsfähiger Fuzzer zum automatisierten Finden von Bugs, `perf` analysiert die Performance von Programmen und dem Linux-Kernel und `cppcheck` sucht nach möglichen Fehlern und Problemen in C/C++-Code.
 
 ```bash
 sudo pacman -S afl++ perf cppcheck
@@ -590,11 +633,15 @@ sudo pacman -S afl++ perf cppcheck
 
 #### GUI-Bibliotheken
 
+> `gtk4` und `libadwaita` bilden die Grundlage für moderne Linux-GUIs, `librsvg` rendert SVG-Grafiken und `adwaita-icon-theme` stellt passende Icons für GTK-Anwendungen bereit.
+
 ```bash
 sudo pacman -S gtk4 libadwaita librsvg adwaita-icon-theme
 ```
 
 #### Desktop-Integration
+
+> `network-manager-applet` stellt eine grafische Oberfläche für NetworkManager bereit und `polkit-gnome` ermöglicht grafische Authentifizierungsdialoge für Anwendungen.
 
 ```bash
 sudo pacman -S network-manager-applet polkit-gnome
@@ -602,43 +649,159 @@ sudo pacman -S network-manager-applet polkit-gnome
 
 #### Lua-Entwicklung
 
+> `luarocks` ist der Paketmanager für Lua und wird benötigt, um Lua-Bibliotheken und Module einfach zu installieren und zu verwalten. Sowohl die Hyprland-Konfiguration als auch meine NeoVim-Konfiguration benötigen Lua bzw. Lua-Module, daher installieren wir es direkt mit.
+
 ```bash
 sudo pacman -S luarocks
 ```
 
-```bash
-# echo "source /usr/share/gef/gef.py" >> ~/.gdbinit
-# echo "source /usr/share/pwndbg/gdbinit.py" >> ~/.gdbinit
+#### GDB-Konfiguration
+
+Die zusätzliche GDB-Konfiguration musst du **nicht manuell** einrichten.
+
+JK-Arch bringt dafür bereits eine eigene Fish-Funktion mit:
+
+```text
+~/.config/fish/functions/gdb.fish
 ```
 
+Diese kümmert sich um die benötigte GDB-Konfiguration, sodass du normalerweise nichts weiter machen musst.
+
+<details>
+<summary>Falls du die GDB-Konfiguration trotzdem manuell einrichten möchtest</summary>
+
+Wenn du GEF verwenden möchtest, kannst du es über `~/.gdbinit` laden:
+
 ```bash
-# echo core | sudo tee /proc/sys/kernel/core_pattern
+echo "source /usr/share/gef/gef.py" >> ~/.gdbinit
 ```
+
+Alternativ kannst du Pwndbg laden:
+
+```bash
+echo "source /usr/share/pwndbg/gdbinit.py" >> ~/.gdbinit
+```
+
+> **Wichtig:** Lade nicht einfach beide Konfigurationen gleichzeitig. Entscheide dich für **GEF oder Pwndbg**, da beide GDB erweitern und sich gegenseitig in die Quere kommen können.
+
+Falls du zusätzlich Core Dumps aktivieren möchtest, kannst du das temporär mit folgendem Befehl konfigurieren:
+
+```bash
+echo core | sudo tee /proc/sys/kernel/core_pattern
+```
+
+> **Hinweis:** Diese Einstellung für `core_pattern` ist nicht dauerhaft und kann nach einem Neustart wieder zurückgesetzt werden. JK-Arch übernimmt die entsprechende Konfiguration bereits für dich.
+
+</details>
 
 ### Das Multilib-Repository in den Systemquellen aktivieren
+
+> **Warum brauchen wir Multilib?**
+> Das `multilib`-Repository stellt 32-Bit-Bibliotheken und Programme für ein 64-Bit-Arch-Linux-System bereit. Einige Anwendungen, Spiele, Entwicklungs- und Debugging-Tools benötigen diese Pakete.
+
+Aktiviere `multilib`, falls es noch nicht in deiner `/etc/pacman.conf` eingetragen ist:
 
 ```bash
 sudo bash -c 'grep -q "^\[multilib\]" /etc/pacman.conf || printf "\n[multilib]\nInclude = /etc/pacman.d/mirrorlist\n" >> /etc/pacman.conf'
 ```
 
+Danach die Paketdatenbank aktualisieren:
+
+```bash
+sudo pacman -Sy
+```
+
+### Rust und Cargo installieren
+
+> Rust wird für verschiedene Entwicklungs- und Security-Projekte benötigt. Wir installieren deshalb neben der Rust-Toolchain auch einige nützliche Cargo-Tools für Testing, Auditing, Debugging und Performance-Analyse.
+
+Falls Rust noch nicht installiert ist, kannst du es mit dem offiziellen Installationsscript von Rustup installieren. Dieser Befehl wird von Rustup selbst als Installationsmethode empfohlen (23.08.2026):
+
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-cargo install --locked cargo-nextest 
-cargo install --locked cargo-audit 
-# cargo install --locked probe-rs # or probe-rs-tools
-# rustup component add rustfmt
+```
+
+<details>
+<summary>Sichere Rustup-Installation – Script vorher ansehen</summary>
+
+**Du willst lieber vorher wissen, was ausgeführt wird? Kein Problem.**
+
+Anstatt das von Rustup empfohlene Script direkt über `curl | sh` auszuführen, kannst du es zuerst herunterladen und dir den Inhalt ansehen.
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o /tmp/rustup.sh
+```
+
+Script anzeigen:
+
+```bash
+less /tmp/rustup.sh
+```
+
+Zusätzlich kannst du nach einigen Befehlen suchen, die bei Installationsscripts besonders interessant sind:
+
+```bash
+grep -nE "curl|wget|sudo|rm -rf|eval|exec|base64|bash|sh" /tmp/rustup.sh
+```
+
+> **Hinweis:** Das ist kein vollständiger Security-Audit. Es gibt dir lediglich einen schnellen Überblick darüber, welche potenziell relevanten Befehle im Script vorkommen.
+
+Wenn du dir das Script angesehen hast und alles für dich passt, kannst du es lokal ausführen:
+
+```bash
+sh /tmp/rustup.sh
+```
+
+Anschließend kannst du das temporäre Script wieder löschen:
+
+```bash
+rm /tmp/rustup.sh
+```
+
+> Damit kannst du die von Rustup bereitgestellte Installationsroutine **vor der Ausführung selbst einsehen**, anstatt sie direkt über `curl | sh` auszuführen.
+
+</details>
+
+Danach die Shell-Konfiguration neu laden oder ein neues Terminal öffnen.
+
+> `cargo-nextest` führt Rust-Tests schneller und komfortabler aus, `cargo-audit` prüft Dependencies auf bekannte Sicherheitslücken, `bacon` bietet einen schnellen Entwicklungs-Loop mit automatischem Prüfen und Testen, `flamegraph` und `samply` helfen bei Performance-Analysen, während `cargo-expand` Makros expandiert, `cargo-show-asm` generierten Assembly-Code sichtbar macht und `cargo-deny` Dependencies auf verschiedene Probleme und Richtlinienverletzungen prüft.
+
+Jetzt installieren wir die wichtigsten Cargo-Tools:
+
+```bash
+cargo install --locked cargo-nextest
+cargo install --locked cargo-audit
 cargo install --locked bacon
-cargo install --locked flamegraph 
+cargo install --locked flamegraph
 cargo install --locked samply
 cargo install --locked cargo-expand
 cargo install --locked cargo-show-asm
-cargo install --locked cargo-deny 
-# cargo install --locked cargo-auditable 
-# cargo install --locked cargo-watch
-# rustup component add rustfmt
-# cargo install --locked cargo-bloat
-# cargo install --locked cargo-binutils
+cargo install --locked cargo-deny
 ```
+
+<details>
+<summary>Optionale Rust-Tools</summary>
+
+> `rustfmt` formatiert Rust-Code automatisch, `probe-rs-tools` stellt Werkzeuge für Embedded- und Debugging-Workflows bereit, `cargo-auditable` erstellt überprüfbare Dependency-Informationen in Binaries, `cargo-watch` führt Cargo-Commands automatisch bei Änderungen aus, `cargo-bloat` analysiert die Größe von Rust-Binaries und `cargo-binutils` stellt zusätzliche Binary-Analysewerkzeuge für Rust bereit.
+
+Falls du zusätzlich mit Embedded-Systemen, Binary-Analyse oder detaillierter Performance-Analyse arbeitest, kannst du folgende Tools installieren:
+
+```bash
+rustup component add rustfmt
+```
+
+```bash
+cargo install --locked probe-rs-tools
+```
+
+```bash
+cargo install --locked cargo-auditable
+cargo install --locked cargo-watch
+cargo install --locked cargo-bloat
+cargo install --locked cargo-binutils
+```
+
+</details>
 
 ### Plugin für Decompilation in radare2 (Terminal)
 
@@ -659,12 +822,6 @@ sudo pacman -S make go
 # Optional, empfohlen:
 # curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.59.2
 # go install github.com/go-delve/delve/cmd/dlv@latest
-```
-
-### Für C/C++ (keines extra)
-
-```bash
-# yay -S checksec
 ```
 
 ### C/C++ Advanced Debugging installieren
