@@ -150,11 +150,13 @@ Okay, genug geredet – los geht’s. :)
     - [.NET SDK installieren](#net-sdk-installieren)
       - [.NET globale Tools verfügbar machen](#net-globale-tools-verfügbar-machen)
     - [Das Standard-Kompressionswerkzeug installieren](#das-standard-kompressionswerkzeug-installieren)
-    - [TypeScript installieren](#typescript-installieren)
+    - [✨ TypeScript installieren](#-typescript-installieren)
     - [Die ultimative LaTeX-Umgebung installieren](#die-ultimative-latex-umgebung-installieren)
     - [Die Rechtschreibprüfung für Deutsch und Englisch installieren](#die-rechtschreibprüfung-für-deutsch-und-englisch-installieren)
     - [Moderne Terminal-Emulatoren installieren](#moderne-terminal-emulatoren-installieren)
-    - [Akku- und Hardware-Informationen auslesen](#akku--und-hardware-informationen-auslesen)
+    - [✨ Akku- und Hardware-Informationen auslesen](#-akku--und-hardware-informationen-auslesen)
+    - [✨ Java-Laufzeitumgebung installieren](#-java-laufzeitumgebung-installieren)
+    - [✨ Erweiterte Grammatik- und Stilprüfung mit LanguageTool](#-erweiterte-grammatik--und-stilprüfung-mit-languagetool)
     - [LazyVim und JetBrains Mono Nerd Font installieren](#lazyvim-und-jetbrains-mono-nerd-font-installieren)
   - [Linux Power Tools](#linux-power-tools)
     - [Das System-Informationswerkzeug Fastfetch installieren](#das-system-informationswerkzeug-fastfetch-installieren)
@@ -197,7 +199,6 @@ Okay, genug geredet – los geht’s. :)
     - [Der universelle Dokumentenbetrachter Okular installieren](#der-universelle-dokumentenbetrachter-okular-installieren)
     - [Den universellen Medienplayer VLC installieren](#den-universellen-medienplayer-vlc-installieren)
     - [✨ Den Audio-Editor Audacity installieren](#-den-audio-editor-audacity-installieren)
-    - [Den funktionsreichen Terminal-Emulator Konsole installieren](#den-funktionsreichen-terminal-emulator-konsole-installieren)
     - [✨ Die Wissensdatenbank Obsidian installieren](#-die-wissensdatenbank-obsidian-installieren)
     - [Den grafischen Plasma-Systemmonitor installieren](#den-grafischen-plasma-systemmonitor-installieren)
     - [✨ Den Taskmanager Mission Center über yay installieren](#-den-taskmanager-mission-center-über-yay-installieren)
@@ -1176,8 +1177,6 @@ sudo pacman -S nodejs npm
 >
 > `aspnet-runtime` erweitert die Laufzeit um Komponenten für ASP.NET-Anwendungen, also Webserver, Web-APIs und moderne Webanwendungen.
 
-Installation:
-
 ```bash
 sudo pacman -S dotnet-sdk
 sudo pacman -S dotnet-runtime aspnet-runtime
@@ -1201,17 +1200,41 @@ dotnet --version
 
 ### Das Standard-Kompressionswerkzeug installieren
 
+> `gzip` komprimiert und entpackt Dateien mit dem `.gz`-Format. Es wird häufig zusammen mit `tar` verwendet, zum Beispiel bei Linux-Archiven (`.tar.gz`).
+
 ```bash
 sudo pacman -S gzip
 ```
 
-### TypeScript installieren
+### ✨ TypeScript installieren
+
+> `typescript` stellt den TypeScript-Compiler (`tsc`) bereit. Dieser übersetzt TypeScript-Code (`.ts`) in normales JavaScript, das anschließend von Browsern oder Node.js ausgeführt werden kann.
 
 ```bash
-# sudo npm install -g typescript
+sudo npm install -g typescript
 ```
 
 ### Die ultimative LaTeX-Umgebung installieren
+
+> LaTeX ist das Standardwerkzeug für hochwertige wissenschaftliche Dokumente, technische Dokumentationen, Papers, Abschlussarbeiten und mathematische Texte. Wir installieren eine komplette Umgebung mit Compiler, Erweiterungen, PDF-Viewer und NeoVim-Unterstützung.
+>
+> `texlive-meta` installiert die grundlegende LaTeX-Distribution mit den wichtigsten Paketen und Werkzeugen.
+>
+> `texlive-latexextra` erweitert LaTeX um viele zusätzliche Pakete für fortgeschrittene Dokumente, Layouts, Tabellen und Formatierungen.
+>
+> `texlive-pictures` stellt Pakete für Grafiken und Diagramme bereit, unter anderem für TikZ-basierte Zeichnungen.
+>
+> `texlive-langgerman`, `texlive-langenglish` und `texlive-langgreek` fügen Sprachunterstützung, Trennregeln und passende typografische Einstellungen für verschiedene Sprachen hinzu.
+>
+> `biber` ist ein moderner Literaturverwaltungs-Prozessor und wird häufig zusammen mit `biblatex` für Quellenverwaltung verwendet.
+>
+> `zathura` ist ein minimalistischer, tastaturgesteuerter PDF-Viewer, der besonders gut zu einem Terminal- und NeoVim-Workflow passt.
+>
+> `zathura-pdf-poppler` ergänzt Zathura um die PDF-Unterstützung über Poppler.
+>
+> `texlab` ist ein LaTeX Language Server und ermöglicht Funktionen wie Autovervollständigung, Fehlermeldungen, Navigation und Dokumentanalyse in NeoVim.
+>
+> `tectonic` ist ein moderner LaTeX-Compiler, der automatisch benötigte Pakete verwalten kann und einen vereinfachten Build-Workflow bietet.
 
 ```bash
 # sudo pacman -S texlive-meta latexmk zathura zathura-pdf-poppler
@@ -1224,33 +1247,88 @@ sudo pacman -S texlive-meta texlive-latexextra texlive-pictures texlive-langgerm
 
 ### Die Rechtschreibprüfung für Deutsch und Englisch installieren
 
+> `hunspell` ist die eigentliche Rechtschreibprüfungs-Engine und stellt die grundlegende Funktionalität bereit.
+>
+> `hunspell-de` fügt das deutsche Wörterbuch hinzu und ermöglicht die Prüfung deutscher Texte.
+>
+> `hunspell-en_us` stellt das englische Wörterbuch (US-Englisch) bereit und ermöglicht die Prüfung englischer Texte.
+
 ```bash
 sudo pacman -S hunspell hunspell-de hunspell-en_us
 ```
 
 ### Moderne Terminal-Emulatoren installieren
 
+> `kitty` ist der **Standard-Terminal-Emulator von JK-Arch** und wird daher empfohlen. Er bietet GPU-Rendering, Tabs, Splits, Bildunterstützung und viele Anpassungsmöglichkeiten. Die JK-Arch-Konfiguration ist auf diesen Workflow abgestimmt.
+>
+> `ghostty` ist ein moderner, sehr schneller Terminal-Emulator mit GPU-Beschleunigung und eine gute Alternative, falls du etwas Neues ausprobieren möchtest.
+>
+> `foot` ist ein minimalistischer, Wayland-nativer Terminal-Emulator. Er passt besonders gut zu Hyprland, wenn du ein extrem leichtgewichtiges Setup bevorzugst.
+>
+> `alacritty` ist ein schneller, GPU-beschleunigter Terminal-Emulator und auf vielen vorkonfigurierten Arch-Systemen wie CachyOS bereits vorhanden.
+>
+> `konsole` ist der Terminal-Emulator von KDE Plasma. Er ist hauptsächlich für KDE-Desktops gedacht und bietet eine enge Integration mit KDE-Anwendungen wie Dolphin. Für ein reines Hyprland-/JK-Arch-Setup ist er jedoch nicht die bevorzugte Wahl.
+
 ```bash
-sudo pacman -S ghostty  # besser für Lazyvim als gnome-terminal oder konsole (KDE)
-sudo pacman -S foot
-sudo pacman -S alacritty # sollte schon installirt sein auf cachy os
-sudo pacman -S kitty # sollte schon installirt sein auf cachy os
-# sudo pacman -S wezterm
-# sudo pacman -S jre-openjdk
-# sudo pacman -S languagetool
-# sudo pacman -S vim
+sudo pacman -S ghostty foot alacritty kitty konsole
 ```
 
-### Akku- und Hardware-Informationen auslesen
+<details>
+<summary>✨ Optionale zusätzliche Tools</summary>
+
+Falls du weitere Terminal- und Entwicklungswerkzeuge möchtest:
+
+> `wezterm` ist ein moderner Terminal-Emulator mit umfangreichen Konfigurationsmöglichkeiten und integrierten Features wie Multiplexing.
+
+```bash
+sudo pacman -S wezterm
+```
+
+> `terminator` bietet eine grafische Oberfläche mit eingebauten Splits und mehreren Terminal-Fenstern. Praktisch, wenn du lieber mit der Maus arbeitest.
+
+```bash
+sudo pacman -S terminator
+```
+
+> `gnome-terminal` ist der klassische Terminal-Emulator der GNOME-Desktopumgebung. Er funktioniert zuverlässig, ist aber weniger auf einen modernen Hyprland-/NeoVim-Workflow ausgelegt.
+
+```bash
+sudo pacman -S gnome-terminal
+```
+
+</details>
+
+### ✨ Akku- und Hardware-Informationen auslesen
+
+> **Nur installieren, wenn du die Akku-Anzeige in meiner NeoVim-Konfiguration verwenden möchtest.**
+> `acpi` liest Akku- und Hardware-Informationen über die ACPI-Schnittstelle aus. Diese Funktion kann praktisch sein, verursacht aber zusätzliche Abfragen und kann dadurch Performance kosten.
+>
+> Deshalb ist die entsprechende Funktion in meiner Konfiguration standardmäßig **auskommentiert** und muss nur aktiviert werden, wenn du sie wirklich nutzen möchtest.
 
 ```bash
 sudo pacman -S acpi
 ```
 
+### ✨ Java-Laufzeitumgebung installieren
+
+> `jre-openjdk` installiert die Java-Laufzeitumgebung (Java Runtime Environment). Damit kannst du fertige Java-Programme starten, ohne das komplette Java-Entwicklungspaket (`jdk`) zu installieren.
+
+```bash
+sudo pacman -S jre-openjdk
+```
+
+### ✨ Erweiterte Grammatik- und Stilprüfung mit LanguageTool
+
+> `languagetool` bietet eine erweiterte Grammatik-, Rechtschreib- und Stilprüfung für verschiedene Sprachen. Es kann von Editoren, Schreibprogrammen und Plugins genutzt werden, um Texte direkt während des Schreibens zu überprüfen.
+
+```bash
+sudo pacman -S languagetool
+```
+
 ### LazyVim und JetBrains Mono Nerd Font installieren
 
 ```bash
-sudo pacman -S neovim
+sudo pacman -S neovim vim
 
 # LazyVim Starter klonen
 git clone https://github.com/LazyVim/starter ~/.config/nvim
@@ -1541,14 +1619,6 @@ sudo pacman -S audacity
 ```
 
 </details>
-
-### Den funktionsreichen Terminal-Emulator Konsole installieren
-
-> Das KDE-eigene Terminal, das sich besonders gut zur Verwendung direkt aus Dolphin heraus eignet.
-
-```bash
-sudo pacman -S konsole
-```
 
 ### ✨ Die Wissensdatenbank Obsidian installieren
 
