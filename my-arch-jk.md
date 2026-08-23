@@ -1,11 +1,11 @@
-<p style="text-align: center; font-family: monospace; white-space: pre;">
+<pre align="center">
      ██╗██╗  ██╗      █████╗ ██████╗  ██████╗██╗  ██╗    
      ██║██║ ██╔╝     ██╔══██╗██╔══██╗██╔════╝██║  ██║    
      ██║█████╔╝█████╗███████║██████╔╝██║     ███████║    
 ██   ██║██╔═██╗╚════╝██╔══██║██╔══██╗██║     ██╔══██║    
 ╚█████╔╝██║  ██╗     ██║  ██║██║  ██║╚██████╗██║  ██║    
  ╚════╝ ╚═╝  ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝   
-</p>
+</pre>
 
 <details>
 <summary>🚨 Arch Linux AUR-Malware? So prüfst du dein System!</summary>
