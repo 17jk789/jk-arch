@@ -110,7 +110,7 @@ Okay, genug geredet – los geht’s. :)
   - [Entwicklung Plugins](#entwicklung-plugins)
     - [Zum Startpunkt wechseln](#zum-startpunkt-wechseln)
     - [Die schnellsten Mirrors finden](#die-schnellsten-mirrors-finden)
-    - [DNS temporär auf Cloudflare (1.1.1.1) setzen](#dns-temporär-auf-cloudflare-1111-setzen)
+    - [✨ DNS temporär auf Cloudflare (1.1.1.1) setzen](#-dns-temporär-auf-cloudflare-1111-setzen)
     - [Das System aktualisieren](#das-system-aktualisieren)
     - [Die Werkzeuge für den Bau von Software installieren](#die-werkzeuge-für-den-bau-von-software-installieren)
     - [Die Firewall sofort einschalten und dauerhaft aktivieren](#die-firewall-sofort-einschalten-und-dauerhaft-aktivieren)
@@ -127,16 +127,21 @@ Okay, genug geredet – los geht’s. :)
       - [GUI-Bibliotheken](#gui-bibliotheken)
       - [Desktop-Integration](#desktop-integration)
       - [Lua-Entwicklung](#lua-entwicklung)
-      - [GDB-Konfiguration](#gdb-konfiguration)
+      - [✨ GDB-Konfiguration](#-gdb-konfiguration)
     - [Das Multilib-Repository in den Systemquellen aktivieren](#das-multilib-repository-in-den-systemquellen-aktivieren)
     - [Rust und Cargo installieren](#rust-und-cargo-installieren)
     - [Plugin für Decompilation in radare2 (Terminal)](#plugin-für-decompilation-in-radare2-terminal)
     - [Go und Make über den Paketmanager installieren](#go-und-make-über-den-paketmanager-installieren)
-    - [C/C++ Advanced Debugging installieren](#cc-advanced-debugging-installieren)
-    - [Mehrere Java-Versionen und die Build-Tool Gradle und Maven installieren](#mehrere-java-versionen-und-die-build-tool-gradle-und-maven-installieren)
+    - [Go-Entwicklungswerkzeuge](#go-entwicklungswerkzeuge)
+    - [Weitere optionale Tools](#weitere-optionale-tools)
+    - [✨ C/C++ Advanced Debugging installieren](#-cc-advanced-debugging-installieren)
+    - [Mehrere Java-Versionen sowie Gradle und Maven installieren](#mehrere-java-versionen-sowie-gradle-und-maven-installieren)
+    - [Java-Versionen installieren](#java-versionen-installieren)
+    - [Maven installieren](#maven-installieren)
+    - [Gradle installieren](#gradle-installieren)
     - [Den x86-Assembler und grundlegende Binär-Werkzeuge installieren](#den-x86-assembler-und-grundlegende-binär-werkzeuge-installieren)
     - [Das Exploit-Entwicklungs-Framework Pwntools installieren](#das-exploit-entwicklungs-framework-pwntools-installieren)
-    - [Die Programmiersprache und Compiler-Toolchain Zig installieren](#die-programmiersprache-und-compiler-toolchain-zig-installieren)
+    - [✨ Die Programmiersprache und Compiler-Toolchain Zig installieren](#-die-programmiersprache-und-compiler-toolchain-zig-installieren)
     - [Die JetBrains Toolbox installieren und starten](#die-jetbrains-toolbox-installieren-und-starten)
     - [Docker und Erweiterungen installieren](#docker-und-erweiterungen-installieren)
     - [Nützliche Systemwerkzeuge und Python einrichten](#nützliche-systemwerkzeuge-und-python-einrichten)
@@ -376,7 +381,7 @@ cd ~
 sudo cachyos-rate-mirrors
 ```
 
-### DNS temporär auf Cloudflare (1.1.1.1) setzen
+### ✨ DNS temporär auf Cloudflare (1.1.1.1) setzen
 
 > Falls dein DNS gerade mal wieder so performt, als würde dein Router die Anfrage persönlich mit der Post verschicken.
 
@@ -422,7 +427,7 @@ sudo systemctl enable --now ufw
 ```
 
 <details>
-<summary>Alternative zu UFW → firewalld</summary>
+<summary>✨ Alternative zu UFW → firewalld</summary>
 
 Falls du lieber `firewalld` verwenden möchtest, installiere es stattdessen:
 
@@ -655,7 +660,7 @@ sudo pacman -S network-manager-applet polkit-gnome
 sudo pacman -S luarocks
 ```
 
-#### GDB-Konfiguration
+#### ✨ GDB-Konfiguration
 
 Die zusätzliche GDB-Konfiguration musst du **nicht manuell** einrichten.
 
@@ -668,7 +673,7 @@ JK-Arch bringt dafür bereits eine eigene Fish-Funktion mit:
 Diese kümmert sich um die benötigte GDB-Konfiguration, sodass du normalerweise nichts weiter machen musst.
 
 <details>
-<summary>Falls du die GDB-Konfiguration trotzdem manuell einrichten möchtest</summary>
+<summary>✨ Falls du die GDB-Konfiguration trotzdem manuell einrichten möchtest</summary>
 
 Wenn du GEF verwenden möchtest, kannst du es über `~/.gdbinit` laden:
 
@@ -696,7 +701,6 @@ echo core | sudo tee /proc/sys/kernel/core_pattern
 
 ### Das Multilib-Repository in den Systemquellen aktivieren
 
-> **Warum brauchen wir Multilib?**
 > Das `multilib`-Repository stellt 32-Bit-Bibliotheken und Programme für ein 64-Bit-Arch-Linux-System bereit. Einige Anwendungen, Spiele, Entwicklungs- und Debugging-Tools benötigen diese Pakete.
 
 Aktiviere `multilib`, falls es noch nicht in deiner `/etc/pacman.conf` eingetragen ist:
@@ -722,7 +726,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
 <details>
-<summary>Sichere Rustup-Installation – Script vorher ansehen</summary>
+<summary>✨ Sichere Rustup-Installation – Script vorher ansehen</summary>
 
 **Du willst lieber vorher wissen, was ausgeführt wird? Kein Problem.**
 
@@ -780,7 +784,7 @@ cargo install --locked cargo-deny
 ```
 
 <details>
-<summary>Optionale Rust-Tools</summary>
+<summary>✨ Optionale Rust-Tools</summary>
 
 > `rustfmt` formatiert Rust-Code automatisch, `probe-rs-tools` stellt Werkzeuge für Embedded- und Debugging-Workflows bereit, `cargo-auditable` erstellt überprüfbare Dependency-Informationen in Binaries, `cargo-watch` führt Cargo-Commands automatisch bei Änderungen aus, `cargo-bloat` analysiert die Größe von Rust-Binaries und `cargo-binutils` stellt zusätzliche Binary-Analysewerkzeuge für Rust bereit.
 
@@ -805,43 +809,162 @@ cargo install --locked cargo-binutils
 
 ### Plugin für Decompilation in radare2 (Terminal)
 
+> `radare2` ist ein mächtiges Framework zur Analyse und zum Reverse Engineering von Binaries. `r2ghidra` bringt die Ghidra-Decompiler-Engine direkt in radare2 und ermöglicht es dir, kompilierten Code wieder in eine besser lesbare Darstellung zu dekompilieren.
+
+Installation:
+
 ```bash
-# r2pm -U
-# r2pm -init
-# r2pm -i r2ghidra
 sudo pacman -Syu radare2 r2ghidra
-# sudo pacman -S python-r2pipe
 ```
+
+✨ Falls du zusätzlich mit `r2pipe` arbeiten möchtest, kannst du die Python-Bindings installieren:
+
+```bash
+sudo pacman -S python-r2pipe
+```
+
+<details>
+<summary>✨ Alternative: r2pm verwenden</summary>
+
+Falls du `r2ghidra` nicht über dein Paketmanagement installieren möchtest, kannst du das Plugin alternativ über den radare2 Package Manager (`r2pm`) installieren:
+
+```bash
+r2pm -U
+r2pm -init
+r2pm -i r2ghidra
+```
+
+> **Hinweis:** Verwende am besten **eine** der beiden Methoden und installiere `r2ghidra` nicht doppelt.
+
+</details>
 
 ### Go und Make über den Paketmanager installieren
 
+> `Go` ist eine schnelle, kompakte Programmiersprache, die besonders häufig für Backend-Entwicklung, Netzwerktools, Security-Tools und CLI-Anwendungen verwendet wird. `make` automatisiert Build-Prozesse und wird von vielen C/C++- und anderen Projekten verwendet.
+
+Installiere beides direkt über `pacman`:
+
 ```bash
 sudo pacman -S make go
-# go install golang.org/x/tools/gopls@latest
-# go install golang.org/x/tools/cmd/goimports@latest
-# Optional, empfohlen:
-# curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.59.2
-# go install github.com/go-delve/delve/cmd/dlv@latest
 ```
 
-### C/C++ Advanced Debugging installieren
+### Go-Entwicklungswerkzeuge
+
+<details>
+<summary>✨ Empfohlene Go-Tools</summary>
+
+Falls du aktiv mit Go entwickelst, kannst du zusätzlich `gopls` und `goimports` installieren:
 
 ```bash
-# yay -S rr
+go install golang.org/x/tools/gopls@latest
+go install golang.org/x/tools/cmd/goimports@latest
 ```
 
-### Mehrere Java-Versionen und die Build-Tool Gradle und Maven installieren
+> `gopls` ist der Language Server für Go und liefert deinem Editor Funktionen wie Autovervollständigung, Fehlermeldungen, Navigation und Codeanalyse. `goimports` formatiert Go-Code und verwaltet automatisch die benötigten Imports.
+
+### Weitere optionale Tools
+
+**golangci-lint** bündelt zahlreiche Linter und statische Analysewerkzeuge für Go-Projekte:
 
 ```bash
-sudo pacman -S jdk21-openjdk jdk25-openjdk jdk-openjdk maven
-# archlinux-java status
-# sudo archlinux-java set java-21-openjdk
+curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b "$(go env GOPATH)/bin" v1.59.2
+```
+
+> **Hinweis:** Das Installationsscript wird direkt aus dem Internet geladen und ausgeführt. Wenn du den Inhalt vorher prüfen möchtest, kannst du es – wie beim Rustup-Installer – zunächst herunterladen und anschließend ausführen.
+
+Für Debugging kannst du außerdem **Delve** installieren:
+
+```bash
+go install github.com/go-delve/delve/cmd/dlv@latest
+```
+
+> `dlv` (Delve) ist der Debugger für Go und ermöglicht unter anderem Breakpoints, das Untersuchen von Variablen und das schrittweise Ausführen deines Codes.
+
+</details>
+
+### ✨ C/C++ Advanced Debugging installieren
+
+> `rr` ist ein fortgeschrittenes Debugging-Tool für C/C++-Programme. Es zeichnet die Ausführung eines Programms auf und ermöglicht danach eine deterministische Wiederholung. Dadurch kannst du Fehler Schritt für Schritt rückwärts und vorwärts analysieren – besonders hilfreich bei schwer reproduzierbaren Bugs.
+
+Installation über das AUR:
+
+```bash
+yay -S rr
+```
+
+> **Hinweis:** `rr` benötigt bestimmte Kernel-Features und funktioniert am besten auf Systemen mit passender Hardware- und Kernel-Konfiguration. Falls es nicht direkt funktioniert, überprüfe die Kernel-Meldungen und die offizielle Dokumentation von `rr`.
+
+### Mehrere Java-Versionen sowie Gradle und Maven installieren
+
+> Java wird in vielen Bereichen eingesetzt – von klassischen Anwendungen über Server-Software bis hin zu Android- und Enterprise-Entwicklung. Wir installieren mehrere Java-Versionen, damit du je nach Projekt flexibel wechseln kannst.
+>
+> `Maven` und `Gradle` sind Build-Tools, die Abhängigkeiten verwalten und den automatischen Bau von Java-Projekten übernehmen.
+
+### Java-Versionen installieren
+
+Wir installieren mehrere JDK-Versionen:
+
+```bash
+sudo pacman -S jdk21-openjdk jdk25-openjdk jdk-openjdk
+```
+
+> **Was machen die Pakete?**
+> `jdk21-openjdk` installiert Java 21 (LTS-Version), `jdk25-openjdk` installiert die aktuelle Java-Version und `jdk-openjdk` stellt das Standard-OpenJDK-Paket bereit.
+
+Welche Java-Version aktuell verwendet wird, kannst du prüfen mit:
+
+```bash
+archlinux-java status
+```
+
+Falls du eine bestimmte Version als Standard setzen möchtest:
+
+```bash
+sudo archlinux-java set java-21-openjdk
+```
+
+### Maven installieren
+
+> `maven` ist ein weit verbreitetes Build-System für Java-Projekte. Es verwaltet Bibliotheken, führt Tests aus und erstellt fertige Builds.
+
+```bash
+sudo pacman -S maven
+```
+
+### Gradle installieren
+
+> `gradle` ist ein modernes Build-System, das besonders häufig bei größeren Java-Projekten und Android-Entwicklung verwendet wird.
+
+```bash
 sudo pacman -S gradle
-# yay -S gradle
-# sdk install gradle 8.6
 ```
+
+<details>
+<summary>✨ Alternative Installationsmethoden für Gradle</summary>
+
+Falls du lieber eine andere Version von Gradle verwenden möchtest:
+
+Über das AUR:
+
+```bash
+yay -S gradle
+```
+
+Oder über SDKMAN (23.08.2026):
+
+```bash
+sdk install gradle 9.7
+```
+
+> **Hinweis:** SDKMAN eignet sich besonders, wenn du häufig zwischen verschiedenen Java-, Gradle- oder Maven-Versionen wechseln möchtest.
+
+</details>
 
 ### Den x86-Assembler und grundlegende Binär-Werkzeuge installieren
+
+> `nasm` ist ein moderner x86/x86-64-Assembler. Damit kannst du direkt Assembler-Code schreiben und in ausführbare Objektdateien übersetzen.
+>
+> `binutils` enthält eine Sammlung wichtiger Binärwerkzeuge wie `objdump`, `readelf`, `nm` und `ld`. Damit kannst du Binärdateien analysieren, Symbole anzeigen, ELF-Dateien untersuchen und Programme linken.
 
 ```bash
 sudo pacman -S nasm binutils
@@ -849,47 +972,175 @@ sudo pacman -S nasm binutils
 
 ### Das Exploit-Entwicklungs-Framework Pwntools installieren
 
+> `pwntools` stellt eine Sammlung von Python-Tools bereit, die häufig bei Binary Exploitation verwendet werden. Dazu gehören unter anderem:
+>
+> * Kommunikation mit lokalen Programmen und entfernten Servern
+> * Erstellen und Senden von Exploit-Payloads
+> * Arbeiten mit Registern, Speicheradressen und Binaries
+> * Unterstützung bei ROP-Chains (Return-Oriented Programming)
+> * Automatisierung von Exploit-Tests
+
 ```bash
 sudo pacman -S python-pwntools
 ```
 
-### Die Programmiersprache und Compiler-Toolchain Zig installieren
+Nach der Installation kannst du prüfen, ob Pwntools funktioniert:
 
 ```bash
-# sudo pacman -S zig
+python -c "from pwn import *; print('Pwntools funktioniert!')"
+```
+
+> **Hinweis:** Pwntools ist vor allem für Lernumgebungen, CTFs, Security-Forschung und autorisierte Tests gedacht. Verwende es nur auf Systemen und Programmen, für die du die Erlaubnis hast.
+
+### ✨ Die Programmiersprache und Compiler-Toolchain Zig installieren
+
+> `zig` enthält den Zig-Compiler, den Build-Manager und verschiedene Werkzeuge für die Entwicklung von nativer Software.
+>
+> Besonders interessant sind:
+>
+> * direkte Kontrolle über Speicher und Ressourcen
+> * einfache Cross-Kompilierung für andere Plattformen
+> * schneller Build-Prozess
+> * gute Integration mit C-Code
+> * moderne Alternative für viele Low-Level-Projekte
+
+```bash
+sudo pacman -S zig
 ```
 
 ### Die JetBrains Toolbox installieren und starten
 
-> Ich würde noch Intellij installieren (java) -> https://www.jetbrains.com/toolbox-app/
-> Für Java-Devs: Nutzt NeoVim mit jdtls für das tägliche Coding. Wenn es kompliziert wird, öffnet das Projekt einfach parallel in IntelliJ IDEA – die beiden ergänzen sich perfekt.
-> In Rust ist NeoVim dank rust-analyzer fast unschlagbar. In C++ lohnt es sich aber oft, CLion (via Toolbox) als Backup für komplexes Debugging und CMake-Management zu haben.
+> Auch wenn NeoVim der Haupteditor in JK-Arch ist, gibt es Situationen, in denen eine vollwertige IDE einfach angenehmer ist – besonders bei großen Projekten, komplexem Debugging oder umfangreichen Build-Systemen.
+
+Die **JetBrains Toolbox** verwaltet deine JetBrains-Programme zentral und ermöglicht es dir, IDEs wie **IntelliJ IDEA**, **CLion**, **PyCharm** oder andere JetBrains-Tools einfach zu installieren, aktualisieren und verwalten.
+
+Download:
+
+[https://www.jetbrains.com/toolbox-app/](https://www.jetbrains.com/toolbox-app/)
+
+Nach dem Download die Toolbox entpacken und starten:
 
 ```bash
 cd Downloads/
-tar -xzf jetbrains-toolbox-[VERSION].tar.gz # Ändere [VERSION] durch die ToolBox Version
+tar -xzf jetbrains-toolbox-[VERSION].tar.gz
 cd jetbrains-toolbox-[VERSION]/bin
 ./jetbrains-toolbox
 ```
 
+> Ersetze `[VERSION]` durch die tatsächliche Version der heruntergeladenen Toolbox-Datei.
+
+<details>
+<summary>Empfehlungen für die Entwicklung</summary>
+
+> **Java-Entwicklung**  
+> Installiere **IntelliJ IDEA** über die JetBrains Toolbox. Für das tägliche Coding kannst du weiterhin NeoVim mit `jdtls` verwenden. Wenn ein Projekt größer oder komplizierter wird, öffnest du es einfach zusätzlich in IntelliJ IDEA – beide Werkzeuge ergänzen sich perfekt.
+
+> **Rust-Entwicklung**  
+> NeoVim ist mit `rust-analyzer` eine extrem starke Entwicklungsumgebung und für die meisten Rust-Projekte völlig ausreichend.
+
+> **C/C++-Entwicklung**  
+> Für kleinere Projekte reicht NeoVim mit den passenden LSP-Tools vollkommen aus. Bei komplexen CMake-Projekten, größerem Debugging oder umfangreichen Codebasen lohnt es sich jedoch, **CLion** als zusätzliche IDE über die Toolbox installiert zu haben.
+
+> **Kurz gesagt:**  
+> NeoVim bleibt dein schneller, flexibler Haupteditor für den Alltag. JetBrains-IDEen sind dein Spezialwerkzeug für große Projekte, komplexes Debugging und Situationen, in denen eine vollständige IDE einfach Vorteile bringt.
+
+</details>
+
 ### Docker und Erweiterungen installieren
+
+> Docker ermöglicht es dir, Anwendungen und komplette Umgebungen isoliert in Containern auszuführen. Das ist besonders praktisch für Entwicklung, Tests, Server-Setups und Projekte mit vielen Abhängigkeiten.
+> `docker` ist die eigentliche Container-Engine und führt Container aus.
+>
+> `docker-compose` ermöglicht es, mehrere Container über eine gemeinsame Konfigurationsdatei (`compose.yml` oder `docker-compose.yml`) zu verwalten – zum Beispiel eine Anwendung mit Datenbank und Backend.
+>
+> `docker-buildx` erweitert Docker um moderne Build-Funktionen und unterstützt unter anderem bessere Builds, Multi-Platform-Images und fortgeschrittene Build-Workflows.
+
+Installation:
 
 ```bash
 sudo pacman -S docker docker-compose docker-buildx
+```
+
+Docker-Dienst aktivieren und direkt starten:
+
+```bash
 sudo systemctl enable --now docker
+```
+
+Überprüfen, ob Docker korrekt installiert ist:
+
+```bash
 docker --version
 ```
 
-### Nützliche Systemwerkzeuge und Python einrichten
+<details>
+<summary>✨ Docker ohne sudo verwenden</summary>
+
+Standardmäßig benötigt Docker Root-Rechte. Wenn du Docker als normaler Benutzer verwenden möchtest, kannst du deinen Benutzer zur Docker-Gruppe hinzufügen:
 
 ```bash
-# sudo pacman -S wl-clipboard fd python python-virtualenv python-pip
-sudo pacman -S wl-clipboard fd python python-pip
-# sudo pacman -S python-pipx
-# pipx ensurepath
-# pipx install black
-# pipx install ruff
+sudo usermod -aG docker $USER
 ```
+
+Danach einmal ab- und wieder anmelden oder die Gruppe neu laden:
+
+```bash
+newgrp docker
+```
+
+Test:
+
+```bash
+docker run hello-world
+```
+
+> **Wichtig:** Mitglieder der `docker`-Gruppe haben praktisch Root-Rechte auf dem System, da Docker-Container mit weitreichenden Berechtigungen gestartet werden können. Nutze diese Option nur, wenn du dir dessen bewusst bist.
+
+</details>
+
+### Nützliche Systemwerkzeuge und Python einrichten
+
+> `wl-clipboard` stellt die Clipboard-Werkzeuge für Wayland bereit (`wl-copy` und `wl-paste`). Viele moderne Wayland-Anwendungen und Scripts benötigen diese Befehle für Copy & Paste.
+>
+> `fd` ist eine moderne Alternative zu `find`. Es ist schneller, einfacher zu benutzen und wird von vielen modernen CLI-Tools unterstützt.
+>
+> `python` installiert die Python-Laufzeitumgebung und wird von vielen Entwicklungswerkzeugen, Scripts und Security-Tools benötigt.
+>
+> `python-pip` ist der Paketmanager für Python und ermöglicht das Installieren zusätzlicher Python-Bibliotheken.
+
+```bash
+sudo pacman -S wl-clipboard fd python python-pip
+```
+
+<details>
+<summary>>✨ Optionale Python-Entwicklungswerkzeuge</summary>
+
+> `pipx` installiert Python-Anwendungen in eigenen virtuellen Umgebungen, sodass dein System-Python sauber bleibt.
+>
+> `black` formatiert Python-Code automatisch nach einem einheitlichen Standard.
+>
+> `ruff` ist ein extrem schneller Python-Linter und findet Fehler, schlechte Patterns und Stilprobleme im Code.
+
+Falls du häufiger Python-Projekte entwickelst, kannst du zusätzlich `pipx` installieren:
+
+```bash
+sudo pacman -S python-pipx
+```
+
+Danach den Python-Bin-Pfad einrichten:
+
+```bash
+pipx ensurepath
+```
+
+Jetzt kannst du Python-Tools isoliert installieren:
+
+```bash
+pipx install black
+pipx install ruff
+```
+
+</details>
 
 ### Ultraschnelle Textsuche installieren
 
