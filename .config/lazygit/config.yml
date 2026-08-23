@@ -17,20 +17,34 @@ gui:
       - "#89b4fa"
       - bold
     inactiveBorderColor:
-      - "#6c7086"
+      - "#a6adc8"
     searchingActiveBorderColor:
       - "#f9e2af"
-      - bold
     optionsTextColor:
-      - "#89dceb"
+      - "#89b4fa"
     selectedLineBgColor:
       - "#313244"
+    inactiveViewSelectedLineBgColor:
+      - "#6c7086"
+    cherryPickedCommitFgColor:
+      - "#89b4fa"
+    cherryPickedCommitBgColor:
+      - "#45475a"
+    markedBaseCommitFgColor:
+      - "#89b4fa"
+    markedBaseCommitBgColor:
+      - "#f9e2af"
+    unstagedChangesColor:
+      - "#f38ba8"
     defaultFgColor:
       - "#cdd6f4"
+
+  authorColors:
+    "*": "#b4befe"
 git:
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: delta --paging=never --navigate --line-numbers --side-by-side --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+      command: delta --paging=never --navigate --line-numbers --side-by-side --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
 os:
   editCommand: nvim
   editCommandTemplate: "{{editor}} +{{line}} {{filename}}"
