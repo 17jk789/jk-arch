@@ -1,5 +1,5 @@
 <p style="text-align: center;">
-  <img src="images/5.png" width="1000" />
+  <img src="images/jk-arch/jk-arch-0.3-eap.png" width="1000" />
 </p>
 
 # My Arch-Linux (JK-Arch) Config
@@ -16,11 +16,11 @@ New:
 
 Old:
 
-- [`NeoVim Ubuntu`](README-neovim-config-Ubuntu.md)  
-- [`NeoVim Arch`](README-neovim-config-Arch.md)
-- [`Windows WSL NeoVim`](README-neovim-config-windows-ubuntu-wsl.md)
-- [`IDEA Vim`](README-idea-config.md)  
-- [`VS Code`](README-vs-code-config.md)
+- [`NeoVim Ubuntu`](./docs/README-neovim-config-Ubuntu.md)  
+- [`NeoVim Arch`](./docs/README-neovim-config-Arch.md)
+- [`Windows WSL NeoVim`](./docs/README-neovim-config-windows-ubuntu-wsl.md)
+- [`IDEA Vim`](./docs/README-idea-config.md)  
+- [`VS Code`](./docs/README-vs-code-config.md)
 - [`License`](LICENSE)
 
 ## Disclaimer
@@ -41,7 +41,7 @@ Use them **at your own risk**.
 This repository is primarily licensed under the **Apache License 2.0**.
 
 Some files are distributed under different licenses:
-- `general.lua` and `execs.lua` is licensed under **GNU General Public License v3.0-only (GPL-3.0-only)** because it contains modifications based on:
+- `general.lua`, `execs.lua` etc. is licensed under **GNU General Public License v3.0-only (GPL-3.0-only)** because it contains modifications based on:
   https://github.com/end-4/dots-hyprland
 
 ## Notes
