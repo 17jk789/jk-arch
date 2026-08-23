@@ -307,16 +307,6 @@ Okay, genug geredet – los geht’s. :)
     - [Mauszeiger-Animationen (Cursor Shaders) für Ghostty einrichten](#mauszeiger-animationen-cursor-shaders-für-ghostty-einrichten)
     - [Einen modularen Fish-Konfigurationsordner erstellen](#einen-modularen-fish-konfigurationsordner-erstellen)
     - [Den praktischen Befehls-Ausführer just installieren](#den-praktischen-befehls-ausführer-just-installieren)
-    - [Überprüfung der AUR-Paketquellen auf Schadcode (Malware-Hunting)](#überprüfung-der-aur-paketquellen-auf-schadcode-malware-hunting)
-    - [Suche nach der spezifischen Malware-Signatur (atomic-lockfile)](#suche-nach-der-spezifischen-malware-signatur-atomic-lockfile)
-    - [Kontrolle installierter Fremdpakete \& Paketmanager-Historie](#kontrolle-installierter-fremdpakete--paketmanager-historie)
-    - [Virenscan mit ClamAV (Deep Scan sensibler Entwickler-Ordner)](#virenscan-mit-clamav-deep-scan-sensibler-entwickler-ordner)
-    - [Rootkit-Erkennung mit Rootkit Hunter (rkhunter)](#rootkit-erkennung-mit-rootkit-hunter-rkhunter)
-    - [chkrootkit](#chkrootkit)
-    - [lynis](#lynis)
-    - [AppArmor sauber aktivieren](#apparmor-sauber-aktivieren)
-    - [Globales Menü aktivieren](#globales-menü-aktivieren)
-    - [Den SSH-Server sofort ausschalten und dauerhaft deaktivieren](#den-ssh-server-sofort-ausschalten-und-dauerhaft-deaktivieren)
     - [Das Begrüßungsprogramm von CachyOS entfernen](#das-begrüßungsprogramm-von-cachyos-entfernen)
     - [Instalation von En Croissant, eine moderne grafische Benutzeroberfläche (GUI) für Schachdatenbanken und Partienanalysen.](#instalation-von-en-croissant-eine-moderne-grafische-benutzeroberfläche-gui-für-schachdatenbanken-und-partienanalysen)
     - [Den Boot-Bildschirm (Plymouth) anpassen und das System-Abbild neu bauen](#den-boot-bildschirm-plymouth-anpassen-und-das-system-abbild-neu-bauen)
@@ -350,6 +340,19 @@ Okay, genug geredet – los geht’s. :)
   - [3.2. Vertiefte Analyse (Logs \& Verdächtige Skripte)](#32-vertiefte-analyse-logs--verdächtige-skripte)
   - [3.3 Bei Fehlern das Programm neu installieren und](#33-bei-fehlern-das-programm-neu-installieren-und)
   - [JK-Arch Config einrichten](#jk-arch-config-einrichten)
+- [Arch Linux Security-Hardening](#arch-linux-security-hardening)
+  - [Überprüfung der AUR-Paketquellen auf Schadcode (Malware-Hunting)](#überprüfung-der-aur-paketquellen-auf-schadcode-malware-hunting)
+  - [Suche nach der spezifischen Malware-Signatur (atomic-lockfile)](#suche-nach-der-spezifischen-malware-signatur-atomic-lockfile)
+  - [Kontrolle installierter Fremdpakete \& Paketmanager-Historie](#kontrolle-installierter-fremdpakete--paketmanager-historie)
+  - [Virenscan mit ClamAV (Deep Scan sensibler Entwickler-Ordner)](#virenscan-mit-clamav-deep-scan-sensibler-entwickler-ordner)
+  - [Rootkit-Erkennung mit Rootkit Hunter (rkhunter)](#rootkit-erkennung-mit-rootkit-hunter-rkhunter)
+  - [chkrootkit](#chkrootkit)
+  - [lynis](#lynis)
+  - [AppArmor sauber aktivieren](#apparmor-sauber-aktivieren)
+  - [Globales Menü aktivieren](#globales-menü-aktivieren)
+  - [Den SSH-Server sofort ausschalten und dauerhaft deaktivieren](#den-ssh-server-sofort-ausschalten-und-dauerhaft-deaktivieren)
+  - [Arch Linux AUR-Malware? So prüfst du dein System!](#arch-linux-aur-malware-so-prüfst-du-dein-system)
+    - [Schnell-Check in 3 Schritten](#schnell-check-in-3-schritten-1)
 - [Use JK-Arch](#use-jk-arch)
 
 # Meine Arch Config → GO!!!
@@ -2465,148 +2468,6 @@ mkdir -p ~/.config/fish/conf.d
 sudo pacman -S just
 ```
 
-### Überprüfung der AUR-Paketquellen auf Schadcode (Malware-Hunting)
-
-```bash
-# npm install -g @mermaid-js/mermaid-cli
-grep -RinE \
-'npm|node|curl.*\||wget.*\||bash -c|sh -c|eval|base64|openssl|nc |socat|python -c' \
-~/.cache/yay/*/PKGBUILD
-grep -R "atomic-lockfile" /tmp 2>/dev/null
-grep -R "npm install" ~/.cache/yay 2>/dev/null
-pacman -Qm
-```
-
-### Suche nach der spezifischen Malware-Signatur (atomic-lockfile)
-
-```bash
-find ~ -iname "*atomic-lockfile*" 2>/dev/null
-npm list -g 2>/dev/null | grep atomic-lockfile
-grep -R "atomic-lockfile" /var/cache 2>/dev/null
-grep -R "atomic-lockfile" ~/.cache/yay 2>/dev/null
-```
-
-### Kontrolle installierter Fremdpakete & Paketmanager-Historie
-
-```bash
-yay -Qm
-ls ~/.cache/yay
-grep "2026-06" /var/log/pacman.log | tail -100
-grep -E "installed|upgraded" /var/log/pacman.log | tail -200
-```
-
-### Virenscan mit ClamAV (Deep Scan sensibler Entwickler-Ordner)
-
-```bash
-sudo pacman -S clamav
-sudo freshclam
-clamscan -r -i ~/.config/nvim ~/.local/share/nvim ~/.local/state/nvim ~/.cache/nvim
-clamscan -r -i ~/.cargo ~/.sdkman ~/.npm ~/.local/lib/python3*/site-packages ~/Downloads
-clamscan -r -i ~/.cache/yay
-```
-
-### Rootkit-Erkennung mit Rootkit Hunter (rkhunter)
-
-```bash
-sudo pacman -S rkhunter
-sudo rkhunter --update
-sudo rkhunter --propupd
-sudo rkhunter --check
-```
-
-### chkrootkit
-
-```bash
-# yay -S chkrootkit
-# sudo chkrootkit
-```
-
-### lynis
-
-```bash
-sudo pacman -S lynis
-sudo lynis audit system
-```
-
-### AppArmor sauber aktivieren
-
-```bash
-sudo pacman -S apparmor apparmor.d
-```
-
-Dann:
-
-```bash
-sudo systemctl enable --now apparmor
-```
-
-Danach:
-
-```bash
-sudo nvim /boot/limine.conf
-```
-
-und füge es hinzu:
-
-```ini
-lsm=landlock,lockdown,yama,integrity,apparmor,bpf
-```
-
-also:
-
-```ini
-# CachyOS Limine theme
-
-...
-
-/+CachyOS
-  //linux-cachyos
-
-  ...
-
-  cmdline: quiet nowatchdog splash rw rootflags=subvol=/@ ... lsm=landlock,lockdown,yama,integrity,apparmor,bpf
-
-```
-
-Danach:
-
-```bash
-sudo nvim /etc/apparmor/parser.conf
-```
-
-und
-
-```ini
-write-cache
-Optimize=compress-fast
-cache-loc /etc/apparmor/earlypolicy/
-```
-
-Danach:
-
-```bash
-sudo reboot
-```
-
-und
-
-```bash
-sudo aa-status
-```
-
-### Globales Menü aktivieren
-
-```bash
-sudo pacman -S appmenu-gtk-module libdbusmenu-glib
-```
-
-### Den SSH-Server sofort ausschalten und dauerhaft deaktivieren
-
-```bash
-sudo systemctl disable --now sshd # Falls du SSH nicht brauchst
-# sudo systemctl enable --now sshd # Wider einschalten, wen man es doch braucht
-```
-
 ### Das Begrüßungsprogramm von CachyOS entfernen 
 
 ```bash
@@ -3187,5 +3048,178 @@ angehängt.
 So bleiben deine bestehenden Einstellungen erhalten und die zusätzlichen JK-Arch-Einstellungen werden einfach ergänzt.
 
 **Damit sind wir durch.** Wenn du alles an die richtigen Stellen kopiert und die `-add`-Dateien entsprechend zusammengeführt hast, kannst du dein Terminal bzw. deine Session neu starten und JK-Arch sollte einsatzbereit sein.
+
+# Arch Linux Security-Hardening
+
+## Überprüfung der AUR-Paketquellen auf Schadcode (Malware-Hunting)
+
+```bash
+# npm install -g @mermaid-js/mermaid-cli
+grep -RinE \
+'npm|node|curl.*\||wget.*\||bash -c|sh -c|eval|base64|openssl|nc |socat|python -c' \
+~/.cache/yay/*/PKGBUILD
+grep -R "atomic-lockfile" /tmp 2>/dev/null
+grep -R "npm install" ~/.cache/yay 2>/dev/null
+pacman -Qm
+```
+
+## Suche nach der spezifischen Malware-Signatur (atomic-lockfile)
+
+```bash
+find ~ -iname "*atomic-lockfile*" 2>/dev/null
+npm list -g 2>/dev/null | grep atomic-lockfile
+grep -R "atomic-lockfile" /var/cache 2>/dev/null
+grep -R "atomic-lockfile" ~/.cache/yay 2>/dev/null
+```
+
+## Kontrolle installierter Fremdpakete & Paketmanager-Historie
+
+```bash
+yay -Qm
+ls ~/.cache/yay
+grep "2026-06" /var/log/pacman.log | tail -100
+grep -E "installed|upgraded" /var/log/pacman.log | tail -200
+```
+
+## Virenscan mit ClamAV (Deep Scan sensibler Entwickler-Ordner)
+
+```bash
+sudo pacman -S clamav
+sudo freshclam
+clamscan -r -i ~/.config/nvim ~/.local/share/nvim ~/.local/state/nvim ~/.cache/nvim
+clamscan -r -i ~/.cargo ~/.sdkman ~/.npm ~/.local/lib/python3*/site-packages ~/Downloads
+clamscan -r -i ~/.cache/yay
+```
+
+## Rootkit-Erkennung mit Rootkit Hunter (rkhunter)
+
+```bash
+sudo pacman -S rkhunter
+sudo rkhunter --update
+sudo rkhunter --propupd
+sudo rkhunter --check
+```
+
+## chkrootkit
+
+```bash
+# yay -S chkrootkit
+# sudo chkrootkit
+```
+
+## lynis
+
+```bash
+sudo pacman -S lynis
+sudo lynis audit system
+```
+
+## AppArmor sauber aktivieren
+
+```bash
+sudo pacman -S apparmor apparmor.d
+```
+
+Dann:
+
+```bash
+sudo systemctl enable --now apparmor
+```
+
+Danach:
+
+```bash
+sudo nvim /boot/limine.conf
+```
+
+und füge es hinzu:
+
+```ini
+lsm=landlock,lockdown,yama,integrity,apparmor,bpf
+```
+
+also:
+
+```ini
+# CachyOS Limine theme
+
+...
+
+/+CachyOS
+  //linux-cachyos
+
+  ...
+
+  cmdline: quiet nowatchdog splash rw rootflags=subvol=/@ ... lsm=landlock,lockdown,yama,integrity,apparmor,bpf
+
+```
+
+Danach:
+
+```bash
+sudo nvim /etc/apparmor/parser.conf
+```
+
+und
+
+```ini
+write-cache
+Optimize=compress-fast
+cache-loc /etc/apparmor/earlypolicy/
+```
+
+Danach:
+
+```bash
+sudo reboot
+```
+
+und
+
+```bash
+sudo aa-status
+```
+
+## Globales Menü aktivieren
+
+```bash
+sudo pacman -S appmenu-gtk-module libdbusmenu-glib
+```
+
+## Den SSH-Server sofort ausschalten und dauerhaft deaktivieren
+
+```bash
+sudo systemctl disable --now sshd # Falls du SSH nicht brauchst
+# sudo systemctl enable --now sshd # Wider einschalten, wen man es doch braucht
+```
+
+## Arch Linux AUR-Malware? So prüfst du dein System!
+
+Im Juni 2026 gab es eine massive Supply-Chain-Attacke auf das Arch User Repository (AUR), bei der über 1600 Pakete mit Infostealern und eBPF-Rootkits infiziert wurden.
+Die Arch-Community hat ein großartiges Open-Source-Tool entwickelt, mit dem ihr euer System komplett durchleuchten könnt (inklusive aller Pacman-Logs, systemd-Dienste und npm/bun/yarn/pnpm-Caches).
+
+### Schnell-Check in 3 Schritten
+
+1. Repository klonen und Ordner öffnen
+
+```bash
+git clone https://github.com/lenucksi/aur-malware-check.git
+cd aur-malware-check
+```
+
+2. Risikofreier Testlauf (holt die neuesten Listen, scannt ohne Root)
+
+```bash
+python -m aur_check --refresh-campaigns --dry-run
+```
+
+3. Der vollständige Tiefenscan (erfordert sudo für eBPF- und Systemd-Prüfungen)
+
+```bash
+sudo python -m aur_check --refresh --full
+```
+
+Wenn am Ende RESULT: CLEAN steht, ist alles im grünen Bereich! Falls das Tool anschlägt, solltet ihr umgehend eure Passwörter und SSH-Keys von einem anderen Gerät aus ändern.
+Bleibt sicher!
 
 # Use JK-Arch
