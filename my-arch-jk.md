@@ -145,9 +145,10 @@ Okay, genug geredet – los geht’s. :)
     - [Docker und Erweiterungen installieren](#docker-und-erweiterungen-installieren)
     - [Nützliche Systemwerkzeuge und Python einrichten](#nützliche-systemwerkzeuge-und-python-einrichten)
     - [Ultraschnelle Textsuche installieren](#ultraschnelle-textsuche-installieren)
-    - [Die intelligente Ordner-Navigation einrichten](#die-intelligente-ordner-navigation-einrichten)
+    - [✨ Die intelligente Ordner-Navigation einrichten](#-die-intelligente-ordner-navigation-einrichten)
     - [JavaScript-Laufzeitumgebung und Paketmanager installieren](#javascript-laufzeitumgebung-und-paketmanager-installieren)
-    - [.NET SDK](#net-sdk)
+    - [.NET SDK installieren](#net-sdk-installieren)
+      - [.NET globale Tools verfügbar machen](#net-globale-tools-verfügbar-machen)
     - [Das Standard-Kompressionswerkzeug installieren](#das-standard-kompressionswerkzeug-installieren)
     - [TypeScript installieren](#typescript-installieren)
     - [Die ultimative LaTeX-Umgebung installieren](#die-ultimative-latex-umgebung-installieren)
@@ -426,7 +427,7 @@ sudo systemctl enable --now ufw
 ```
 
 <details>
-<summary>✨ Alternative zu UFW → firewalld</summary>
+<summary>✨ Alternative zu UFW -> firewalld</summary>
 
 Falls du lieber `firewalld` verwenden möchtest, installiere es stattdessen:
 
@@ -1110,7 +1111,7 @@ sudo pacman -S wl-clipboard fd python python-pip
 ```
 
 <details>
-<summary>>✨ Optionale Python-Entwicklungswerkzeuge</summary>
+<summary>✨ Optionale Python-Entwicklungswerkzeuge</summary>
 
 > `pipx` installiert Python-Anwendungen in eigenen virtuellen Umgebungen, sodass dein System-Python sauber bleibt.
 >
@@ -1141,11 +1142,15 @@ pipx install ruff
 
 ### Ultraschnelle Textsuche installieren
 
+> `ripgrep` (`rg`) durchsucht Dateien nach Textmustern und berücksichtigt dabei automatisch Dinge wie `.gitignore`. Dadurch eignet es sich perfekt für die Suche in Softwareprojekten, Konfigurationsdateien und großen Verzeichnissen.
+
 ```bash
 sudo pacman -S ripgrep
 ```
 
-### Die intelligente Ordner-Navigation einrichten
+### ✨ Die intelligente Ordner-Navigation einrichten
+
+> `zoxide` lernt deine meistgenutzten Verzeichnisse und erstellt daraus eine intelligente Navigation. Je öfter du einen Ordner verwendest, desto besser funktioniert die Suche.
 
 ```bash
 sudo pacman -S zoxide
@@ -1153,17 +1158,46 @@ sudo pacman -S zoxide
 
 ### JavaScript-Laufzeitumgebung und Paketmanager installieren
 
+> `nodejs` ist die Laufzeitumgebung, mit der JavaScript-Code außerhalb eines Browsers ausgeführt werden kann. Viele moderne Tools wie Build-Systeme, Entwickler-Server und Automatisierungsscripte basieren darauf.
+>
+> `npm` (Node Package Manager) ist der Paketmanager für JavaScript und ermöglicht das Installieren, Verwalten und Aktualisieren von JavaScript-Bibliotheken und Entwicklerwerkzeugen. **Außerdem wird npm häufig von NeoVim-Plugins und LSP-Tools benötigt, zum Beispiel für die Installation und Verwaltung von Language-Servern, Formatierern und weiteren Entwicklungswerkzeugen über die NeoVim-Konfiguration.**
+
 ```bash
 sudo pacman -S nodejs npm
 ```
 
-### .NET SDK
+### .NET SDK installieren
+
+> `.NET` ist eine moderne Entwicklungsplattform von Microsoft und wird häufig für Backend-Anwendungen, Web-APIs, Desktop-Anwendungen, Cloud-Services und verschiedene Enterprise-Projekte verwendet. Mit dem SDK kannst du eigene .NET-Anwendungen entwickeln, bauen und testen.
+>
+> `dotnet-sdk` enthält alles, was du zum Entwickeln mit .NET benötigst: Compiler, Build-Tools, Templates und die komplette Entwicklungsumgebung für C# und andere .NET-Sprachen.
+>
+> `dotnet-runtime` stellt die Laufzeitumgebung bereit, die benötigt wird, um fertige .NET-Anwendungen auszuführen.
+>
+> `aspnet-runtime` erweitert die Laufzeit um Komponenten für ASP.NET-Anwendungen, also Webserver, Web-APIs und moderne Webanwendungen.
+
+Installation:
 
 ```bash
 sudo pacman -S dotnet-sdk
 sudo pacman -S dotnet-runtime aspnet-runtime
+```
+
+#### .NET globale Tools verfügbar machen
+
+Viele .NET-Erweiterungen und Entwicklerwerkzeuge werden über `dotnet tool install` installiert. Damit diese Tools direkt im Terminal gefunden werden, fügen wir den Tool-Pfad zu Fish hinzu:
+
+```fish
 fish_add_path $HOME/.dotnet/tools
 ```
+
+Nach der Installation kannst du prüfen, ob alles funktioniert:
+
+```bash
+dotnet --version
+```
+
+> Wenn eine Versionsnummer ausgegeben wird, ist die .NET-Umgebung erfolgreich eingerichtet.
 
 ### Das Standard-Kompressionswerkzeug installieren
 
