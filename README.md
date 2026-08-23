@@ -4,7 +4,7 @@
      ██║█████╔╝█████╗███████║██████╔╝██║     ███████║    
 ██   ██║██╔═██╗╚════╝██╔══██║██╔══██╗██║     ██╔══██║    
 ╚█████╔╝██║  ██╗     ██║  ██║██║  ██║╚██████╗██║  ██║    
- ╚════╝ ╚═╝  ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝   
+ ╚════╝ ╚═╝  ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝    
 </pre>
 
 <p style="text-align: center;">
@@ -19,18 +19,7 @@ This repository contains my personal **Visual Studio Code / IDEA Vim / NeoVim (L
 > This repo was not created for public distribution.
 > It is intended only for my own use, so I can use my settings on another computer without logging into my GitHub account.
 
-New:
-
-- [`JK-Arch (Deutsch) + .config`](my-arch-jk.md)
-
-Old:
-
-- [`NeoVim Ubuntu`](./docs/README-neovim-config-Ubuntu.md)  
-- [`NeoVim Arch`](./docs/README-neovim-config-Arch.md)
-- [`Windows WSL NeoVim`](./docs/README-neovim-config-windows-ubuntu-wsl.md)
-- [`IDEA Vim`](./docs/README-idea-config.md)  
-- [`VS Code`](./docs/README-vs-code-config.md)
-- [`License`](LICENSE)
+- [`JK-Arch Manual (Deutsch) -> Lets GO!!!`](my-arch-jk.md)
 
 ## Disclaimer
 
@@ -38,10 +27,10 @@ These settings are provided **as-is**, without any warranty.
 
 I am **not responsible** for any issues, errors, or damage that may occur from using them, including but not limited to:
 
-* configuration problems
-* loss of data
-* software issues
-* compatibility problems
+- configuration problems
+- loss of data
+- software issues
+- compatibility problems
 
 Use them **at your own risk**.
 
@@ -55,5 +44,5 @@ Some files are distributed under different licenses:
 
 ## Notes
 
-* Some settings may be system-specific (Windows vs Linux).
-* This configuration is tailored to my personal workflow and may not suit everyone.
+- Some settings may be system-specific (Windows vs Linux).
+- This configuration is tailored to my personal workflow and may not suit everyone.
