@@ -158,21 +158,23 @@ Okay, genug geredet – los geht’s. :)
     - [✨ Java-Laufzeitumgebung installieren](#-java-laufzeitumgebung-installieren)
     - [✨ Erweiterte Grammatik- und Stilprüfung mit LanguageTool](#-erweiterte-grammatik--und-stilprüfung-mit-languagetool)
     - [LazyVim und JetBrains Mono Nerd Font installieren](#lazyvim-und-jetbrains-mono-nerd-font-installieren)
+      - [LazyVim Starter-Konfiguration herunterladen](#lazyvim-starter-konfiguration-herunterladen)
+      - [JetBrains Mono Nerd Font installieren](#jetbrains-mono-nerd-font-installieren)
   - [Linux Power Tools](#linux-power-tools)
     - [Das System-Informationswerkzeug Fastfetch installieren](#das-system-informationswerkzeug-fastfetch-installieren)
     - [Den interaktiven Prozess-Viewer htop installieren](#den-interaktiven-prozess-viewer-htop-installieren)
     - [Den hochentwickelten System-Monitor btop installieren](#den-hochentwickelten-system-monitor-btop-installieren)
-    - [Den GPU-Prozess-Monitor nvtop installieren](#den-gpu-prozess-monitor-nvtop-installieren)
-    - [Den Terminal-Dateimanager und die Bildvorschau installieren](#den-terminal-dateimanager-und-die-bildvorschau-installieren)
+    - [✨ Den GPU-Prozess-Monitor nvtop installieren](#-den-gpu-prozess-monitor-nvtop-installieren)
+    - [Den ultraschnellen Terminal-Dateimanager Yazi installieren](#den-ultraschnellen-terminal-dateimanager-yazi-installieren)
+    - [✨ Den Terminal-Dateimanager und die Bildvorschau installieren](#-den-terminal-dateimanager-und-die-bildvorschau-installieren)
     - [Das Zeitmessungs-Werkzeug time installieren](#das-zeitmessungs-werkzeug-time-installieren)
     - [Installiere Radare2 (oft r2 genannt), den fortgeschrittenen Hex-Editor und Reverse-Engineering-Framework](#installiere-radare2-oft-r2-genannt-den-fortgeschrittenen-hex-editor-und-reverse-engineering-framework)
     - [Das professionelle Benchmarking-Werkzeug Hyperfine installieren](#das-professionelle-benchmarking-werkzeug-hyperfine-installieren)
-    - [Den Terminal-Multiplexer tmux installieren](#den-terminal-multiplexer-tmux-installieren)
-    - [Den Anwendungsstarter Wofi installieren](#den-anwendungsstarter-wofi-installieren)
-    - [Die intelligente Ordner-Navigation zoxide installieren](#die-intelligente-ordner-navigation-zoxide-installieren)
+    - [✨ Den Terminal-Multiplexer tmux installieren](#-den-terminal-multiplexer-tmux-installieren)
+    - [✨ Den Anwendungsstarter Wofi installieren](#-den-anwendungsstarter-wofi-installieren)
+    - [✨ Die intelligente Ordner-Navigation zoxide installieren](#-die-intelligente-ordner-navigation-zoxide-installieren)
     - [Den Hex-Editor GHex installieren](#den-hex-editor-ghex-installieren)
     - [Die moderne cat-Alternative bat installieren](#die-moderne-cat-alternative-bat-installieren)
-    - [Den ultraschnellen Terminal-Dateimanager Yazi installieren](#den-ultraschnellen-terminal-dateimanager-yazi-installieren)
     - [Das interaktive Git-Terminalwerkzeug LazyGit installieren](#das-interaktive-git-terminalwerkzeug-lazygit-installieren)
     - [Den Verzeichnisbaum-Generator tree installieren](#den-verzeichnisbaum-generator-tree-installieren)
     - [Das ultraschnelle Suchwerkzeug ripgrep installieren](#das-ultraschnelle-suchwerkzeug-ripgrep-installieren)
@@ -182,7 +184,7 @@ Okay, genug geredet – los geht’s. :)
     - [Den JSON-Datenprozessor jq installieren](#den-json-datenprozessor-jq-installieren)
     - [Die grafische Monitor-Konfiguration nwg-displays installieren](#die-grafische-monitor-konfiguration-nwg-displays-installieren)
     - [Das Bildverarbeitungs-Framework ImageMagick installieren](#das-bildverarbeitungs-framework-imagemagick-installieren)
-    - [Den Tippfehler-Korrektor thefuck installieren](#den-tippfehler-korrektor-thefuck-installieren)
+    - [✨ Den Tippfehler-Korrektor thefuck installieren](#-den-tippfehler-korrektor-thefuck-installieren)
     - [Die Programmiersprache Lua in der Version 5.1 installieren](#die-programmiersprache-lua-in-der-version-51-installieren)
     - [Microsoft Visual Studio Code (VS Code) über yay installieren](#microsoft-visual-studio-code-vs-code-über-yay-installieren)
     - [GitKraken über yay installieren](#gitkraken-über-yay-installieren)
@@ -973,11 +975,11 @@ sudo pacman -S nasm binutils
 
 > `pwntools` stellt eine Sammlung von Python-Tools bereit, die häufig bei Binary Exploitation verwendet werden. Dazu gehören unter anderem:
 >
-> * Kommunikation mit lokalen Programmen und entfernten Servern
-> * Erstellen und Senden von Exploit-Payloads
-> * Arbeiten mit Registern, Speicheradressen und Binaries
-> * Unterstützung bei ROP-Chains (Return-Oriented Programming)
-> * Automatisierung von Exploit-Tests
+> - Kommunikation mit lokalen Programmen und entfernten Servern
+> - Erstellen und Senden von Exploit-Payloads
+> - Arbeiten mit Registern, Speicheradressen und Binaries
+> - Unterstützung bei ROP-Chains (Return-Oriented Programming)
+> - Automatisierung von Exploit-Tests
 
 ```bash
 sudo pacman -S python-pwntools
@@ -997,11 +999,11 @@ python -c "from pwn import *; print('Pwntools funktioniert!')"
 >
 > Besonders interessant sind:
 >
-> * direkte Kontrolle über Speicher und Ressourcen
-> * einfache Cross-Kompilierung für andere Plattformen
-> * schneller Build-Prozess
-> * gute Integration mit C-Code
-> * moderne Alternative für viele Low-Level-Projekte
+> - direkte Kontrolle über Speicher und Ressourcen
+> - einfache Cross-Kompilierung für andere Plattformen
+> - schneller Build-Prozess
+> - gute Integration mit C-Code
+> - moderne Alternative für viele Low-Level-Projekte
 
 ```bash
 sudo pacman -S zig
@@ -1327,32 +1329,73 @@ sudo pacman -S languagetool
 
 ### LazyVim und JetBrains Mono Nerd Font installieren
 
+> NeoVim wird hier zur vollständigen Entwicklungsumgebung ausgebaut. Wir installieren NeoVim, richten LazyVim als moderne Plugin-Basis ein und installieren eine Nerd Font, damit Icons, Symbole und UI-Elemente in NeoVim korrekt dargestellt werden.
+>
+> `neovim` ist der moderne Vim-Nachfolger und die Grundlage für die JK-Arch-Entwicklungsumgebung.
+>
+> `vim` wird zusätzlich installiert, da einige Tools und Scripts weiterhin auf die klassische Vim-Kompatibilität zurückgreifen.
+
 ```bash
 sudo pacman -S neovim vim
+```
 
-# LazyVim Starter klonen
+#### LazyVim Starter-Konfiguration herunterladen
+
+> Wir legen die Grundlage für unsere NeoVim-Umgebung. Dafür laden wir zuerst die **LazyVim Starter-Konfiguration** herunter. LazyVim ist keine eigene Version von NeoVim, sondern eine moderne vorkonfigurierte Plugin- und Struktur-Basis für NeoVim.
+>
+> Es kümmert sich unter anderem um Plugin-Verwaltung, eine saubere Ordnerstruktur und viele moderne Entwicklungsfunktionen. Die JK-Arch NeoVim-Konfiguration baut auf dieser Grundlage auf und erweitert sie mit eigenen Plugins, Themes, LSP-Setups und zusätzlichen Anpassungen.
+
+```bash
 git clone https://github.com/LazyVim/starter ~/.config/nvim
+```
 
-# Git-Historie entfernen
+Danach entfernen wir die Git-Historie des Starter-Repositories:
+
+```bash
 rm -rf ~/.config/nvim/.git 
+```
 
-# Font-Verzeichnis erstellen und dorthin wechseln
+> Dadurch bleibt nur deine eigene Konfiguration erhalten und sie ist nicht mehr direkt mit dem LazyVim-Starter-Repository verbunden.
+
+#### JetBrains Mono Nerd Font installieren
+
+> Viele NeoVim-Themes und Plugins verwenden spezielle Symbole und Icons. Ohne eine Nerd Font werden diese oft falsch oder als leere Zeichen dargestellt.
+
+Font-Verzeichnis erstellen:
+
+```bash
 mkdir -p ~/.local/share/fonts
 cd ~/.local/share/fonts
+```
 
+JetBrains Mono Nerd Font herunterladen und entpacken:
+
+```bash
 # JetBrains Mono Nerd Font herunterladen und entpacken
 wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip
 unzip JetBrainsMono.zip -d JetBrainsMono
+```
 
+Font-Cache aktualisieren:
+
+```bash
 # Font-Cache aktualisieren
 fc-cache -fv
+```
 
+Jetzt kannst du NeoVim starten:
+
+```bash
 nvim
 ```
+
+> Beim ersten Start lädt LazyVim automatisch die benötigten Plugins herunter und richtet die Entwicklungsumgebung ein.
 
 ## Linux Power Tools
 
 ### Das System-Informationswerkzeug Fastfetch installieren
+
+> `fastfetch` zeigt dir beim Start oder auf Wunsch wichtige Informationen über dein System direkt im Terminal an. Es ist eine moderne Alternative zu `neofetch` und passt besonders gut zu einem minimalistischen, Terminal-zentrierten Setup wie JK-Arch.
 
 ```bash
 sudo pacman -S fastfetch
@@ -1360,23 +1403,54 @@ sudo pacman -S fastfetch
 
 ### Den interaktiven Prozess-Viewer htop installieren
 
+> `htop` ist ein interaktiver Prozess-Viewer, der dir eine visuelle Darstellung der laufenden Prozesse deines Systems zeigt. Es ist eine moderne Alternative zu `top` und bietet eine benutzerfreundliche Oberfläche.
+
 ```bash
 sudo pacman -S htop
 ```
 
 ### Den hochentwickelten System-Monitor btop installieren
 
-```bash
-sudo pacman -S btop # nvim ~/.config/btop/btop.conf
-```
-
-### Den GPU-Prozess-Monitor nvtop installieren
+> `btop` ist ein moderner System-Monitor, der eine detaillierte Übersicht über CPU, RAM, Netzwerk, Prozesse und mehr bietet. Er ist besonders für Entwickler und Systemadministratoren nützlich, die eine umfassende Visualisierung ihrer Systemressourcen benötigen.
 
 ```bash
-# sudo pacman -S nvtop
+sudo pacman -S btop
 ```
 
-### Den Terminal-Dateimanager und die Bildvorschau installieren
+<details>
+<summary>Eigene btop-Konfiguration bearbeiten</summary>
+
+Die Konfiguration liegt hier:
+
+```bash
+nvim ~/.config/btop/btop.conf
+```
+
+Dort kannst du unter anderem Darstellung, Farben, Layout und Verhalten anpassen.
+
+</details>
+
+### ✨ Den GPU-Prozess-Monitor nvtop installieren
+
+> `nvtop` ist ein interaktiver Monitor für NVIDIA-GPUs, der dir eine visuelle Darstellung der laufenden Prozesse deiner GPU zeigt. Es ist besonders nützlich für Entwickler, die ihre GPU-Ressourcen überwachen möchten.
+
+```bash
+sudo pacman -S nvtop
+```
+
+### Den ultraschnellen Terminal-Dateimanager Yazi installieren
+
+> `yazi` ist ein ultraschneller, moderner Terminal-Dateimanager mit Fokus auf Geschwindigkeit und einer angenehmen Bedienung über die Tastatur. Er eignet sich perfekt für einen Terminal-zentrierten Workflow mit Fish, Kitty und NeoVim.
+
+```bash
+sudo pacman -S yazi
+```
+
+### ✨ Den Terminal-Dateimanager und die Bildvorschau installieren
+
+> `ranger` ist ein klassischer Terminal-Dateimanager mit einer großen Community und vielen Erweiterungen. Er funktioniert zuverlässig, wird in JK-Arch aber nicht bevorzugt, da `yazi` moderner und schneller ist.
+>
+> `w3m` wird häufig zusammen mit `ranger` für Bildvorschauen im Terminal verwendet.
 
 ```bash
 sudo pacman -S ranger w3m
@@ -1384,11 +1458,20 @@ sudo pacman -S ranger w3m
 
 ### Das Zeitmessungs-Werkzeug time installieren
 
+> `time` misst die Ausführungszeit von Programmen und Skripten. Es ist besonders nützlich, um die Performance von Befehlen zu analysieren und Engpässe zu identifizieren.
+>
+> **JK-Arch erweitert diesen Workflow mit der eigenen Fish-Funktion `jtime`.**  
+> `jtime` ist ein modernes Benchmarking-, Profiling- und Tracing-Werkzeug, das mehrere Analysewerkzeuge unter einem einzigen Befehl zusammenfasst.
+
 ```bash
 sudo pacman -S time
 ```
 
 ### Installiere Radare2 (oft r2 genannt), den fortgeschrittenen Hex-Editor und Reverse-Engineering-Framework
+
+> `radare2` (kurz `r2`) ist ein leistungsfähiges Open-Source-Framework für Reverse Engineering, Binary-Analyse und Debugging. Es wird verwendet, um ausführbare Dateien zu untersuchen, Assembly-Code zu analysieren und Programme auf einer sehr niedrigen Ebene zu verstehen.
+>
+> Es ist deutlich mehr als nur ein Hex-Editor: `r2` bietet eine komplette Umgebung für die Analyse von Binaries, inklusive Disassembly, Debugging und teilweise auch Decompilation über Erweiterungen.
 
 ```bash
 sudo pacman -S radare2
@@ -1396,29 +1479,49 @@ sudo pacman -S radare2
 
 ### Das professionelle Benchmarking-Werkzeug Hyperfine installieren
 
+> `hyperfine` ist ein modernes Kommandozeilen-Benchmarking-Tool, mit dem du Programme und Befehle sehr genau miteinander vergleichen kannst. Es ist deutlich zuverlässiger als einfach nur `time` zu verwenden, da es mehrere Durchläufe ausführt, Aufwärmphasen berücksichtigt und statistisch auswertbare Ergebnisse liefert.
+
 ```bash
 sudo pacman -S hyperfine
 ```
 
-### Den Terminal-Multiplexer tmux installieren
+### ✨ Den Terminal-Multiplexer tmux installieren
+
+> `tmux` ist ein Terminal-Multiplexer und ermöglicht es, mehrere Shell-Sitzungen, Fenster und Splits innerhalb eines einzigen Terminals zu verwalten.
+>
+> In JK-Arch wird `tmux` jedoch **nicht benötigt**. Der Standard-Terminal-Emulator `kitty` bringt bereits eigene Funktionen für Splits, Tabs und Fensterverwaltung mit und deckt damit den täglichen Workflow vollständig ab.
+>
+> Für ein modernes Hyprland-/NeoVim-Setup mit Kitty ist `tmux` daher meistens überflüssig. Es kann aber weiterhin sinnvoll sein, wenn du:
+>
+> - über SSH auf Servern arbeitest
+> - lange laufende Prozesse unabhängig vom Terminal offen halten möchtest
+> - mit minimalen Terminals ohne integrierte Split-Funktionen arbeitest
+>
+> Für den normalen JK-Arch-Workflow mit `kitty`, `fish` und `NeoVim` kannst du `tmux` einfach überspringen.
 
 ```bash
 sudo pacman -S tmux
 ```
 
-### Den Anwendungsstarter Wofi installieren
+### ✨ Den Anwendungsstarter Wofi installieren
+
+> `wofi` ist ein moderner Anwendungsstarter für Wayland, der eine schnelle und einfache Möglichkeit bietet, Programme zu starten. Er ist besonders nützlich in minimalistischen Desktop-Umgebungen wie Hyprland.
 
 ```bash
-# sudo pacman -S wofi
+sudo pacman -S wofi
 ```
 
-### Die intelligente Ordner-Navigation zoxide installieren
+### ✨ Die intelligente Ordner-Navigation zoxide installieren
+
+> `zoxide` ist ein modernes Werkzeug zur intelligenten Navigation in Verzeichnissen. Es merkt sich die am häufigsten verwendeten Ordner und ermöglicht es dir, schnell zu ihnen zu wechseln, ohne den vollständigen Pfad eingeben zu müssen.
 
 ```bash
-# sudo pacman -S zoxide
+sudo pacman -S zoxide
 ```
 
 ### Den Hex-Editor GHex installieren
+
+> `ghex` ist ein grafischer Hex-Editor, der es ermöglicht, Binärdateien direkt zu bearbeiten. Er bietet eine einfache Benutzeroberfläche und ist besonders nützlich für Entwickler, die mit Binärdaten arbeiten.
 
 ```bash
 sudo pacman -S ghex
@@ -1426,17 +1529,33 @@ sudo pacman -S ghex
 
 ### Die moderne cat-Alternative bat installieren
 
+> `bat` ist eine moderne Alternative zu `cat`, die Syntax-Highlighting, Zeilennummern und eine bessere Darstellung von Textdateien bietet. Es ist besonders nützlich für Entwickler, die Code oder Konfigurationsdateien im Terminal anzeigen möchten.
+
 ```bash
 sudo pacman -S bat
 ```
 
-### Den ultraschnellen Terminal-Dateimanager Yazi installieren
-
-```bash
-sudo pacman -S yazi
-```
-
 ### Das interaktive Git-Terminalwerkzeug LazyGit installieren
+
+> `lazygit` ist ein interaktives Terminal-Frontend für Git. Es ermöglicht dir, Commits, Branches, Änderungen und den Git-Verlauf bequem über eine grafische Oberfläche im Terminal zu verwalten, ohne ständig lange Git-Befehle eingeben zu müssen.
+>
+> **Was macht das Tool?**
+> `lazygit` bietet unter anderem:
+>
+> - Übersicht über Änderungen und Commits
+> - einfaches Stagen und Zurücksetzen von Dateien
+> - Branch-Verwaltung
+> - Commit-Erstellung
+> - Anzeige der Git-Historie
+> - schnelles Wechseln zwischen Repository-Bereichen
+>
+> **JK-Arch Integration:**
+> `lazygit` ist in JK-Arch bereits in den Workflow integriert:
+>
+> - In **NeoVim** wird es als Git-Oberfläche verwendet.
+> - Über die **Fish-Konfiguration** kann es direkt per Tastenkürzel **`Strg + G`** gestartet werden.
+>
+> Dadurch kannst du Git-Verwaltung schnell aus dem Terminal oder direkt aus deiner Entwicklungsumgebung heraus öffnen.
 
 ```bash
 sudo pacman -S lazygit
@@ -1490,7 +1609,7 @@ sudo pacman -S nwg-displays
 sudo pacman -S imagemagick
 ```
 
-### Den Tippfehler-Korrektor thefuck installieren
+### ✨ Den Tippfehler-Korrektor thefuck installieren
 
 ```bash
 # sudo pacman -S thefuck
@@ -3207,10 +3326,10 @@ sudo pacman -S --asexplicit shellcheck pandoc
 ```
 
 > **Wichtige Änderungen gegenüber dem Original:**
-> *   **Reihenfolge:** `cachyos-rate-mirrors` kommt jetzt an den Anfang, damit das Update schnell läuft.
-> *   **Sicherheit:** Der riskante One-Liner `$(pacman -Qq | grep ...)` wurde entfernt. Stattdessen sorgt `pacman -Syu` dafür, dass alle Pakete konsistent neu gebaut werden, was bei Haskell zwingend notwendig ist.
-> *   **Bereinigung:** Der Schritt `pacman -Rns $(pacman -Qdtq)` entfernt verwaiste Pakete, die oft die Ursache für Haskell-Fehler sind.
-> *   **Entfernt:** `systemctl restart NetworkManager` wurde gestrichen, da er für die Paket-Reparatur irrelevant ist.   
+> -   **Reihenfolge:** `cachyos-rate-mirrors` kommt jetzt an den Anfang, damit das Update schnell läuft.
+> -   **Sicherheit:** Der riskante One-Liner `$(pacman -Qq | grep ...)` wurde entfernt. Stattdessen sorgt `pacman -Syu` dafür, dass alle Pakete konsistent neu gebaut werden, was bei Haskell zwingend notwendig ist.
+> -   **Bereinigung:** Der Schritt `pacman -Rns $(pacman -Qdtq)` entfernt verwaiste Pakete, die oft die Ursache für Haskell-Fehler sind.
+> -   **Entfernt:** `systemctl restart NetworkManager` wurde gestrichen, da er für die Paket-Reparatur irrelevant ist.   
 
 # WARP Cloudflair "1.1.1.1"
 
