@@ -1,3 +1,12 @@
+```ini
+     ██╗██╗  ██╗      █████╗ ██████╗  ██████╗██╗  ██╗    
+     ██║██║ ██╔╝     ██╔══██╗██╔══██╗██╔════╝██║  ██║    
+     ██║█████╔╝█████╗███████║██████╔╝██║     ███████║    
+██   ██║██╔═██╗╚════╝██╔══██║██╔══██╗██║     ██╔══██║    
+╚█████╔╝██║  ██╗     ██║  ██║██║  ██║╚██████╗██║  ██║    
+ ╚════╝ ╚═╝  ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝   
+```
+
 <details>
 <summary>🚨 Arch Linux AUR-Malware? So prüfst du dein System!</summary>
 
@@ -32,15 +41,72 @@ Bleibt sicher! 🐧
 
 </details>
 
-Bitte installieren Sie eine Arch-basierte Distribution – vorzugsweise [Arch Linux](https://archlinux.org), [CachyOS](https://cachyos.org), [EndeavourOS](https://endeavouros.com), [Garuda Linux](https://garudalinux.org) oder [Manjaro](https://manjaro.org). Die Konfiguration sollte vollständig auf Hyprland unter Wayland basieren.
+**Vorab**: Bitte installieren Sie eine Arch-basierte Distribution – vorzugsweise [Arch Linux](https://archlinux.org), [CachyOS](https://cachyos.org), [EndeavourOS](https://endeavouros.com), [Garuda Linux](https://garudalinux.org) oder [Manjaro](https://manjaro.org). 
 
-Fish und nicht bash oder zsh!!!
+Ich persönlich bin auf CachyOS umgestiegen – einfach, weil ich Arch irgendwann nicht mehr wirklich genießen konnte. Es gab immer wieder kleine Dinge, die einfach nicht sauber funktioniert haben (zum Beispiel Kopfhörer-Treiber oder bestimmte Hardware-Konfigurationen). CachyOS fühlt sich meiner Meinung nach deutlich stabiler an als eine klassische Arch-Installation über archinstall.
 
-Bitte führen sie alle Commands aus und fügen sie .config in ihr Systhem ein.
+Trotzdem: Hier bekommst du eine komplette Arch-Linux-Installation – sowohl für dein Hauptsystem als auch für VirtualBox unter Windows oder Linux. Falls du lieber bei einer Debian-basierten Distribution bleiben möchtest und einfach mal meine Konfiguration ausprobieren willst, gebe ich dir weiter unten auch noch einen passenden QEMU-Command mit. ;-)
+
+-> [Install Arch Linux as your main system](./arch-docs/arch-linux-as-your-main-system.md)
+-> [Install Arch Linux in VirtualBox](./arch-docs/arch-linux-in-virtualbox.md)
+-> [Install Arch Linux in QEMU](./arch-docs/arch-linux-in-qemu.md)
+
+Wenn du bereits eine vorkonfigurierte Arch-basierte Distribution wie CachyOS oder EndeavourOS nutzten willst: Installiere es einfach so, wie du möchtest. Das passt alles. Als Desktop-Environment würde ich allerdings nur Hyprland installieren – nicht KDE oder GNOME. Beim Rest (Dateimanager, Bootloader usw.) ist es eigentlich egal, was du verwendest.
+
+Falls du bei bestimmten Sachen Hilfe brauchst, schau am besten auch mal auf YouTube. Gerade bei Installations-Themen erklären andere Leute manche Dinge wahrscheinlich besser als ich.
+
+Viel Spaß und schön, dass du hier bist!
+
+---
+
+Falls du trotzdem Arch Linux selbst installiert hast oder eine andere Arch-basierte Distribution mit Bash oder Zsh nutzt, installiere bitte Fish.
+
+**Warum Fish?**
+
+Falls du Arch Linux selbst installiert hast oder eine andere Arch-basierte Distribution mit Bash oder Zsh nutzt, installiere bitte Fish (CachyOS bringt Fish bereits standardmäßig mit).
+
+Natürlich kannst du weiterhin Bash oder Zsh verwenden. Wenn du lieber dabei bleiben möchtest, kannst du zum Beispiel einfach `bash` oder `zsh` starten oder einzelne Commands mit `bash -c "..."` ausführen.
+
+<details>
+<summary>Fish installieren</summary>
+
+```bash
+sudo apt-add-repository ppa:fish-shell/release-4
+sudo apt update
+sudo apt install fish
+```
+
+</details>
+
+Also, legen wir los.
+
+---
+
+JK-Arch ist keine eigene Distribution wie Ubuntu oder Fedora. Es ist eher meine persönliche Art, eine Arch-Installation einzurichten.
+
+Du kannst einfach durch die Anleitung gehen, dir die Sachen auswählen, die du brauchst, und anschließend die Ordner:
+
+```ini
+~/jk-arch/.config -> ~/.config
+~/jk-arch/.local -> ~/.local
+~/jk-arch/home -> ~/
+```
+
+in dein Home-Verzeichnis übernehmen.
+
+JK-Arch richtet sich vor allem an Power-User und Leute, die viel mit dem Terminal arbeiten. Außerdem bringt es eine eigene NeoVim-Konfiguration mit, die über 20 Programmiersprachen unterstützt und verschiedene Security-Tools enthält.
+
+Ein wichtiger Punkt noch vorab:
+
+Meine komplette Konfiguration basiert auf Hyprland. Das sollte also klar sein. Sie nutzt als Grundlage die **end-4 Hyprland Config**, eine der modernsten und bekanntesten Hyprland-Konfigurationen, und wurde von mir weiter angepasst.
+
+Das komplette Theme ist auf **Catppuccin Mocha** abgestimmt.
+
+Okay, genug geredet – los geht’s. :)
 
 - [🚨 Arch Linux AUR-Malware? So prüfst du dein System!](#-arch-linux-aur-malware-so-prüfst-du-dein-system)
   - [Schnell-Check in 3 Schritten](#schnell-check-in-3-schritten)
-- [Meine Arch Config](#meine-arch-config)
+- [Meine Arch Config → GO!!!](#meine-arch-config--go)
   - [Entwicklung Plugins](#entwicklung-plugins)
     - [Zum Startpunkt wechseln](#zum-startpunkt-wechseln)
     - [Die schnellsten Mirrors finden](#die-schnellsten-mirrors-finden)
@@ -48,6 +114,8 @@ Bitte führen sie alle Commands aus und fügen sie .config in ihr Systhem ein.
     - [Das System aktualisieren](#das-system-aktualisieren)
     - [Die Werkzeuge für den Bau von Software installieren](#die-werkzeuge-für-den-bau-von-software-installieren)
     - [Die Firewall sofort einschalten und dauerhaft aktivieren](#die-firewall-sofort-einschalten-und-dauerhaft-aktivieren)
+    - [UFW später verwalten](#ufw-später-verwalten)
+    - [JK-Arch herunterladen](#jk-arch-herunterladen)
     - [Die end-4 Hyperland Konfiguration herunterladen und die Installation starten](#die-end-4-hyperland-konfiguration-herunterladen-und-die-installation-starten)
     - [Den Quellcode von yay herunterladen und das Programm bauen und installieren](#den-quellcode-von-yay-herunterladen-und-das-programm-bauen-und-installieren)
     - [Kern-Werkzeuge und Entwickler-Tools installieren](#kern-werkzeuge-und-entwickler-tools-installieren)
@@ -280,9 +348,13 @@ Bitte führen sie alle Commands aus und fügen sie .config in ihr Systhem ein.
   - [2. Netzwerk-Analyse (Der wichtigste Sicherheitscheck)](#2-netzwerk-analyse-der-wichtigste-sicherheitscheck)
   - [3.1. Paketdatenbank \& Integrität prüfen](#31-paketdatenbank--integrität-prüfen)
   - [3.2. Vertiefte Analyse (Logs \& Verdächtige Skripte)](#32-vertiefte-analyse-logs--verdächtige-skripte)
-  - [3.3 Bei Fehlern das Programm neu installieren und:](#33-bei-fehlern-das-programm-neu-installieren-und)
+  - [3.3 Bei Fehlern das Programm neu installieren und](#33-bei-fehlern-das-programm-neu-installieren-und)
+  - [JK-Arch Config einrichten](#jk-arch-config-einrichten)
+- [Use JK-Arch](#use-jk-arch)
 
-# Meine Arch Config
+# Meine Arch Config → GO!!!
+
+Bevor wir mit der eigentlichen Konfiguration anfangen, bereiten wir erstmal unser System vor. Wir installieren die wichtigsten Werkzeuge, aktualisieren das System und holen anschließend die JK-Arch Config.
 
 ## Entwicklung Plugins
 
@@ -294,11 +366,15 @@ cd ~
 
 ### Die schnellsten Mirrors finden
 
+> Nur bei CachyOS, sonst überspringen.
+
 ```bash
 sudo cachyos-rate-mirrors
 ```
 
 ### DNS temporär auf Cloudflare (1.1.1.1) setzen
+
+> Falls dein DNS gerade mal wieder so performt, als würde dein Router die Anfrage persönlich mit der Post verschicken.
 
 ```bash
 echo "nameserver 1.1.1.1" | sudo tee /etc/resolv.conf
@@ -306,11 +382,15 @@ echo "nameserver 1.1.1.1" | sudo tee /etc/resolv.conf
 
 ### Das System aktualisieren
 
+> Am besten regelmäßig machen – dein System mag Updates ungefähr so sehr wie du Kaffee am Morgen.
+
 ```bash
 sudo pacman -Syu
 ```
 
 ### Die Werkzeuge für den Bau von Software installieren
+
+> Wir brauchen `git`, um später die JK-Arch Config zu klonen. `base-devel` enthält außerdem die wichtigsten Werkzeuge, die wir für das Bauen und Installieren einiger Pakete benötigen.
 
 ```bash
 sudo pacman -S --needed git base-devel
@@ -318,21 +398,134 @@ sudo pacman -S --needed git base-devel
 
 ### Die Firewall sofort einschalten und dauerhaft aktivieren
 
-```bash
-# sudo pacman -S ufw
-sudo systemctl enable --now ufw # Wichtig -> Firewall aktivieren!!!
+> Wichtig -> Firewall aktivieren!!!
 
-# sudo pacman -S firewalld
-# sudo systemctl stop ufw          # UFW stoppen
-# sudo systemctl disable ufw       # UFW Autostart aus
-# sudo systemctl enable --now firewalld  # firewalld starten
+Für JK-Arch kannst du entweder **UFW** oder **firewalld** verwenden. Beide gleichzeitig solltest du nicht betreiben.
+
+<details>
+<summary>UFW installieren, falls noch nicht geschehen</summary>
+
+```bash
+sudo pacman -S ufw
 ```
+
+</details>
+
+UFW aktivieren und direkt starten:
+
+```bash
+sudo systemctl enable --now ufw
+```
+
+<details>
+<summary>Alternative zu UFW → firewalld</summary>
+
+Falls du lieber `firewalld` verwenden möchtest, installiere es stattdessen:
+
+```bash
+sudo pacman -S firewalld
+```
+
+Wenn UFW bereits aktiviert ist, solltest du es vorher stoppen und aus dem Autostart entfernen:
+
+```bash
+sudo systemctl stop ufw
+sudo systemctl disable ufw
+```
+
+Danach `firewalld` aktivieren und starten:
+
+```bash
+sudo systemctl enable --now firewalld
+```
+
+</details>
+
+<details>
+<summary>Schnellstart mit UFW</summary>
+
+Falls du einfach nur schnell eine funktionierende Firewall mit UFW möchtest:
+
+```bash
+sudo ufw default deny incoming # Alles, was von außen auf deinen Rechner möchte, wird standardmäßig abgelehnt.
+sudo ufw default allow outgoing # Programme auf deinem Rechner dürfen standardmäßig Verbindungen nach außen aufbauen.
+sudo ufw enable # UFW wird eingeschaltet und die vorher festgelegten Regeln werden aktiv.
+```
+
+Status überprüfen:
 
 ```bash
 sudo systemctl status ufw
 sudo ufw status verbose
-ss -tulpen
 ```
+
+### UFW später verwalten
+
+Du kannst UFW jederzeit manuell aktivieren oder deaktivieren:
+
+- Firewall aktivieren:
+
+```bash
+sudo ufw enable
+```
+
+- Firewall deaktivieren:
+
+```bash
+sudo ufw disable
+```
+
+- Status und Regeln anzeigen:
+
+```bash
+sudo ufw status verbose
+```
+
+- Alle Regeln anzeigen:
+
+```bash
+sudo ufw status numbered
+```
+
+Wenn du eine Regel über ihre Nummer entfernen möchtest:
+
+```bash
+sudo ufw delete <NUMMER>
+```
+
+> **Tipp:** UFW bleibt auch nach einem Neustart aktiviert, solange du es nicht mit `sudo ufw disable` deaktivierst. Der systemd-Dienst sorgt zusätzlich dafür, dass UFW beim Booten gestartet wird.
+
+</details>
+
+### JK-Arch herunterladen
+
+Jetzt können wir endlich das Repository klonen:
+
+```bash
+cd ~
+git clone https://github.com/17jk789/jk-arch.git
+cd jk-arch
+```
+
+**Wichtig:** An dieser Stelle wird noch nichts nach `~/.config`, `~/.local` oder `~/` verschoben oder kopiert. Wir brauchen die Dateien später während der Konfiguration und führen das Einrichten erst ganz am Ende durch.
+
+Außerdem gibt es bei JK-Arch einige Dateien, deren Name auf `-add` endet. Diese Dateien werden **nicht einfach kopiert oder ersetzt**. Ihr Inhalt muss später an die jeweils passende, bereits vorhandene Konfigurationsdatei angehängt werden.
+
+Beispiel:
+
+```text
+config-add.conf
+```
+
+wird am Ende an
+
+```text
+config.conf
+```
+
+angehängt.
+
+So bleiben deine bestehenden Einstellungen erhalten und die zusätzlichen JK-Arch-Einstellungen werden einfach ergänzt.
 
 ### Die end-4 Hyperland Konfiguration herunterladen und die Installation starten
 
@@ -2916,6 +3109,8 @@ systemctl --failed
 
 ## 2. Netzwerk-Analyse (Der wichtigste Sicherheitscheck)
 
+Zusätzlich kannst du überprüfen, welche Ports aktuell auf deinem System lauschen:
+
 ```bash
 ss -tulpen
 ```
@@ -2944,9 +3139,53 @@ expac --timefmt='%Y-%m-%d %T' '%l %n' | sort -r | head -50
 systemctl --type=service --state=running
 ```
 
-## 3.3 Bei Fehlern das Programm neu installieren und:
+## 3.3 Bei Fehlern das Programm neu installieren und
 
 ```bash
 sudo systemctl --failed
 sudo journalctl -p 3 -xb
 ```
+
+## JK-Arch Config einrichten
+
+Wir sind jetzt am **Ende der Konfiguration** angekommen. Alle benötigten Pakete, Programme und Einstellungen sind eingerichtet – jetzt fehlt nur noch der letzte Schritt: Wir bringen die JK-Arch Config an die richtigen Stellen in deinem System.
+
+Falls du das Repository noch nicht geklont hast, kannst du es jetzt noch nachholen:
+
+```bash
+cd ~
+git clone https://github.com/17jk789/jk-arch.git
+cd jk-arch
+```
+
+**Jetzt musst du die Config-Dateien selbst an die entsprechenden Stellen kopieren.** Dabei gilt:
+
+```text
+~/jk-arch/.config  ->  ~/.config
+~/jk-arch/.local   ->  ~/.local
+~/jk-arch/home     ->  ~/
+```
+
+Du kannst also die jeweiligen Inhalte manuell in die entsprechenden Verzeichnisse übernehmen.
+
+**Wichtig:** Einige Dateien in JK-Arch enden auf `-add`. Diese Dateien werden **nicht einfach kopiert oder ersetzt**. Ihr Inhalt muss an die jeweils passende, bereits vorhandene Konfigurationsdatei **angehängt** werden.
+
+Zum Beispiel:
+
+```text
+config-add.conf
+```
+
+wird an
+
+```text
+config.conf
+```
+
+angehängt.
+
+So bleiben deine bestehenden Einstellungen erhalten und die zusätzlichen JK-Arch-Einstellungen werden einfach ergänzt.
+
+**Damit sind wir durch.** Wenn du alles an die richtigen Stellen kopiert und die `-add`-Dateien entsprechend zusammengeführt hast, kannst du dein Terminal bzw. deine Session neu starten und JK-Arch sollte einsatzbereit sein.
+
+# Use JK-Arch
