@@ -20,6 +20,7 @@ gui:
       - "#a6adc8"
     searchingActiveBorderColor:
       - "#f9e2af"
+      - bold
     optionsTextColor:
       - "#89b4fa"
     selectedLineBgColor:
