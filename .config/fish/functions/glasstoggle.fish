@@ -5,7 +5,7 @@ function glasstoggle
     if grep -q GLASS_MODE_START $file
 
         sed -i '/-- GLASS_MODE_START/,/-- GLASS_MODE_END/d' $file
-        notify-send "Glass Toggle" AUS
+        notify-send "Glass Toggle" OFF
 
     else
 
@@ -27,7 +27,7 @@ hl.window_rule({
 })
 -- GLASS_MODE_END' >>$file
 
-        notify-send "Glass Toggle" AN
+        notify-send "Glass Toggle" ON
 
     end
 
