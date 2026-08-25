@@ -1,0 +1,2 @@
+-- Wichtig, das muss auskommentiert werden, sonst wird kitty glass theme nicht funktionieren
+-- hl.window_rule({match = {class = ".*" }, no_blur = true })
