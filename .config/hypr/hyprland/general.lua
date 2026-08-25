@@ -115,6 +115,10 @@ hl.config({
 			vibrancy = 0.1,
 			vibrancy_darkness = 0.0,
 
+			-- Glass Mode: ignore_opacity aktivieren
+			-- Diese Variable bleibt dauerhaft bestehen und dient als Status:
+			-- false = Glass/Blur global AUS
+			-- true  = Glass/Blur global AN
 			ignore_opacity = false,
 
 			popups = true,
