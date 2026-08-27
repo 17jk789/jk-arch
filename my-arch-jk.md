@@ -4,7 +4,7 @@
      ██║█████╔╝█████╗███████║██████╔╝██║     ███████║    
 ██   ██║██╔═██╗╚════╝██╔══██║██╔══██╗██║     ██╔══██║    
 ╚█████╔╝██║  ██╗     ██║  ██║██║  ██║╚██████╗██║  ██║    
- ╚════╝ ╚═╝  ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝   
+ ╚════╝ ╚═╝  ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝    
 </pre>
 
 <details>
@@ -45,11 +45,11 @@ Bleibt sicher! 🐧
 
 Ich persönlich bin auf CachyOS umgestiegen – einfach, weil ich Arch irgendwann nicht mehr wirklich genießen konnte. Es gab immer wieder kleine Dinge, die einfach nicht sauber funktioniert haben (zum Beispiel Kopfhörer-Treiber oder bestimmte Hardware-Konfigurationen). CachyOS fühlt sich meiner Meinung nach deutlich stabiler an als eine klassische Arch-Installation über archinstall.
 
-Trotzdem: Hier bekommst du eine komplette Arch-Linux-Installation – sowohl für dein Hauptsystem als auch für VirtualBox unter Windows oder Linux. Falls du lieber bei einer Debian-basierten Distribution bleiben möchtest und einfach mal meine Konfiguration ausprobieren willst, gebe ich dir weiter unten auch noch einen passenden QEMU-Command mit. ;-)
+Trotzdem: Hier bekommst du eine komplette Arch-Linux-Installation – sowohl für dein Hauptsystem als auch für VirtualBox unter Windows oder Linux. Falls du lieber bei einer Debian-basierten Distribution bleiben möchtest und einfach mal meine Konfiguration ausprobieren willst, gebe ich dir weiter unten auch noch einen passenden QEMU-Command mit. 🤘
 
--> [Install Arch Linux as your main system](./arch-docs/arch-linux-as-your-main-system.md)
--> [Install Arch Linux in VirtualBox](./arch-docs/arch-linux-in-virtualbox.md)
--> [Install Arch Linux in QEMU](./arch-docs/arch-linux-in-qemu.md)
+-> [Install Arch Linux as your main system](./arch-docs/arch-linux-as-your-main-system.md)  
+-> [Install Arch Linux in VirtualBox](./arch-docs/arch-linux-in-virtualbox.md)  
+-> [Install Arch Linux in QEMU](./arch-docs/arch-linux-in-qemu.md)  
 
 Wenn du bereits eine vorkonfigurierte Arch-basierte Distribution wie CachyOS oder EndeavourOS nutzten willst: Installiere es einfach so, wie du möchtest. Das passt alles. Als Desktop-Environment würde ich allerdings nur Hyprland installieren – nicht KDE oder GNOME. Beim Rest (Dateimanager, Bootloader usw.) ist es eigentlich egal, was du verwendest.
 
@@ -82,9 +82,27 @@ Also, legen wir los.
 
 ---
 
-JK-Arch ist keine eigene Distribution wie Ubuntu oder Fedora. Es ist eher meine persönliche Art, eine Arch-Installation einzurichten.
+Ab dem **01.10.2026** wird JK-Arch nicht mehr als eigenes Projekt unter diesem Namen verfügbar sein.
 
-Du kannst einfach durch die Anleitung gehen, dir die Sachen auswählen, die du brauchst, und anschließend die Ordner:
+JK-Arch war keine eigene Distribution wie Ubuntu oder Fedora, sondern meine persönliche Art, eine Arch-Linux-Installation einzurichten und anzupassen.
+
+Die bisherigen Inhalte, Konfigurationen und Anpassungen werden zukünftig vollständig unter folgendem Projekt weitergeführt:
+
+```url
+https://github.com/17jk789/dots-hyprland
+```
+
+Die Einrichtung wird dadurch deutlich einfacher: Statt einzelne Dateien und Ordner manuell zu übernehmen, genügt es, den Installer auszuführen:
+
+```bash
+./setup install
+```
+
+Damit wird automatisch eine vollständige Hyprland-Umgebung mit der End-4-Konfiguration eingerichtet und aktuell gehalten. Der gesamte Prozess ist dadurch einfacher, schneller und benutzerfreundlicher.
+
+Das Projekt richtet sich weiterhin besonders an Power-User und Nutzer, die viel mit dem Terminal arbeiten. Es enthält umfangreiche Anpassungen für eine produktive Linux-Umgebung sowie vorkonfigurierte Tools und Einstellungen.
+
+Die alte Vorgehensweise mit:
 
 ```ini
 ~/jk-arch/.config -> ~/.config
@@ -92,9 +110,7 @@ Du kannst einfach durch die Anleitung gehen, dir die Sachen auswählen, die du b
 ~/jk-arch/home -> ~/
 ```
 
-in dein Home-Verzeichnis übernehmen.
-
-JK-Arch richtet sich vor allem an Power-User und Leute, die viel mit dem Terminal arbeiten. Außerdem bringt es eine eigene NeoVim-Konfiguration mit, die über 20 Programmiersprachen unterstützt und verschiedene Security-Tools enthält.
+entfällt damit. Alle notwendigen Dateien werden zukünftig zentral über das Repository und den automatisierten Installer verwaltet.
 
 Ein wichtiger Punkt noch vorab:
 
@@ -127,6 +143,7 @@ Okay, genug geredet – los geht’s. :)
       - [GUI-Bibliotheken](#gui-bibliotheken)
       - [Desktop-Integration](#desktop-integration)
       - [Lua-Entwicklung](#lua-entwicklung)
+    - [Die Programmiersprache Lua in der Version 5.1 installieren](#die-programmiersprache-lua-in-der-version-51-installieren)
       - [✨ GDB-Konfiguration](#-gdb-konfiguration)
     - [Das Multilib-Repository in den Systemquellen aktivieren](#das-multilib-repository-in-den-systemquellen-aktivieren)
     - [Rust und Cargo installieren](#rust-und-cargo-installieren)
@@ -177,7 +194,7 @@ Okay, genug geredet – los geht’s. :)
     - [Die moderne cat-Alternative bat installieren](#die-moderne-cat-alternative-bat-installieren)
     - [Das interaktive Git-Terminalwerkzeug LazyGit installieren](#das-interaktive-git-terminalwerkzeug-lazygit-installieren)
     - [Den Verzeichnisbaum-Generator tree installieren](#den-verzeichnisbaum-generator-tree-installieren)
-    - [Das ultraschnelle Suchwerkzeug ripgrep installieren](#das-ultraschnelle-suchwerkzeug-ripgrep-installieren)
+    - [✨ Das ultraschnelle Suchwerkzeug ripgrep installieren](#-das-ultraschnelle-suchwerkzeug-ripgrep-installieren)
     - [Das blitzschnelle Dateisuch-Werkzeug fd installieren](#das-blitzschnelle-dateisuch-werkzeug-fd-installieren)
     - [Die moderne und farbenfrohe ls-Alternative eza installieren](#die-moderne-und-farbenfrohe-ls-alternative-eza-installieren)
     - [Die vereinfachten Community-Handbücher tldr installieren](#die-vereinfachten-community-handbücher-tldr-installieren)
@@ -185,7 +202,6 @@ Okay, genug geredet – los geht’s. :)
     - [Die grafische Monitor-Konfiguration nwg-displays installieren](#die-grafische-monitor-konfiguration-nwg-displays-installieren)
     - [Das Bildverarbeitungs-Framework ImageMagick installieren](#das-bildverarbeitungs-framework-imagemagick-installieren)
     - [✨ Den Tippfehler-Korrektor thefuck installieren](#-den-tippfehler-korrektor-thefuck-installieren)
-    - [Die Programmiersprache Lua in der Version 5.1 installieren](#die-programmiersprache-lua-in-der-version-51-installieren)
     - [Microsoft Visual Studio Code (VS Code) über yay installieren](#microsoft-visual-studio-code-vs-code-über-yay-installieren)
     - [GitKraken über yay installieren](#gitkraken-über-yay-installieren)
     - [Den Discord-Client (Vesktop) über den Paketmanager installieren](#den-discord-client-vesktop-über-den-paketmanager-installieren)
@@ -546,7 +562,7 @@ Als Nächstes installieren wir die end-4 Hyprland-Konfiguration. Sie dient als G
 Zuerst klonen wir das Repository und wechseln in das Verzeichnis:
 
 ```bash
-git clone https://github.com/end-4/dots-hyprland.git
+git clone https://github.com/17jk789/dots-hyprland.git
 cd dots-hyprland
 ```
 
@@ -661,6 +677,14 @@ sudo pacman -S network-manager-applet polkit-gnome
 
 ```bash
 sudo pacman -S luarocks
+```
+
+### Die Programmiersprache Lua in der Version 5.1 installieren
+
+> Lua 5.1 wird von einigen älteren Lua-Modulen und Tools benötigt und kann parallel zu neueren Lua-Versionen installiert werden. Für bestimmte Neovim-Plugins oder Entwicklungsumgebungen ist diese Version weiterhin relevant.
+
+```bash
+sudo pacman -S --needed lua51
 ```
 
 #### ✨ GDB-Konfiguration
@@ -1563,11 +1587,15 @@ sudo pacman -S lazygit
 
 ### Den Verzeichnisbaum-Generator tree installieren
 
+> `tree` ist ein einfaches Kommandozeilenwerkzeug, das die Verzeichnisstruktur eines Ordners in einer baumartigen Darstellung anzeigt. Es ist besonders nützlich, um schnell einen Überblick über die Ordnerhierarchie zu bekommen.
+
 ```bash
 sudo pacman -S tree
 ```
 
-### Das ultraschnelle Suchwerkzeug ripgrep installieren
+### ✨ Das ultraschnelle Suchwerkzeug ripgrep installieren
+
+> `ripgrep` ist ein sehr schnelles Suchwerkzeug, das auf der Basis von `grep` entwickelt wurde. Es ermöglicht es dir, in Dateien nach Mustern zu suchen, wobei es besonders schnell bei großen Dateien und Verzeichnissen ist.
 
 ```bash
 sudo pacman -S ripgrep
@@ -1575,11 +1603,15 @@ sudo pacman -S ripgrep
 
 ### Das blitzschnelle Dateisuch-Werkzeug fd installieren
 
+> `fd` ist ein modernes, schnelles und benutzerfreundliches Kommandozeilenwerkzeug zur Dateisuche. Es ist eine Alternative zu `find` und bietet eine einfachere Syntax sowie bessere Performance.
+
 ```bash
 sudo pacman -S fd
 ```
 
 ### Die moderne und farbenfrohe ls-Alternative eza installieren
+
+> `eza` ist eine moderne Alternative zu `ls`, die eine farbenfrohe und übersichtliche Darstellung von Dateien und Verzeichnissen bietet. Es unterstützt unter anderem Icons, Git-Statusanzeigen und eine bessere Formatierung.
 
 ```bash
 sudo pacman -S eza
@@ -1605,21 +1637,20 @@ sudo pacman -S nwg-displays
 
 ### Das Bildverarbeitungs-Framework ImageMagick installieren
 
+> `ImageMagick` ist ein leistungsfähiges Open-Source-Framework zur Bearbeitung, Konvertierung und Erstellung von Bildern. Es unterstützt eine Vielzahl von Bildformaten und bietet zahlreiche Funktionen wie Skalierung, Filterung, Textüberlagerung und Animationen.
+
 ```bash
 sudo pacman -S imagemagick
 ```
 
 ### ✨ Den Tippfehler-Korrektor thefuck installieren
 
-```bash
-# sudo pacman -S thefuck
-```
-
-### Die Programmiersprache Lua in der Version 5.1 installieren
+> `thefuck` ist ein Kommandozeilenwerkzeug, das Tippfehler in Befehlen erkennt und automatisch korrigiert. Es analysiert die Eingaben im Terminal und schlägt Korrekturen vor, um häufige Fehler zu beheben.
 
 ```bash
-sudo pacman -S --needed lua51
+sudo pacman -S thefuck
 ```
+
 
 ### Microsoft Visual Studio Code (VS Code) über yay installieren
 
