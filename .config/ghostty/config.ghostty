@@ -109,8 +109,8 @@
 # keybind = ctrl+shift+comma=reload_config
 
 # ============================================================
-# GHOSTTY CONFIG
-# Catppuccin Mocha / Neovim / Hyprland
+# GHOSTTY — HYPRLAND / ENDEAVOUROS
+# CATPPUCCIN MOCHA
 # ============================================================
 
 
@@ -119,20 +119,27 @@
 # ============================================================
 
 window-decoration = auto
+
 window-padding-x = 0
 window-padding-y = 0
+
 window-inherit-working-directory = true
 
 confirm-close-surface = false
 
-# Glas / Hyprland
-background = #1E1E2E
-background-opacity = 0.65
-background-blur-radius = 0
 
-# Kein Shader!
-# custom-shader = "shaders/cursor_warp.glsl"
-# custom-shader-animation = always
+# ============================================================
+# BACKGROUND
+# ============================================================
+
+background = #1E1E2E
+foreground = #CDD6F4
+
+# Kein Transparenz-/Blur-Trick.
+# Falls du später Glas möchtest:
+#
+# background-opacity = 0.65
+# background-blur-radius = 20
 
 
 # ============================================================
@@ -147,48 +154,32 @@ font-thicken = false
 adjust-cell-height = 0%
 adjust-cell-width = 0%
 
-# Kitty:
-# disable_ligatures always
-#
-# Ghostty:
-# Keine Ligaturen über die Kitty-Option übernehmen.
-# Falls deine Ghostty-Version font-feature unterstützt:
-# font-feature = "-calt"
-# font-feature = "-liga"
-# font-feature = "-dlig"
-
 
 # ============================================================
 # CURSOR
 # ============================================================
 
 cursor-style = block
-
-# Kein Cursor-Blinken
 cursor-style-blink = false
 
-# WICHTIG:
-# KEIN custom-shader
-# KEIN custom-shader-animation
+cursor-color = #F5E0DC
+cursor-text = #1E1E2E
 
 
 # ============================================================
 # TERMINAL CORE
 # ============================================================
 
-term = ghostty
+term = xterm-ghostty
 
 shell-integration = fish
 shell-integration-features = no-cursor
 
 scrollback-limit = 20000
 
-# Wayland / Hyprland
-# Ghostty erkennt Wayland normalerweise automatisch.
-
 
 # ============================================================
-# BACKGROUND / CATPPUCCIN MOCHA
+# CATPPUCCIN MOCHA
 # ============================================================
 
 foreground = #CDD6F4
@@ -198,8 +189,6 @@ selection-foreground = #1E1E2E
 selection-background = #F5E0DC
 
 cursor-color = #F5E0DC
-
-# Falls von deiner Ghostty-Version unterstützt:
 cursor-text = #1E1E2E
 
 
@@ -227,17 +216,8 @@ palette = 15=#A6ADC8
 
 
 # ============================================================
-# EXTRA 256 COLOR OVERRIDES
+# EXTENDED 256-COLOR PALETTE
 # ============================================================
-
-palette = 255=#CDD6F4
-palette = 254=#45475A
-palette = 253=#BAC2DE
-palette = 252=#585B70
-palette = 251=#A6ADC8
-palette = 250=#7F849C
-palette = 249=#F38BA8
-palette = 248=#BA1B1D
 
 palette = 232=#1E1E2E
 palette = 233=#CDD6F4
@@ -253,9 +233,18 @@ palette = 243=#A6ADC8
 palette = 244=#F38BA8
 palette = 245=#6C7086
 
+palette = 248=#BA1B1D
+palette = 249=#F38BA8
+palette = 250=#7F849C
+palette = 251=#A6ADC8
+palette = 252=#585B70
+palette = 253=#BAC2DE
+palette = 254=#45475A
+palette = 255=#CDD6F4
+
 
 # ============================================================
-# CLIPBOARD / MOUSE
+# CLIPBOARD
 # ============================================================
 
 clipboard-read = allow
@@ -263,15 +252,12 @@ clipboard-write = allow
 
 copy-on-select = true
 
+
+# ============================================================
+# MOUSE
+# ============================================================
+
 mouse-hide-while-typing = true
-
-
-# ============================================================
-# SEARCH
-# ============================================================
-
-# Kittys search.py hat in Ghostty kein direktes 1:1 Äquivalent.
-# Daher keine kitty-spezifische search.py-Zeile übernehmen.
 
 
 # ============================================================
@@ -285,7 +271,7 @@ keybind = ctrl+tab=next_tab
 keybind = ctrl+shift+tab=previous_tab
 
 keybind = shift+ctrl+,=move_tab:-1
-keybind = shift+ctrl+.=move_tab:+1
+keybind = shift+ctrl+.=move_tab:1
 
 
 # ============================================================
@@ -297,10 +283,6 @@ keybind = ctrl+shift+q=quit
 
 keybind = ctrl+shift+m=toggle_fullscreen
 
-# Kitty:
-# toggle_layout stack
-#
-# Ghostty-Entsprechung:
 keybind = ctrl+shift+enter=toggle_split_zoom
 
 
@@ -308,20 +290,22 @@ keybind = ctrl+shift+enter=toggle_split_zoom
 # SPLITS
 # ============================================================
 
-# horizontal / down
+# Horizontal / down
 keybind = ctrl+shift+e=new_split:down
 
-# vertical / right
+# Vertical / right
 keybind = ctrl+shift+o=new_split:right
 
 
-# Navigation
+# ============================================================
+# SPLIT NAVIGATION
+# ============================================================
+
 keybind = alt+left=goto_split:left
 keybind = alt+right=goto_split:right
 keybind = alt+up=goto_split:up
 keybind = alt+down=goto_split:down
 
-# optional vim-style navigation
 keybind = alt+h=goto_split:left
 keybind = alt+j=goto_split:down
 keybind = alt+k=goto_split:up
@@ -341,7 +325,7 @@ keybind = alt+shift+equal=equalize_splits
 
 
 # ============================================================
-# CLIPBOARD
+# COPY / PASTE
 # ============================================================
 
 keybind = performable:ctrl+shift+c=copy_to_clipboard
@@ -369,54 +353,24 @@ keybind = ctrl+shift+comma=reload_config
 
 
 # ============================================================
-# SCROLL
+# SEARCH
 # ============================================================
 
-# Ghostty übernimmt normales Scrollverhalten.
-# Kitty-spezifische:
-#
-# wheel_scroll_multiplier 3
-# touch_scroll_multiplier 3
-#
-# werden nicht 1:1 übernommen.
-
-
-# ============================================================
-# PERFORMANCE / LOW LATENCY
-# ============================================================
-
-# Kitty:
-# repaint_delay 0
-# input_delay 0
-# sync_to_monitor yes
-#
-# Diese Optionen existieren in Ghostty nicht 1:1.
-# Ghostty verwaltet Rendering/Input selbst.
-
-
-# ============================================================
-# SHELL
-# ============================================================
-
-shell-integration = fish
-shell-integration-features = no-cursor
+# Keine Kitty-search.py-Integration.
+# Ghostty verwendet seine eigene Suchfunktion.
 
 
 # ============================================================
 # HYPRLAND
 # ============================================================
 
-# Keine Fensterdekoration
+# Wayland wird automatisch verwendet.
+# Keine X11-spezifische Konfiguration notwendig.
+
 window-decoration = auto
 
-# Minimaler Innenabstand
 window-padding-x = 0
 window-padding-y = 0
 
-# Transparenz
-background-opacity = 0.65
-
-# Kein künstlicher Cursor-Effekt
 cursor-style = block
 cursor-style-blink = false
-
