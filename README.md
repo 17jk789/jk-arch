@@ -11,15 +11,20 @@
   <img src="images/jk-arch/jk-arch-0.3-eap.png" width="1000" />
 </p>
 
-# My Arch-Linux (JK-Arch) Config
+# JK-Arch Linux Configuration
 
-This repository contains my personal **Visual Studio Code / IDEA Vim / NeoVim (LazyVim) etc. settings**.
+Based on Arch Linux, Hyprland, Quickshell, and the `end-4` Hyprland configuration, this setup includes my personal settings for:
+- **Visual Studio Code**
+- **IntelliJ IDEA (Vim mode)**
+- **NeoVim (LazyVim)**
+- and other tools.
 
-> ⚠️ **Important:**
-> This repo was not created for public distribution.
-> It is intended only for my own use, so I can use my settings on another computer without logging into my GitHub account.
+> 🤘 **Important:**
+> This repository was not intended for public distribution. It is primarily for my own use, allowing me to quickly restore my environment on another machine without needing to log into my GitHub account. 
+> 
+> However, if you're interested, feel free to explore and use it as you see fit!
 
-- [`JK-Arch Manual (Deutsch) -> Lets GO!!!`](my-arch-jk.md)
+- [`JK-Arch Manual (Deutsch) -> Let's Go!!!`](my-arch-jk.md)
 
 ## Disclaimer
 
