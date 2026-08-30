@@ -2,17 +2,17 @@
 Color=#1E1E2E
 ColorAmount=0.5
 ColorEffect=3
-ContrastAmount=0
+ContrastAmount=0.05
 ContrastEffect=0
 IntensityAmount=0
 IntensityEffect=0
 
 [ColorEffects:Inactive]
 ChangeSelectionColor=true
-Color=#11111B
-ColorAmount=0.025
-ColorEffect=0
-ContrastAmount=0.1
+Color=#1E1E2E
+ColorAmount=0.02
+ColorEffect=3
+ContrastAmount=0.05
 ContrastEffect=0
 Enable=true
 IntensityAmount=0
