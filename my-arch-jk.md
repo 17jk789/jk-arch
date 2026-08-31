@@ -332,10 +332,11 @@ Okay, genug geredet – los geht’s. :)
   - [Emfehlungen bei end-4 -\> fix soon](#emfehlungen-bei-end-4---fix-soon)
 - [✨ UFW ist langsam](#-ufw-ist-langsam)
 - [✨ Langsames Internet über WLAN beheben](#-langsames-internet-über-wlan-beheben)
-- [Firefox ist langsam](#firefox-ist-langsam)
-- [Librewulf Google securtiy](#librewulf-google-securtiy)
-- [Reparieren von Haskell](#reparieren-von-haskell)
-- [WARP Cloudflair "1.1.1.1"](#warp-cloudflair-1111)
+- [✨ Firefox ist langsam](#-firefox-ist-langsam)
+- [✨ Librewulf Google securtiy](#-librewulf-google-securtiy)
+- [✨ Haskell-Pakete reparieren](#-haskell-pakete-reparieren)
+- [✨ Cloudflare WARP („1.1.1.1“) installieren und einrichten](#-cloudflare-warp-1111-installieren-und-einrichten)
+    - [✨ Wichtige WARP-Befehle](#-wichtige-warp-befehle)
 - [TailScale](#tailscale)
 - [Korrigiertes Skript (Optimiert für 16 GB RAM)](#korrigiertes-skript-optimiert-für-16-gb-ram)
 - [Cachy OS optimirung](#cachy-os-optimirung)
@@ -4149,8 +4150,7 @@ yay -S rtw88-dkms-git
 
 </details>
 
-
-# Firefox ist langsam
+# ✨ Firefox ist langsam
 
 > Ist nicht notwenig bei modernen Linux OS.
 Firefox nutzt unter Linux nicht immer automatisch deine Grafikkarte. So schaltest du sie manuell ein:
@@ -4165,54 +4165,100 @@ Dies kann durch das Ändern der internen Einstellungen im Firefox erfolgen.
 - Suche nach der Einstellung `browser.cache.disk.enable`.
 - Klicke doppelt darauf, um den Wert auf `false` zu setzen.
 
-# Librewulf Google securtiy
+# ✨ Librewulf Google securtiy
+
+> Um die Sicherheit deines Browsers zu erhöhen, kannst du die integrierte Google-Sicherheit in Librewolf aktivieren.
 
 ```bash
-# Erstellt den Ordner und schreibt die Zeilen in die Datei
 mkdir -p ~/.librewolf && printf 'defaultPref("browser.safebrowsing.malware.enabled", true);\ndefaultPref("browser.safebrowsing.phishing.enabled", true);\ndefaultPref("browser.safebrowsing.blockedURIs.enabled", true);\n' >> ~/.librewolf/librewolf.overrides.cfg
 ```
 
-# Reparieren von Haskell
+# ✨ Haskell-Pakete reparieren
+
+> Falls Haskell-Pakete oder darauf basierende Anwendungen nach einem Systemupdate nicht mehr korrekt funktionieren, sollte zunächst das System vollständig aktualisiert und die Paketdatenbank auf einen aktuellen Stand gebracht werden.
+>
+> Die folgenden Schritte aktualisieren die Mirror-Liste, führen ein vollständiges Systemupdate durch, entfernen nicht mehr benötigte Abhängigkeiten und installieren wichtige Werkzeuge anschließend erneut.
+
+<details>
+<summary>✨ Haskell-Umgebung reparieren</summary>
+
+> **1. Mirror-Liste aktualisieren**
+>
+> Mit `cachyos-rate-mirrors` werden die verfügbaren CachyOS-Mirrors überprüft und eine schnelle Mirror-Liste erstellt.
 
 ```bash
-# Alt: ist nicht die empfohlene Methode, um Haskell-Pakete zu reparieren, und kann das Problem sogar verschlimmern.
-# sudo pacman -S $(pacman -Qq | grep '^haskell-') shellcheck pandoc
-# sudo systemctl restart NetworkManager
-# sudo cachyos-rate-mirrors
-
-# Neu:
-# 1. Mirror-Liste aktualisieren für schnelle Downloads
 sudo cachyos-rate-mirrors
-
-# 2. System vollständig aktualisieren (baut Haskell-Pakete bei Bedarf neu)
-sudo pacman -Syu
-
-# 3. Nicht mehr benötigte Abhängigkeiten entfernen (bereinigt alte Bibliotheken)
-sudo pacman -Rns $(pacman -Qdtq)
-
-# 4. Spezifische Tools sicher neu installieren
-sudo pacman -S --asexplicit shellcheck pandoc
-
 ```
 
-> **Wichtige Änderungen gegenüber dem Original:**
-> - **Reihenfolge:** `cachyos-rate-mirrors` kommt jetzt an den Anfang, damit das Update schnell läuft.
-> - **Sicherheit:** Der riskante One-Liner `$(pacman -Qq | grep ...)` wurde entfernt. Stattdessen sorgt `pacman -Syu` dafür, dass alle Pakete konsistent neu gebaut werden, was bei Haskell zwingend notwendig ist.
-> - **Bereinigung:** Der Schritt `pacman -Rns $(pacman -Qdtq)` entfernt verwaiste Pakete, die oft die Ursache für Haskell-Fehler sind.
-> - **Entfernt:** `systemctl restart NetworkManager` wurde gestrichen, da er für die Paket-Reparatur irrelevant ist.   
+> **2. System vollständig aktualisieren**
+>
+> Anschließend wird das gesamte System inklusive aller installierten Haskell-Pakete aktualisiert.
 
-# WARP Cloudflair "1.1.1.1"
+```bash
+sudo pacman -Syu
+```
+
+> **3. Nicht mehr benötigte Abhängigkeiten entfernen**
+>
+> Verwaiste Pakete können entfernt werden, wenn sie nicht mehr von anderen installierten Paketen benötigt werden.
+
+```bash
+sudo pacman -Rns $(pacman -Qdtq)
+```
+
+> **4. Benötigte Werkzeuge erneut installieren**
+>
+> Falls `ShellCheck` oder `Pandoc` weiterhin Probleme verursachen, können die Pakete erneut installiert und gleichzeitig als ausdrücklich installierte Pakete markiert werden.
+
+```bash
+sudo pacman -S --asexplicit shellcheck pandoc
+```
+
+</details>
+
+> **Hinweis:** Die frühere Methode, sämtliche installierten Haskell-Pakete mit einem Befehl wie `pacman -S $(pacman -Qq | grep '^haskell-')` erneut zu installieren, ist nicht empfehlenswert. Dadurch werden unter Umständen unnötige Pakete erneut installiert und bestehende Abhängigkeitsprobleme nicht zuverlässig behoben.
+>
+> Ein vollständiges Systemupdate mit `pacman -Syu` ist unter Arch Linux grundsätzlich der bessere erste Schritt, um eine konsistente Paketbasis wiederherzustellen.
+
+# ✨ Cloudflare WARP („1.1.1.1“) installieren und einrichten
+
+> **Cloudflare WARP** ist ein VPN-ähnlicher Dienst von Cloudflare, der den Internetverkehr über das Cloudflare-Netzwerk leitet. WARP kann unter anderem die Verbindung absichern und DNS-Anfragen über Cloudflare abwickeln.
+>
+> Unter Arch Linux kann WARP über das AUR installiert und anschließend als Systemdienst aktiviert werden.
+
+<details>
+<summary>✨ Cloudflare WARP installieren</summary>
+
+> Das Paket `cloudflare-warp-bin` enthält die aktuelle Binärversion von Cloudflare WARP.
 
 ```bash
 sudo pacman -S cloudflare-warp-bin
 # yay -S cloudflare-warp-bin
 ```
 
-Alternatively, for a version without the GUI taskbar (useful for servers), use cloudflare-warp-nox-bin.
+> Für Systeme ohne grafische Benutzeroberfläche beziehungsweise Server steht alternativ `cloudflare-warp-nox-bin` zur Verfügung. Diese Variante enthält keine grafische Taskleisten-Anwendung.
+
+```bash
+yay -S cloudflare-warp-nox-bin
+```
+
+</details>
+
+<details>
+<summary>✨ WARP-Dienst aktivieren</summary>
+
+> Nach der Installation wird der WARP-Dienst aktiviert und direkt gestartet.
 
 ```bash
 sudo systemctl enable --now warp-svc
 ```
+
+</details>
+
+<details>
+<summary>✨ WARP registrieren</summary>
+
+> Bevor WARP verwendet werden kann, muss das Gerät zunächst registriert werden.
 
 ```bash
 # bashwarp-cli register
@@ -4220,14 +4266,56 @@ sudo systemctl enable --now warp-svc
 warp-cli registration new
 ```
 
-Connect:
+</details>
+
+<details>
+<summary>✨ WARP aktivieren</summary>
+
+> Nach der Registrierung kann die WARP-Verbindung hergestellt werden.
 
 ```bash
 # bashwarp-cli connect
 warp-cli connect
 ```
 
-Bei Problemen:
+</details>
+
+<details>
+<summary>✨ WARP-Status und Einstellungen überprüfen</summary>
+
+> Mit den folgenden Befehlen können der aktuelle Verbindungsstatus und die WARP-Einstellungen überprüft werden.
+
+```bash
+warp-cli status
+```
+
+```bash
+warp-cli settings
+```
+
+> Falls WARP zwar aktiviert wurde, aber noch keine Verbindung besteht, kann zusätzlich der Verbindungsaufbau überprüft werden:
+
+```bash
+warp-cli connectivity-check
+```
+
+</details>
+
+<details>
+<summary>✨ WARP-DNS und Family-Filter konfigurieren</summary>
+
+> WARP kann auch zur Verwendung der Cloudflare-DNS-Filter konfiguriert werden. Mit `families malware` werden DNS-Anfragen für bekannte Malware-Domains blockiert.
+
+```bash
+warp-cli dns families malware
+```
+
+</details>
+
+<details>
+<summary>✨ WARP bei Verbindungsproblemen neu registrieren</summary>
+
+> Falls WARP nicht korrekt funktioniert, kann die Registrierung zurückgesetzt und anschließend eine neue Verbindung hergestellt werden.
 
 ```bash
 warp-cli registration new
@@ -4235,22 +4323,18 @@ warp-cli connect
 warp-cli status
 ```
 
-Wen es immer noch nicht leuft, warte kurtz: WARP baut Zeit um den Tunnel aufzubauen.
+> **Hinweis:** Nach dem Aktivieren kann es einen kurzen Moment dauern, bis WARP den verschlüsselten Tunnel aufgebaut hat. Falls unmittelbar nach `warp-cli connect` noch keine aktive Verbindung angezeigt wird, sollte zunächst kurz gewartet und anschließend der Status erneut überprüft werden.
+
+</details>
+
+### ✨ Wichtige WARP-Befehle
 
 ```bash
-warp-cli status
-warp-cli dns families malware
-warp-cli settings
-# warp-cli connectivity-check
-```
-
-Weitere Commands:
-
-```bash
-warp-cli disconnect     # disable WARP
-warp-cli connect        # enable WARP
-warp-cli status         # check status
-warp-cli settings       # view settings
+warp-cli connect        # WARP aktivieren
+warp-cli disconnect     # WARP deaktivieren
+warp-cli status         # Verbindungsstatus anzeigen
+warp-cli settings       # Einstellungen anzeigen
+warp-cli connectivity-check  # Verbindung überprüfen
 ```
 
 # TailScale
