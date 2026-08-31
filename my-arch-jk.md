@@ -355,7 +355,7 @@ Okay, genug geredet – los geht’s. :)
   - [Windows](#windows)
     - [✨ Moonlight installieren](#-moonlight-installieren)
     - [✨ Mit dem Linux-PC verbinden](#-mit-dem-linux-pc-verbinden)
-- [OpenClaw](#openclaw)
+- [✨ OpenClaw installieren und einrichten](#-openclaw-installieren-und-einrichten)
 - [Was ich noch machen würde](#was-ich-noch-machen-würde)
   - [1. System aktualisieren \& Fehler prüfen](#1-system-aktualisieren--fehler-prüfen)
   - [2. Netzwerk-Analyse (Der wichtigste Sicherheitscheck)](#2-netzwerk-analyse-der-wichtigste-sicherheitscheck)
@@ -4813,13 +4813,48 @@ Moonlight öffnen → Linux-PC auswählen → Pairing-Code eingeben
 
 > Nach erfolgreichem Pairing kann der Linux-Desktop über Moonlight gesteuert werden.
 
-# OpenClaw
+# ✨ OpenClaw installieren und einrichten
+
+> **OpenClaw** ist eine Kommandozeilenanwendung, die über npm installiert und anschließend über einen Einrichtungsassistenten konfiguriert werden kann.
+>
+> Nach der Installation kann OpenClaw als Hintergrunddienst eingerichtet und anschließend beispielsweise mit **GitHub Copilot** als Authentifizierungsquelle verbunden werden.
+
+<details>
+<summary>✨ OpenClaw installieren</summary>
+
+> OpenClaw wird über den Node.js-Paketmanager `npm` global installiert:
 
 ```bash
-# npm i -g openclaw@latest
-# openclaw onboard --install-daemon
-# openclaw models auth login-github-copilot
+npm i -g openclaw@latest
 ```
+
+> Mit `@latest` wird die aktuellste verfügbare Version installiert.
+
+</details>
+
+<details>
+<summary>✨ OpenClaw einrichten und Daemon installieren</summary>
+
+> Der Einrichtungsassistent führt durch die grundlegende Konfiguration und kann gleichzeitig den OpenClaw-Daemon installieren.
+
+```bash
+openclaw onboard --install-daemon
+```
+
+</details>
+
+<details>
+<summary>✨ GitHub Copilot als Authentifizierung einrichten</summary>
+
+> Falls **GitHub Copilot** für die Authentifizierung beziehungsweise als Modellanbieter verwendet werden soll, kann die Anmeldung direkt über OpenClaw gestartet werden:
+
+```bash
+openclaw models auth login-github-copilot
+```
+
+> Anschließend den angezeigten Anweisungen folgen, um die GitHub-Anmeldung abzuschließen.
+
+</details>
 
 # Was ich noch machen würde
 
