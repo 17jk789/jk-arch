@@ -330,8 +330,8 @@ Okay, genug geredet – los geht’s. :)
   - [Nach der Neovim-Konfiguration](#nach-der-neovim-konfiguration)
     - [Code über den LSP-Server im Editor formatieren](#code-über-den-lsp-server-im-editor-formatieren)
   - [Emfehlungen bei end-4 -\> fix soon](#emfehlungen-bei-end-4---fix-soon)
-- [UFW ist langsam](#ufw-ist-langsam)
-- [Langsames Internet](#langsames-internet)
+- [✨ UFW ist langsam](#-ufw-ist-langsam)
+- [✨ Langsames Internet über WLAN beheben](#-langsames-internet-über-wlan-beheben)
 - [Firefox ist langsam](#firefox-ist-langsam)
 - [Librewulf Google securtiy](#librewulf-google-securtiy)
 - [Reparieren von Haskell](#reparieren-von-haskell)
@@ -4000,7 +4000,11 @@ Zeile 480:
 property list<string> excludedSites: []
 ```
 
-# UFW ist langsam
+# ✨ UFW ist langsam
+
+> Falls **UFW (Uncomplicated Firewall)** unter Umständen sehr langsam reagiert, kann eine Anpassung der DNS-Konfiguration helfen.
+>
+> Dazu wird die Datei `/etc/resolv.conf` geöffnet und die verwendeten DNS-Server angepasst. In diesem Beispiel werden **Cloudflare DNS** (`1.1.1.1`) und **Google DNS** (`8.8.8.8`) verwendet.
 
 ```bash
 sudo nvim /etc/resolv.conf
@@ -4015,74 +4019,136 @@ options single-request
 options edns0 trust-ad
 ```
 
-# Langsames Internet
+# ✨ Langsames Internet über WLAN beheben
+
+> Falls die WLAN-Verbindung unter Linux ungewöhnlich langsam ist oder Verbindungsprobleme auftreten, kann dies bei bestimmten **Realtek-WLAN-Adaptern** an der Energieverwaltung des WLAN-Treibers liegen.
+>
+> Durch das Deaktivieren verschiedener Energiesparfunktionen des `8821ce`-Treibers kann die Stabilität und Geschwindigkeit der WLAN-Verbindung verbessert werden.
+
+<details>
+<summary>✨ Energiesparfunktionen des 8821ce-Treibers deaktivieren</summary>
+
+> Zunächst wird eine Konfigurationsdatei für den `8821ce`-Treiber erstellt beziehungsweise bearbeitet:
 
 ```bash
 sudo nvim /etc/modprobe.d/8821ce.conf
 ```
 
-und
+Folgende Optionen eintragen:
 
 ```ini
 options 8821ce rtw_power_mgnt=0 rtw_enusbss=0 rtw_ips_mode=0
 ```
 
+> Die Optionen deaktivieren verschiedene Energiesparfunktionen des Treibers. Dadurch kann insbesondere bei problematischen Realtek-WLAN-Adaptern eine stabilere Verbindung erreicht werden.
+
+</details>
+
+<details>
+<summary>✨ Initramfs neu erstellen</summary>
+
+> Nach Änderungen an den Kernel-Moduloptionen muss das System-Abbild neu erstellt werden, damit die Änderungen beim nächsten Systemstart berücksichtigt werden.
+
+**Arch Linux mit GRUB:**
+
 ```bash
-# sudo update-initramfs -u
-# sudo mkinitcpio -P # normalem Arch + GRUB
-sudo limine-mkinitcpio # Arch + Limine
+sudo mkinitcpio -P
+```
+
+**Arch Linux mit Limine:**
+
+```bash
+sudo limine-mkinitcpio
+```
+
+> Bei anderen Distributionen beziehungsweise Bootloader-Konfigurationen kann ein anderes Werkzeug zum Erstellen des Initramfs verwendet werden.
+
+Anschließend das System neu starten:
+
+```bash
 reboot
 ```
 
-und
+</details>
+
+<details>
+<summary>✨ WLAN-Powersaving überprüfen</summary>
+
+> Mit `iw` kann überprüft werden, ob die Energieverwaltung des WLAN-Adapters aktiviert ist:
 
 ```bash
 iw dev wlan0 get power_save
 ```
 
-wen an
+> Falls `Power save: on` angezeigt wird, kann die WLAN-Energieverwaltung testweise deaktiviert werden:
 
 ```bash
 sudo iw dev wlan0 set power_save off
 ```
 
-oder für immer:
+</details>
+
+<details>
+<summary>✨ WLAN-Powersaving dauerhaft deaktivieren</summary>
+
+> Damit NetworkManager die WLAN-Energieverwaltung nicht bei jeder Verbindung erneut aktiviert, kann eine eigene Konfigurationsdatei erstellt werden:
 
 ```bash
 sudo nvim /etc/NetworkManager/conf.d/wifi-powersave.conf
 ```
+
+Folgenden Inhalt eintragen:
 
 ```ini
 [connection]
 wifi.powersave = 2
 ```
 
-Bedeutung:
-2 = Power Save deaktiviert
+> Der Wert `2` deaktiviert die WLAN-Energiesparfunktion in NetworkManager.
 
-Danach:
+Danach NetworkManager neu starten:
 
 ```bash
 sudo systemctl restart NetworkManager
 ```
 
-Prüfen:
+Einstellung überprüfen:
 
 ```bash
 iw dev wlan0 get power_save
 ```
 
-```ini
+Erwartete Ausgabe:
+
+```text
 Power save: off
 ```
 
-und evt. bei Problemen:
+</details>
+
+<details>
+<summary>✨ Alternativen Realtek-WLAN-Treiber ausprobieren</summary>
+
+> Falls die WLAN-Probleme weiterhin bestehen, kann bei bestimmten Realtek-Adaptern ein alternativer, DKMS-basierter Treiber ausprobiert werden.
+>
+> Für die Erstellung von Kernel-Modulen werden zunächst die passenden Kernel-Header benötigt.
+
+Für den CachyOS-Kernel:
 
 ```bash
-# sudo pacman -S linux-cachyos-headers
-# Installiert den stabileren Realtek WLAN-Treiber aus dem AUR und deaktiviert die fehlerhafte Kernel-Version
+sudo pacman -S linux-cachyos-headers
+```
+
+> Anschließend kann der alternative `rtw88`-Treiber aus dem AUR installiert werden:
+
+```bash
 yay -S rtw88-dkms-git
 ```
+
+> Der DKMS-Treiber wird für den aktuell verwendeten Kernel gebaut und kann eine Alternative zum im Kernel enthaltenen Realtek-Treiber darstellen, wenn dieser mit der verwendeten WLAN-Hardware Probleme verursacht.
+
+</details>
+
 
 # Firefox ist langsam
 
