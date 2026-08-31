@@ -3919,36 +3919,12 @@ https://raw.githubusercontent.com/google/styleguide/gh-pages/intellij-java-googl
 # ASM Verzeichnis erstellen
 mkdir -p ~/.config/asm-lsp/
 
-# Die Konfiguration schreiben (mit printf)
-# printf 'version = "0.10.0"
-
-# [default_config]
-# assembler = "gas"
-# instruction_set = "x86-64"
-
-# [default_config.opts]
-# compiler = "as"
-# diagnostics = true
-# default_diagnostics = true' > ~/.config/asm-lsp/.asm-lsp.toml
-
 # rust
 rm ~/.cargo/bin/rust-analyzer
 
 # markdown 
 cd /home/jk/.local/share/nvim/lazy/markdown-preview.nvim
 git checkout -- app/yarn.lock   
-
-# lazygit Verzeichnis erstellen
-mkdir -p ~/.config/lazygit/
-
-# Die Konfiguration direkt mit printf schreiben (sicherer in fish)
-# printf "git:
-#   paging:
-#     colorArg: always
-#     pager: delta --dark --paging=never --line-numbers
-# os:
-#   editCommand: 'nvim'" > ~/.config/lazygit/config.yml
-
 ```
 
 ### Code über den LSP-Server im Editor formatieren
@@ -4100,10 +4076,10 @@ sudo pacman -S --asexplicit shellcheck pandoc
 ```
 
 > **Wichtige Änderungen gegenüber dem Original:**
-> -   **Reihenfolge:** `cachyos-rate-mirrors` kommt jetzt an den Anfang, damit das Update schnell läuft.
-> -   **Sicherheit:** Der riskante One-Liner `$(pacman -Qq | grep ...)` wurde entfernt. Stattdessen sorgt `pacman -Syu` dafür, dass alle Pakete konsistent neu gebaut werden, was bei Haskell zwingend notwendig ist.
-> -   **Bereinigung:** Der Schritt `pacman -Rns $(pacman -Qdtq)` entfernt verwaiste Pakete, die oft die Ursache für Haskell-Fehler sind.
-> -   **Entfernt:** `systemctl restart NetworkManager` wurde gestrichen, da er für die Paket-Reparatur irrelevant ist.   
+> - **Reihenfolge:** `cachyos-rate-mirrors` kommt jetzt an den Anfang, damit das Update schnell läuft.
+> - **Sicherheit:** Der riskante One-Liner `$(pacman -Qq | grep ...)` wurde entfernt. Stattdessen sorgt `pacman -Syu` dafür, dass alle Pakete konsistent neu gebaut werden, was bei Haskell zwingend notwendig ist.
+> - **Bereinigung:** Der Schritt `pacman -Rns $(pacman -Qdtq)` entfernt verwaiste Pakete, die oft die Ursache für Haskell-Fehler sind.
+> - **Entfernt:** `systemctl restart NetworkManager` wurde gestrichen, da er für die Paket-Reparatur irrelevant ist.   
 
 # WARP Cloudflair "1.1.1.1"
 
