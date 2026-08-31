@@ -325,8 +325,8 @@ Okay, genug geredet – los geht’s. :)
     - [Einen modularen Fish-Konfigurationsordner erstellen](#einen-modularen-fish-konfigurationsordner-erstellen)
     - [✨ Den praktischen Befehls-Ausführer just installieren](#-den-praktischen-befehls-ausführer-just-installieren)
     - [✨ Das Begrüßungsprogramm von CachyOS entfernen](#-das-begrüßungsprogramm-von-cachyos-entfernen)
-    - [Instalation von En Croissant, eine moderne grafische Benutzeroberfläche (GUI) für Schachdatenbanken und Partienanalysen.](#instalation-von-en-croissant-eine-moderne-grafische-benutzeroberfläche-gui-für-schachdatenbanken-und-partienanalysen)
-    - [Den Boot-Bildschirm (Plymouth) anpassen und das System-Abbild neu bauen](#den-boot-bildschirm-plymouth-anpassen-und-das-system-abbild-neu-bauen)
+    - [✨ Die moderne Schachdatenbank- und Analyse-Software En Croissant installieren](#-die-moderne-schachdatenbank--und-analyse-software-en-croissant-installieren)
+    - [✨ Den Boot-Bildschirm (Plymouth) anpassen und das System-Abbild neu bauen](#-den-boot-bildschirm-plymouth-anpassen-und-das-system-abbild-neu-bauen)
   - [Nach der neovim config](#nach-der-neovim-config)
     - [Code über den LSP-Server im Editor formatieren](#code-über-den-lsp-server-im-editor-formatieren)
     - [Emfehlungen bei end-4](#emfehlungen-bei-end-4)
@@ -3808,31 +3808,100 @@ rm ~/.config/autostart/cachyos-hello.desktop
 
 </details>
 
-### Instalation von En Croissant, eine moderne grafische Benutzeroberfläche (GUI) für Schachdatenbanken und Partienanalysen.
+### ✨ Die moderne Schachdatenbank- und Analyse-Software En Croissant installieren
+
+> **En Croissant** ist eine moderne grafische Benutzeroberfläche (GUI) für die Verwaltung von Schachdatenbanken und die Analyse von Schachpartien.
+>
+> Die Anwendung bietet Funktionen zur Verwaltung von Partien, zum Durchsuchen von Schachdatenbanken und zur Analyse mit Schach-Engines wie **Stockfish**. Sie eignet sich besonders für Spieler, die ihre eigenen Partien analysieren und umfangreiche Schachdatenbanken verwalten möchten.
+
+<details>
+<summary>Installieren</summary>
+
+> **En Croissant** wird unter Arch Linux über das **Arch User Repository (AUR)** installiert. Für die grafische Oberfläche werden zusätzlich `webkit2gtk-4.1` und die benötigten GStreamer-Plugins installiert.
 
 ```bash
-# yay -S en-croissant-bin
-# sudo pacman -S webkit2gtk-4.1
-# yay -S stockfish
-# sudo pacman -S gst-plugins-good
+yay -S en-croissant-bin
+sudo pacman -S webkit2gtk-4.1 gst-plugins-good
 ```
 
-### Den Boot-Bildschirm (Plymouth) anpassen und das System-Abbild neu bauen
+> Für die Schachanalyse wird zusätzlich die Schach-Engine **Stockfish** benötigt. Diese kann entweder über das System installiert oder direkt innerhalb von **En Croissant** eingerichtet werden.
 
 ```bash
-# yay -S plymouth-theme-arch-logo
-# sudo plymouth-set-default-theme -R arch-logo
-# plymouth-set-default-theme
-# yay -Rns plymouth-theme-arch-logo
-# sudo plymouth-set-default-theme -R bgrt
-# sudo mkinitcpio -P
-# /home/jk/.config/quickshell/ii/assets/icons/
-# /usr/share/plymouth/themes/cachyos/
-# sudo mv ~/Pictures/auto.png /usr/share/plymouth/themes/cachyos/
-# sudo mv watermark.png watermark3.png
-# sudo mv auto.png watermark.png
-# arch-logo
+yay -S stockfish
 ```
+
+</details>
+
+### ✨ Den Boot-Bildschirm (Plymouth) anpassen und das System-Abbild neu bauen
+
+> **Plymouth** ist für die grafische Darstellung während des Systemstarts zuständig. Unter CachyOS kann das vorhandene Plymouth-Theme angepasst oder durch ein anderes Theme ersetzt werden.
+>
+> Mit `plymouth-set-default-theme` lässt sich das gewünschte Theme auswählen. Der Parameter `-R` sorgt zusätzlich dafür, dass das Initramfs nach der Änderung automatisch neu erstellt wird.
+
+<details>
+<summary>✨ Das Arch-Logo-Plymouth-Theme installieren</summary>
+
+> Das Theme `arch-logo` kann aus dem AUR installiert und anschließend als Standard-Theme festgelegt werden.
+
+```bash
+yay -S plymouth-theme-arch-logo
+sudo plymouth-set-default-theme -R arch-logo
+```
+
+Aktuell verwendetes Plymouth-Theme anzeigen:
+
+```bash
+plymouth-set-default-theme
+```
+
+</details>
+
+<details>
+<summary>✨ Das CachyOS-Plymouth-Theme wiederherstellen</summary>
+
+> Falls anschließend wieder das standardmäßige **CachyOS-Plymouth-Theme** verwendet werden soll, kann das zuvor installierte Arch-Theme entfernt und anschließend das Theme `bgrt` aktiviert werden.
+
+```bash
+yay -Rns plymouth-theme-arch-logo
+sudo plymouth-set-default-theme -R bgrt
+```
+
+</details>
+
+<details>
+<summary>✨ Ein eigenes Bild für das Plymouth-Theme verwenden</summary>
+
+> Das vorhandene Plymouth-Theme von CachyOS befindet sich unter `/usr/share/plymouth/themes/cachyos/`.
+>
+> Ein eigenes Bild kann beispielsweise aus dem persönlichen Bilderordner in das Theme-Verzeichnis kopiert werden.
+
+```bash
+sudo mv ~/Pictures/auto.png /usr/share/plymouth/themes/cachyos/
+```
+
+> Im Theme-Verzeichnis können anschließend vorhandene Bilddateien umbenannt oder durch das eigene Bild ersetzt werden.
+
+```bash
+cd /usr/share/plymouth/themes/cachyos/
+
+sudo mv watermark.png watermark3.png
+sudo mv auto.png watermark.png
+```
+
+</details>
+
+<details>
+<summary>✨ Das System-Abbild neu erstellen</summary>
+
+> Nach Änderungen am Plymouth-Theme muss das Initramfs neu erstellt werden, damit die Änderungen bereits während des Systemstarts verfügbar sind.
+
+```bash
+sudo mkinitcpio -P
+```
+
+> Anschließend kann das System neu gestartet werden, um die Änderungen am Boot-Bildschirm zu überprüfen.
+
+</details>
 
 ## Nach der neovim config
 
