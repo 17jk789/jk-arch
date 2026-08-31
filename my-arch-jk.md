@@ -306,12 +306,12 @@ Okay, genug geredet – los geht’s. :)
         - [Metasploit starten](#metasploit-starten)
     - [✨ Den grafischen Audio-Mixer pwvucontrol installieren](#-den-grafischen-audio-mixer-pwvucontrol-installieren)
     - [✨ Den grafischen Audio-Verkabelungs-Manager qpwgraph installieren](#-den-grafischen-audio-verkabelungs-manager-qpwgraph-installieren)
-    - [Die lokale KI-Laufzeitumgebung Ollama installieren](#die-lokale-ki-laufzeitumgebung-ollama-installieren)
-    - [Die S.M.A.R.T.-Festplattenüberwachung installieren](#die-smart-festplattenüberwachung-installieren)
-    - [Den Remote-Desktop-Client KRDC installieren](#den-remote-desktop-client-krdc-installieren)
-    - [Den ultraschnellen Download-Manager aria2 installieren](#den-ultraschnellen-download-manager-aria2-installieren)
-    - [Das strukturelle Diff-Werkzeug Difftastic installieren](#das-strukturelle-diff-werkzeug-difftastic-installieren)
-    - [Das offizielle GitHub-Kommandozeilenwerkzeug (GitHub CLI) installieren](#das-offizielle-github-kommandozeilenwerkzeug-github-cli-installieren)
+    - [✨ Die lokale KI-Laufzeitumgebung Ollama installieren](#-die-lokale-ki-laufzeitumgebung-ollama-installieren)
+    - [✨ Die S.M.A.R.T.-Festplattenüberwachung installieren](#-die-smart-festplattenüberwachung-installieren)
+    - [✨ Den Remote-Desktop-Client KRDC installieren](#-den-remote-desktop-client-krdc-installieren)
+    - [✨ Den ultraschnellen Download-Manager aria2 installieren](#-den-ultraschnellen-download-manager-aria2-installieren)
+    - [✨ Das strukturelle Diff-Werkzeug Difftastic installieren](#-das-strukturelle-diff-werkzeug-difftastic-installieren)
+    - [✨ Das offizielle GitHub-Kommandozeilenwerkzeug (GitHub CLI) installieren](#-das-offizielle-github-kommandozeilenwerkzeug-github-cli-installieren)
     - [Das Software-Reverse-Engineering-Framework Ghidra über yay installieren](#das-software-reverse-engineering-framework-ghidra-über-yay-installieren)
     - [Das universitäre WLAN (eduroam) fehlerfrei einrichten](#das-universitäre-wlan-eduroam-fehlerfrei-einrichten)
     - [Die offizielle Open-Source-Alternative für Universitäts-VPNs installieren](#die-offizielle-open-source-alternative-für-universitäts-vpns-installieren)
@@ -3558,51 +3558,107 @@ exploit
 
 ### ✨ Den grafischen Audio-Mixer pwvucontrol installieren
 
+> `pwvucontrol` ist ein grafisches Frontend für PipeWire, das die Audioverwaltung erleichtert. Es bietet eine benutzerfreundliche Oberfläche zur Steuerung von Audioeingängen, -ausgängen und -geräten.
+
+<details>
+<summary>Installieren</summary>
+
 ```bash
 sudo pacman -S pwvucontrol
 ```
 
+</details>
+
 ### ✨ Den grafischen Audio-Verkabelungs-Manager qpwgraph installieren
+
+> `qpwgraph` ist ein grafisches Tool, das die Verwaltung von Audioverbindungen in PipeWire erleichtert. Es ermöglicht das einfache Verbinden von Audioquellen und -senken über eine visuelle Oberfläche.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
 sudo pacman -S qpwgraph
 ```
 
-### Die lokale KI-Laufzeitumgebung Ollama installieren
+</details>
+
+### ✨ Die lokale KI-Laufzeitumgebung Ollama installieren
+
+> `Ollama` ist eine lokale KI-Laufzeitumgebung, die es ermöglicht, KI-Modelle direkt auf deinem System auszuführen. Sie bietet eine benutzerfreundliche Oberfläche und unterstützt verschiedene KI-Frameworks.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
 sudo pacman -S ollama
 ```
 
-### Die S.M.A.R.T.-Festplattenüberwachung installieren
+</details>
+
+### ✨ Die S.M.A.R.T.-Festplattenüberwachung installieren
+
+> S.M.A.R.T. (Self-Monitoring, Analysis, and Reporting Technology) ist eine Technologie, die es ermöglicht, den Zustand von Festplatten und SSDs zu überwachen. Mit `smartmontools` kannst du den Gesundheitszustand deiner Speichergeräte überprüfen und frühzeitig auf mögliche Ausfälle reagieren.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
 sudo pacman -S smartmontools
 ```
 
-### Den Remote-Desktop-Client KRDC installieren
+</details>
+
+### ✨ Den Remote-Desktop-Client KRDC installieren
+
+> `KRDC` ist ein Remote-Desktop-Client, der es dir ermöglicht, dich über das Netzwerk mit anderen Computern zu verbinden und diese fernzusteuern.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
 sudo pacman -S krdc
 ```
 
-### Den ultraschnellen Download-Manager aria2 installieren
+</details>
+
+### ✨ Den ultraschnellen Download-Manager aria2 installieren
+
+> `aria2` ist ein vielseitiger Download-Manager, der mehrere Protokolle unterstützt, darunter HTTP, HTTPS, FTP, BitTorrent und Metalink. Er ermöglicht parallele Downloads und kann die Download-Geschwindigkeit erheblich verbessern.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
 sudo pacman -S aria2
 ```
 
-### Das strukturelle Diff-Werkzeug Difftastic installieren
+</details>
+
+### ✨ Das strukturelle Diff-Werkzeug Difftastic installieren
+
+> `Difftastic` ist ein strukturelles Diff-Werkzeug, das Unterschiede zwischen Dateien auf einer höheren Ebene analysiert. Es erkennt Änderungen in der Struktur von Code und Text, anstatt nur Zeilenunterschiede zu vergleichen, was es besonders nützlich für die Code-Analyse macht.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
 sudo pacman -S difftastic
 ```
 
-### Das offizielle GitHub-Kommandozeilenwerkzeug (GitHub CLI) installieren
+</details>
+
+### ✨ Das offizielle GitHub-Kommandozeilenwerkzeug (GitHub CLI) installieren
+
+> `GitHub CLI` ist das offizielle Kommandozeilenwerkzeug für GitHub, das es ermöglicht, GitHub-Operationen direkt von der Kommandozeile aus durchzuführen.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
-# sudo pacman -S github-cli
+sudo pacman -S github-cli
 ```
+
+</details>
 
 ### Das Software-Reverse-Engineering-Framework Ghidra über yay installieren
 
