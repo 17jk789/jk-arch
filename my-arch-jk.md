@@ -327,9 +327,9 @@ Okay, genug geredet – los geht’s. :)
     - [✨ Das Begrüßungsprogramm von CachyOS entfernen](#-das-begrüßungsprogramm-von-cachyos-entfernen)
     - [✨ Die moderne Schachdatenbank- und Analyse-Software En Croissant installieren](#-die-moderne-schachdatenbank--und-analyse-software-en-croissant-installieren)
     - [✨ Den Boot-Bildschirm (Plymouth) anpassen und das System-Abbild neu bauen](#-den-boot-bildschirm-plymouth-anpassen-und-das-system-abbild-neu-bauen)
-  - [Nach der neovim config](#nach-der-neovim-config)
+  - [Nach der Neovim-Konfiguration](#nach-der-neovim-konfiguration)
     - [Code über den LSP-Server im Editor formatieren](#code-über-den-lsp-server-im-editor-formatieren)
-    - [Emfehlungen bei end-4](#emfehlungen-bei-end-4)
+  - [Emfehlungen bei end-4 -\> fix soon](#emfehlungen-bei-end-4---fix-soon)
 - [UFW ist langsam](#ufw-ist-langsam)
 - [Langsames Internet](#langsames-internet)
 - [Firefox ist langsam](#firefox-ist-langsam)
@@ -3903,37 +3903,91 @@ sudo mkinitcpio -P
 
 </details>
 
-## Nach der neovim config
+## Nach der Neovim-Konfiguration
+
+> Nach der Einrichtung von **Neovim** können je nach verwendeten Sprachservern und Plugins noch einige Anpassungen oder Bereinigungen notwendig sein.
+
+<details>
+<summary>C/C++: Alte Clang-Format-Dateien entfernen</summary>
+
+> Falls Neovim beziehungsweise ein Plugin automatisch `.clang-format`-Dateien im Cache angelegt hat, können diese entfernt werden.
 
 ```bash
-# Cpp
 find ~ -name ".clang-format" -path "*/.cache/nvim/*" -delete
+```
 
-# Java
+</details>
+
+<details>
+<summary>Java: Google Java Format für Neovim bereitstellen</summary>
+
+> Für die Java-Formatierung kann die offizielle **Google Java Style**-Konfiguration verwendet werden.
+>
+> Zunächst wird das Verzeichnis für zusätzliche Sprachserver- und Konfigurationsdateien erstellt:
+
+```bash
 mkdir -p ~/.config/nvim/lang-servers
+```
 
+> Anschließend wird die Google-Java-Formatierung direkt aus dem offiziellen Google-Styleguide heruntergeladen:
+
+```bash
 curl -L \
 https://raw.githubusercontent.com/google/styleguide/gh-pages/intellij-java-google-style.xml \
 -o ~/.config/nvim/lang-servers/intellij-java-google-style.xml
-
-# ASM Verzeichnis erstellen
-mkdir -p ~/.config/asm-lsp/
-
-# rust
-rm ~/.cargo/bin/rust-analyzer
-
-# markdown 
-cd /home/jk/.local/share/nvim/lazy/markdown-preview.nvim
-git checkout -- app/yarn.lock   
 ```
 
+</details>
+
+<details>
+<summary>ASM: Verzeichnis für den Assembly-Language-Server erstellen</summary>
+
+> Für die Konfiguration des **Assembly Language Servers (ASM LSP)** wird ein eigenes Konfigurationsverzeichnis angelegt.
+
+```bash
+mkdir -p ~/.config/asm-lsp/
+```
+
+</details>
+
+<details>
+<summary>Rust: Vorhandenen rust-analyzer entfernen</summary>
+
+> Falls `rust-analyzer` zuvor manuell über Cargo installiert wurde und stattdessen eine andere Installation verwendet werden soll, kann die vorhandene Binary entfernt werden.
+
+```bash
+rm ~/.cargo/bin/rust-analyzer
+```
+
+</details>
+
+<details>
+<summary>Markdown Preview: Änderungen an yarn.lock zurücksetzen</summary>
+
+> Falls die `yarn.lock`-Datei des **markdown-preview.nvim**-Plugins verändert wurde, kann sie auf den ursprünglichen Stand des Git-Repositories zurückgesetzt werden.
+
+```bash
+cd ~/.local/share/nvim/lazy/markdown-preview.nvim
+git checkout -- app/yarn.lock
+```
+
+</details>
+
 ### Code über den LSP-Server im Editor formatieren
+
+> **Neovim** kann den aktuell geöffneten Quellcode direkt über den konfigurierten **LSP-Server (Language Server Protocol)** formatieren.
+>
+> Dadurch wird der Code automatisch entsprechend der vom jeweiligen Sprachserver bereitgestellten Formatierungsregeln formatiert.
+
+Im Editor folgenden Befehl ausführen:
 
 ```vim
 :lua vim.lsp.buf.format()
 ```
 
-### Emfehlungen bei end-4
+> Der Befehl formatiert den aktuell geöffneten Buffer. Voraussetzung ist, dass für die verwendete Programmiersprache ein LSP-Server mit aktivierter Formatierungsunterstützung eingerichtet ist.
+
+## Emfehlungen bei end-4 -> fix soon
 
 ```bash
 nvim ~/.config/quickshell/ii/modules/common/Config.qml
