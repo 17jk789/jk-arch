@@ -356,26 +356,33 @@ Okay, genug geredet – los geht’s. :)
     - [✨ Moonlight installieren](#-moonlight-installieren)
     - [✨ Mit dem Linux-PC verbinden](#-mit-dem-linux-pc-verbinden)
 - [✨ OpenClaw installieren und einrichten](#-openclaw-installieren-und-einrichten)
-- [Was ich noch machen würde](#was-ich-noch-machen-würde)
-  - [1. System aktualisieren \& Fehler prüfen](#1-system-aktualisieren--fehler-prüfen)
-  - [2. Netzwerk-Analyse (Der wichtigste Sicherheitscheck)](#2-netzwerk-analyse-der-wichtigste-sicherheitscheck)
-  - [3.1. Paketdatenbank \& Integrität prüfen](#31-paketdatenbank--integrität-prüfen)
-  - [3.2. Vertiefte Analyse (Logs \& Verdächtige Skripte)](#32-vertiefte-analyse-logs--verdächtige-skripte)
-  - [3.3 Bei Fehlern das Programm neu installieren und](#33-bei-fehlern-das-programm-neu-installieren-und)
+- [✨ Nach der Installation: System prüfen und absichern](#-nach-der-installation-system-prüfen-und-absichern)
+  - [1. ✨ System aktualisieren und Fehler prüfen](#1--system-aktualisieren-und-fehler-prüfen)
+  - [2. ✨ Netzwerk- und Portanalyse](#2--netzwerk--und-portanalyse)
+  - [3. ✨ Paketdatenbank und Paketintegrität prüfen](#3--paketdatenbank-und-paketintegrität-prüfen)
+    - [3.1 Paketdateien überprüfen](#31-paketdateien-überprüfen)
+    - [3.2 ✨ Installierte Pakete und verdächtige Dateien untersuchen](#32--installierte-pakete-und-verdächtige-dateien-untersuchen)
+    - [3.3 ✨ Kürzlich installierte Pakete anzeigen](#33--kürzlich-installierte-pakete-anzeigen)
+    - [3.4 ✨ Laufende Dienste überprüfen](#34--laufende-dienste-überprüfen)
+  - [4. ✨ Bei Fehlern Logs überprüfen](#4--bei-fehlern-logs-überprüfen)
+  - [5. ✨ Bei beschädigten Paketen](#5--bei-beschädigten-paketen)
   - [JK-Arch Config einrichten](#jk-arch-config-einrichten)
-- [Arch Linux Security-Hardening](#arch-linux-security-hardening)
-  - [Überprüfung der AUR-Paketquellen auf Schadcode (Malware-Hunting)](#überprüfung-der-aur-paketquellen-auf-schadcode-malware-hunting)
-  - [Suche nach der spezifischen Malware-Signatur (atomic-lockfile)](#suche-nach-der-spezifischen-malware-signatur-atomic-lockfile)
-  - [Kontrolle installierter Fremdpakete \& Paketmanager-Historie](#kontrolle-installierter-fremdpakete--paketmanager-historie)
-  - [Virenscan mit ClamAV (Deep Scan sensibler Entwickler-Ordner)](#virenscan-mit-clamav-deep-scan-sensibler-entwickler-ordner)
-  - [Rootkit-Erkennung mit Rootkit Hunter (rkhunter)](#rootkit-erkennung-mit-rootkit-hunter-rkhunter)
-  - [chkrootkit](#chkrootkit)
-  - [lynis](#lynis)
-  - [AppArmor sauber aktivieren](#apparmor-sauber-aktivieren)
-  - [Globales Menü aktivieren](#globales-menü-aktivieren)
-  - [Den SSH-Server sofort ausschalten und dauerhaft deaktivieren](#den-ssh-server-sofort-ausschalten-und-dauerhaft-deaktivieren)
-  - [Arch Linux AUR-Malware? So prüfst du dein System!](#arch-linux-aur-malware-so-prüfst-du-dein-system)
-    - [Schnell-Check in 3 Schritten](#schnell-check-in-3-schritten-1)
+- [✨ Arch Linux Security-Hardening](#-arch-linux-security-hardening)
+  - [1. ✨ AUR-Paketquellen auf verdächtige Befehle überprüfen](#1--aur-paketquellen-auf-verdächtige-befehle-überprüfen)
+  - [2. ✨ Nach der Malware-Signatur `atomic-lockfile` suchen](#2--nach-der-malware-signatur-atomic-lockfile-suchen)
+  - [3. ✨ Fremdpakete und Paketmanager-Historie überprüfen](#3--fremdpakete-und-paketmanager-historie-überprüfen)
+  - [4. ✨ Virenscan mit ClamAV durchführen](#4--virenscan-mit-clamav-durchführen)
+  - [5. ✨ Rootkits mit Rootkit Hunter überprüfen](#5--rootkits-mit-rootkit-hunter-überprüfen)
+  - [6. ✨ Zusätzliche Rootkit-Prüfung mit chkrootkit](#6--zusätzliche-rootkit-prüfung-mit-chkrootkit)
+  - [7. ✨ System mit Lynis überprüfen](#7--system-mit-lynis-überprüfen)
+  - [✨ AppArmor sauber aktivieren](#-apparmor-sauber-aktivieren)
+  - [✨ Globales Menü aktivieren](#-globales-menü-aktivieren)
+  - [✨ SSH-Server deaktivieren](#-ssh-server-deaktivieren)
+- [✨ Arch Linux AUR auf Malware überprüfen](#-arch-linux-aur-auf-malware-überprüfen)
+  - [✨ AUR-Malware-Check installieren](#-aur-malware-check-installieren)
+  - [✨ Risikofreien Testlauf durchführen](#-risikofreien-testlauf-durchführen)
+  - [✨ Vollständigen Malware-Scan durchführen](#-vollständigen-malware-scan-durchführen)
+  - [✨ Bei einem positiven Malware-Befund](#-bei-einem-positiven-malware-befund)
 - [Use JK-Arch](#use-jk-arch)
 
 # Meine Arch Config → GO!!!
@@ -4856,56 +4863,135 @@ openclaw models auth login-github-copilot
 
 </details>
 
-# Was ich noch machen würde
+# ✨ Nach der Installation: System prüfen und absichern
 
-## 1. System aktualisieren & Fehler prüfen
+> Nach der Einrichtung des Systems empfiehlt es sich, einmal das gesamte System zu aktualisieren, die Integrität der installierten Pakete zu überprüfen und nach fehlgeschlagenen Diensten oder ungewöhnlichen Netzwerkverbindungen zu suchen.
+>
+> Die folgenden Befehle bieten eine grundlegende Übersicht über den Zustand des Systems und können dabei helfen, Fehler oder unbekannte Dienste frühzeitig zu erkennen.
+
+## 1. ✨ System aktualisieren und Fehler prüfen
+
+> Zunächst sollte das System vollständig aktualisiert werden. Anschließend können die installierten Dateien der Pakete sowie fehlgeschlagene systemd-Dienste überprüft werden.
 
 ```bash
 sudo pacman -Syu
+```
 
+Installierte Pakete auf fehlende oder beschädigte Dateien überprüfen:
+
+```bash
 sudo pacman -Qk
+```
 
+Fehlgeschlagene systemd-Dienste anzeigen:
+
+```bash
 systemctl --failed
 ```
 
-## 2. Netzwerk-Analyse (Der wichtigste Sicherheitscheck)
+## 2. ✨ Netzwerk- und Portanalyse
 
-Zusätzlich kannst du überprüfen, welche Ports aktuell auf deinem System lauschen:
+> Ein wichtiger Sicherheitscheck ist die Überprüfung der aktuell geöffneten beziehungsweise lauschenden Netzwerkports. Dadurch lässt sich erkennen, welche Dienste Verbindungen aus dem Netzwerk annehmen.
 
 ```bash
 ss -tulpen
 ```
 
-> Hinweis: Achte hier besonders auf Dienste, die du nicht kennst oder die an 0.0.0.0 (weltweit erreichbar) lauschen. 
+> Achte insbesondere auf Dienste, die du nicht kennst oder die auf `0.0.0.0` beziehungsweise `::` lauschen. Solche Dienste können grundsätzlich Verbindungen von mehreren beziehungsweise allen Netzwerkinterfaces annehmen.
+>
+> Ein offener Port bedeutet allerdings nicht automatisch, dass das System unsicher ist. Entscheidend ist, welcher Dienst dahinter läuft und ob der Zugriff durch die Firewall entsprechend eingeschränkt wird.
 
-## 3.1. Paketdatenbank & Integrität prüfen
+## 3. ✨ Paketdatenbank und Paketintegrität prüfen
+
+### 3.1 Paketdateien überprüfen
+
+> Mit `pacman -Qk` kann überprüft werden, ob bei installierten Paketen Dateien fehlen.
 
 ```bash
-# pacman -Qk
-# pacman -Qkk
+pacman -Qk
+```
+
+> Mit `pacman -Qkk` wird eine ausführlichere Integritätsprüfung durchgeführt, bei der zusätzlich Dateieigenschaften überprüft werden.
+
+```bash
+pacman -Qkk
+```
+
+Nur Pakete mit Auffälligkeiten anzeigen:
+
+```bash
 sudo pacman -Qkk | grep -v "0 altered files"
+```
+
+> Mit `pacman -Qm` können außerdem Pakete angezeigt werden, die nicht aus den offiziellen Arch-Repositories stammen, beispielsweise Pakete aus dem AUR.
+
+```bash
 pacman -Qm
 ```
 
-## 3.2. Vertiefte Analyse (Logs & Verdächtige Skripte)
+### 3.2 ✨ Installierte Pakete und verdächtige Dateien untersuchen
+
+> Das Pacman-Log kann verwendet werden, um kürzlich installierte, aktualisierte oder entfernte Pakete nachzuvollziehen.
 
 ```bash
 grep installed /var/log/pacman.log | tail -100
+```
+
+> Bei AUR-Paketen können außerdem die im `yay`-Cache vorhandenen Dateien nach häufig in Installationsskripten verwendeten Befehlen durchsucht werden.
+
+```bash
 grep -RinE "curl|wget|base64|eval|bash -c|sh -c" ~/.cache/yay
+```
 
-# Kürzlich installierte Pakete ansehen
+> Das Ergebnis sollte nicht automatisch als Schadsoftware interpretiert werden. Befehle wie `curl`, `wget` oder `bash -c` können in legitimen Build- und Installationsskripten vollkommen normal sein. Unbekannte oder unerwartete Skripte sollten jedoch genauer überprüft werden.
+
+### 3.3 ✨ Kürzlich installierte Pakete anzeigen
+
+> Mit `expac` können Pakete nach ihrem Installationszeitpunkt sortiert angezeigt werden.
+
+```bash
 expac --timefmt='%Y-%m-%d %T' '%l %n' | sort -r | head -50
+```
 
-# Unbekannte laufende Dienste prüfen
+> Dadurch lassen sich insbesondere kürzlich installierte Pakete schnell überprüfen.
+
+### 3.4 ✨ Laufende Dienste überprüfen
+
+> Mit folgendem Befehl können alle aktuell laufenden systemd-Dienste angezeigt werden:
+
+```bash
 systemctl --type=service --state=running
 ```
 
-## 3.3 Bei Fehlern das Programm neu installieren und
+> Prüfe insbesondere Dienste, die du nicht selbst installiert oder bewusst aktiviert hast.
+
+## 4. ✨ Bei Fehlern Logs überprüfen
+
+> Falls Anwendungen oder Systemdienste nicht korrekt funktionieren, können zunächst fehlgeschlagene Dienste und kritische Fehlermeldungen des aktuellen Systemstarts überprüft werden.
+
+Fehlgeschlagene Dienste anzeigen:
 
 ```bash
 sudo systemctl --failed
+```
+
+Kritische Fehlermeldungen des aktuellen Systemstarts anzeigen:
+
+```bash
 sudo journalctl -p 3 -xb
 ```
+
+> `journalctl -p 3` zeigt Meldungen mit der Priorität **Error** beziehungsweise höher an. Dadurch lassen sich häufig relevante Fehler schneller finden, ohne das komplette System-Log durchsuchen zu müssen.
+
+## 5. ✨ Bei beschädigten Paketen
+
+> Falls bei der Paketintegritätsprüfung fehlende oder beschädigte Dateien festgestellt werden, kann das entsprechende Paket erneut installiert werden.
+
+```bash
+sudo pacman -S <paketname>
+```
+
+> Vor einer Neuinstallation sollte jedoch geprüft werden, ob tatsächlich ein beschädigtes Paket die Ursache des Problems ist. Bei systemweiten Fehlern ist es häufig sinnvoller, zunächst die Logs und Abhängigkeiten zu untersuchen.
 
 ## JK-Arch Config einrichten
 
@@ -4949,96 +5035,224 @@ So bleiben deine bestehenden Einstellungen erhalten und die zusätzlichen JK-Arc
 
 **Damit sind wir durch.** Wenn du alles an die richtigen Stellen kopiert und die `-add`-Dateien entsprechend zusammengeführt hast, kannst du dein Terminal bzw. deine Session neu starten und JK-Arch sollte einsatzbereit sein.
 
-# Arch Linux Security-Hardening
+# ✨ Arch Linux Security-Hardening
 
-## Überprüfung der AUR-Paketquellen auf Schadcode (Malware-Hunting)
+> Nach der Einrichtung eines Arch-Linux-Systems kann es sinnvoll sein, die installierten Fremdpakete, AUR-Buildskripte, Paketmanager-Protokolle und wichtige Entwicklungsverzeichnisse auf Auffälligkeiten zu überprüfen.
+>
+> Die folgenden Werkzeuge ersetzen keine vollständige Sicherheitsanalyse. Sie dienen hauptsächlich dazu, verdächtige Dateien, unbekannte Pakete, ungewöhnliche Installationsskripte und mögliche Fehlkonfigurationen frühzeitig zu erkennen.
 
-```bash
-# npm install -g @mermaid-js/mermaid-cli
+## 1. ✨ AUR-Paketquellen auf verdächtige Befehle überprüfen
+
+> Bei Paketen aus dem **Arch User Repository (AUR)** können die verwendeten `PKGBUILD`-Dateien vor der Installation eingesehen werden. Besonders interessant sind Befehle, die Dateien aus dem Internet herunterladen oder dynamisch Code ausführen.
+>
+> Die folgende Suche sucht beispielsweise nach `npm`, `curl`, `wget`, `bash -c`, `eval`, `base64`, `openssl`, `nc`, `socat` und ähnlichen Befehlen.
+
+```bash id="5u4z7n"
 grep -RinE \
 'npm|node|curl.*\||wget.*\||bash -c|sh -c|eval|base64|openssl|nc |socat|python -c' \
 ~/.cache/yay/*/PKGBUILD
-grep -R "atomic-lockfile" /tmp 2>/dev/null
-grep -R "npm install" ~/.cache/yay 2>/dev/null
+```
+
+> Ein Treffer bedeutet **nicht automatisch Schadcode**. Viele dieser Befehle können in legitimen Buildskripten verwendet werden. Unbekannte oder unerwartete Downloads und Codeausführungen sollten jedoch genauer untersucht werden.
+
+Installierte AUR- beziehungsweise Fremdpakete anzeigen:
+
+```bash id="q8v3kc"
 pacman -Qm
 ```
 
-## Suche nach der spezifischen Malware-Signatur (atomic-lockfile)
+Nach `npm install` im `yay`-Cache suchen:
 
-```bash
+```bash id="k6f2wp"
+grep -R "npm install" ~/.cache/yay 2>/dev/null
+```
+
+Nach der bekannten Zeichenfolge `atomic-lockfile` im temporären Verzeichnis suchen:
+
+```bash id="j4r9mx"
+grep -R "atomic-lockfile" /tmp 2>/dev/null
+```
+
+## 2. ✨ Nach der Malware-Signatur `atomic-lockfile` suchen
+
+> Falls gezielt nach der bekannten Bezeichnung `atomic-lockfile` gesucht werden soll, können das Home-Verzeichnis, globale npm-Pakete sowie verschiedene Paket- und Build-Caches durchsucht werden.
+
+```bash id="z2c7vh"
 find ~ -iname "*atomic-lockfile*" 2>/dev/null
+```
+
+Globale npm-Pakete überprüfen:
+
+```bash id="e7n4qs"
 npm list -g 2>/dev/null | grep atomic-lockfile
+```
+
+Paket- und AUR-Caches durchsuchen:
+
+```bash id="s5m8dx"
 grep -R "atomic-lockfile" /var/cache 2>/dev/null
 grep -R "atomic-lockfile" ~/.cache/yay 2>/dev/null
 ```
 
-## Kontrolle installierter Fremdpakete & Paketmanager-Historie
+> Wird die Zeichenfolge gefunden, sollte die betreffende Datei beziehungsweise das Paket genauer untersucht werden. Eine einzelne Übereinstimmung ist noch kein Beweis dafür, dass das System kompromittiert wurde.
 
-```bash
+## 3. ✨ Fremdpakete und Paketmanager-Historie überprüfen
+
+> Mit `pacman -Qm` beziehungsweise `yay -Qm` können Pakete angezeigt werden, die nicht aus den offiziellen Arch-Repositories stammen.
+>
+> Das ist besonders nützlich, wenn überprüft werden soll, welche AUR- oder anderen Fremdpakete auf dem System installiert sind.
+
+```bash id="r3v7mp"
 yay -Qm
+```
+
+AUR-Cache anzeigen:
+
+```bash id="n9c4wk"
 ls ~/.cache/yay
+```
+
+> Die Paketmanager-Historie befindet sich bei Arch Linux in `/var/log/pacman.log`. Dort können Installationen und Aktualisierungen nachvollzogen werden.
+
+Beispielsweise die Einträge eines bestimmten Monats anzeigen:
+
+```bash id="u6x1za"
 grep "2026-06" /var/log/pacman.log | tail -100
+```
+
+Installierte und aktualisierte Pakete anzeigen:
+
+```bash id="p8k5cf"
 grep -E "installed|upgraded" /var/log/pacman.log | tail -200
 ```
 
-## Virenscan mit ClamAV (Deep Scan sensibler Entwickler-Ordner)
+## 4. ✨ Virenscan mit ClamAV durchführen
 
-```bash
+> **ClamAV** ist ein Open-Source-Virenscanner für Linux. Besonders bei der Entwicklung mit vielen Drittanbieterpaketen können gezielte Scans sinnvoll sein.
+>
+> Zunächst wird ClamAV installiert und die Virensignaturen aktualisiert:
+
+```bash id="w2q6mv"
 sudo pacman -S clamav
 sudo freshclam
+```
+
+> Anschließend können wichtige Entwicklungs- und Konfigurationsverzeichnisse überprüft werden.
+
+Neovim-Konfiguration und Cache:
+
+```bash id="a7d3xr"
 clamscan -r -i ~/.config/nvim ~/.local/share/nvim ~/.local/state/nvim ~/.cache/nvim
+```
+
+Entwicklungsumgebungen und heruntergeladene Pakete:
+
+```bash id="c5m9qt"
 clamscan -r -i ~/.cargo ~/.sdkman ~/.npm ~/.local/lib/python3*/site-packages ~/Downloads
+```
+
+AUR-Build-Cache:
+
+```bash id="h8v4nb"
 clamscan -r -i ~/.cache/yay
 ```
 
-## Rootkit-Erkennung mit Rootkit Hunter (rkhunter)
+> `-r` führt einen rekursiven Scan durch und `-i` zeigt nur infizierte beziehungsweise verdächtige Dateien an.
+
+## 5. ✨ Rootkits mit Rootkit Hunter überprüfen
+
+> **Rootkit Hunter (rkhunter)** untersucht das System unter anderem auf bekannte Rootkits, verdächtige Dateien und ungewöhnliche Änderungen an Systemdateien.
+
+```bash id="m3w7qp"
+sudo pacman -S rkhunter
+```
+
+Signaturen und Daten aktualisieren:
+
+```bash id="x6k2vd"
+sudo rkhunter --update
+```
+
+> **Wichtig:** `--propupd` sollte nicht blind als erster Schritt ausgeführt werden. Dieser Befehl aktualisiert die gespeicherte Referenzdatenbank der Dateieigenschaften. Wenn sich bereits manipulierte Dateien auf dem System befinden, könnten diese dadurch als neuer Ausgangszustand übernommen werden.
+>
+> Nach einer bewussten Überprüfung beziehungsweise bei einem vertrauenswürdigen Ausgangszustand kann die Referenzdatenbank aktualisiert werden:
 
 ```bash
-sudo pacman -S rkhunter
-sudo rkhunter --update
 sudo rkhunter --propupd
+```
+
+System überprüfen:
+
+```bash id="q9c5xr"
 sudo rkhunter --check
 ```
 
-## chkrootkit
+## 6. ✨ Zusätzliche Rootkit-Prüfung mit chkrootkit
 
-```bash
-# yay -S chkrootkit
-# sudo chkrootkit
+> **chkrootkit** ist ein weiteres Werkzeug zur Erkennung bestimmter bekannter Rootkits und verdächtiger Systemzustände.
+>
+> Falls das Paket aus einer geeigneten Paketquelle verfügbar ist, kann es installiert und anschließend als Root ausgeführt werden.
+
+```bash id="v4m8zs"
+yay -S chkrootkit
+sudo chkrootkit
 ```
 
-## lynis
+## 7. ✨ System mit Lynis überprüfen
 
-```bash
+> **Lynis** führt ein umfassendes Sicherheits-Audit des Linux-Systems durch. Dabei werden unter anderem Systemkonfiguration, Berechtigungen, Dienste, Netzwerkoptionen und verschiedene Sicherheitsmechanismen überprüft.
+
+```bash id="b7n3kw"
 sudo pacman -S lynis
+```
+
+System-Audit starten:
+
+```bash id="d5q9mc"
 sudo lynis audit system
 ```
 
-## AppArmor sauber aktivieren
+> Nach dem Scan zeigt Lynis Empfehlungen und mögliche Sicherheitsverbesserungen an. Die Ergebnisse sollten einzeln geprüft werden, bevor Änderungen am System vorgenommen werden.
+
+## ✨ AppArmor sauber aktivieren
+
+> **AppArmor** ist ein Mandatory-Access-Control-System (MAC), das Anwendungen anhand von Sicherheitsprofilen auf bestimmte Dateien, Verzeichnisse und Systemressourcen beschränkt.
+>
+> Unter CachyOS beziehungsweise Arch Linux kann AppArmor zusätzlich zur normalen Linux-Berechtigungsverwaltung eingesetzt werden.
+
+<details>
+<summary>✨ AppArmor installieren und aktivieren</summary>
 
 ```bash
 sudo pacman -S apparmor apparmor.d
 ```
 
-Dann:
+> Anschließend wird der AppArmor-Dienst aktiviert und direkt gestartet:
 
 ```bash
 sudo systemctl enable --now apparmor
 ```
 
-Danach:
+</details>
+
+<details>
+<summary>✨ AppArmor im Kernel aktivieren</summary>
+
+> Damit AppArmor bereits beim Systemstart als Linux Security Module (LSM) geladen wird, muss es in der Kernel-Kommandozeile aktiviert werden.
+>
+> Bei einem System mit **Limine** wird dazu die Limine-Konfiguration geöffnet:
 
 ```bash
 sudo nvim /boot/limine.conf
 ```
 
-und füge es hinzu:
+> In der entsprechenden `cmdline`-Zeile wird `apparmor` zur LSM-Liste hinzugefügt:
 
 ```ini
 lsm=landlock,lockdown,yama,integrity,apparmor,bpf
 ```
 
-also:
+> Beispiel:
 
 ```ini
 # CachyOS Limine theme
@@ -5054,13 +5268,22 @@ also:
 
 ```
 
-Danach:
+> Die vorhandenen Kernel-Parameter sollten dabei **nicht ersetzt**, sondern lediglich um die benötigte LSM-Konfiguration ergänzt werden.
+
+</details>
+
+<details>
+<summary>✨ AppArmor-Profil-Caching aktivieren</summary>
+
+> AppArmor kann seine kompilierten Profile zwischenspeichern. Dadurch kann der Start von AppArmor beschleunigt werden, insbesondere wenn viele Profile geladen werden.
+
+Konfigurationsdatei öffnen:
 
 ```bash
 sudo nvim /etc/apparmor/parser.conf
 ```
 
-und
+Folgende Einstellungen eintragen:
 
 ```ini
 write-cache
@@ -5068,58 +5291,108 @@ Optimize=compress-fast
 cache-loc /etc/apparmor/earlypolicy/
 ```
 
-Danach:
+> Das Caching reduziert den Aufwand, AppArmor-Profile bei jedem Systemstart erneut zu verarbeiten. Die genaue Cache-Konfiguration kann je nach verwendeter AppArmor-Version und Distribution variieren. Der Standard-Cache von AppArmor liegt bei aktuellen Versionen unter `/var/cache/apparmor`.
+
+</details>
+
+<details>
+<summary>✨ AppArmor überprüfen</summary>
+
+> Nach der Konfiguration wird das System neu gestartet:
 
 ```bash
 sudo reboot
 ```
 
-und
+> Nach dem Neustart kann überprüft werden, ob AppArmor aktiv ist:
 
 ```bash
 sudo aa-status
 ```
 
-## Globales Menü aktivieren
+> Zusätzlich kann überprüft werden, ob der AppArmor-Dienst erfolgreich gestartet wurde:
+
+```bash
+systemctl status apparmor
+```
+
+</details>
+
+## ✨ Globales Menü aktivieren
+
+> Für Anwendungen, die das **AppMenu-/DBusMenu-System** verwenden, können die entsprechenden GTK- und D-Bus-Komponenten installiert werden.
 
 ```bash
 sudo pacman -S appmenu-gtk-module libdbusmenu-glib
 ```
 
-## Den SSH-Server sofort ausschalten und dauerhaft deaktivieren
+## ✨ SSH-Server deaktivieren
+
+> Wenn auf dem Rechner kein SSH-Zugriff benötigt wird, sollte der SSH-Server deaktiviert werden. Dadurch wird verhindert, dass der Dienst unnötig einen Netzwerkport für eingehende SSH-Verbindungen bereitstellt.
 
 ```bash
-sudo systemctl disable --now sshd # Falls du SSH nicht brauchst
-# sudo systemctl enable --now sshd # Wider einschalten, wen man es doch braucht
+sudo systemctl disable --now sshd
 ```
 
-## Arch Linux AUR-Malware? So prüfst du dein System!
+> Falls SSH später wieder benötigt wird, kann der Dienst erneut aktiviert und gestartet werden:
 
-Im Juni 2026 gab es eine massive Supply-Chain-Attacke auf das Arch User Repository (AUR), bei der über 1600 Pakete mit Infostealern und eBPF-Rootkits infiziert wurden.
-Die Arch-Community hat ein großartiges Open-Source-Tool entwickelt, mit dem ihr euer System komplett durchleuchten könnt (inklusive aller Pacman-Logs, systemd-Dienste und npm/bun/yarn/pnpm-Caches).
+```bash
+sudo systemctl enable --now sshd
+```
 
-### Schnell-Check in 3 Schritten
+# ✨ Arch Linux AUR auf Malware überprüfen
 
-1. Repository klonen und Ordner öffnen
+> Im Juni 2026 wurde eine große Supply-Chain-Kampagne gegen das **Arch User Repository (AUR)** bekannt. Dabei wurden zahlreiche AUR-Pakete kompromittiert und unter anderem Payloads über `npm`, `bun` und manipulierte Build- beziehungsweise Installationsskripte verteilt. Das von der Community gepflegte Projekt `aur-malware-check` dokumentiert die Kampagne und stellt automatisierte Prüfungen bereit.
+>
+> Das Tool wurde inzwischen zu einem kampagnenbasierten Scanner erweitert und kann neben der ursprünglichen `atomic-lockfile`-Kampagne auch weitere bekannte Kampagnen berücksichtigen.
+
+## ✨ AUR-Malware-Check installieren
+
+> Das Projekt ist Python-basiert und benötigt laut Projektbeschreibung Python 3.14 oder neuer sowie keine zusätzlichen Python-Abhängigkeiten.
+
+Repository klonen:
 
 ```bash
 git clone https://github.com/lenucksi/aur-malware-check.git
 cd aur-malware-check
 ```
 
-2. Risikofreier Testlauf (holt die neuesten Listen, scannt ohne Root)
+> Das Repository sollte vor der Ausführung auf den aktuellen Stand gebracht werden:
+
+```bash
+git pull
+```
+
+## ✨ Risikofreien Testlauf durchführen
+
+> Zunächst kann ein Testlauf durchgeführt werden, bei dem die aktuellen Kampagneninformationen aktualisiert und die geplanten Prüfungen angezeigt werden, ohne Änderungen am System vorzunehmen:
 
 ```bash
 python -m aur_check --refresh-campaigns --dry-run
 ```
 
-3. Der vollständige Tiefenscan (erfordert sudo für eBPF- und Systemd-Prüfungen)
+> Dadurch kann zunächst überprüft werden, welche Kampagnen beziehungsweise Datenquellen verwendet werden.
+
+## ✨ Vollständigen Malware-Scan durchführen
+
+> Für eine umfassendere Untersuchung kann anschließend der vollständige Scan ausgeführt werden:
 
 ```bash
 sudo python -m aur_check --refresh --full
 ```
 
-Wenn am Ende RESULT: CLEAN steht, ist alles im grünen Bereich! Falls das Tool anschlägt, solltet ihr umgehend eure Passwörter und SSH-Keys von einem anderen Gerät aus ändern.
-Bleibt sicher!
+> Der vollständige Scan kann unter anderem installierte Pakete, Pacman-Logs, systemd-Dienste sowie verschiedene Entwicklungs- und Paketmanager-Caches untersuchen. Die genauen Prüfungen hängen von der aktuellen Version des Projekts und den aktivierten Kampagnen ab.
+
+> **Wichtig:** Ein Ergebnis wie `CLEAN` bedeutet, dass bei den durchgeführten Prüfungen keine bekannten beziehungsweise vom Scanner erfassten Indikatoren gefunden wurden. Es ist **keine Garantie dafür, dass das System vollständig frei von Schadsoftware ist**.
+
+## ✨ Bei einem positiven Malware-Befund
+
+> Falls der Scanner einen ernsthaften Treffer meldet, sollte das System zunächst als potenziell kompromittiert betrachtet werden.
+>
+> Besonders wenn Zugangsdaten, SSH-Schlüssel, Browserdaten oder Entwickler-Credentials auf dem System vorhanden waren, sollten diese **von einem vertrauenswürdigen Gerät aus** geändert beziehungsweise widerrufen werden.
+>
+> Bei einem begründeten Verdacht auf eine vollständige Systemkompromittierung ist eine Neuinstallation aus einem vertrauenswürdigen Installationsmedium in der Regel zuverlässiger als der Versuch, sämtliche Schadsoftware manuell zu entfernen.
+
+> **Tipp:** AUR-Pakete sollten grundsätzlich vor der Installation überprüft werden. Besonders bei unbekannten, neuen oder verwaisten Paketen lohnt sich ein Blick auf das `PKGBUILD` und die Änderungen, bevor `yay` oder ein anderer AUR-Helper das Paket baut.
 
 # Use JK-Arch
