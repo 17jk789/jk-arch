@@ -313,18 +313,18 @@ Okay, genug geredet – los geht’s. :)
     - [✨ Das strukturelle Diff-Werkzeug Difftastic installieren](#-das-strukturelle-diff-werkzeug-difftastic-installieren)
     - [✨ Das offizielle GitHub-Kommandozeilenwerkzeug (GitHub CLI) installieren](#-das-offizielle-github-kommandozeilenwerkzeug-github-cli-installieren)
     - [Das Software-Reverse-Engineering-Framework Ghidra über yay installieren](#das-software-reverse-engineering-framework-ghidra-über-yay-installieren)
-    - [Das universitäre WLAN (eduroam) fehlerfrei einrichten](#das-universitäre-wlan-eduroam-fehlerfrei-einrichten)
-    - [Die offizielle Open-Source-Alternative für Universitäts-VPNs installieren](#die-offizielle-open-source-alternative-für-universitäts-vpns-installieren)
+    - [✨ Das universitäre WLAN (eduroam) fehlerfrei einrichten](#-das-universitäre-wlan-eduroam-fehlerfrei-einrichten)
+    - [✨ Die offizielle Open-Source-Alternative für Universitäts-VPNs installieren](#-die-offizielle-open-source-alternative-für-universitäts-vpns-installieren)
     - [Nützliche Fish plugins](#nützliche-fish-plugins)
     - [Modernes Datei-Listing und ein interaktiver Terminal-Spickzettel](#modernes-datei-listing-und-ein-interaktiver-terminal-spickzettel)
-    - [Die offizielle Spickzettel-Datenbank für navi hinzufügen](#die-offizielle-spickzettel-datenbank-für-navi-hinzufügen)
-    - [Die CachyOS-spezifischen Spickzettel für navi hinzufügen (Optional)](#die-cachyos-spezifischen-spickzettel-für-navi-hinzufügen-optional)
+      - [Die offizielle Spickzettel-Datenbank für navi hinzufügen](#die-offizielle-spickzettel-datenbank-für-navi-hinzufügen)
+    - [✨ Die CachyOS-spezifischen Spickzettel für navi hinzufügen (Optional)](#-die-cachyos-spezifischen-spickzettel-für-navi-hinzufügen-optional)
     - [Für yazi: Die Desktop-Integrationswerkzeuge xdg-utils installieren](#für-yazi-die-desktop-integrationswerkzeuge-xdg-utils-installieren)
     - [Für yazi: Die MIME-Typ-Erkennung perl-file-mimeinfo installieren](#für-yazi-die-mime-typ-erkennung-perl-file-mimeinfo-installieren)
-    - [Mauszeiger-Animationen (Cursor Shaders) für Ghostty einrichten](#mauszeiger-animationen-cursor-shaders-für-ghostty-einrichten)
+    - [✨ Mauszeiger-Animationen (Cursor Shaders) für Ghostty einrichten](#-mauszeiger-animationen-cursor-shaders-für-ghostty-einrichten)
     - [Einen modularen Fish-Konfigurationsordner erstellen](#einen-modularen-fish-konfigurationsordner-erstellen)
-    - [Den praktischen Befehls-Ausführer just installieren](#den-praktischen-befehls-ausführer-just-installieren)
-    - [Das Begrüßungsprogramm von CachyOS entfernen](#das-begrüßungsprogramm-von-cachyos-entfernen)
+    - [✨ Den praktischen Befehls-Ausführer just installieren](#-den-praktischen-befehls-ausführer-just-installieren)
+    - [✨ Das Begrüßungsprogramm von CachyOS entfernen](#-das-begrüßungsprogramm-von-cachyos-entfernen)
     - [Instalation von En Croissant, eine moderne grafische Benutzeroberfläche (GUI) für Schachdatenbanken und Partienanalysen.](#instalation-von-en-croissant-eine-moderne-grafische-benutzeroberfläche-gui-für-schachdatenbanken-und-partienanalysen)
     - [Den Boot-Bildschirm (Plymouth) anpassen und das System-Abbild neu bauen](#den-boot-bildschirm-plymouth-anpassen-und-das-system-abbild-neu-bauen)
   - [Nach der neovim config](#nach-der-neovim-config)
@@ -3662,30 +3662,50 @@ sudo pacman -S github-cli
 
 ### Das Software-Reverse-Engineering-Framework Ghidra über yay installieren
 
+> **Ghidra** ist ein Software-Reverse-Engineering-Framework, das von der National Security Agency (NSA) entwickelt wurde. Es bietet eine Vielzahl von Tools zur Analyse von Binärdateien und zur Durchführung von Reverse Engineering.
+
 ```bash
 sudo pacman -S ghidra
 # yay -S ghidra
-# https://github.com/catppuccin/ghidra/blob/main/themes/catppuccin-mocha.theme
 ```
 
-### Das universitäre WLAN (eduroam) fehlerfrei einrichten
+### ✨ Das universitäre WLAN (eduroam) fehlerfrei einrichten
+
+> **eduroam** ist ein weltweites WLAN-Netzwerk für Studierende, Forschende und Mitarbeitende von Bildungseinrichtungen. Es ermöglicht den sicheren Zugang zu WLAN-Diensten an teilnehmenden Institutionen.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
-# sudo pacman -S --needed networkmanager python-dbus ca-certificates
-# yay -S geteduroam-gui
+sudo pacman -S --needed networkmanager python-dbus ca-certificates
+yay -S geteduroam-gui
 ```
 
-### Die offizielle Open-Source-Alternative für Universitäts-VPNs installieren
+</details>
+
+### ✨ Die offizielle Open-Source-Alternative für Universitäts-VPNs installieren
+
+> **GlobalProtect** ist eine VPN-Lösung, die von Palo Alto Networks entwickelt wurde. Sie ermöglicht den sicheren Zugriff auf Unternehmensnetzwerke und wird häufig in akademischen Einrichtungen verwendet.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
 # yay -S globalprotect-bin
 sudo pacman -S globalprotect-openconnect
-# run: gpclient launch-gui
-# yay -S wireguird
-# yay -S wireguard-gui-bin
 ```
 
+Grafische Oberfläche starten:
+
+```bash
+gpclient launch-gui
+```
+
+</details>
+
 ### Nützliche Fish plugins
+
+> **Fisher** ist ein Plugin-Manager für die Fish Shell. Mit den folgenden Plugins lassen sich unter anderem automatisch passende Klammern einfügen, Vim-Tastenkürzel verwenden, Umgebungsvariablen aus Bash-Skripten übernehmen und fzf komfortabel in Fish integrieren.
 
 ```bash
 fisher install jorgebucaran/autopair.fish nickeb96/fish-vim edc/bass PatrickF1/fzf.fish
@@ -3693,23 +3713,40 @@ fisher install jorgebucaran/autopair.fish nickeb96/fish-vim edc/bass PatrickF1/f
 
 ### Modernes Datei-Listing und ein interaktiver Terminal-Spickzettel
 
+> **eza** ist ein modernes Ersatzwerkzeug für `ls`, das eine farbige und strukturierte Ausgabe bietet. Es unterstützt unter anderem Dateitypen, Berechtigungen, Größen, Zeitstempel und Git-Informationen.
+>
+> **navi** ist ein interaktives Kommandozeilenwerkzeug für Spickzettel, mit dem häufig benötigte Befehle schnell durchsucht, ausgewählt und direkt im Terminal verwendet werden können.
+
 ```bash
 sudo pacman -S eza navi
 ```
 
-### Die offizielle Spickzettel-Datenbank für navi hinzufügen
+#### Die offizielle Spickzettel-Datenbank für navi hinzufügen
+
+> Die offizielle Spickzettel-Datenbank von navi enthält eine Vielzahl von nützlichen Befehlen und Anleitungen für verschiedene Tools und Anwendungen. Durch das Hinzufügen dieser Datenbank kannst du direkt auf eine umfangreiche Sammlung von Spickzetteln zugreifen.
 
 ```bash
 navi repo add denisidoro/cheats
 ```
 
-### Die CachyOS-spezifischen Spickzettel für navi hinzufügen (Optional)
+### ✨ Die CachyOS-spezifischen Spickzettel für navi hinzufügen (Optional)
+
+> Die CachyOS-spezifischen Spickzettel für navi enthalten Anleitungen und Befehle, die speziell auf die CachyOS-Distribution zugeschnitten sind. Durch das Hinzufügen dieser Datenbank kannst du direkt auf eine Sammlung von Spickzetteln zugreifen, die für CachyOS-Benutzer besonders nützlich sind.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
-# navi repo add cachyos/cheats
+navi repo add cachyos/cheats
 ```
 
+</details>
+
 ### Für yazi: Die Desktop-Integrationswerkzeuge xdg-utils installieren
+
+> `xdg-utils` ist ein Satz von Kommandozeilenwerkzeugen, die die Integration von Anwendungen in Desktop-Umgebungen erleichtern. Sie ermöglichen das Öffnen von URLs, Dateien und Anwendungen in der Standardanwendung des Systems.
+> 
+> Besonders praktisch finde ich xdg-open, da sich damit Dateien, Verzeichnisse und URLs unkompliziert mit der jeweils hinterlegten Standardanwendung öffnen lassen. Dafür habe ich in meiner Fish-Konfiguration zusätzlich den Befehl open als Alias für xdg-open hinzugefügt.
 
 ```bash
 sudo pacman -S xdg-utils
@@ -3717,34 +3754,59 @@ sudo pacman -S xdg-utils
 
 ### Für yazi: Die MIME-Typ-Erkennung perl-file-mimeinfo installieren
 
+> `perl-file-mimeinfo` ist ein Perl-Modul, das die Erkennung von MIME-Typen basierend auf Dateiinhalten und -erweiterungen ermöglicht. Es wird häufig in Skripten und Anwendungen verwendet, um den Typ einer Datei zu bestimmen und entsprechend zu verarbeiten.
+
 ```bash
 sudo pacman -S perl-file-mimeinfo
 ```
 
-### Mauszeiger-Animationen (Cursor Shaders) für Ghostty einrichten
+### ✨ Mauszeiger-Animationen (Cursor Shaders) für Ghostty einrichten
+
+> Ghostty ist ein Terminal-Emulator, der Mauszeiger-Animationen (Cursor Shaders) unterstützt. Mit den folgenden Schritten kannst du die Cursor Shaders für Ghostty einrichten und anpassen.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
-# git clone https://github.com/sahaj-b/ghostty-cursor-shaders ~/.config/ghostty/shaders
+git clone https://github.com/sahaj-b/ghostty-cursor-shaders ~/.config/ghostty/shaders
 ```
 
+</details>
+
 ### Einen modularen Fish-Konfigurationsordner erstellen
+
+> Die Fish Shell unterstützt die Verwendung von modularen Konfigurationsdateien, die in einem speziellen Ordner abgelegt werden können. Dies ermöglicht eine bessere Organisation und Wartung der Konfiguration, da einzelne Module unabhängig voneinander verwaltet werden können.
 
 ```bash
 mkdir -p ~/.config/fish/conf.d
 ```
 
-### Den praktischen Befehls-Ausführer just installieren
+### ✨ Den praktischen Befehls-Ausführer just installieren
+
+> `just` ist ein praktisches Befehls-Ausführungswerkzeug, das es ermöglicht, wiederkehrende Aufgaben und Befehle in sogenannten "Justfiles" zu organisieren. Es bietet eine einfache Möglichkeit, komplexe Befehlsfolgen zu speichern und mit einem einzigen Befehl auszuführen.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
 sudo pacman -S just
 ```
 
-### Das Begrüßungsprogramm von CachyOS entfernen 
+</details>
+
+### ✨ Das Begrüßungsprogramm von CachyOS entfernen
+
+> Das Begrüßungsprogramm von CachyOS, auch bekannt als "cachyos-hello", ist ein kleines Tool, das beim ersten Start des Systems angezeigt wird. Wenn du es entfernen möchtest, kannst du die folgenden Befehle verwenden:
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
 sudo pacman -R cachyos-hello
 rm ~/.config/autostart/cachyos-hello.desktop
 ```
+
+</details>
 
 ### Instalation von En Croissant, eine moderne grafische Benutzeroberfläche (GUI) für Schachdatenbanken und Partienanalysen.
 
