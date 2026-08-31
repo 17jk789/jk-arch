@@ -197,20 +197,21 @@ Okay, genug geredet – los geht’s. :)
     - [✨ Das ultraschnelle Suchwerkzeug ripgrep installieren](#-das-ultraschnelle-suchwerkzeug-ripgrep-installieren)
     - [Das blitzschnelle Dateisuch-Werkzeug fd installieren](#das-blitzschnelle-dateisuch-werkzeug-fd-installieren)
     - [Die moderne und farbenfrohe ls-Alternative eza installieren](#die-moderne-und-farbenfrohe-ls-alternative-eza-installieren)
-    - [Die vereinfachten Community-Handbücher tldr installieren](#die-vereinfachten-community-handbücher-tldr-installieren)
-    - [Den JSON-Datenprozessor jq installieren](#den-json-datenprozessor-jq-installieren)
+    - [✨ Die vereinfachten Community-Handbücher tldr installieren](#-die-vereinfachten-community-handbücher-tldr-installieren)
+    - [✨ Den JSON-Datenprozessor jq installieren](#-den-json-datenprozessor-jq-installieren)
     - [Die grafische Monitor-Konfiguration nwg-displays installieren](#die-grafische-monitor-konfiguration-nwg-displays-installieren)
     - [Das Bildverarbeitungs-Framework ImageMagick installieren](#das-bildverarbeitungs-framework-imagemagick-installieren)
     - [✨ Den Tippfehler-Korrektor thefuck installieren](#-den-tippfehler-korrektor-thefuck-installieren)
-    - [Microsoft Visual Studio Code (VS Code) über yay installieren](#microsoft-visual-studio-code-vs-code-über-yay-installieren)
+    - [Microsoft Visual Studio Code (VS Code) installieren](#microsoft-visual-studio-code-vs-code-installieren)
     - [GitKraken über yay installieren](#gitkraken-über-yay-installieren)
     - [Den Discord-Client (Vesktop) über den Paketmanager installieren](#den-discord-client-vesktop-über-den-paketmanager-installieren)
     - [Den Signal Messenger installieren](#den-signal-messenger-installieren)
+    - [Den Firefox Browser installieren](#den-firefox-browser-installieren)
     - [Den Brave Browser über yay installieren](#den-brave-browser-über-yay-installieren)
-    - [Den datenschutzfokussierten Mullvad Browser installieren](#den-datenschutzfokussierten-mullvad-browser-installieren)
-    - [Google Chrome über den AUR-Helfer installieren](#google-chrome-über-den-aur-helfer-installieren)
-    - [Den datenschutzfokussierten LibreWolf Browser installieren](#den-datenschutzfokussierten-librewolf-browser-installieren)
-    - [Die Firefox Developer Edition installieren](#die-firefox-developer-edition-installieren)
+    - [✨ Den datenschutzfokussierten Mullvad Browser installieren](#-den-datenschutzfokussierten-mullvad-browser-installieren)
+    - [✨ Google Chrome über den AUR-Helfer installieren](#-google-chrome-über-den-aur-helfer-installieren)
+    - [✨ Den datenschutzfokussierten LibreWolf Browser installieren](#-den-datenschutzfokussierten-librewolf-browser-installieren)
+    - [✨ Die Firefox Developer Edition installieren](#-die-firefox-developer-edition-installieren)
     - [Das grafische Archivierungsprogramm Ark installieren](#das-grafische-archivierungsprogramm-ark-installieren)
     - [Den erweiterten KDE-Texteditor Kate installieren](#den-erweiterten-kde-texteditor-kate-installieren)
     - [Der grafische Bildbetrachter Gwenview installieren](#der-grafische-bildbetrachter-gwenview-installieren)
@@ -220,31 +221,26 @@ Okay, genug geredet – los geht’s. :)
     - [✨ Die Wissensdatenbank Obsidian installieren](#-die-wissensdatenbank-obsidian-installieren)
     - [Den grafischen Plasma-Systemmonitor installieren](#den-grafischen-plasma-systemmonitor-installieren)
     - [✨ Den Taskmanager Mission Center über yay installieren](#-den-taskmanager-mission-center-über-yay-installieren)
-    - [Das digitale Mal- und Zeichenprogramm Krita installieren](#das-digitale-mal--und-zeichenprogramm-krita-installieren)
+    - [✨ Das digitale Mal- und Zeichenprogramm Krita installieren](#-das-digitale-mal--und-zeichenprogramm-krita-installieren)
     - [✨ Das Bildbearbeitungsprogramm GIMP installieren](#-das-bildbearbeitungsprogramm-gimp-installieren)
     - [✨ Das professionelle Videoschnittprogramm Kdenlive installieren](#-das-professionelle-videoschnittprogramm-kdenlive-installieren)
     - [✨ Das professionelle All-in-One-Videoschnittprogramm DaVinci Resolve installieren](#-das-professionelle-all-in-one-videoschnittprogramm-davinci-resolve-installieren)
     - [✨ Das plattformübergreifende Videoschnittprogramm Shotcut installieren](#-das-plattformübergreifende-videoschnittprogramm-shotcut-installieren)
-    - [Die 3D-Grafik- und Animations-Suite Blender installieren](#die-3d-grafik--und-animations-suite-blender-installieren)
-    - [Den E-Mail- und Kalender-Client Thunderbird installieren](#den-e-mail--und-kalender-client-thunderbird-installieren)
+    - [✨ Die 3D-Grafik- und Animations-Suite Blender installieren](#-die-3d-grafik--und-animations-suite-blender-installieren)
+    - [✨ Den E-Mail- und Kalender-Client Thunderbird installieren](#-den-e-mail--und-kalender-client-thunderbird-installieren)
     - [Den wissenschaftlichen Taschenrechner Qalculate! installieren](#den-wissenschaftlichen-taschenrechner-qalculate-installieren)
-    - [Den Screenshot- und Bildschirmaufnahme-Manager Flameshot installieren](#den-screenshot--und-bildschirmaufnahme-manager-flameshot-installieren)
+    - [✨ Den Screenshot- und Bildschirmaufnahme-Manager Flameshot installieren](#-den-screenshot--und-bildschirmaufnahme-manager-flameshot-installieren)
     - [Die Streaming- und Aufnahme-Software OBS Studio installieren](#die-streaming--und-aufnahme-software-obs-studio-installieren)
     - [Das Software-Zentrum Discover und das Flatpak-System installieren](#das-software-zentrum-discover-und-das-flatpak-system-installieren)
     - [Die Desktop-Uhr KClock installieren](#die-desktop-uhr-kclock-installieren)
-    - [Den Morgen Calendar über yay installieren](#den-morgen-calendar-über-yay-installieren)
+    - [✨ Den Morgen Calendar über yay installieren](#-den-morgen-calendar-über-yay-installieren)
     - [Das Smartphone-Integrationswerkzeug KDE Connect installieren](#das-smartphone-integrationswerkzeug-kde-connect-installieren)
-    - [Eine ältere Python-Version (3.12) über yay installieren](#eine-ältere-python-version-312-über-yay-installieren)
-    - [Die Office-Suite LibreOffice installieren](#die-office-suite-libreoffice-installieren)
-    - [Die Microsoft-kompatiblen Liberation-Schriftarten installieren](#die-microsoft-kompatiblen-liberation-schriftarten-installieren)
-    - [Das Sandbox-Sicherheitswerkzeug Firejail installieren](#das-sandbox-sicherheitswerkzeug-firejail-installieren)
-    - [Das vollständige Linux-Drucksystem (CUPS) einrichten](#das-vollständige-linux-drucksystem-cups-einrichten)
-    - [Die offiziellen HP-Druckertreiber (HPLIP) installieren](#die-offiziellen-hp-druckertreiber-hplip-installieren)
-    - [Die moderne LaTeX-Alternative Tectonic und den Dokumenten-Konverter Pandoc einrichten](#die-moderne-latex-alternative-tectonic-und-den-dokumenten-konverter-pandoc-einrichten)
-    - [Text-zu-PostScript-Konverter und PDF-Interpreter installieren](#text-zu-postscript-konverter-und-pdf-interpreter-installieren)
-    - [Den Drucker-Hintergrunddienst aktivieren](#den-drucker-hintergrunddienst-aktivieren)
-    - [Den Netzwerk-Erkennungsdienst Avahi aktivieren](#den-netzwerk-erkennungsdienst-avahi-aktivieren)
-    - [Die Rust-Alternative für den sudo-Befehl installieren](#die-rust-alternative-für-den-sudo-befehl-installieren)
+    - [✨ Eine ältere Python-Version (3.12) über yay installieren](#-eine-ältere-python-version-312-über-yay-installieren)
+    - [✨ Die Office-Suite LibreOffice installieren](#-die-office-suite-libreoffice-installieren)
+    - [✨ Das Sandbox-Sicherheitswerkzeug Firejail installieren](#-das-sandbox-sicherheitswerkzeug-firejail-installieren)
+    - [✨ Das vollständige Linux-Drucksystem CUPS für Hyprland mit KDE-Tools einrichten](#-das-vollständige-linux-drucksystem-cups-für-hyprland-mit-kde-tools-einrichten)
+    - [✨ Die moderne LaTeX-Alternative Tectonic und den Dokumenten-Konverter Pandoc einrichten](#-die-moderne-latex-alternative-tectonic-und-den-dokumenten-konverter-pandoc-einrichten)
+    - [✨ Die Rust-Alternative für den sudo-Befehl installieren](#-die-rust-alternative-für-den-sudo-befehl-installieren)
     - [Die HEIF- und AVIF-Bildbibliothek libheif installieren](#die-heif--und-avif-bildbibliothek-libheif-installieren)
     - [Die erweiterten Bildformat-Plugins für KDE installieren](#die-erweiterten-bildformat-plugins-für-kde-installieren)
     - [Den Netzwerk-Bandbreiten-Monitor bandwhich installieren](#den-netzwerk-bandbreiten-monitor-bandwhich-installieren)
@@ -252,10 +248,6 @@ Okay, genug geredet – los geht’s. :)
     - [Den zweispaltigen Dateimanager Krusader installieren](#den-zweispaltigen-dateimanager-krusader-installieren)
     - [Das offizielle 7-Zip-Kompressionswerkzeug installieren](#das-offizielle-7-zip-kompressionswerkzeug-installieren)
     - [QEMU, KVM und die grafische Verwaltung Virt-Manager installieren](#qemu-kvm-und-die-grafische-verwaltung-virt-manager-installieren)
-      - [Den Virtualisierungs-Dienst für KVM/QEMU aktivieren](#den-virtualisierungs-dienst-für-kvmqemu-aktivieren)
-      - [Festplatten-Diagnosewerkzeuge scannen](#festplatten-diagnosewerkzeuge-scannen)
-      - [Erweiterte Gruppenrechte für native Kernel-Virtualisierung (KVM) setzen](#erweiterte-gruppenrechte-für-native-kernel-virtualisierung-kvm-setzen)
-    - [Vagrant und das Libvirt-Plugin installieren](#vagrant-und-das-libvirt-plugin-installieren)
       - [Das Highlight: Der optimale QEMU-Startbefell für Ubuntu 26.04 LTS, Kali Linux 2026, Cachy OS + BlackArch Linux](#das-highlight-der-optimale-qemu-startbefell-für-ubuntu-2604-lts-kali-linux-2026-cachy-os--blackarch-linux)
         - [Ubuntu](#ubuntu)
           - [Ubuntu: Installation mit GTK und Sicherheits-Sandbox](#ubuntu-installation-mit-gtk-und-sicherheits-sandbox)
@@ -846,9 +838,14 @@ sudo pacman -Syu radare2 r2ghidra
 
 ✨ Falls du zusätzlich mit `r2pipe` arbeiten möchtest, kannst du die Python-Bindings installieren:
 
+<details>
+<summary>Installieren</summary>
+
 ```bash
 sudo pacman -S python-r2pipe
 ```
+
+</details>
 
 <details>
 <summary>✨ Alternative: r2pm verwenden</summary>
@@ -911,11 +908,14 @@ go install github.com/go-delve/delve/cmd/dlv@latest
 
 > `rr` ist ein fortgeschrittenes Debugging-Tool für C/C++-Programme. Es zeichnet die Ausführung eines Programms auf und ermöglicht danach eine deterministische Wiederholung. Dadurch kannst du Fehler Schritt für Schritt rückwärts und vorwärts analysieren – besonders hilfreich bei schwer reproduzierbaren Bugs.
 
-Installation über das AUR:
+<details>
+<summary>Installieren</summary>
 
 ```bash
 yay -S rr
 ```
+
+</details>
 
 > **Hinweis:** `rr` benötigt bestimmte Kernel-Features und funktioniert am besten auf Systemen mit passender Hardware- und Kernel-Konfiguration. Falls es nicht direkt funktioniert, überprüfe die Kernel-Meldungen und die offizielle Dokumentation von `rr`.
 
@@ -1029,9 +1029,14 @@ python -c "from pwn import *; print('Pwntools funktioniert!')"
 > - gute Integration mit C-Code
 > - moderne Alternative für viele Low-Level-Projekte
 
+<details>
+<summary>Installieren</summary>
+
 ```bash
 sudo pacman -S zig
 ```
+
+</details>
 
 ### Die JetBrains Toolbox installieren und starten
 
@@ -1179,9 +1184,14 @@ sudo pacman -S ripgrep
 
 > `zoxide` lernt deine meistgenutzten Verzeichnisse und erstellt daraus eine intelligente Navigation. Je öfter du einen Ordner verwendest, desto besser funktioniert die Suche.
 
+<details>
+<summary>Installieren</summary>
+
 ```bash
 sudo pacman -S zoxide
 ```
+
+</details>
 
 ### JavaScript-Laufzeitumgebung und Paketmanager installieren
 
@@ -1236,9 +1246,14 @@ sudo pacman -S gzip
 
 > `typescript` stellt den TypeScript-Compiler (`tsc`) bereit. Dieser übersetzt TypeScript-Code (`.ts`) in normales JavaScript, das anschließend von Browsern oder Node.js ausgeführt werden kann.
 
+<details>
+<summary>Installieren</summary>
+
 ```bash
 sudo npm install -g typescript
 ```
+
+</details>
 
 ### Die ultimative LaTeX-Umgebung installieren
 
@@ -1331,25 +1346,40 @@ sudo pacman -S gnome-terminal
 >
 > Deshalb ist die entsprechende Funktion in meiner Konfiguration standardmäßig **auskommentiert** und muss nur aktiviert werden, wenn du sie wirklich nutzen möchtest.
 
+<details>
+<summary>Installieren</summary>
+
 ```bash
 sudo pacman -S acpi
 ```
+
+</details>
 
 ### ✨ Java-Laufzeitumgebung installieren
 
 > `jre-openjdk` installiert die Java-Laufzeitumgebung (Java Runtime Environment). Damit kannst du fertige Java-Programme starten, ohne das komplette Java-Entwicklungspaket (`jdk`) zu installieren.
 
+<details>
+<summary>Installieren</summary>
+
 ```bash
 sudo pacman -S jre-openjdk
 ```
+
+</details>
 
 ### ✨ Erweiterte Grammatik- und Stilprüfung mit LanguageTool
 
 > `languagetool` bietet eine erweiterte Grammatik-, Rechtschreib- und Stilprüfung für verschiedene Sprachen. Es kann von Editoren, Schreibprogrammen und Plugins genutzt werden, um Texte direkt während des Schreibens zu überprüfen.
 
+<details>
+<summary>Installieren</summary>
+
 ```bash
 sudo pacman -S languagetool
 ```
+
+</details>
 
 ### LazyVim und JetBrains Mono Nerd Font installieren
 
@@ -1458,9 +1488,14 @@ Dort kannst du unter anderem Darstellung, Farben, Layout und Verhalten anpassen.
 
 > `nvtop` ist ein interaktiver Monitor für NVIDIA-GPUs, der dir eine visuelle Darstellung der laufenden Prozesse deiner GPU zeigt. Es ist besonders nützlich für Entwickler, die ihre GPU-Ressourcen überwachen möchten.
 
+<details>
+<summary>Installieren</summary>
+
 ```bash
 sudo pacman -S nvtop
 ```
+
+</details>
 
 ### Den ultraschnellen Terminal-Dateimanager Yazi installieren
 
@@ -1476,9 +1511,14 @@ sudo pacman -S yazi
 >
 > `w3m` wird häufig zusammen mit `ranger` für Bildvorschauen im Terminal verwendet.
 
+<details>
+<summary>Installieren</summary>
+
 ```bash
 sudo pacman -S ranger w3m
 ```
+
+</details>
 
 ### Das Zeitmessungs-Werkzeug time installieren
 
@@ -1523,25 +1563,40 @@ sudo pacman -S hyperfine
 >
 > Für den normalen JK-Arch-Workflow mit `kitty`, `fish` und `NeoVim` kannst du `tmux` einfach überspringen.
 
+<details>
+<summary>Installieren</summary>
+
 ```bash
 sudo pacman -S tmux
 ```
+
+</details>
 
 ### ✨ Den Anwendungsstarter Wofi installieren
 
 > `wofi` ist ein moderner Anwendungsstarter für Wayland, der eine schnelle und einfache Möglichkeit bietet, Programme zu starten. Er ist besonders nützlich in minimalistischen Desktop-Umgebungen wie Hyprland.
 
+<details>
+<summary>Installieren</summary>
+
 ```bash
 sudo pacman -S wofi
 ```
+
+</details>
 
 ### ✨ Die intelligente Ordner-Navigation zoxide installieren
 
 > `zoxide` ist ein modernes Werkzeug zur intelligenten Navigation in Verzeichnissen. Es merkt sich die am häufigsten verwendeten Ordner und ermöglicht es dir, schnell zu ihnen zu wechseln, ohne den vollständigen Pfad eingeben zu müssen.
 
+<details>
+<summary>Installieren</summary>
+
 ```bash
 sudo pacman -S zoxide
 ```
+
+</details>
 
 ### Den Hex-Editor GHex installieren
 
@@ -1597,9 +1652,14 @@ sudo pacman -S tree
 
 > `ripgrep` ist ein sehr schnelles Suchwerkzeug, das auf der Basis von `grep` entwickelt wurde. Es ermöglicht es dir, in Dateien nach Mustern zu suchen, wobei es besonders schnell bei großen Dateien und Verzeichnissen ist.
 
+<details>
+<summary>Installieren</summary>
+
 ```bash
 sudo pacman -S ripgrep
 ```
+
+</details>
 
 ### Das blitzschnelle Dateisuch-Werkzeug fd installieren
 
@@ -1617,19 +1677,35 @@ sudo pacman -S fd
 sudo pacman -S eza
 ```
 
-### Die vereinfachten Community-Handbücher tldr installieren
+### ✨ Die vereinfachten Community-Handbücher tldr installieren
+
+> `tldr` ist ein Kommandozeilenwerkzeug, das vereinfachte und leicht verständliche Handbücher für viele Linux-Befehle bereitstellt. Es bietet kurze Beispiele und Erklärungen, um die Nutzung von Befehlen schnell zu erlernen.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
 sudo pacman -S tldr
 ```
 
-### Den JSON-Datenprozessor jq installieren
+</details>
+
+### ✨ Den JSON-Datenprozessor jq installieren
+
+> `jq` ist ein leistungsstarkes Kommandozeilenwerkzeug zur Verarbeitung und Manipulation von JSON-Daten. Es ermöglicht es dir, JSON-Objekte zu filtern, zu transformieren und zu analysieren.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
 sudo pacman -S jq
 ```
 
+</details>
+
 ### Die grafische Monitor-Konfiguration nwg-displays installieren
+
+> `nwg-displays` ist ein grafisches Werkzeug zur Konfiguration von Monitoren und Displays unter Wayland. Es ermöglicht dir, Auflösung, Position, Rotation und andere Anzeigeeinstellungen einfach über eine Benutzeroberfläche anzupassen.
 
 ```bash
 sudo pacman -S nwg-displays
@@ -1647,85 +1723,190 @@ sudo pacman -S imagemagick
 
 > `thefuck` ist ein Kommandozeilenwerkzeug, das Tippfehler in Befehlen erkennt und automatisch korrigiert. Es analysiert die Eingaben im Terminal und schlägt Korrekturen vor, um häufige Fehler zu beheben.
 
+<details>
+<summary>Installieren</summary>
+
 ```bash
 sudo pacman -S thefuck
 ```
 
+</details>
 
-### Microsoft Visual Studio Code (VS Code) über yay installieren
+### Microsoft Visual Studio Code (VS Code) installieren
+
+> **Visual Studio Code** ist ein moderner, erweiterbarer Quellcode-Editor von Microsoft. Er bietet Unterstützung für viele Programmiersprachen, Debugging, Git-Integration und eine große Auswahl an Erweiterungen.
+>
+> Die AUR-Version `visual-studio-code-bin` enthält die originale Microsoft-Version von VS Code als vorkompiliertes Paket. Dadurch erhältst du die gleiche Version wie auf anderen Plattformen inklusive Microsoft-Features.
 
 ```bash
-# sudo pacman -S code
 yay -S visual-studio-code-bin
+````
+
+<details>
+<summary>✨ Open-Source-Version von VS Code installieren</summary>
+
+> **Code - OSS** ist die vollständig quelloffene Variante von Visual Studio Code. Sie basiert auf dem gleichen Quellcode wie VS Code, enthält aber keine proprietären Microsoft-Komponenten wie Telemetrie oder den offiziellen Microsoft-Marktplatz.
+>
+> Diese Version eignet sich besonders, wenn du eine freie und transparente Entwicklungsumgebung bevorzugst.
+
+Installation über die offiziellen Arch-Repositories:
+
+```bash
+sudo pacman -S code
 ```
+
+</details>
 
 ### GitKraken über yay installieren
 
-```bash
-# wget https://release.gitkraken.com/linux/gitkraken-amd64.tar.gz
-# sudo tar -xvzf gitkraken-amd64.tar.gz
-# sudo mv gitkraken /opt/
-# sudo ln -s /opt/gitkraken/gitkraken /usr/local/bin/gitkraken
-# mkdir -p ~/.local/share/applications; printf '%s\n' '[Desktop Entry]' 'Name=GitKraken' 'Comment=Git Client' 'Exec=/opt/gitkraken/gitkraken' 'Icon=/opt/gitkraken/gitkraken.png' 'Terminal=false' 'Type=Application' 'Categories=Development;' > ~/.local/share/applications/gitkraken.desktop
+> **GitKraken** ist ein moderner grafischer Git-Client, der das Arbeiten mit Git-Repositories übersichtlicher macht. Er bietet eine visuelle Darstellung von Branches, Commits und Merge-Vorgängen und erleichtert dadurch komplexe Git-Workflows.
+>
+> Das Paket `gitkraken` installiert GitKraken über das AUR und integriert es sauber in dein Arch-System.
 
+```bash
 yay -S gitkraken
+````
+
+<details>
+<summary>✨ Offizielle GitKraken-Version manuell installieren</summary>
+
+> Diese Methode installiert die offizielle Linux-Version direkt von GitKraken. Sie ist unabhängig vom AUR und kann verwendet werden, wenn du die vom Hersteller bereitgestellte Version bevorzugst.
+
+```bash
+wget https://release.gitkraken.com/linux/gitkraken-amd64.tar.gz
+sudo tar -xvzf gitkraken-amd64.tar.gz
+sudo mv gitkraken /opt/
+sudo ln -s /opt/gitkraken/gitkraken /usr/local/bin/gitkraken
+mkdir -p ~/.local/share/applications
+printf '%s\n' '[Desktop Entry]' 'Name=GitKraken' 'Comment=Git Client' 'Exec=/opt/gitkraken/gitkraken' 'Icon=/opt/gitkraken/gitkraken.png' 'Terminal=false' 'Type=Application' 'Categories=Development;' > ~/.local/share/applications/gitkraken.desktop
 ```
+
+</details>
 
 ### Den Discord-Client (Vesktop) über den Paketmanager installieren
 
+> **Vesktop** ist ein alternativer Discord-Client für Linux, der auf Discords Web-Version basiert und zusätzliche Funktionen sowie bessere Integration in moderne Linux-Desktop-Umgebungen bietet.
+>
+> Besonders unter Wayland-Compositors wie Hyprland bietet Vesktop häufig eine bessere Erfahrung als der originale Discord-Client.
+
 ```bash
-# yay -S discord
 sudo pacman -S vesktop
 ```
 
-Bie Problemen:
+<details>
+<summary>✨ Originalen Discord-Client über yay installieren</summary>
+
+> Falls du lieber den offiziellen Discord-Client verwenden möchtest, kannst du ihn über das AUR installieren.
+>
+> Das Paket `discord` wird dabei von `yay` verwaltet und kann später genauso über den AUR-Update-Workflow aktualisiert werden.
+
+```bash
+yay -S discord
+```
+
+</details>
+
+<details>
+<summary>✨ Probleme mit Bildschirmfreigabe oder Wayland-Portalen beheben</summary>
+
+> Unter Wayland, besonders mit Hyprland, können Probleme mit Bildschirmfreigabe, Fensterauswahl oder Desktop-Integration auftreten.
+>
+> Die folgenden Befehle starten die Desktop-Portale neu und prüfen anschließend deren Status.
 
 ```bash
 systemctl --user restart xdg-desktop-portal
 systemctl --user restart xdg-desktop-portal-hyprland
+
 systemctl --user status xdg-desktop-portal-hyprland
 systemctl --user status xdg-desktop-portal
 ```
 
+</details>
+
 ### Den Signal Messenger installieren
+
+> **Signal** ist ein datenschutzfokussierter Messenger, der Ende-zu-Ende-Verschlüsselung für Nachrichten, Anrufe und Medien bietet. Er ist besonders beliebt bei Nutzern, die Wert auf Sicherheit und Privatsphäre legen.
 
 ```bash
 sudo pacman -S signal-desktop
 # yay -S signal-desktop
 ```
 
+### Den Firefox Browser installieren
+
+> **Firefox** ist ein freier und quelloffener Webbrowser von Mozilla. Er legt besonderen Wert auf Datenschutz, Sicherheit und die Kontrolle der Nutzer über ihre Daten.
+>
+> Firefox verwendet keine Chromium-Basis, sondern die eigene Browser-Engine **Gecko** und unterstützt moderne Webstandards, Erweiterungen sowie umfangreiche Datenschutz-Einstellungen.
+
+```bash
+sudo pacman -S firefox
+# yay -S firefox
+```
+
 ### Den Brave Browser über yay installieren
+
+> **Brave** ist ein datenschutzfokussierter Webbrowser, der Tracking und Werbung blockiert und auf Chromium basiert. Er bietet zusätzliche Funktionen wie integrierten Werbeblocker, HTTPS Everywhere und Schutz vor Fingerprinting.
 
 ```bash
 sudo pacman -S brave-bin
 # yay -S brave-bin
 ```
 
-### Den datenschutzfokussierten Mullvad Browser installieren
+### ✨ Den datenschutzfokussierten Mullvad Browser installieren
+
+> **Mullvad Browser** ist ein datenschutzorientierter Webbrowser, der auf Firefox basiert und von Mullvad entwickelt wurde. Er bietet zusätzliche Sicherheits- und Datenschutzfunktionen, wie z.B. integrierten Schutz vor Tracking, Fingerprinting und Werbung.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
-# yay -S mullvad-browser-bin
+yay -S mullvad-browser-bin
 ```
 
-### Google Chrome über den AUR-Helfer installieren
+</details>
+
+### ✨ Google Chrome über den AUR-Helfer installieren
+
+> **Google Chrome** ist ein populärer Webbrowser, der von Google entwickelt wurde. Er bietet eine schnelle und zuverlässige Browsererfahrung mit einer breiten Auswahl an Funktionen und Erweiterungen.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
-# yay -S google-chrome
+yay -S google-chrome
 ```
 
-### Den datenschutzfokussierten LibreWolf Browser installieren
+</details>
+
+### ✨ Den datenschutzfokussierten LibreWolf Browser installieren
+
+> **LibreWolf** ist ein datenschutzorientierter Webbrowser, der auf Firefox basiert und von der Community entwickelt wird. Er legt besonderen Wert auf Sicherheit, Datenschutz und die Entfernung von Telemetrie- und Tracking-Funktionen.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
-# yay -S librewolf-bin
+yay -S librewolf-bin
 ```
 
-### Die Firefox Developer Edition installieren
+</details>
+
+### ✨ Die Firefox Developer Edition installieren
+
+> **Firefox Developer Edition** ist eine spezielle Version von Firefox, die für Webentwickler optimiert ist. Sie bietet zusätzliche Entwicklerwerkzeuge, Debugging-Funktionen und experimentelle Features, die in der regulären Version von Firefox nicht verfügbar sind.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
 sudo pacman -S firefox-developer-edition
 ```
 
+</details>
+
 ### Das grafische Archivierungsprogramm Ark installieren
+
+> `Ark` ist ein grafisches Archivierungsprogramm, das es ermöglicht, verschiedene Archivformate wie ZIP, TAR, RAR und 7z zu erstellen, zu extrahieren und zu verwalten. Es bietet eine benutzerfreundliche Oberfläche für die Arbeit mit komprimierten Dateien.
 
 ```bash
 sudo pacman -S ark
@@ -1733,11 +1914,15 @@ sudo pacman -S ark
 
 ### Den erweiterten KDE-Texteditor Kate installieren
 
+> `Kate` ist ein leistungsfähiger Texteditor für Entwickler und fortgeschrittene Benutzer. Er bietet Syntax-Highlighting, Code-Faltung, Plugins und eine Vielzahl von Funktionen, die das Bearbeiten von Quellcode und Textdateien erleichtern.
+
 ```bash
 sudo pacman -S kate
 ```
 
 ### Der grafische Bildbetrachter Gwenview installieren
+
+> `Gwenview` ist ein schneller und benutzerfreundlicher Bildbetrachter für KDE. Er unterstützt eine Vielzahl von Bildformaten, bietet grundlegende Bearbeitungsfunktionen und ermöglicht das einfache Durchsuchen von Bildersammlungen.
 
 ```bash
 sudo pacman -S gwenview
@@ -1745,13 +1930,15 @@ sudo pacman -S gwenview
 
 ### Der universelle Dokumentenbetrachter Okular installieren
 
+> `Okular` ist ein universeller Dokumentenbetrachter, der verschiedene Dateiformate wie PDF, DjVu, TIFF und mehr unterstützt. Er bietet eine benutzerfreundliche Oberfläche für das Lesen und Anzeigen von Dokumenten.
+
 ```bash
 sudo pacman -S okular
 ```
 
 ### Den universellen Medienplayer VLC installieren
 
-> Zum Abspielen von Videos, Musik und nahezu allen gängigen Medienformaten.
+> `VLC` ist ein vielseitiger und plattformübergreifender Medienplayer, der eine breite Palette von Audio- und Videoformaten unterstützt. Er bietet Funktionen wie Streaming, Untertitelunterstützung und Medienkonvertierung.
 
 ```bash
 sudo pacman -S vlc
@@ -1759,7 +1946,7 @@ sudo pacman -S vlc
 
 ### ✨ Den Audio-Editor Audacity installieren
 
-> Zum Aufnehmen, Schneiden und Bearbeiten von Audiodateien.
+> `Audacity` ist ein leistungsstarker Audio-Editor, der zum Aufnehmen, Schneiden und Bearbeiten von Audiodateien verwendet werden kann. Er bietet eine Vielzahl von Funktionen für die Audioverarbeitung und -bearbeitung.
 
 <details>
 <summary>Installieren</summary>
@@ -1772,7 +1959,7 @@ sudo pacman -S audacity
 
 ### ✨ Die Wissensdatenbank Obsidian installieren
 
-> Zum Erstellen, Organisieren und Verknüpfen von Notizen und Wissen.
+> `Obsidian` ist eine leistungsstarke Wissensdatenbank und Notiz-App, die auf Markdown basiert. Sie ermöglicht es dir, Notizen zu erstellen, zu verknüpfen und in einem Netzwerk von Ideen zu organisieren. Obsidian eignet sich besonders gut für persönliche Wissensmanagement-Systeme, Forschung und kreative Projekte.
 
 <details>
 <summary>Installieren</summary>
@@ -1785,7 +1972,7 @@ sudo pacman -S obsidian
 
 ### Den grafischen Plasma-Systemmonitor installieren
 
-> Zur Überwachung von CPU, RAM, Festplatten, Netzwerk und laufenden Prozessen.
+> `plasma-systemmonitor` ist ein grafisches Werkzeug zur Überwachung von Systemressourcen wie CPU, RAM, Festplattennutzung und laufenden Prozessen. Es bietet eine benutzerfreundliche Oberfläche für die Analyse der Systemleistung und -auslastung.
 
 ```bash
 sudo pacman -S plasma-systemmonitor
@@ -1793,7 +1980,7 @@ sudo pacman -S plasma-systemmonitor
 
 ### ✨ Den Taskmanager Mission Center über yay installieren
 
-> Zur Übersicht und Überwachung von CPU, RAM, Festplatte und laufenden Prozessen.
+> `mission-center` ist ein moderner Taskmanager und Systemmonitor, der eine übersichtliche Darstellung von laufenden Prozessen, Ressourcenverbrauch und Systeminformationen bietet. Er eignet sich besonders für Benutzer, die eine grafische Oberfläche zur Überwachung ihres Systems bevorzugen.
 
 <details>
 <summary>Installieren</summary>
@@ -1804,17 +1991,22 @@ yay -S mission-center
 
 </details>
 
-### Das digitale Mal- und Zeichenprogramm Krita installieren
+### ✨ Das digitale Mal- und Zeichenprogramm Krita installieren
 
-> Zum digitalen Zeichnen, Malen und Erstellen von Illustrationen.
+> `Krita` ist ein professionelles digitales Mal- und Zeichenprogramm, das sich besonders für Illustratoren, Concept Artists und digitale Künstler eignet. Es bietet eine Vielzahl von Pinseltypen, Ebenenfunktionen und Zeichenwerkzeugen.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
 sudo pacman -S krita
 ```
 
+</details>
+
 ### ✨ Das Bildbearbeitungsprogramm GIMP installieren
 
-> Zum Bearbeiten, Retuschieren und Erstellen von Bildern und Grafiken.
+> `GIMP` (GNU Image Manipulation Program) ist ein leistungsfähiges Open-Source-Bildbearbeitungsprogramm, das für Fotobearbeitung, Grafikdesign und digitale Kunst verwendet wird. Es bietet eine Vielzahl von Werkzeugen und Funktionen für die Bildbearbeitung.
 
 <details>
 <summary>Installieren</summary>
@@ -1827,7 +2019,7 @@ sudo pacman -S gimp
 
 ### ✨ Das professionelle Videoschnittprogramm Kdenlive installieren
 
-> Zum Schneiden, Bearbeiten und Erstellen von Videos.
+> `Kdenlive` ist ein professionelles Videoschnittprogramm, das eine Vielzahl von Funktionen für die Videobearbeitung bietet. Es unterstützt mehrere Spuren, Effekte, Übergänge und bietet eine benutzerfreundliche Oberfläche für die Erstellung von Videos.
 
 <details>
 <summary>Installieren</summary>
@@ -1840,28 +2032,63 @@ sudo pacman -S kdenlive
 
 ### ✨ Das professionelle All-in-One-Videoschnittprogramm DaVinci Resolve installieren
 
-> Für professionellen Videoschnitt, Farbkorrektur, Effekte und Audiobearbeitung.
+> **DaVinci Resolve** ist eine professionelle All-in-One-Software für Videobearbeitung, Farbkorrektur, visuelle Effekte, Motion Graphics und Audio-Postproduktion.
+>
+> Die Software wird häufig in der Film- und Medienproduktion eingesetzt und kombiniert Schnitt, Color Grading, Effekte und Tonbearbeitung in einer einzigen Anwendung.
+>
+> Unter Linux benötigt DaVinci Resolve eine korrekt eingerichtete GPU-Unterstützung, besonders für hardwarebeschleunigte Effekte und Rendering.
 
 <details>
 <summary>Installieren</summary>
 
 ```bash
 sudo pacman -S davinci-resolve
+````
 
-# Bei CachyOS reicht die Installation von davinci-resolve meistens aus.
-# Bei anderen Arch-basierten Distributionen müssen die Treiber manuell installiert werden:
-# sudo pacman -S cuda opencl-nvidia
-# sudo pacman -S rocm-opencl-runtime
+> **CachyOS:**
+> Unter CachyOS reicht die Installation von `davinci-resolve` meistens aus, da benötigte Abhängigkeiten bereits passend eingerichtet sind.
+>
+> **Andere Arch-basierte Distributionen:**
+> Je nach verwendeter Grafikkarte müssen die passenden Compute-Treiber zusätzlich installiert werden.
 
-# ffmpeg -i eingabe.mp4 -c:v prores_ks -profile:v 3 -c:a pcm_s16le ausgabe.mov
-# mkdir -p konvertiert && for f in *.mp4; do ffmpeg -i "$f" -c:v prores_ks -profile:v 3 -c:a pcm_s16le "konvertiert/${f%.mp4}.mov"; done
+**NVIDIA:**
+
+```bash
+sudo pacman -S cuda opencl-nvidia
+```
+
+**AMD:**
+
+```bash
+sudo pacman -S rocm-opencl-runtime
+```
+
+</details>
+
+<details>
+<summary>✨ Videodateien für DaVinci Resolve vorbereiten</summary>
+
+> Einige Kameras und Aufnahmeprogramme erzeugen Formate, die unter Linux oder in DaVinci Resolve nicht optimal funktionieren.
+>
+> Mit `ffmpeg` können Videos beispielsweise in ein besser geeignetes Schnittformat wie ProRes konvertiert werden.
+
+Einzelne Datei konvertieren:
+
+```bash
+ffmpeg -i eingabe.mp4 -c:v prores_ks -profile:v 3 -c:a pcm_s16le ausgabe.mov
+```
+
+Mehrere MP4-Dateien automatisch konvertieren:
+
+```bash
+mkdir -p konvertiert && for f in *.mp4; do ffmpeg -i "$f" -c:v prores_ks -profile:v 3 -c:a pcm_s16le "konvertiert/${f%.mp4}.mov"; done
 ```
 
 </details>
 
 ### ✨ Das plattformübergreifende Videoschnittprogramm Shotcut installieren
 
-> Zum einfachen Schneiden, Bearbeiten und Exportieren von Videos.
+> `Shotcut` ist ein plattformübergreifendes Videoschnittprogramm, das eine Vielzahl von Funktionen für die Videobearbeitung bietet. Es unterstützt mehrere Spuren, Effekte, Übergänge und bietet eine benutzerfreundliche Oberfläche für die Erstellung von Videos.
 
 <details>
 <summary>Installieren</summary>
@@ -1872,43 +2099,96 @@ sudo pacman -S shotcut
 
 </details>
 
-### Die 3D-Grafik- und Animations-Suite Blender installieren
+### ✨ Die 3D-Grafik- und Animations-Suite Blender installieren
+
+> `Blender` ist eine leistungsstarke Open-Source-Software für 3D-Modellierung, Animation, Rendering und Simulation. Sie wird in der Filmproduktion, Spieleentwicklung und für visuelle Effekte eingesetzt.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
 sudo pacman -S blender
 ```
 
-### Den E-Mail- und Kalender-Client Thunderbird installieren
+</details>
+
+### ✨ Den E-Mail- und Kalender-Client Thunderbird installieren
+
+> `Thunderbird` ist ein freier und quelloffener E-Mail-Client, der auch Kalender- und Aufgabenfunktionen bietet. Er unterstützt mehrere E-Mail-Konten, Erweiterungen und bietet eine benutzerfreundliche Oberfläche für die Verwaltung von E-Mails.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
-# sudo pacman -S thunderbird
+sudo pacman -S thunderbird
 ```
 
+</details>
+
 ### Den wissenschaftlichen Taschenrechner Qalculate! installieren
+
+> `Qalculate!` ist ein leistungsfähiger wissenschaftlicher Taschenrechner, der sowohl einfache als auch komplexe Berechnungen unterstützt. Er bietet Funktionen wie Einheitenumrechnung, Währungsumrechnung, Statistik, Algebra und vieles mehr.
 
 ```bash
 sudo pacman -S qalculate-gtk
 ```
 
-### Den Screenshot- und Bildschirmaufnahme-Manager Flameshot installieren
+### ✨ Den Screenshot- und Bildschirmaufnahme-Manager Flameshot installieren
+
+> `Flameshot` ist ein leistungsfähiges Screenshot-Tool, das es ermöglicht, Screenshots zu erstellen, zu bearbeiten und zu teilen. Es bietet Funktionen wie Anmerkungen, Hervorhebungen, Zuschneiden und direkte Upload-Optionen.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
 sudo pacman -S flameshot grim xdg-desktop-portal-hyprland
 ```
 
+</details>
+
 ### Die Streaming- und Aufnahme-Software OBS Studio installieren
+
+> **OBS Studio** (Open Broadcaster Software) ist eine freie und quelloffene Software für Bildschirmaufnahmen, Livestreams und Videoaufzeichnungen.
+>
+> OBS wird häufig für Streaming auf Plattformen wie Twitch, YouTube oder eigene RTMP-Server verwendet und bietet Funktionen wie Szenenverwaltung, Audio-Mixing, Webcam-Unterstützung, Filter und Hardware-Encoding.
+>
+> Unter Wayland benötigt OBS eine korrekt eingerichtete Desktop-Portal- und PipeWire-Umgebung, damit Bildschirmaufnahme und Fensteraufnahme zuverlässig funktionieren.
 
 ```bash
 sudo pacman -S obs-studio
-# sudo pacman -S xdg-desktop-portal xdg-desktop-portal-hyprland pipewire wireplumber
-# systemctl --user status xdg-desktop-portal
-# systemctl --user status xdg-desktop-portal-hyprland
-# systemctl --user restart xdg-desktop-portal
-# systemctl --user restart xdg-desktop-portal-hyprland
-# systemctl --user restart pipewire wireplumber
+````
+
+<details>
+<summary>✨ Wayland- und Hyprland-Unterstützung einrichten</summary>
+
+> Falls Bildschirmaufnahme, Fensteraufnahme oder die Auswahl von Monitoren unter Wayland nicht funktioniert, können die benötigten Portale und Audio-Dienste installiert beziehungsweise neu gestartet werden.
+
+Benötigte Pakete installieren:
+
+```bash
+sudo pacman -S xdg-desktop-portal xdg-desktop-portal-hyprland pipewire wireplumber
 ```
 
+Status der Desktop-Portale prüfen:
+
+```bash
+systemctl --user status xdg-desktop-portal
+systemctl --user status xdg-desktop-portal-hyprland
+```
+
+Dienste neu starten:
+
+```bash
+systemctl --user restart xdg-desktop-portal
+systemctl --user restart xdg-desktop-portal-hyprland
+systemctl --user restart pipewire wireplumber
+```
+
+</details>
+
 ### Das Software-Zentrum Discover und das Flatpak-System installieren
+
+> `Discover` ist ein grafisches Software-Zentrum für KDE Plasma, das es ermöglicht, Anwendungen zu durchsuchen, zu installieren und zu verwalten. Es unterstützt verschiedene Paketformate wie Flatpak, Snap und native Pakete.
 
 ```bash
 sudo pacman -S discover flatpak
@@ -1916,89 +2196,265 @@ sudo pacman -S discover flatpak
 
 ### Die Desktop-Uhr KClock installieren
 
+> `KClock` ist eine Desktop-Uhr für KDE Plasma, die die aktuelle Zeit, Datum und zusätzliche Funktionen wie Wecker, Timer und Weltzeituhr bietet. Sie kann in der Systemleiste oder als eigenständiges Widget angezeigt werden.
+
 ```bash
 sudo pacman -S kclock
 ```
 
-### Den Morgen Calendar über yay installieren
+### ✨ Den Morgen Calendar über yay installieren
+
+> `Morgen` ist ein moderner Kalender-Client für Linux, der eine übersichtliche Darstellung von Terminen, Aufgaben und Erinnerungen bietet. Er unterstützt verschiedene Kalenderdienste wie Google Calendar, CalDAV und andere.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
-# yay -S morgen-bin
+yay -S morgen-bin
 ```
 
+</details>
+
 ### Das Smartphone-Integrationswerkzeug KDE Connect installieren
+
+> `KDE Connect` ist ein Tool, das die Integration zwischen deinem Linux-Desktop und deinem Smartphone ermöglicht. Es bietet Funktionen wie Dateiübertragung, Benachrichtigungen, Mediensteuerung und mehr.
 
 ```bash
 sudo pacman -S kdeconnect
 ```
 
-### Eine ältere Python-Version (3.12) über yay installieren
+### ✨ Eine ältere Python-Version (3.12) über yay installieren
+
+> `Python 3.12` ist eine ältere Version von Python, die für bestimmte Anwendungen oder Kompatibilitätsgründe benötigt werden kann.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
-# yay -S python312
+yay -S python312
 ```
 
-### Die Office-Suite LibreOffice installieren
+</details>
+
+### ✨ Die Office-Suite LibreOffice installieren
+
+> **LibreOffice** ist eine freie und quelloffene Office-Suite für Textverarbeitung, Tabellenkalkulation, Präsentationen, Zeichnungen und weitere Büroanwendungen.
+>
+> Sie bietet eine hohe Kompatibilität zu Microsoft-Office-Dateiformaten wie `.docx`, `.xlsx` und `.pptx` und stellt eine vollständige Alternative zu kommerziellen Office-Paketen dar.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
 sudo pacman -S libreoffice-fresh libreoffice-fresh-de
 ```
 
-### Die Microsoft-kompatiblen Liberation-Schriftarten installieren
+</details>
+
+<details>
+<summary>✨ Microsoft-kompatible Liberation-Schriftarten installieren</summary>
+
+> **Liberation Fonts** sind freie Schriftarten, die metrisch mit bekannten Microsoft-Schriften wie Arial, Times New Roman und Courier New kompatibel sind.
+>
+> Sie verbessern die Darstellung und den Austausch von Dokumenten zwischen LibreOffice und Microsoft Office.
 
 ```bash
 sudo pacman -S ttf-liberation
 ```
 
-### Das Sandbox-Sicherheitswerkzeug Firejail installieren
+</details>
+
+### ✨ Das Sandbox-Sicherheitswerkzeug Firejail installieren
+
+> **Firejail** ist ein Sicherheitswerkzeug, das Anwendungen in einer isolierten Umgebung (Sandbox) ausführt. Es reduziert die Angriffsfläche von Programmen, indem es deren Zugriff auf das System einschränkt und potenzielle Sicherheitsrisiken minimiert.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
 sudo pacman -S firejail
 ```
 
-### Das vollständige Linux-Drucksystem (CUPS) einrichten
+</details>
+
+### ✨ Das vollständige Linux-Drucksystem CUPS für Hyprland mit KDE-Tools einrichten
+
+> **CUPS** (Common UNIX Printing System) ist das zentrale Drucksystem unter Linux und ermöglicht die Verwaltung von lokalen und Netzwerkdruckern.
+>
+> Es unterstützt moderne Drucker über IPP, stellt Druckwarteschlangen bereit und funktioniert zuverlässig mit Wayland-Umgebungen wie **Hyprland** sowie KDE-Anwendungen.
+>
+> Mit `cups-filters`, `ghostscript` und `gutenprint` werden wichtige Druckfilter, PostScript-Unterstützung und zusätzliche Treiber für viele Druckermodelle installiert.
+>
+> `avahi` und `nss-mdns` ermöglichen die automatische Erkennung von Netzwerkdruckern über mDNS/Bonjour, beispielsweise bei WLAN-Druckern und AirPrint-kompatiblen Geräten.
+>
+> Für KDE-basierte Umgebungen wird zusätzlich `print-manager` verwendet, wodurch Drucker bequem über KDE-Systemwerkzeuge verwaltet werden können.
+
+<details>
+<summary>Installieren</summary>
 
 ```bash
-sudo pacman -S cups cups-filters ghostscript gutenprint avahi nss-mdns system-config-printer
+sudo pacman -S cups cups-filters ghostscript gutenprint avahi nss-mdns print-manager
 ```
 
-### Die offiziellen HP-Druckertreiber (HPLIP) installieren
+</details>
 
-```bash
-sudo pacman -S hplip
-```
+<details>
+<summary>✨ CUPS-Dienst aktivieren und starten</summary>
 
-### Die moderne LaTeX-Alternative Tectonic und den Dokumenten-Konverter Pandoc einrichten
-
-```bash
-# sudo pacman -S pandoc tectonic
-```
-
-### Text-zu-PostScript-Konverter und PDF-Interpreter installieren
-
-```bash
-sudo pacman -S enscript ghostscript
-```
-
-### Den Drucker-Hintergrunddienst aktivieren
+> Nach der Installation muss der CUPS-Druckdienst aktiviert werden, damit Drucker automatisch verfügbar sind.
 
 ```bash
 sudo systemctl enable --now cups.service
 ```
 
-### Den Netzwerk-Erkennungsdienst Avahi aktivieren
+Status prüfen:
+
+```bash
+systemctl status cups.service
+```
+
+</details>
+
+<details>
+<summary>✨ Netzwerkdrucker-Erkennung aktivieren</summary>
+
+> Für die automatische Erkennung von Druckern im lokalen Netzwerk wird **Avahi** verwendet. Dies ermöglicht die Erkennung von IPP-, WLAN- und AirPrint-kompatiblen Druckern.
 
 ```bash
 sudo systemctl enable --now avahi-daemon.service
 ```
 
-### Die Rust-Alternative für den sudo-Befehl installieren
+</details>
+
+<details>
+<summary>✨ Offizielle HP-Druckerunterstützung (HPLIP) installieren</summary>
+
+> **HPLIP** (HP Linux Imaging and Printing) ist das offizielle Linux-Treiberpaket von HP für viele HP-Drucker und Multifunktionsgeräte.
+>
+> Es erweitert CUPS um zusätzliche Funktionen wie Scannen, Tintenstatusanzeige, Gerätekonfiguration und Unterstützung für viele HP LaserJet-, OfficeJet- und DeskJet-Modelle.
+>
+> Besonders bei HP-Multifunktionsgeräten wird HPLIP empfohlen, da dadurch neben dem Drucken auch Scanner-Funktionen unter Linux verfügbar werden.
 
 ```bash
-# sudo pacman -S sudo-rs
+sudo pacman -S hplip
 ```
 
+</details>
+
+<details>
+<summary>✨ HP-Drucker erkennen und einrichten</summary>
+
+> Nach der Installation von HPLIP können HP-Drucker automatisch erkannt und eingerichtet werden.
+
+Geräteerkennung starten:
+
+```bash
+hp-setup
+```
+
+Installierte HP-Geräte anzeigen:
+
+```bash
+hp-info
+```
+
+Druckerstatus prüfen:
+
+```bash
+hp-status
+```
+
+</details>
+
+<details>
+<summary>✨ HP-Scanner-Unterstützung aktivieren</summary>
+
+> Bei HP-Multifunktionsgeräten kann zusätzlich die Scan-Unterstützung aktiviert werden.
+
+Scanner testen:
+
+```bash
+hp-scan
+```
+
+Falls eine grafische Scan-Oberfläche benötigt wird:
+
+```bash
+sudo pacman -S simple-scan
+```
+
+</details>
+
+<details>
+<summary>✨ Zusätzliche Druck- und PDF-Werkzeuge installieren</summary>
+
+> Für die Verarbeitung von Textdateien, PostScript-Dokumenten und PDF-Dateien werden zusätzliche Werkzeuge installiert.
+>
+> `enscript` kann Textdateien in PostScript umwandeln, während `ghostscript` als Interpreter und Konverter für PostScript- und PDF-Dokumente dient.
+
+```bash
+sudo pacman -S enscript ghostscript
+```
+
+</details>
+
+<details>
+<summary>✨ KDE-Druckverwaltung unter Hyprland verwenden</summary>
+
+> Unter Hyprland können weiterhin KDE-Systemwerkzeuge genutzt werden. `print-manager` integriert sich in KDE-Anwendungen und ermöglicht die grafische Verwaltung von Druckern.
+
+KDE-Druckverwaltung öffnen:
+
+```bash
+systemsettings kcm_printer_manager
+```
+
+Falls die KDE-Systemeinstellungen fehlen:
+
+<details>
+<summary>Installieren</summary>
+
+```bash
+sudo pacman -S systemsettings
+```
+
+</details>
+
+</details>
+
+### ✨ Die moderne LaTeX-Alternative Tectonic und den Dokumenten-Konverter Pandoc einrichten
+
+> **Tectonic** ist eine moderne LaTeX-Distribution, die das Erstellen von PDF-Dokumenten aus LaTeX-Quelltexten vereinfacht.
+>
+> Im Gegensatz zu klassischen LaTeX-Installationen verwaltet Tectonic benötigte Pakete automatisch und bietet eine einfache Möglichkeit, wissenschaftliche Dokumente, Berichte und Präsentationen zu erstellen.
+>
+> **Pandoc** ist ein universeller Dokumenten-Konverter, der Dateien zwischen verschiedenen Formaten wie Markdown, LaTeX, HTML, DOCX und PDF umwandeln kann.
+
+<details>
+<summary>Installieren</summary>
+
+```bash
+sudo pacman -S pandoc tectonic
+```
+
+</details>
+
+### ✨ Die Rust-Alternative für den sudo-Befehl installieren
+
+> **sudo-rs** ist eine moderne Implementierung des bekannten `sudo`-Befehls, geschrieben in der Programmiersprache Rust. Es bietet ähnliche Funktionalitäten wie das traditionelle `sudo`, ermöglicht jedoch eine sicherere und effizientere Ausführung von Befehlen mit erhöhten Rechten.
+
+<details>
+<summary>Installieren</summary>
+
+```bash
+sudo pacman -S sudo-rs
+```
+
+</details>
+
 ### Die HEIF- und AVIF-Bildbibliothek libheif installieren
+
+> **libheif** ist eine Bibliothek zur Verarbeitung von HEIF- und AVIF-Bildformaten. Sie ermöglicht das Lesen, Schreiben und Konvertieren von Bildern in diesen modernen Formaten, die für ihre hohe Kompression und Qualität bekannt sind.
 
 ```bash
 sudo pacman -S libheif
@@ -2006,11 +2462,15 @@ sudo pacman -S libheif
 
 ### Die erweiterten Bildformat-Plugins für KDE installieren
 
+> **kimageformats** ist ein Paket, das zusätzliche Bildformat-Plugins für KDE-Anwendungen bereitstellt. Es erweitert die Unterstützung für verschiedene Bildformate und ermöglicht eine bessere Integration in KDE-Software wie Gwenview, Krita und andere.
+
 ```bash
 sudo pacman -S kimageformats
 ```
 
 ### Den Netzwerk-Bandbreiten-Monitor bandwhich installieren
+
+> **bandwhich** ist ein Kommandozeilenwerkzeug, das die aktuelle Netzwerkbandbreite überwacht und anzeigt. Es zeigt an, welche Prozesse und Verbindungen die meiste Bandbreite verbrauchen, und bietet eine übersichtliche Darstellung der Netzwerkaktivität.
 
 ```bash
 sudo pacman -S bandwhich
@@ -2018,11 +2478,15 @@ sudo pacman -S bandwhich
 
 ### Den Netzwerk-Protokollanalysator Wireshark installieren
 
+> **Wireshark** ist ein leistungsfähiger Netzwerk-Protokollanalysator, der es ermöglicht, den Netzwerkverkehr zu überwachen, zu analysieren und zu debuggen. Es unterstützt eine Vielzahl von Protokollen und bietet eine grafische Benutzeroberfläche zur Visualisierung von Netzwerkpaketen.
+
 ```bash
 sudo pacman -S wireshark-qt
 ```
 
 ### Den zweispaltigen Dateimanager Krusader installieren
+
+> **Krusader** ist ein leistungsstarkes, zweispaltiges Dateimanagement-Tool für KDE. Es bietet eine umfangreiche Funktionalität zur Dateiorganisation, -verwaltung und -bearbeitung.
 
 ```bash
 sudo pacman -S krusader
@@ -2030,40 +2494,132 @@ sudo pacman -S krusader
 
 ### Das offizielle 7-Zip-Kompressionswerkzeug installieren
 
+> **7-Zip** ist ein leistungsfähiges Kompressionswerkzeug, das eine hohe Kompressionsrate und Unterstützung für verschiedene Archivformate bietet. Es ermöglicht das Erstellen, Extrahieren und Verwalten von komprimierten Dateien.
+
 ```bash
 sudo pacman -S 7zip
 ```
 
 ### QEMU, KVM und die grafische Verwaltung Virt-Manager installieren
 
+> **QEMU** ist eine leistungsfähige Open-Source-Virtualisierungslösung, die zusammen mit **KVM** (Kernel-based Virtual Machine) eine nahezu native Geschwindigkeit für virtuelle Maschinen unter Linux ermöglicht.
+>
+> **libvirt** stellt eine einheitliche Verwaltungs-Schnittstelle für Virtualisierung bereit und ermöglicht die Steuerung von QEMU/KVM über grafische Werkzeuge wie **Virt-Manager**.
+>
+> **Virt-Manager** ist eine grafische Oberfläche zur Erstellung, Verwaltung und Überwachung virtueller Maschinen. Es eignet sich besonders für Linux-Desktops wie **Hyprland mit KDE-Tools**, da es vollständig unabhängig von der Desktop-Umgebung funktioniert.
+>
+> Zusätzliche Pakete wie `virt-viewer`, `SPICE`, `virglrenderer` und Video-/Audio-Unterstützung verbessern die Integration, Grafikleistung und Bedienung virtueller Maschinen.
+
 ```bash
 sudo pacman -Syu qemu-full virt-manager libvirt virt-viewer dnsmasq qemu-ui-gtk qemu-ui-sdl qemu-audio-pa spice-gtk virglrenderer libvdpau libva-mesa-driver spice-vdagent
 ```
 
-#### Den Virtualisierungs-Dienst für KVM/QEMU aktivieren
+<details>
+<summary>✨ Den Virtualisierungsdienst für KVM/QEMU aktivieren</summary>
+
+> Der `libvirtd`-Dienst verwaltet virtuelle Maschinen und stellt die Verbindung zwischen Virt-Manager und QEMU/KVM her.
 
 ```bash
-sudo systemctl enable --now libvirtd
+sudo systemctl enable --now libvirtd.service
 ```
 
-#### Festplatten-Diagnosewerkzeuge scannen
+Status prüfen:
 
 ```bash
-# sudo smartctl --scan
+systemctl status libvirtd.service
 ```
 
-#### Erweiterte Gruppenrechte für native Kernel-Virtualisierung (KVM) setzen
+</details>
+
+<details>
+<summary>✨ Benutzerrechte für KVM und libvirt einrichten</summary>
+
+> Damit virtuelle Maschinen ohne ständige Root-Rechte über Virt-Manager verwaltet werden können, wird der Benutzer den Gruppen `libvirt` und `kvm` hinzugefügt.
 
 ```bash
 sudo usermod -aG libvirt,kvm $(whoami)
 ```
 
-### Vagrant und das Libvirt-Plugin installieren
+> Danach muss sich der Benutzer einmal ab- und wieder anmelden, damit die Gruppenänderungen aktiv werden.
+
+</details>
+
+<details>
+<summary>✨ Prüfen, ob Hardware-Virtualisierung verfügbar ist</summary>
+
+> Moderne Prozessoren benötigen aktivierte Virtualisierungserweiterungen wie **Intel VT-x** oder **AMD-V**.
+>
+> Mit folgendem Befehl kann geprüft werden, ob die CPU Virtualisierung unterstützt:
 
 ```bash
-# yay -S vagrant
-# vagrant plugin install vagrant-libvirt
+LC_ALL=C lscpu | grep Virtualization
 ```
+
+Unterstützte Kernel-Module prüfen:
+
+```bash
+lsmod | grep kvm
+```
+
+</details>
+
+<details>
+<summary>✨ Netzwerkverwaltung für virtuelle Maschinen einrichten</summary>
+
+> Libvirt verwendet standardmäßig ein NAT-Netzwerk für virtuelle Maschinen. Falls dieses nicht automatisch gestartet wurde, kann es aktiviert werden.
+
+Standard-Netzwerk prüfen:
+
+```bash
+sudo virsh net-list --all
+```
+
+Standard-Netzwerk aktivieren:
+
+```bash
+sudo virsh net-start default
+sudo virsh net-autostart default
+```
+
+</details>
+
+<details>
+<summary>✨ Festplatten-Diagnosewerkzeuge verwenden</summary>
+
+> Mit `smartctl` können Festplatten und SSDs auf Gesundheitszustand, Fehler und SMART-Werte überprüft werden.
+
+Installieren:
+
+```bash
+sudo pacman -S smartmontools
+```
+
+Festplatten erkennen:
+
+```bash
+sudo smartctl --scan
+```
+
+</details>
+
+<details>
+<summary>✨ Vagrant mit Libvirt-Unterstützung installieren</summary>
+
+> **Vagrant** ist ein Werkzeug zur automatisierten Erstellung und Verwaltung reproduzierbarer virtueller Entwicklungsumgebungen.
+>
+> Mit dem **vagrant-libvirt**-Plugin können virtuelle Maschinen direkt über QEMU/KVM und libvirt betrieben werden, ohne VirtualBox zu benötigen.
+
+```bash
+yay -S vagrant
+```
+
+Plugin installieren:
+
+```bash
+vagrant plugin install vagrant-libvirt
+```
+
+</details>
 
 #### Das Highlight: Der optimale QEMU-Startbefell für Ubuntu 26.04 LTS, Kali Linux 2026, Cachy OS + BlackArch Linux
 
