@@ -337,9 +337,11 @@ Okay, genug geredet – los geht’s. :)
 - [✨ Haskell-Pakete reparieren](#-haskell-pakete-reparieren)
 - [✨ Cloudflare WARP („1.1.1.1“) installieren und einrichten](#-cloudflare-warp-1111-installieren-und-einrichten)
     - [✨ Wichtige WARP-Befehle](#-wichtige-warp-befehle)
-- [TailScale](#tailscale)
-- [Korrigiertes Skript (Optimiert für 16 GB RAM)](#korrigiertes-skript-optimiert-für-16-gb-ram)
-- [Cachy OS optimirung](#cachy-os-optimirung)
+- [✨ Tailscale installieren und einrichten](#-tailscale-installieren-und-einrichten)
+    - [✨ Wichtige Tailscale-Befehle](#-wichtige-tailscale-befehle)
+- [✨ ZRAM konfigurieren](#-zram-konfigurieren)
+- [✨ CachyOS optimieren](#-cachyos-optimieren)
+    - [✨ UKSM (Ultra Kernel Samepage Merging) aktivieren](#-uksm-ultra-kernel-samepage-merging-aktivieren)
 - [Remote Desktop Connection (Windows ↔ Linux)](#remote-desktop-connection-windows--linux)
 - [Remote Desktop für Hyprland (Windows ↔ Linux)](#remote-desktop-für-hyprland-windows--linux)
   - [Linux (Hyprland)](#linux-hyprland)
@@ -4337,92 +4339,278 @@ warp-cli settings       # Einstellungen anzeigen
 warp-cli connectivity-check  # Verbindung überprüfen
 ```
 
-# TailScale
+# ✨ Tailscale installieren und einrichten
+
+> **Tailscale** ist ein VPN auf Basis von **WireGuard**, das Geräte über ein privates Netzwerk miteinander verbindet. Dadurch können beispielsweise Linux-PCs, Server, Smartphones oder andere Geräte sicher miteinander kommunizieren, auch wenn sie sich in unterschiedlichen Netzwerken befinden.
+>
+> Nach der Installation wird der Tailscale-Dienst aktiviert und das Gerät mit dem Tailscale-Netzwerk verbunden.
+
+<details>
+<summary>✨ Tailscale installieren</summary>
 
 ```bash
 sudo pacman -S tailscale
+```
+
+> Anschließend wird der Tailscale-Dienst aktiviert und direkt gestartet:
+
+```bash
 sudo systemctl enable --now tailscaled
+```
+
+</details>
+
+<details>
+<summary>✨ Gerät mit Tailscale verbinden</summary>
+
+> Mit `tailscale up` wird das Gerät mit dem eigenen Tailscale-Netzwerk verbunden. Je nach Konfiguration wird anschließend eine Anmeldung über den Webbrowser benötigt.
+
+```bash
 sudo tailscale up
 ```
 
-Prüfen:
+> Alternativ kann ein Authentifizierungsschlüssel verwendet werden:
+
+```bash
+sudo tailscale up --authkey [key]
+```
+
+> Der Authentifizierungsschlüssel sollte nicht öffentlich geteilt oder in Konfigurationsdateien gespeichert werden, die für andere Benutzer zugänglich sind.
+
+</details>
+
+<details>
+<summary>✨ Tailscale-Verbindung überprüfen</summary>
+
+> Mit `tailscale ip` kann die Tailscale-IP-Adresse des Geräts angezeigt werden:
 
 ```bash
 tailscale ip
+```
+
+> Den aktuellen Verbindungsstatus und die im Tailscale-Netzwerk erreichbaren Geräte kann man mit folgendem Befehl anzeigen:
+
+```bash
 tailscale status
 ```
 
-Dann von Gerät A:
+</details>
+
+<details>
+<summary>✨ Verbindung zwischen zwei Geräten testen</summary>
+
+> Jedes Tailscale-Gerät erhält eine private IP-Adresse aus dem Tailscale-Netzwerk. Diese beginnt normalerweise mit `100.`.
+>
+> Von einem anderen Gerät kann die Verbindung beispielsweise mit `ping` getestet werden:
 
 ```bash
 ping 100.x.x.x
 ```
 
-Bei Problemen:
+> Dabei muss `100.x.x.x` durch die tatsächliche Tailscale-IP-Adresse des Zielgeräts ersetzt werden.
+
+</details>
+
+<details>
+<summary>✨ Tailscale mit UFW erlauben</summary>
+
+> Falls **UFW** den Datenverkehr über das Tailscale-Interface blockiert, kann die Kommunikation über `tailscale0` explizit erlaubt werden.
+
+Eingehenden Datenverkehr erlauben:
 
 ```bash
 sudo ufw allow in on tailscale0
+```
+
+Ausgehenden Datenverkehr erlauben:
+
+```bash
 sudo ufw allow out on tailscale0
 ```
 
-Wichtig:
+> Anschließend kann die Verbindung erneut mit `tailscale status` oder `ping` überprüft werden.
+
+</details>
+
+### ✨ Wichtige Tailscale-Befehle
 
 ```bash
-tailscale ip
+tailscale ip       # Tailscale-IP anzeigen
+tailscale status   # Verbindungsstatus anzeigen
+tailscale up       # Tailscale aktivieren
+tailscale down     # Tailscale deaktivieren
 ```
 
-```bash
-tailscale up --authkey [key]
-```
+# ✨ ZRAM konfigurieren
 
-# Korrigiertes Skript (Optimiert für 16 GB RAM)
+> **ZRAM** erstellt ein komprimiertes Swap-Gerät im Arbeitsspeicher. Dadurch können Speicherseiten komprimiert im RAM abgelegt werden, bevor das System auf langsameren Speicher auslagern muss.
+>
+> Die Größe von ZRAM sollte an die Menge des vorhandenen Arbeitsspeichers angepasst werden. Als sinnvoller Ausgangspunkt kann eine ZRAM-Größe von **100 % des verfügbaren RAMs** verwendet werden.
+>
+> Für ein System mit **32 GB RAM** wird in dieser Anleitung eine ZRAM-Größe von **32 GiB** verwendet.
+
+| Arbeitsspeicher |    ZRAM-Größe |
+| --------------: | ------------: |
+|           16 GB |     16384 MiB |
+|       **32 GB** | **32768 MiB** |
+|           64 GB |     65536 MiB |
+
+<details>
+<summary>✨ ZRAM für 32 GB RAM konfigurieren</summary>
+
+> Zunächst wird die Konfigurationsdatei des `zram-generator` geöffnet:
 
 ```bash
 sudo nvim /etc/systemd/zram-generator.conf
 ```
 
+Für ein System mit **32 GB RAM** folgenden Inhalt eintragen:
+
 ```ini
 [zram0]
-# Setzt die Größe auf 100% des RAMs (hier 16GB), was komprimiert ca. 5-8GB physischen RAM nutzt.
-# Das ist sicherer und performanter als künstliche Begrenzung auf 1,5x.
-zram-size = 16384
+zram-size = 32768
 # compression-algorithm = zstd
 ```
 
-> Nie über 1,5:1 gehen!!! Bei 16Gb RAM die über 24576 ZRAM, gehe, auch 1,5:1 ist die Schmerzgrenze.
+> `zram-size = 32768` erstellt ein ZRAM-Gerät mit einer Größe von **32 GiB**.
+>
+> Der tatsächliche physische Speicherverbrauch fällt durch die Kompression abhängig von den gespeicherten Daten geringer aus. Wie stark die Daten komprimiert werden können, hängt vom jeweiligen Inhalt ab.
+
+</details>
+
+<details>
+<summary>✨ ZRAM-Größe für andere RAM-Konfigurationen anpassen</summary>
+
+> Falls das System nicht über 32 GB RAM verfügt, kann der Wert entsprechend angepasst werden.
+
+**16 GB RAM:**
+
+```ini
+[zram0]
+zram-size = 16384
+```
+
+**32 GB RAM:**
+
+```ini
+[zram0]
+zram-size = 32768
+```
+
+**64 GB RAM:**
+
+```ini
+[zram0]
+zram-size = 65536
+```
+
+> Als allgemeine Orientierung kann die ZRAM-Größe auf ungefähr **100 % des physischen RAMs** gesetzt werden.
+>
+> Eine deutlich größere ZRAM-Größe ist zwar technisch möglich, aber nicht automatisch besser. Sehr große ZRAM-Geräte können bei starkem Speicherdruck zusätzlichen CPU-Aufwand durch Kompression und Dekompression verursachen.
+
+</details>
+
+<details>
+<summary>✨ ZRAM-Dienst neu starten</summary>
+
+> Nach der Änderung der Konfiguration wird die systemd-Konfiguration neu geladen und das ZRAM-Gerät neu gestartet.
 
 ```bash
 sudo systemctl daemon-reload
 sudo systemctl restart systemd-zram-setup@zram0.service
-reboot
-
-# 3. Dienst sicher neu starten (ohne Reboot, falls genug RAM frei ist)
-# sudo swapoff /dev/zram0 2>/dev/null || true
-# sudo systemctl restart systemd-zram-setup@zram0.service
-# sudo swapon /dev/zram0
 ```
+
+> Anschließend kann das System neu gestartet werden:
+
+```bash
+reboot
+```
+
+</details>
+
+<details>
+<summary>✨ ZRAM ohne Neustart neu einrichten</summary>
+
+> Falls ausreichend freier Arbeitsspeicher vorhanden ist, kann das ZRAM-Gerät auch ohne vollständigen Neustart neu eingerichtet werden.
+
+```bash
+sudo swapoff /dev/zram0 2>/dev/null || true
+sudo systemctl restart systemd-zram-setup@zram0.service
+sudo swapon /dev/zram0
+```
+
+</details>
+
+<details>
+<summary>✨ ZRAM und Swap überprüfen</summary>
+
+> Mit `zramctl` können Größe, Kompressionsalgorithmus und Zustand des ZRAM-Geräts überprüft werden:
 
 ```bash
 zramctl
+```
+
+> Mit `swapon --show` lässt sich überprüfen, ob ZRAM vom System als Swap verwendet wird:
+
+```bash
 swapon --show
 ```
 
-# Cachy OS optimirung
+</details>
 
-Prüfen, ob aktiv: Geben Sie im Terminal ein:
+> **Hinweis:** Die ZRAM-Größe entspricht der maximalen Größe des komprimierten Swap-Geräts und nicht dem tatsächlich dafür reservierten physischen RAM. Der tatsächliche Speicherbedarf hängt vom Kompressionsverhältnis der ausgelagerten Daten ab.
+
+# ✨ CachyOS optimieren
+
+### ✨ UKSM (Ultra Kernel Samepage Merging) aktivieren
+
+> **UKSM (Ultra Kernel Samepage Merging)** ist eine Speicheroptimierung, die identische Speicherseiten verschiedener Prozesse erkennt und zusammenführt. Dadurch kann der RAM-Verbrauch reduziert werden, insbesondere wenn mehrere Anwendungen ähnliche oder identische Speicherinhalte verwenden.
+>
+> CachyOS stellt hierfür das Paket `cachyos-ksm-settings` bereit, das die entsprechenden Einstellungen und den `uksmd`-Dienst zur Verfügung stellt.
+
+<details>
+<summary>✨ Prüfen, ob UKSM aktiv ist</summary>
+
+> Mit `systemctl` kann überprüft werden, ob der `uksmd`-Dienst aktuell ausgeführt wird:
 
 ```bash
-bashsystemctl status uksmd
+systemctl status uksmd
 ```
 
-Aktivieren (falls aus): Sollte er nicht laufen, starten Sie ihn mit:
+> Wird der Dienst als `active (running)` angezeigt, ist UKSM aktuell aktiv.
+
+</details>
+
+<details>
+<summary>✨ UKSM installieren und aktivieren</summary>
+
+> Falls UKSM noch nicht installiert oder aktiviert ist, kann das benötigte CachyOS-Paket installiert und der Dienst anschließend dauerhaft aktiviert werden:
 
 ```bash
 sudo pacman -S cachyos-ksm-settings
-bashsudo systemctl enable --now uksmd
-# sudo systemctl disable --now uksmd
-# sudo pacman -R cachyos-ksm-settings
+sudo systemctl enable --now uksmd
 ```
+
+> Durch `enable --now` wird der Dienst sofort gestartet und gleichzeitig so eingerichtet, dass er bei zukünftigen Systemstarts automatisch gestartet wird.
+
+</details>
+
+<details>
+<summary>✨ UKSM deaktivieren</summary>
+
+> Falls UKSM nicht mehr verwendet werden soll, kann der Dienst deaktiviert und gestoppt werden:
+
+```bash
+sudo systemctl disable --now uksmd
+```
+
+> Das Paket kann anschließend bei Bedarf entfernt werden:
+
+```bash
+sudo pacman -R cachyos-ksm-settings
+```
+
+</details>
 
 # Remote Desktop Connection (Windows ↔ Linux)
 
