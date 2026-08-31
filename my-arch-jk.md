@@ -342,16 +342,19 @@ Okay, genug geredet – los geht’s. :)
 - [✨ ZRAM konfigurieren](#-zram-konfigurieren)
 - [✨ CachyOS optimieren](#-cachyos-optimieren)
     - [✨ UKSM (Ultra Kernel Samepage Merging) aktivieren](#-uksm-ultra-kernel-samepage-merging-aktivieren)
-- [Remote Desktop Connection (Windows ↔ Linux)](#remote-desktop-connection-windows--linux)
-- [Remote Desktop für Hyprland (Windows ↔ Linux)](#remote-desktop-für-hyprland-windows--linux)
+- [✨ Remote Desktop Connection (Windows ↔ Linux)](#-remote-desktop-connection-windows--linux)
+- [✨ Remote Desktop für Hyprland (Windows ↔ Linux)](#-remote-desktop-für-hyprland-windows--linux)
   - [Linux (Hyprland)](#linux-hyprland)
-    - [Installieren](#installieren)
-    - [Starten](#starten)
-    - [Firewall (nur LAN)](#firewall-nur-lan)
-    - [Setup öffnen](#setup-öffnen)
-- [Windows](#windows)
-  - [Moonlight installieren](#moonlight-installieren)
-  - [Verbinden](#verbinden)
+    - [✨ Sunshine installieren](#-sunshine-installieren)
+    - [✨ Sunshine als User-Service einrichten](#-sunshine-als-user-service-einrichten)
+    - [✨ Sunshine starten](#-sunshine-starten)
+    - [✨ Sunshine-Firewall für das lokale Netzwerk konfigurieren](#-sunshine-firewall-für-das-lokale-netzwerk-konfigurieren)
+    - [✨ Sunshine-Weboberfläche öffnen](#-sunshine-weboberfläche-öffnen)
+    - [✨ Audio- und Monitorprobleme beheben](#-audio--und-monitorprobleme-beheben)
+    - [✨ Cursor-Probleme unter Hyprland beheben](#-cursor-probleme-unter-hyprland-beheben)
+  - [Windows](#windows)
+    - [✨ Moonlight installieren](#-moonlight-installieren)
+    - [✨ Mit dem Linux-PC verbinden](#-mit-dem-linux-pc-verbinden)
 - [OpenClaw](#openclaw)
 - [Was ich noch machen würde](#was-ich-noch-machen-würde)
   - [1. System aktualisieren \& Fehler prüfen](#1-system-aktualisieren--fehler-prüfen)
@@ -4612,32 +4615,78 @@ sudo pacman -R cachyos-ksm-settings
 
 </details>
 
-# Remote Desktop Connection (Windows ↔ Linux)
+# ✨ Remote Desktop Connection (Windows ↔ Linux)
+
+> Mit **XRDP** kann eine klassische Remote-Desktop-Verbindung von Windows zu einem Linux-System eingerichtet werden. Windows kann sich anschließend über den integrierten Remotedesktop-Client mit dem Linux-PC verbinden.
+>
+> Für die grafische Sitzung werden zusätzlich `xorgxrdp` und ein funktionierender Xorg-Desktop benötigt.
+
+<details>
+<summary>✨ XRDP installieren und aktivieren</summary>
 
 ```bash
-sudo pacman -S xrdp 
-sudo pacman -S xorgxrdp 
-sudo systemctl enable xrdp 
-sudo systemctl start xrdp 
-sudo ufw allow from 192.168.1.0/24 to any port 3389 
-sudo pacman -S fail2ban 
+sudo pacman -S xrdp xorgxrdp
+```
+
+> Anschließend wird der XRDP-Dienst aktiviert und gestartet:
+
+```bash
+sudo systemctl enable --now xrdp
+```
+
+</details>
+
+<details>
+<summary>✨ RDP-Verbindung in der Firewall erlauben</summary>
+
+> Der RDP-Dienst verwendet standardmäßig den TCP-Port `3389`. Wenn die Verbindung ausschließlich aus dem lokalen Netzwerk erfolgen soll, kann der Zugriff auf das eigene LAN beschränkt werden.
+
+```bash
+sudo ufw allow from 192.168.1.0/24 to any port 3389 proto tcp
+```
+
+> Das Netzwerk `192.168.1.0/24` muss gegebenenfalls an das eigene lokale Netzwerk angepasst werden.
+
+</details>
+
+<details>
+<summary>✨ Fail2Ban installieren</summary>
+
+> **Fail2Ban** kann verwendet werden, um wiederholte fehlgeschlagene Anmeldeversuche zu erkennen und entsprechende IP-Adressen temporär zu sperren.
+
+```bash
+sudo pacman -S fail2ban
 sudo systemctl enable --now fail2ban
 ```
 
-# Remote Desktop für Hyprland (Windows ↔ Linux)
+</details>
+
+# ✨ Remote Desktop für Hyprland (Windows ↔ Linux)
+
+> Für **Hyprland** eignet sich **Sunshine** zusammen mit **Moonlight** besser als eine klassische XRDP-Sitzung. Sunshine stellt den Linux-PC als Streaming-Host bereit, während Moonlight unter Windows als Client verwendet wird.
+>
+> Diese Lösung eignet sich besonders für eine flüssige Desktop-Steuerung mit geringer Latenz und kann neben dem Desktop auch für Spiele und andere grafisch anspruchsvolle Anwendungen verwendet werden.
 
 ## Linux (Hyprland)
 
-### Installieren
+### ✨ Sunshine installieren
 
-```bash id="hk4a3v"
+> Sunshine ist der Streaming-Server, der den Bildschirminhalt des Linux-PCs an Moonlight überträgt.
+
+```bash
 sudo pacman -S sunshine fail2ban
 ```
+
+### ✨ Sunshine als User-Service einrichten
+
+> Damit Sunshine als Benutzerprozess ausgeführt werden kann, wird ein eigener systemd-User-Service erstellt.
 
 ```bash
 mkdir -p ~/.config/systemd/user
 nvim ~/.config/systemd/user/sunshine.service
 ```
+
+Folgenden Inhalt eintragen:
 
 ```ini
 [Unit]
@@ -4652,40 +4701,72 @@ Restart=on-failure
 WantedBy=default.target
 ```
 
-### Starten
+### ✨ Sunshine starten
+
+> Anschließend wird der neue User-Service von systemd eingelesen und aktiviert:
 
 ```bash
 systemctl --user daemon-reload
 systemctl --user enable --now sunshine.service
-sudo systemctl enable --now fail2ban
-systemctl --user status sunshine
 ```
 
-### Firewall (nur LAN)
+Status überprüfen:
+
+```bash
+systemctl --user status sunshine.service
+```
+
+> Falls Fail2Ban ebenfalls verwendet werden soll, kann der Dienst systemweit aktiviert werden:
+
+```bash
+sudo systemctl enable --now fail2ban
+```
+
+### ✨ Sunshine-Firewall für das lokale Netzwerk konfigurieren
+
+> Sunshine benötigt mehrere TCP- und UDP-Ports für die Verbindung zwischen Host und Moonlight.
+>
+> Wenn Sunshine **nur im lokalen Netzwerk** erreichbar sein soll, können die Ports auf das eigene LAN beschränkt werden.
 
 ```bash
 sudo ufw allow from 192.168.x.x to any port 47984:48010 proto tcp
 sudo ufw allow from 192.168.x.x to any port 47998:48010 proto udp
 ```
 
+> `192.168.x.x` muss durch das eigene Netzwerk beziehungsweise den gewünschten IP-Bereich ersetzt werden.
+
+Die Regeln können bei Bedarf wieder entfernt werden:
+
 ```bash
 sudo ufw delete allow from 192.168.x.x to any port 47984:48010 proto tcp
 sudo ufw delete allow from 192.168.x.x to any port 47998:48010 proto udp
 ```
 
-### Setup öffnen
+### ✨ Sunshine-Weboberfläche öffnen
 
-```url
+> Die Konfiguration von Sunshine kann über die integrierte Weboberfläche vorgenommen werden.
+
+```text
 https://localhost:47990
 ```
 
-Bei Problemen:
+> Dort können unter anderem Audio-, Video-, Eingabe- und Streaming-Einstellungen angepasst werden.
 
-Gehe zu Configuration -> Audio/Video.Ändere den Wert bei Monitor Index.
+### ✨ Audio- und Monitorprobleme beheben
 
-evt.: alsa_output.pci-0000_e5_00.1.hdmi-stereo
+> Falls Sunshine keinen korrekten Monitor oder keine passende Audioausgabe verwendet, können die Einstellungen unter **Configuration → Audio/Video** überprüft werden.
+>
+> Bei Problemen mit mehreren Monitoren kann insbesondere der **Monitor Index** angepasst werden.
+>
+> Je nach System kann beispielsweise ein Audio-Gerät wie folgendes verwendet werden:
 
-oder auch einfach mal neustarten:
+```text
+alsa_output.pci-0000_e5_00.1.hdmi-stereo
+```
+
+> Die tatsächliche Bezeichnung des Audio-Geräts kann auf jedem System unterschiedlich sein.
+
+Falls Sunshine nach Änderungen nicht korrekt funktioniert, kann der Dienst neu gestartet werden:
 
 ```bash
 systemctl --user stop sunshine
@@ -4693,7 +4774,13 @@ sleep 2
 systemctl --user start sunshine
 ```
 
-Tip: Es kann bei Sunshine mit Kurserausblenden zu Probelem führen, diebezüglich würde ich volgende einstellungen für end-4 Hyperland bervorzugen:
+### ✨ Cursor-Probleme unter Hyprland beheben
+
+> Bei Sunshine kann es unter Hyprland in bestimmten Konfigurationen zu Problemen mit dem Cursor beziehungsweise mit Hardware-Cursors kommen.
+>
+> Insbesondere bei angepassten Hyprland-Konfigurationen wie **end-4** kann es sinnvoll sein, Hardware-Cursors zu deaktivieren.
+
+In der Hyprland-Konfiguration kann beispielsweise Folgendes verwendet werden:
 
 ```ini
 cursor {
@@ -4706,17 +4793,25 @@ cursor {
 }
 ```
 
-# Windows
+> Nach Änderungen an der Hyprland-Konfiguration muss Hyprland gegebenenfalls neu geladen oder neu gestartet werden.
 
-## Moonlight installieren
+## Windows
 
-[Moonlight Official Website](https://moonlight-stream.org/?utm_source=chatgpt.com)
+### ✨ Moonlight installieren
 
-## Verbinden
+> **Moonlight** ist der Client für Sunshine. Die Anwendung kann unter Windows installiert und anschließend zur Verbindung mit dem Linux-PC verwendet werden.
 
-```ini
+[Moonlight – offizielle Website](https://moonlight-stream.org/?utm_source=chatgpt.com)
+
+### ✨ Mit dem Linux-PC verbinden
+
+> Nach dem Start von Moonlight wird der Linux-PC normalerweise automatisch im Netzwerk erkannt. Anschließend kann die Verbindung über einen Pairing-Code autorisiert werden.
+
+```text
 Moonlight öffnen → Linux-PC auswählen → Pairing-Code eingeben
 ```
+
+> Nach erfolgreichem Pairing kann der Linux-Desktop über Moonlight gesteuert werden.
 
 # OpenClaw
 
