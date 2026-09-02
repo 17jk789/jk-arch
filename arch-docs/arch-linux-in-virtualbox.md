@@ -224,8 +224,11 @@ Die meisten von euch werden hier `Desktop` auswählen und `Enter` drücken.
 
 Nun können Sie auswählen, welche Desktop-Umgebung Sie installieren möchten. 
 Arch hat nicht wirklich einen "Standard"-Desktop, so dass Sie auswählen können, was Sie möchten. 
-`Cinnamon`, `Mate`, `KDE` und `GNOME` sind alle beliebt - [Hier finden Sie die richtige DE de-de.md](de-de.md). 
+`Cinnamon`, `Mate`, `KDE` und `GNOME` sind alle beliebt - [Hier finden Sie die richtige DE de.md](de.md). 
 Ich werde `GNOME` für diese Installation wählen. Verwenden Sie die Pfeiltasten nach oben und unten, um Ihre Auswahl zu treffen. 
+
+> Hinweis für VirtualBox: Hyprland läuft in VirtualBox leider nicht zuverlässig und kann dort zu einer sehr schlechten Darstellung oder Performance führen. Wenn Sie jk-arch in einer VirtualBox-VM installieren, empfehle ich daher GNOME oder KDE Plasma anstelle von Hyprland.
+
 Sobald sie hell ist, drücken Sie die `Leertaste`-Leiste. Sie sollten ein smll `x` in den eckigen Klammern neben Ihrer Auswahl sehen. 
 Fahren Sie fort und drücken Sie `Enter`. Dies bringt uns zurück zum Hauptkonfigurationsbildschirm.
 

@@ -359,14 +359,17 @@ Beispiele sind:
 * KDE Plasma
 * Cinnamon
 * MATE
+* Hyprland
 
-Für diese Installation verwenden wir:
+[Hier finden Sie die richtige DE de.md](de.md)
 
-`GNOME`
+### Für jk-arch verwenden wir:
 
-Wählen Sie GNOME aus und bestätigen Sie anschließend mit `Enter`.
+`Hyprland`
 
-![GNOME](./img-readme/arch-14-3.png)
+Wählen Sie **Hyprland** aus und bestätigen Sie anschließend mit `Enter`.
+
+**Hinweis:** Hyprland wird für jk-arch als grafische Umgebung verwendet und ist daher die empfohlene Auswahl.
 
 ---
 
@@ -545,19 +548,17 @@ Wenn die Installation erfolgreich war, sollte der Computer jetzt **ohne den USB-
 
 Melden Sie sich mit dem zuvor eingerichteten Benutzerkonto an.
 
-![Login](./img-readme/arch-27.png)
+![Login](./img-readme/arch-34.png)
 
-Wenn Sie GNOME ausgewählt haben, sollte anschließend die GNOME-Desktop-Umgebung erscheinen.
+Wenn Sie Hyperland ausgewählt haben, sollte anschließend die GNOME-Desktop-Umgebung erscheinen.
 
-![GNOME](./img-readme/arch-28.png)
+![GNOME](https://i0.wp.com/www.lorenzobettini.it/wp-content/uploads/2023/05/hyprland-first-run-1.png?ssl=1)
 
 ---
 
 ## 34. Schritt: Terminal öffnen
 
-Öffnen Sie nun das Terminal.
-
-![Terminal](./img-readme/arch-29.png)
+Öffnen Sie nun das Terminal (SUPER + Q)
 
 ---
 
