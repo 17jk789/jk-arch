@@ -49,7 +49,6 @@ Trotzdem: Hier bekommst du eine komplette Arch-Linux-Installation – sowohl fü
 
 -> [Install Arch Linux as your main system](./arch-docs/arch-linux-as-your-main-system.md)  
 -> [Install Arch Linux in VirtualBox](./arch-docs/arch-linux-in-virtualbox.md)  
--> [Install Arch Linux in QEMU](./arch-docs/arch-linux-in-qemu.md)  
 
 Wenn du bereits eine vorkonfigurierte Arch-basierte Distribution wie CachyOS oder EndeavourOS nutzten willst: Installiere es einfach so, wie du möchtest. Das passt alles. Als Desktop-Environment würde ich allerdings nur Hyprland installieren – nicht KDE oder GNOME. Beim Rest (Dateimanager, Bootloader usw.) ist es eigentlich egal, was du verwendest.
 
