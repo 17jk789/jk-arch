@@ -12,18 +12,18 @@ Bevor Sie fortfahren, stellen Sie sicher, dass die folgenden Komponenten install
 ### 1. VirtualBox
 VirtualBox ist erforderlich, um eine virtuelle Maschine für Arch Linux zu erstellen.
 
-🔗 **Download:** [Get VirtualBox](https://www.virtualbox.org/)
+**Download:** [Get VirtualBox](https://www.virtualbox.org/)
 
 Darüber hinaus benötigen Sie eine funktionierende C++-Entwicklungsumgebung:
 
-🔗 **Download:** [Get VisualStudio](https://visualstudio.microsoft.com/downloads/)
+**Download:** [Get VisualStudio](https://visualstudio.microsoft.com/downloads/)
 
 ![Visual Studio C++ Setup](https://learn.microsoft.com/en-us/cpp/build/media/vscpp-concierge-choose-workload.gif?view=msvc-170)
 
 ### 2. Arch Linux ISO
 Zur Installation des Systems in der virtuellen Maschine ist die neueste Arch Linux ISO-Datei erforderlich.
 
-🔗 **Download:** [Arch Linux 2026.09.01 ISO](https://geo.mirror.pkgbuild.com/iso/2026.09.01/)
+**Download:** [Arch Linux ISO](https://archlinux.org/download/)
 
 ---
 
