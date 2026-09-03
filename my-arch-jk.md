@@ -95,7 +95,7 @@ Die Einrichtung wurde dadurch deutlich einfacher: Statt einzelne Dateien und Ord
 ./setup install
 ```
 
-Damit wird automatisch eine vollständige Hyprland-Umgebung mit der *End-4*-Konfiguration eingerichtet und aktuell gehalten. Der gesamte Prozess ist nun einfacher, schneller und benutzerfreundlicher.
+Damit wird automatisch eine vollständige Hyprland-Umgebung mit der *End-4*-Konfiguration + JK-Arch Features eingerichtet und aktuell gehalten. Der gesamte Prozess ist nun einfacher, schneller und benutzerfreundlicher.
 
 Das Projekt richtet sich weiterhin besonders an Power-User und Nutzer, die viel mit dem Terminal arbeiten. Es enthält umfangreiche Anpassungen für eine produktive Linux-Umgebung sowie vorkonfigurierte Tools und Einstellungen.
 
