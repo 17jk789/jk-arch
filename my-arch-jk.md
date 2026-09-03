@@ -81,35 +81,31 @@ Also, legen wir los.
 
 ---
 
-Ab dem **01.10.2026** wird JK-Arch nicht mehr als eigenes Projekt unter diesem Namen verfügbar sein.
+**JK-Arch** ist keine eigenständige Distribution wie Ubuntu oder Fedora, sondern meine persönliche Art, eine Arch-Linux-Installation einzurichten und anzupassen.
 
-JK-Arch war keine eigene Distribution wie Ubuntu oder Fedora, sondern meine persönliche Art, eine Arch-Linux-Installation einzurichten und anzupassen.
-
-Die bisherigen Inhalte, Konfigurationen und Anpassungen werden zukünftig vollständig unter folgendem Projekt weitergeführt:
+Die bisherigen Inhalte, Konfigurationen und Anpassungen werden nun unter folgendem Projekt weitergeführt:
 
 ```url
 https://github.com/17jk789/dots-hyprland
 ```
 
-Die Einrichtung wird dadurch deutlich einfacher: Statt einzelne Dateien und Ordner manuell zu übernehmen, genügt es, den Installer auszuführen:
+Die Einrichtung wurde dadurch deutlich einfacher: Statt einzelne Dateien und Ordner manuell zu kopieren, genügt es, den Installer auszuführen:
 
 ```bash
 ./setup install
 ```
 
-Damit wird automatisch eine vollständige Hyprland-Umgebung mit der End-4-Konfiguration eingerichtet und aktuell gehalten. Der gesamte Prozess ist dadurch einfacher, schneller und benutzerfreundlicher.
+Damit wird automatisch eine vollständige Hyprland-Umgebung mit der *End-4*-Konfiguration eingerichtet und aktuell gehalten. Der gesamte Prozess ist nun einfacher, schneller und benutzerfreundlicher.
 
 Das Projekt richtet sich weiterhin besonders an Power-User und Nutzer, die viel mit dem Terminal arbeiten. Es enthält umfangreiche Anpassungen für eine produktive Linux-Umgebung sowie vorkonfigurierte Tools und Einstellungen.
 
-Die alte Vorgehensweise mit:
+**Was sich geändert hat:**
 
-```ini
-~/jk-arch/.config -> ~/.config
-~/jk-arch/.local -> ~/.local
-~/jk-arch/home -> ~/
-```
+Die alte Vorgehensweise, bei der der gesamte `.config`-Ordner von `~/jk-arch/` nach `~/.config` verschoben wurde (sowie `~/.local` und `~`), entfällt.
 
-entfällt damit. Alle notwendigen Dateien werden zukünftig zentral über das Repository und den automatisierten Installer verwaltet.
+- **`.config-cache`**: Enthält nun die **vollständige Referenz** aller Konfigurationen. Diese Ordnerstruktur wird **ab dem 03.09.2026 nicht mehr weiterentwickelt** und dient ausschließlich zum Nachschauen.
+- **`.config`, `.local`, `home` (aktiv)**: Diese Ordner enthalten nun nur noch die aktuellen, essenziellen Dateien.
+- **Optionale `esintelline`-Konfigurationen**: Falls du spezifische Einstellungen nutzen möchtest, kannst du diese **optional und manuell** aus dem Repository in deinen eigenen `jk-arch/.config` -> `~/.config` , `jk-arch/.local` -> `~/.local` oder `jk-arch/home` -> `~` Ordner verschieben.
 
 Ein wichtiger Punkt noch vorab:
 
@@ -173,9 +169,9 @@ Okay, genug geredet – los geht’s. :)
     - [✨ Akku- und Hardware-Informationen auslesen](#-akku--und-hardware-informationen-auslesen)
     - [✨ Java-Laufzeitumgebung installieren](#-java-laufzeitumgebung-installieren)
     - [✨ Erweiterte Grammatik- und Stilprüfung mit LanguageTool](#-erweiterte-grammatik--und-stilprüfung-mit-languagetool)
-    - [LazyVim und JetBrains Mono Nerd Font installieren](#lazyvim-und-jetbrains-mono-nerd-font-installieren)
-      - [LazyVim Starter-Konfiguration herunterladen](#lazyvim-starter-konfiguration-herunterladen)
-      - [JetBrains Mono Nerd Font installieren](#jetbrains-mono-nerd-font-installieren)
+    - [✨ LazyVim und JetBrains Mono Nerd Font installieren](#-lazyvim-und-jetbrains-mono-nerd-font-installieren)
+      - [✨ LazyVim Starter-Konfiguration herunterladen](#-lazyvim-starter-konfiguration-herunterladen)
+      - [✨ JetBrains Mono Nerd Font installieren](#-jetbrains-mono-nerd-font-installieren)
   - [Linux Power Tools](#linux-power-tools)
     - [Das System-Informationswerkzeug Fastfetch installieren](#das-system-informationswerkzeug-fastfetch-installieren)
     - [Den interaktiven Prozess-Viewer htop installieren](#den-interaktiven-prozess-viewer-htop-installieren)
@@ -1408,7 +1404,7 @@ sudo pacman -S languagetool
 sudo pacman -S neovim vim
 ```
 
-#### LazyVim Starter-Konfiguration herunterladen
+#### ✨ LazyVim Starter-Konfiguration herunterladen
 
 > Wir legen die Grundlage für unsere NeoVim-Umgebung. Dafür laden wir zuerst die **LazyVim Starter-Konfiguration** herunter. LazyVim ist keine eigene Version von NeoVim, sondern eine moderne vorkonfigurierte Plugin- und Struktur-Basis für NeoVim.
 >
@@ -1426,7 +1422,7 @@ rm -rf ~/.config/nvim/.git
 
 > Dadurch bleibt nur deine eigene Konfiguration erhalten und sie ist nicht mehr direkt mit dem LazyVim-Starter-Repository verbunden.
 
-#### JetBrains Mono Nerd Font installieren
+#### ✨ JetBrains Mono Nerd Font installieren
 
 > Viele NeoVim-Themes und Plugins verwenden spezielle Symbole und Icons. Ohne eine Nerd Font werden diese oft falsch oder als leere Zeichen dargestellt.
 
@@ -4997,9 +4993,9 @@ sudo pacman -S <paketname>
 
 ## JK-Arch Config einrichten
 
-Wir sind jetzt am **Ende der Konfiguration** angekommen. Alle benötigten Pakete, Programme und Einstellungen sind eingerichtet – jetzt fehlt nur noch der letzte Schritt: Wir bringen die JK-Arch Config an die richtigen Stellen in deinem System.
+Wir sind jetzt am **Ende der Konfiguration** angekommen. Alle benötigten Pakete, Programme und die Grundstruktur für Hyprland sind bereits eingerichtet. Der Großteil deiner Konfiguration (die End-4-Umgebung + JK-Arch-Features) wird automatisch vom Installer bereitgestellt.
 
-Falls du das Repository noch nicht geklont hast, kannst du es jetzt noch nachholen:
+Falls du das Repository noch nicht geklont hast, kannst du es jetzt nachholen, um die **optionalen** `esintelline`-Einstellungen zu nutzen:
 
 ```bash
 cd ~
@@ -5007,17 +5003,13 @@ git clone https://github.com/17jk789/jk-arch.git
 cd jk-arch
 ```
 
-**Jetzt musst du die Config-Dateien selbst an die entsprechenden Stellen kopieren.** Dabei gilt:
+**Wichtig:** Du musst **nicht** den gesamten `.config`-Ordner kopieren. Der Installer hat bereits die essenziellen Dateien in `~/.config` und `~/.local` eingerichtet.
 
-```text
-~/jk-arch/.config  ->  ~/.config
-~/jk-arch/.local   ->  ~/.local
-~/jk-arch/home     ->  ~/
-```
+Der letzte Schritt ist nun **optional**: Falls du spezifische `esintelline`-Einstellungen nutzen möchtest, kannst du deren Inhalte manuell in deine bestehenden Konfigurationsdateien integrieren.
 
-Du kannst also die jeweiligen Inhalte manuell in die entsprechenden Verzeichnisse übernehmen.
+**Wichtig:** Dateien, die auf `-add` enden, werden **nicht kopiert oder ersetzt**. Ihr Inhalt muss an die jeweils passende, bereits vorhandene Konfigurationsdatei **angehängt** werden, um die Einstellungen zu erweitern.
 
-**Wichtig:** Einige Dateien in JK-Arch enden auf `-add`. Diese Dateien werden **nicht einfach kopiert oder ersetzt**. Ihr Inhalt muss an die jeweils passende, bereits vorhandene Konfigurationsdatei **angehängt** werden.
+Kurz gesagt: Die Basis ist fertig. Du musst nur noch entscheiden, welche speziellen Anpassungen du manuell hinzufü
 
 Zum Beispiel:
 
