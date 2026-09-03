@@ -1393,7 +1393,10 @@ sudo pacman -S languagetool
 
 </details>
 
-### LazyVim und JetBrains Mono Nerd Font installieren
+### ✨ LazyVim und JetBrains Mono Nerd Font installieren
+
+> [!IMPORTANT]
+> Hinweis: Die unten aufgeführten manuellen Schritte zur Einrichtung von LazyVim und der JetBrains Mono Nerd Font sind standardmäßig nicht mehr notwendig. Das neue Installationsskript von doshyperland bringt bereits die vollautomatisierte Funktion install_neovim_lazyvim_nerdfont mit, die alle Pakete, Abhängigkeiten, Konfigurationen und Schriftarten fehlerfrei und in der korrekten Reihenfolge einrichtet.
 
 > NeoVim wird hier zur vollständigen Entwicklungsumgebung ausgebaut. Wir installieren NeoVim, richten LazyVim als moderne Plugin-Basis ein und installieren eine Nerd Font, damit Icons, Symbole und UI-Elemente in NeoVim korrekt dargestellt werden.
 >
