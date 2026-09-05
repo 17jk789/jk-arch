@@ -11,6 +11,10 @@
   <img src="images/jk-arch/jk-arch-0.3-eap.png" width="1000" />
 </p>
 
+> [!WARNING]
+> **Wichtiger Hinweis (05.09.2026):** Dieses Projekt wird ab heute **nicht mehr weiterentwickelt**. 
+> Bitte wechsle zu [dots-hyprland](https://github.com/17jk789/dots-hyprland), wo alles vollständig automatisiert ist.
+
 # JK-Arch Linux Configuration
 
 Based on Arch Linux, Hyprland, Quickshell, and the `end-4` Hyprland configuration, this setup includes my personal settings for:
