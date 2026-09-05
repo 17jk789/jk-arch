@@ -184,7 +184,6 @@ Okay, genug geredet – los geht’s. :)
     - [Das professionelle Benchmarking-Werkzeug Hyperfine installieren](#das-professionelle-benchmarking-werkzeug-hyperfine-installieren)
     - [✨ Den Terminal-Multiplexer tmux installieren](#-den-terminal-multiplexer-tmux-installieren)
     - [✨ Den Anwendungsstarter Wofi installieren](#-den-anwendungsstarter-wofi-installieren)
-    - [✨ Die intelligente Ordner-Navigation zoxide installieren](#-die-intelligente-ordner-navigation-zoxide-installieren)
     - [Den Hex-Editor GHex installieren](#den-hex-editor-ghex-installieren)
     - [Die moderne cat-Alternative bat installieren](#die-moderne-cat-alternative-bat-installieren)
     - [Das interaktive Git-Terminalwerkzeug LazyGit installieren](#das-interaktive-git-terminalwerkzeug-lazygit-installieren)
@@ -1592,19 +1591,6 @@ sudo pacman -S tmux
 
 ```bash
 sudo pacman -S wofi
-```
-
-</details>
-
-### ✨ Die intelligente Ordner-Navigation zoxide installieren
-
-> `zoxide` ist ein modernes Werkzeug zur intelligenten Navigation in Verzeichnissen. Es merkt sich die am häufigsten verwendeten Ordner und ermöglicht es dir, schnell zu ihnen zu wechseln, ohne den vollständigen Pfad eingeben zu müssen.
-
-<details>
-<summary>Installieren</summary>
-
-```bash
-sudo pacman -S zoxide
 ```
 
 </details>
