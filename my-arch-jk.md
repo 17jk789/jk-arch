@@ -300,7 +300,6 @@ Okay, genug geredet – los geht’s. :)
     - [✨ Den grafischen Audio-Mixer pwvucontrol installieren](#-den-grafischen-audio-mixer-pwvucontrol-installieren)
     - [✨ Den grafischen Audio-Verkabelungs-Manager qpwgraph installieren](#-den-grafischen-audio-verkabelungs-manager-qpwgraph-installieren)
     - [✨ Die lokale KI-Laufzeitumgebung Ollama installieren](#-die-lokale-ki-laufzeitumgebung-ollama-installieren)
-    - [✨ Die S.M.A.R.T.-Festplattenüberwachung installieren](#-die-smart-festplattenüberwachung-installieren)
     - [✨ Den Remote-Desktop-Client KRDC installieren](#-den-remote-desktop-client-krdc-installieren)
     - [✨ Den ultraschnellen Download-Manager aria2 installieren](#-den-ultraschnellen-download-manager-aria2-installieren)
     - [✨ Das strukturelle Diff-Werkzeug Difftastic installieren](#-das-strukturelle-diff-werkzeug-difftastic-installieren)
@@ -3578,19 +3577,6 @@ sudo pacman -S ollama
 
 </details>
 
-### ✨ Die S.M.A.R.T.-Festplattenüberwachung installieren
-
-> S.M.A.R.T. (Self-Monitoring, Analysis, and Reporting Technology) ist eine Technologie, die es ermöglicht, den Zustand von Festplatten und SSDs zu überwachen. Mit `smartmontools` kannst du den Gesundheitszustand deiner Speichergeräte überprüfen und frühzeitig auf mögliche Ausfälle reagieren.
-
-<details>
-<summary>Installieren</summary>
-
-```bash
-sudo pacman -S smartmontools
-```
-
-</details>
-
 ### ✨ Den Remote-Desktop-Client KRDC installieren
 
 > `KRDC` ist ein Remote-Desktop-Client, der es dir ermöglicht, dich über das Netzwerk mit anderen Computern zu verbinden und diese fernzusteuern.
@@ -3689,6 +3675,22 @@ gpclient launch-gui
 ### Nützliche Fish plugins
 
 > **Fisher** ist ein Plugin-Manager für die Fish Shell. Mit den folgenden Plugins lassen sich unter anderem automatisch passende Klammern einfügen, Vim-Tastenkürzel verwenden, Umgebungsvariablen aus Bash-Skripten übernehmen und fzf komfortabel in Fish integrieren.
+
+Fisher-Skript herunterladen und überprüfen:
+
+```bash
+curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish -o fisher.fish
+less fisher.fish
+```
+
+Fisher aktivieren und installieren:
+
+```bash
+source fisher.fish
+fisher install jorgebucaran/fisher
+```
+
+Gewünschte Plugins installieren:
 
 ```bash
 fisher install jorgebucaran/autopair.fish nickeb96/fish-vim edc/bass PatrickF1/fzf.fish
