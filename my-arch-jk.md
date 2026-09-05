@@ -188,7 +188,6 @@ Okay, genug geredet – los geht’s. :)
     - [Die moderne cat-Alternative bat installieren](#die-moderne-cat-alternative-bat-installieren)
     - [Das interaktive Git-Terminalwerkzeug LazyGit installieren](#das-interaktive-git-terminalwerkzeug-lazygit-installieren)
     - [Den Verzeichnisbaum-Generator tree installieren](#den-verzeichnisbaum-generator-tree-installieren)
-    - [✨ Das ultraschnelle Suchwerkzeug ripgrep installieren](#-das-ultraschnelle-suchwerkzeug-ripgrep-installieren)
     - [Das blitzschnelle Dateisuch-Werkzeug fd installieren](#das-blitzschnelle-dateisuch-werkzeug-fd-installieren)
     - [Die moderne und farbenfrohe ls-Alternative eza installieren](#die-moderne-und-farbenfrohe-ls-alternative-eza-installieren)
     - [✨ Die vereinfachten Community-Handbücher tldr installieren](#-die-vereinfachten-community-handbücher-tldr-installieren)
@@ -1644,19 +1643,6 @@ sudo pacman -S lazygit
 ```bash
 sudo pacman -S tree
 ```
-
-### ✨ Das ultraschnelle Suchwerkzeug ripgrep installieren
-
-> `ripgrep` ist ein sehr schnelles Suchwerkzeug, das auf der Basis von `grep` entwickelt wurde. Es ermöglicht es dir, in Dateien nach Mustern zu suchen, wobei es besonders schnell bei großen Dateien und Verzeichnissen ist.
-
-<details>
-<summary>Installieren</summary>
-
-```bash
-sudo pacman -S ripgrep
-```
-
-</details>
 
 ### Das blitzschnelle Dateisuch-Werkzeug fd installieren
 
